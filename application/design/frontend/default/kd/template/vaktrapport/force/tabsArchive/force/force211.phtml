@@ -1,0 +1,117 @@
+<table cellspacing=0 cellpadding="0" border="0px" style="border-collapse:collapse; margin-left:0pt"  width="100%">
+  <tr>
+	<td style="padding:0px;">
+		<table cellspacing=0 cellpadding="5" border="0px" style="border-collapse:collapse; margin-left:0pt" width="100%">
+			<thead>
+				<tr>
+					<th style="width: 100%;" colspan="2"><h2>2.11 &sect; 25 Adgang til &aring; kreve urinpr&oslash;ver f&oslash;lger av fylkesnemndas vedtak / Samtykke til &aring; avlegge urinpr&oslash;ver ved inntak og under oppholdet<!--&sect; 211 Right to require urine samples provided by the county board&#39;s decision / Consent to take urine samples at admission and during stay--></h2></th>
+				</tr>
+			</thead>
+			<tbody>
+			  <tr><td colspan="2">Hver hjemmel st&aring;r p&aring; egen siden, da det kun er den dokumentasjonen som er utfylt, som skal oversendes Fylkesmannen uten ugrunnet opphold.<!--Each authority is on their side, since only the documentation is completed, which shall be submitted to the County without undue delay.--></td></tr>
+			  <tr><td colspan="2"><u>For &aring; benytte denne bestemmelsen m&aring; beboer v&aelig;re plassert med hjemmel i barnevernloven &sect;&sect; 4-24, 4-26 eller 4-211 annet ledd.<!--To use this provision must inmate being placed pursuant to the Child Welfare Act &sect; &sect; 4-24, 4-26 or 4-211, second paragraph.--></u></td></tr>
+			 
+			  <tr>
+				<td class="title1" width="60%">Urinpr&oslash;vetaking f&oslash;lger av:<!--Urine Sampling follows:--></td>
+				<td class="value1">
+					<span class="nonecls1"><span class="tdbg"><input type="checkbox" class="css-checkbox" readonly="readonly" disabled="disabled" id="force_chk211_decision" name="force2511[force_chk211_decision]" value="1"  <?php echo (isset($this->forceInfo['force_chk211_decision']) && $this->forceInfo['force_chk211_decision']=='1')?'checked="checked"':'';?>/><label for="force_chk211_decision" class="css-label"></label></span></span><label for="force_chk211_decision">fylkesnemndas vedtak</label><!--county board&#39;s decision--><br /><br />
+					<span class="nonecls1"><span class="tdbg"><input type="checkbox" class="css-checkbox" readonly="readonly" disabled="disabled" name="force2511[force_chk211_consent]" id="force_chk211_consent" value="1" <?php echo (isset($this->forceInfo['force_chk211_consent']) && $this->forceInfo['force_chk211_consent']=='1')?'checked="checked"':'';?>/><label for="force_chk211_consent" class="css-label"></label></span></span><label for="force_chk211_consent">skriftlig samtykke</label><!--written consent--><br />
+				</td>
+			  </tr>
+			  <tr>
+				<td class="title1">N&aring;r det f&oslash;lger av Fylkesnemndas vedtak: Hva er besluttet vedr. urinpr&oslash;vetaking: <!--As follows from the County Board&#39;s decision: What has been decided regarding urine collection:--></td>
+				<td class="value1 nonecls1"><span class="tdbg1">
+					<?php echo (isset($this->forceInfo['force_txta211_urine']) && $this->forceInfo['force_txta211_urine']!='')?$this->forceInfo['force_txta211_urine']:'';?></span>
+				</td>
+			  </tr>
+			  <tr>
+				<td class="title1">Dersom skriftlig samtykke:<!--If written consent:--></td>
+				<td class="value1 nonecls1">
+					<span class="padding5">Urinpr&oslash;vetakingen er foretatt p&aring; grunnlag av samtykke fra</span><!--Urine sampling is undertaken on the basis of the consent of-->
+					<span class="tdbg1"><select class="width98 validation" name="force2511[force_sel211_urine_res]" id="force_sel211_urine_res" readonly="readonly" disabled="disabled">
+					<option value="" <?php echo (!isset($this->forceInfo['force_sel211_urine_res']) || $this->forceInfo['force_sel211_urine_res']=='')?'selected="selected"':'';?>>Velg<!--Select--></option>
+					<option value="alone" <?php echo (isset($this->forceInfo['force_sel211_urine_res']) && $this->forceInfo['force_sel211_urine_res']=='alone')?'selected="selected"':'';?>> beboeren alene<!--resident alone--> </option>
+					<option value="guardian" <?php echo (isset($this->forceInfo['force_sel211_urine_res']) && $this->forceInfo['force_sel211_urine_res']=='guardian')?'selected="selected"':'';?>> beboeren (u.15 &aring;r) og foresatte<!--resident (u.15 years) and carers --></option>
+					<option value="bvtj" <?php echo (isset($this->forceInfo['force_sel211_urine_res']) && $this->forceInfo['force_sel211_urine_res']=='bvtj')?'selected="selected"':'';?>> beboeren (u.15 &aring;r) og bvtj. (bvl. &sect;4-12 + atferd)<!--the resident (u 15) and bvtj. (Bvl. &sect; 12.4 + behavior)--> </option>
+					</select></span>
+				</td>
+			  </tr>
+			  <tr>
+				<td class="title1">Har beboeren f&aring;tt kunnskap om institusjonens regler og rutiner for pr&oslash;vetaking, herunder om hvordan urinpr&oslash;ven avlegges, f&oslash;r samtykket ble gitt?<!--Has the resident received the knowledge of the institution&#39;s policies and procedures for sampling, including how the urine sample taken before the consent was given?--></td>
+				<td class="value1 nonecls1"><span class="tdbg1">
+					<select class="width98 validation" name="force2511[force_sel211_policy]" id="force_sel211_policy" readonly="readonly" disabled="disabled"  onchange="changeAreaClass(this.value,'','rem','#force_txta211_policy_res','no');">
+						<option value="" <?php echo (!isset($this->forceInfo['force_sel211_policy']) || $this->forceInfo['force_sel211_policy']=='')?'selected="selected"':'';?>>Velg<!--Select--></option>
+						<option value="yes" <?php echo (isset($this->forceInfo['force_sel211_policy']) && $this->forceInfo['force_sel211_policy']=='yes')?'selected="selected"':'';?>>  yes<!--Yes--></option>
+						<option value="no" <?php echo (isset($this->forceInfo['force_sel211_policy']) && $this->forceInfo['force_sel211_policy']=='no')?'selected="selected"':'';?>>  no<!--No--></option>
+					</select></span>
+				</td>
+			  </tr>
+			  <tr>
+				<td class="title1">Hvis no: Hvorfor ikke?<!--If no:Why not?--></td>
+				<td class="value1 nonecls1"><span class="tdbg1"><?php echo (isset($this->forceInfo['force_txta211_policy_res']) && $this->forceInfo['force_txta211_policy_res']!='')?$this->forceInfo['force_txta211_policy_res']:'';?></span></td>
+			  </tr>
+			  <tr>
+				<td class="title1">
+				Er avleggelse av urinpr&oslash;ve h&aring;ndtert i samsvar gjeldende kvalitetsrutiner for rusmiddeltes ting gitt av Helsedirektoratet ?<!--Is the presentation of the urine sample handled in accordance the applicable quality procedures rusmiddeltes things provided by the Directorate of Health?-->
+				</td>
+				<td class="value1 nonecls1"><span class="tdbg1">
+					  <select class="width98 validation" name="force2511[force_sel211_present]" id="force_sel211_present" readonly="readonly" disabled="disabled">
+						<option value="" <?php echo (!isset($this->forceInfo['force_sel211_present']) || $this->forceInfo['force_sel211_present']=='')?'selected="selected"':'';?>>Velg<!--Select--></option>
+						<option value="yes" <?php echo (isset($this->forceInfo['force_sel211_present']) && $this->forceInfo['force_sel211_present']=='yes')?'selected="selected"':'';?>>  yes<!--Yes--></option>
+						<option value="no" <?php echo (isset($this->forceInfo['force_sel211_present']) && $this->forceInfo['force_sel211_present']=='no')?'selected="selected"':'';?>>  no<!--No--></option>
+					  </select></span>
+				</td>
+			  </tr>
+			  <tr>
+				<td class="title1">Ble det gjort funn i urinpr&oslash;ven?<!--When oil was discovered in the urine sample?--></td>
+				<td class="value1 nonecls1"><span class="tdbg1">
+					<select class="width98 validation" name="force2511[force_sel211_discovery]" id="force_sel211_discovery" readonly="readonly" disabled="disabled"  onchange="changeAreaClass(this.value,'','rem','#force_txta211_discovery_res','yes');">
+						<option value="" <?php echo (!isset($this->forceInfo['force_sel211_discovery']) || $this->forceInfo['force_sel211_discovery']=='')?'selected="selected"':'';?>>Velg<!--Select--></option>
+						<option value="yes" <?php echo (isset($this->forceInfo['force_sel211_discovery']) && $this->forceInfo['force_sel211_discovery']=='yes')?'selected="selected"':'';?>>  yes<!--Yes--></option>
+						<option value="no" <?php echo (isset($this->forceInfo['force_sel211_discovery']) && $this->forceInfo['force_sel211_discovery']=='no')?'selected="selected"':'';?>>  no<!--No--></option>
+					</select></span>
+				</td>
+			  </tr>
+			  <tr>
+				<td class="title1">Hvis yes: Hva ble det testet positivt p&aring;?<!--If yes: What was it tested positive for?--></td>
+				<td class="value1 nonecls1"><span class="tdbg1"><?php echo (isset($this->forceInfo['force_txta211_discovery_res']) && $this->forceInfo['force_txta211_discovery_res']!='')?$this->forceInfo['force_txta211_discovery_res']:'';?></span></td>
+
+			  </tr>
+			   <tr>
+				<td class="title1">Er avgitt urinpr&oslash;ve sendt inn til laboratorium for analyse?<!--Is prepared urine sample submitted to the laboratory for analysis?-->
+				</td>
+				<td class="value1 nonecls1"><span class="tdbg1">
+					<select class="width98 validation" name="force2511[force_sel211_analysis]" id="force_sel211_analysis" readonly="readonly" disabled="disabled">
+						<option value="" <?php echo (!isset($this->forceInfo['force_sel211_analysis']) || $this->forceInfo['force_sel211_analysis']=='')?'selected="selected"':'';?>>Velg<!--Select--></option>
+						<option value="yes" <?php echo (isset($this->forceInfo['force_sel211_analysis']) && $this->forceInfo['force_sel211_analysis']=='yes')?'selected="selected"':'';?>>  yes<!--Yes--></option>
+						<option value="no" <?php echo (isset($this->forceInfo['force_sel211_analysis']) && $this->forceInfo['force_sel211_analysis']=='no')?'selected="selected"':'';?>>  no, men den vil bli sendt inn omg&aring;ende<!--No, but it will be submitted promptly--></option>
+					</select></span>
+				</td>
+			  </tr>
+			  <tr>
+				<td class="title1">Er det brukt hurtigtest ved urinpr&oslash;vetakingen?<!--Is it used quick test by urine sampling?-->
+				</td>
+				<td class="value1 nonecls1"><span class="tdbg1">
+					<select class="width98 validation" name="force2511[force_sel211_sample]" id="force_sel211_sample" readonly="readonly" disabled="disabled" onchange="changeAreaClass(this.value,'','rem','#force_sel211_control','yes');">
+						<option value="" <?php echo (!isset($this->forceInfo['force_sel211_sample']) || $this->forceInfo['force_sel211_sample']=='')?'selected="selected"':'';?>>Velg<!--Select--></option>
+						<option value="yes" <?php echo (isset($this->forceInfo['force_sel211_sample']) && $this->forceInfo['force_sel211_sample']=='yes')?'selected="selected"':'';?>>  yes<!--Yes--></option>
+						<option value="no" <?php echo (isset($this->forceInfo['force_sel211_sample']) && $this->forceInfo['force_sel211_sample']=='no')?'selected="selected"':'';?>>  no<!--No--></option>
+					</select></span>
+				</td>
+			  </tr>
+			  <tr>
+				<td class="title1">Dersom positiv analyse av hurtigtest; er avgitt urinpr&oslash;ve sendt til laboratorium for kontroll?<!--If positive analysis of the rapid test; is given urine sample sent to the laboratory for control?-->
+				</td>
+				<td class="value1 nonecls1"><span class="tdbg1">
+					<select class="width98" name="force2511[force_sel211_control]" id="force_sel211_control" readonly="readonly" disabled="disabled">
+						<option value="" <?php echo (!isset($this->forceInfo['force_sel211_control']) || $this->forceInfo['force_sel211_control']=='')?'selected="selected"':'';?>>Velg<!--Select--></option>
+						<option value="yes" <?php echo (isset($this->forceInfo['force_sel211_control']) && $this->forceInfo['force_sel211_control']=='yes')?'selected="selected"':'';?>>  yes<!--Yes--></option>
+						<option value="no" <?php echo (isset($this->forceInfo['force_sel211_control']) && $this->forceInfo['force_sel211_control']=='no')?'selected="selected"':'';?>>  no, men den vil bli sendt inn omg&aring;ende<!--No--></option>
+					</select></span>
+				</td>
+			  </tr>
+			</tbody>
+		</table>
+	</td>
+  </tr>
+</table>

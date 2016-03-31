@@ -1,0 +1,322 @@
+<?php $format = KD::getModel('core/format');?>
+<div class="PSUBTCWRAPPER">
+	<div class="PSUBTCLEFT">
+    <?php echo $this->translate('Force');?>
+    </div>
+</div>
+<div class="CLEARBBORDER"></div>
+<form name="frmClientForce" id="frmClientForce" method="post" action="<?php echo $this->getUrl("vaktrapport/info/saveforce/id/".$this->forceInfo['patientId']);?>">
+<input type="hidden" name="force_vaktrapID" value="<?php echo $this->forceInfo['vaktrapId'];?>" />
+<input type="hidden" name="force_patientID" value="<?php echo $this->forceInfo['patientId'];?>" />
+<input type="hidden" name="force_id" value="<?php echo (isset($this->forceInfo['force_id']) && $this->forceInfo['force_id']>0)?$this->forceInfo['force_id']:0;?>" />
+<div class="VVGBG VV2IN1C2 floatleft">
+<?php echo $this->partial('info/tabs/force/forceStatus.phtml',array('forceInfo'=>$this->forceInfo));?>   
+<div id="printContent">
+<?php /*?><div id="scrollable">
+<div id="scrollable1"><?php */?>
+<div style="width:100%">
+<div style="width:100%">
+<table cellpadding="0" cellspacing="5" border="0" width="100%" class="scrollable">
+ <tr id="IdTable1">
+  <td class="force" style="padding:0px" >
+  <?php echo $this->partial('info/tabs/force/force1.phtml',array('forceInfo'=>$this->forceInfo));?>   
+  </td>
+ </tr>
+ 
+ <tr id="IdTable21" style="width:100%; <?php echo (isset($this->forceInfo['force_chk21_status']) && $this->forceInfo['force_chk21_status']==1)?';display:block':';display:none;'?>">
+  <td class="force" style="padding:0px">
+  <?php echo $this->partial('info/tabs/force/force21.phtml',array('forceInfo'=>$this->forceInfo));?>   
+  </td>
+ </tr>
+
+ <tr id="IdTable22" style="width:100%; <?php echo (isset($this->forceInfo['force_chk22_status']) && $this->forceInfo['force_chk22_status']==1)?';display:block':';display:none;'?>">
+  <td class="force" style="padding:0px">
+  <?php echo $this->partial('info/tabs/force/force22.phtml',array('forceInfo'=>$this->forceInfo));?>   
+  </td>
+ </tr>
+
+ <tr id="IdTable23" style="width:100%; <?php echo (isset($this->forceInfo['force_chk23_status']) && $this->forceInfo['force_chk23_status']==1)?';display:block':';display:none;'?>">
+  <td class="force" style="padding:0px">
+  <?php echo $this->partial('info/tabs/force/force23.phtml',array('forceInfo'=>$this->forceInfo));?>   
+  </td>
+ </tr>
+
+ <tr id="IdTable24" style="width:100%; <?php echo (isset($this->forceInfo['force_chk24_status']) && $this->forceInfo['force_chk24_status']==1)?';display:block':';display:none;'?>">
+  <td class="force" style="padding:0px">
+  <?php echo $this->partial('info/tabs/force/force24.phtml',array('forceInfo'=>$this->forceInfo));?>   
+  </td>
+ </tr>
+
+ <tr id="IdTable25" style="width:100%; <?php echo (isset($this->forceInfo['force_chk25_status']) && $this->forceInfo['force_chk25_status']==1)?';display:block':';display:none;'?>">
+  <td class="force" style="padding:0px">
+  <?php echo $this->partial('info/tabs/force/force25.phtml',array('forceInfo'=>$this->forceInfo));?>   
+  </td>
+ </tr>
+
+ <tr id="IdTable26" style="width:100%; <?php echo (isset($this->forceInfo['force_chk26_status']) && $this->forceInfo['force_chk26_status']==1)?';display:block':';display:none;'?>">
+  <td class="force" style="padding:0px" >
+  <?php echo $this->partial('info/tabs/force/force26.phtml',array('forceInfo'=>$this->forceInfo));?>
+  </td>
+ </tr>
+
+ <tr id="IdTable27" style="width:100%; <?php echo (isset($this->forceInfo['force_chk27_status']) && $this->forceInfo['force_chk27_status']==1)?';display:block':';display:none;'?>">
+  <td class="force" style="padding:0px" >
+  <?php echo $this->partial('info/tabs/force/force27.phtml',array('forceInfo'=>$this->forceInfo));?>
+  </td>
+ </tr>
+
+ <tr id="IdTable28" style="width:100%; <?php echo (isset($this->forceInfo['force_chk28_status']) && $this->forceInfo['force_chk28_status']==1)?';display:block':';display:none;'?>">
+  <td class="force" style="padding:0px" >
+  <?php echo $this->partial('info/tabs/force/force28.phtml',array('forceInfo'=>$this->forceInfo));?>
+  </td>
+ </tr>
+
+ <tr id="IdTable29" style="width:100%; <?php echo (isset($this->forceInfo['force_chk29_status']) && $this->forceInfo['force_chk29_status']==1)?';display:block':';display:none;'?>">
+  <td class="force" style="padding:0px" >
+  <?php echo $this->partial('info/tabs/force/force29.phtml',array('forceInfo'=>$this->forceInfo));?>
+  </td>
+ </tr>
+
+ <tr id="IdTable210" style="width:100%; <?php echo (isset($this->forceInfo['force_chk210_status']) && $this->forceInfo['force_chk210_status']==1)?';display:block':';display:none;'?>">
+  <td class="force" style="padding:0px" >
+  <?php echo $this->partial('info/tabs/force/force210.phtml',array('forceInfo'=>$this->forceInfo));?>
+  </td>
+ </tr>
+
+ <tr id="IdTable211" style="width:100%; <?php echo (isset($this->forceInfo['force_chk211_status']) && $this->forceInfo['force_chk211_status']==1)?';display:block':';display:none;'?>">
+  <td class="force" style="padding:0px" >
+  <?php echo $this->partial('info/tabs/force/force211.phtml',array('forceInfo'=>$this->forceInfo));?>
+  </td>
+ </tr>
+ 
+ <tr id="IdTable3">
+  <td class="force" style="padding:0px" >
+  <?php echo $this->partial('info/tabs/force/force3.phtml',array('forceInfo'=>$this->forceInfo));?>
+  </td>
+ </tr>
+
+ <tr id="IdTable4" >
+  <td class="force" style="padding:0px">
+  <?php echo $this->partial('info/tabs/force/force4.phtml',array('forceInfo'=>$this->forceInfo));?>
+  </td>
+ </tr>
+
+ <tr id="IdTable5">
+  <td class="force" style="padding:0px" >
+  <?php echo $this->partial('info/tabs/force/force5.phtml',array('forceInfo'=>$this->forceInfo));?>
+  </td>
+ </tr>
+ <tr>
+	<td  class="force" style="height:10px;line-height:10px;padding:0px">
+	<div class="knappWrapper">
+        <div class="LAGREB"><input type="button" onclick="document.frmClientForce.submit(); " name="save_force" id="save_force" class="LAGREBA" value="<?php echo $this->translate('Save');?>"></div>
+		<div class="LAGREB"><input type="button" onclick="document.frmClientForce.submit(); " name="continue_force" id="continue_force" class="LAGREBA marginleft20" value="<?php echo $this->translate('Save & Continue');?>"></div>
+		<div class="OPPRETTB"><input type="submit" name="lock_force" id="lock_force" class="OPPRETTBA" value="<?php echo $this->translate('Create');?>"></a></div>
+    </div>
+	</td>
+ </tr>
+ <tr><td class="force" style="height:10px;line-height:10px;padding:0px">&nbsp;</td></tr> 
+ <?php 
+ if((isset($this->forceInfo['force_chk1_status']) && $this->forceInfo['force_chk1_status']==1) || (isset($this->forceInfo['force_chk21_status']) && $this->forceInfo['force_chk21_status']==1)|| (isset($this->forceInfo['force_chk22_status']) && $this->forceInfo['force_chk22_status']==1) || (isset($this->forceInfo['force_chk23_status']) && $this->forceInfo['force_chk23_status']==1)|| (isset($this->forceInfo['force_chk24_status']) && $this->forceInfo['force_chk24_status']==1) || (isset($this->forceInfo['force_chk25_status']) && $this->forceInfo['force_chk25_status']==1)|| (isset($this->forceInfo['force_chk26_status']) && $this->forceInfo['force_chk26_status']==1) || (isset($this->forceInfo['force_chk27_status']) && $this->forceInfo['force_chk27_status']==1)|| (isset($this->forceInfo['force_chk28_status']) && $this->forceInfo['force_chk28_status']==1) || (isset($this->forceInfo['force_chk29_status']) && $this->forceInfo['force_chk29_status']==1)|| (isset($this->forceInfo['force_chk210_status']) && $this->forceInfo['force_chk210_status']==1) || (isset($this->forceInfo['force_chk211_status']) && $this->forceInfo['force_chk211_status']==1)|| (isset($this->forceInfo['force_chk3_status']) && $this->forceInfo['force_chk3_status']==1) || (isset($this->forceInfo['force_chk24_status']) && $this->forceInfo['force_chk4_status']==1)|| (isset($this->forceInfo['force_chk5_status']) && $this->forceInfo['force_chk5_status']==1))
+ {
+ 	$termsConditions = true;
+ }
+ else
+ {
+ 	$termsConditions = false;
+ }
+ ?>
+ <tr>
+   <td class="force" style="padding:0px;width:100% <?php echo ($termsConditions)?'display:block':'display:none'?>" >
+     <table cellpadding="0" cellspacing="0" border="0" width="100%" id="termsConditions">
+ 	  <tr>
+		<td width="100%">
+		  <table border="0" cellpadding="0" cellspacing="0" style="border-collapse:collapse; margin-left:0pt" width="100%" class="bordercolor"> 
+		    <tbody>
+			<tr style="width:100%">
+			  <td width="30%" class="nonecls1 padding5"><span class="padding5">Dato:<!--Date: --><span class="tdbg1 padding5h"><?php if(isset($this->forceInfo['date_of_modification']) && $this->forceInfo['date_of_modification']!='' && (strpos($this->forceInfo['date_of_modification'],'0000')===false)){echo $format->FormatDate($this->forceInfo['date_of_modification']);}elseif(isset($this->forceInfo['date_of_creation']) && $this->forceInfo['date_of_creation']!='' && (strpos($this->forceInfo['date_of_creation'],'0000')===false)){echo $format->FormatDate($this->forceInfo['date_of_creation']);}else{echo $format->FormatDate(date('Y-m-d'));}?></span></span></td>
+			  <td width="40%">&nbsp;</td>
+			  <td width="30%" class="nonecls1 padding5"><span class="padding5">Signatur leder / fungerende leder</span><br /><span class="tdbg1 padding5h"><?php if(isset($this->forceInfo['modified_by']) && $this->forceInfo['modified_by']>0){$user = KD::getModel('user/user')->load($this->forceInfo['modified_by']);echo $format->FormatName($user['user_fname'],$user['user_mname'],$user['user_lname']);}elseif(isset($this->forceInfo['created_by']) && $this->forceInfo['created_by']>0){$user = KD::getModel('user/user')->load($this->forceInfo['created_by']);echo $format->FormatName($user['user_fname'],$user['user_mname'],$user['user_lname']);}else{echo '';}?></span><!--Signature Manager / Acting Head--></td>
+			</tr>
+			</tbody>
+		  </table>
+		</td>
+	  </tr>
+	  </table>
+	</td>
+  </tr>
+  <tr><td class="force" style="height:10px;line-height:10px;padding:0px">&nbsp;</td></tr> 
+  <tr>
+    <td class="force" style="padding:0px;width:100%;<?php echo ($termsConditions)?'display:block':'display:none'?>">
+	  <table cellpadding="0" cellspacing="0" border="0" width="100%" id="rules">
+	  <tr>
+	    <td style="width:100%">
+		  <table border="0" cellpadding="0" cellspacing="0" style="border-collapse:collapse; margin-left:0pt" width="100%" class="bordercolor"> 
+		    <tr>
+		      <td>
+			  <b>Kopi:<!--Copy:--></b>
+			  <ul type="circle">
+				<li>Ansvarlig barneverntjeneste<!--Subordinated child welfare--></li>
+				<li>Ansvarlig fagteam. For beboere plassert av Oslo kommune skal kopi sendes Barne- og familieetaten, Barnevernavdelingen v / avdelingsdirekt&oslash;r.<!--Responsible professional teams. For residents placed by the City of Oslo will be sent a copy of Children and Family Affairs, Child Welfare Department v / avdelingsdir VICE PRESIDENT.--></li>
+				<li>Statlig regional barnevernmyndighet (for beboere i omsorgssentre)<!--State county municipality (for residents of care centers)--></li>
+				<li>Den eller de med foreldreansvar / verge (unntatt hvis annet er avtalt med disse, for eksempel i ansvarsgruppem&oslash;te el.l.)<!--The person or persons with parental / guardian (Unless otherwise agreed with these, such as the responsibility group, etc.)--></li>
+			  </ul>
+			  </td>
+			</tr>
+		  </table>
+		</td>
+	  </tr>
+	  </table>
+	</td>
+  </tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</form>
+<script language="javascript" type="text/javascript">
+	$(document).ready(function () {
+		$('#sysIcon').click(function () {
+			if ($('#forceReport').valid()) {
+				printPage('printContent');
+			}
+			else
+			{
+				alert('All Fields Are Required!');
+			}
+		});
+	});
+</script>
+<script language="javascript" type="text/javascript">
+	
+	function printPage(id) {
+		//alert(document.getElementById("#txtResident").value);
+		$('input[type=text]').each(function( index ) {
+            $(this).attr('value', $(this).val());
+        });
+		$('input[type=checkbox]').each(function( index ) {
+            $(this).attr('checked', $(this).prop('checked'));
+        });
+		$('textarea').each(function( index ) {
+			//alert($(this).val());
+            $(this).html($(this).val());
+        });
+		$('select').each(function( index ) {
+            $(this).find(':selected').attr('selected', 'selected');
+        });
+		$('input[type=radio]').each(function( index ) {
+            $(this).attr('checked', $(this).prop('checked'));
+        });
+		var html="<html>";
+		html+="<head>";
+		//html+="<style type='text/css'>#tableId1, #tableId21, #tableId22, #tableId23, #tableId24, #tableId25, #tableId26, #tableId27, #tableId28, #tableId29, #tableId210, #tableId211, #tableId3, #tableId4, #tableId5, .knappWrapper {display:none}</style>";
+		html+="<link rel='stylesheet' type='text/css' href='style_force.css'/>";
+		html+="</head>";
+		html+="<body>";
+		html+='<table cellspacing=0 cellpadding="5" border="0px" style="border-collapse:collapse; margin-left:0pt" width="800px">';
+		html+= document.getElementById(id).innerHTML;
+		html+='</table>';
+		html+="</body>";
+		html+="</html>";
+		var printWin = window.open('','','left=0,top=0,width=1,height=1,toolbar=0,scrollbars=1,status =0');
+		var html = html.replace(/<textarea/g, '<div class="textarea"');
+		html = html.replace("textarea>", "div>");
+		html = html.trim();
+		printWin.document.write(html);
+		printWin.document.close();
+		printWin.focus();
+		printWin.print();
+		printWin.close();
+	}
+	$('.trengerForklaring').click(function() {
+		var forklaringId = $(this).attr('data-forklaring');
+		var selector = '#' + forklaringId + 'rad';
+		// Vis raden
+		$(selector).show();
+		selector = '#' + forklaringId;
+		$(selector).attr('required', true);
+		$(selector).focus();
+	});
+	$('.forceCheck').click(function() {
+		var selector = '#Id' + $(this).attr("id");
+		var validator = selector +' .validation';
+        if($(this).is(":checked")) {
+            $(selector).show();
+			$('#termsConditions').show();
+			$('#rules').show();
+				{
+				$(validator).each(function () {
+					if($(this).is(':radio'))
+					{
+						$(this).attr( "data-validation", 'radio' );
+						//$(this).data('validation','radio');
+					}
+					else
+					{
+						$(this).attr( "data-validation", 'required' );
+						//$(this).data('validation','required');
+					}
+				}); 
+				}
+        }
+		else
+		{
+			$(validator).each(function () {
+				if($(this).is(':radio'))
+				{
+					$(this).attr( "data-validation", '' );
+					//$(this).data('validation','radio');
+				}
+				else
+				{
+					$(this).attr( "data-validation", '' );
+					//$(this).data('validation','required');
+				}
+			}); 
+			$(selector).hide();
+		}       
+    });
+	function changeAreaClass(value, compare, ops, areaId, val)
+	{
+
+		if(value==compare)
+		{
+			if(ops=='add' || value==val)
+			{
+				//$(areaId).addClass("required");
+				$(areaId).attr( "data-validation", 'required' );
+			}
+			else if(ops=='rem' || value!=val)
+			{
+				//$(areaId).removeClass("required");
+				//$(areaId).removeClass("error");
+				$(areaId).attr( "data-validation", '' );
+				
+			}
+		}
+		else
+		{
+			if(value==val)
+			{
+				//$(areaId).addClass("required");
+				$(areaId).attr( "data-validation", 'required' );
+			}
+			else if(value!=val)
+			{
+				$(areaId).attr( "data-validation", 'required' );
+				//$(areaId).removeClass("required");
+				//$(areaId).removeClass("error");
+			}
+		}
+	}
+</script>
+
+<script language="javascript" type="text/javascript">
+$(document).ready(function(){
+
+  $('textarea').each(function () {
+  	//$(this).style.height((25+ $(this).style.height)+"px");
+  });
+ });
+</script>

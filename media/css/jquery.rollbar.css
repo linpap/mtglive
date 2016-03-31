@@ -1,0 +1,175 @@
+/* SCROLBAR LEFT SIDE */
+
+#LEFT .rollbar-path-vertical, .rollbar-path-horizontal {
+	position: absolute;
+	background-color:#1a3d47; 
+	z-index: 100;
+	-webkit-box-shadow: 0px 0px 11px -3px rgba(227,232,255,1);
+-moz-box-shadow: 0px 0px 11px -3px rgba(227,232,255,1);
+box-shadow: 0px 0px 11px -3px rgba(227,232,255,1);
+}
+
+#LEFT .rollbar-path-horizontal {
+	bottom: 5px;
+	left: 0;
+	width: 100%;
+	height: 10px;
+}
+
+#LEFT .rollbar-path-vertical {
+	right: 5px; 
+	top: 0; 
+	height: 100%; 
+	width: 1px; 
+}
+
+
+/* rollbar paths inner shadow */
+
+#LEFT .rollbar-path-vertical {
+ 	box-shadow: inset 1px 0px 1 rgba(0,0,0,0.1);
+	-moz-box-shadow: inset 1px 0px 1 rgba(0,0,0,0.1);
+	-webkit-box-shadow: inset 1px 0px 0 rgba(0,0,0,0.1);
+}
+
+#LEFT .rollbar-path-horizontal {
+ 	box-shadow: inset 0px 1px 1 rgba(0,0,0,0.1);
+	-moz-box-shadow: inset 0px 1px 1 rgba(0,0,0,0.1);
+	-webkit-box-shadow: inset 0px 1px 0 rgba(0,0,0,0.1);
+}
+
+
+
+/* rollbar handle style */
+ 
+#LEFT .rollbar-handle{
+	position: relative;
+	top: 0;
+	left: 0;
+	background-color:#fff;
+	width:3px;
+	margin-left:-1px; 
+}
+
+
+/* prevent handle selection */
+
+#LEFT .rollbar-handle {
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+#LEFT .rollbar-path-vertical .rollbar-handle {
+	height: 20%;
+} 
+
+#LEFT .rollbar-path-horizontal .rollbar-handle {
+	width: 20%;
+	height: 100%;
+}
+
+
+/* round corners for rollbar handle and paths */
+
+#LEFT .rollbar-path-vertical,
+#LEFT .rollbar-path-horizontal,
+#LEFT .rollbar-handle {
+
+}
+#LEFT div.rollbar-content {
+	padding-right:6px;
+	overflow:visible !important;
+}
+
+/* SCROLBAR CONTENT SIDE */
+#CONTENT .rollbar-path-vertical, .rollbar-path-horizontal {
+	position: absolute;
+	background-color:#fff; 
+	z-index: 100;
+	-webkit-box-shadow: 0px 0px 11px -3px rgba(227,232,255,1);
+-moz-box-shadow: 0px 0px 11px -3px rgba(227,232,255,1);
+box-shadow: 0px 0px 11px -3px rgba(227,232,255,1);
+}
+
+#CONTENT .rollbar-path-horizontal {
+	bottom: 5px;
+	left: 0;
+	width: 100%;
+	height: 10px;
+}
+
+#CONTENT .rollbar-path-vertical {
+	right: 5px; 
+	top: 0; 
+	height: 100%; 
+	width: 1px;
+	overflow:visible; 
+}
+
+
+/* rollbar paths inner shadow */
+
+#CONTENT .rollbar-path-vertical {
+ 	box-shadow: inset 1px 0px 1 rgba(0,0,0,0.1);
+	-moz-box-shadow: inset 1px 0px 1 rgba(0,0,0,0.1);
+	-webkit-box-shadow: inset 1px 0px 0 rgba(0,0,0,0.1);
+}
+
+#CONTENT .rollbar-path-horizontal {
+ 	box-shadow: inset 0px 1px 1 rgba(0,0,0,0.1);
+	-moz-box-shadow: inset 0px 1px 1 rgba(0,0,0,0.1);
+	-webkit-box-shadow: inset 0px 1px 0 rgba(0,0,0,0.1);
+}
+
+
+
+/* rollbar handle style */
+ 
+#CONTENT .rollbar-handle{
+	position: relative;
+	top: 0;
+	left: 0;
+	background-color: #000;
+	width:3px;
+	margin-left:-1px; 
+}
+
+
+/* prevent handle selection */
+
+#CONTENT .rollbar-handle {
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+#CONTENT .rollbar-path-vertical .rollbar-handle {
+	height: 20%;
+
+} 
+
+#CONTENT .rollbar-path-horizontal .rollbar-handle {
+	width: 20%;
+	height: 100%;
+}
+
+
+/* round corners for rollbar handle and paths */
+
+#CONTENT .rollbar-path-vertical,
+#CONTENT .rollbar-path-horizontal,
+#CONTENT .rollbar-handle {
+
+}
+#CONTENT div.rollbar-content {
+	padding-right:6px;
+	background-image:url(../images/timg/content_bg.jpg);
+	background-position: left top;
+    background-repeat: repeat-x;
+	background-attachment:scroll;
+}

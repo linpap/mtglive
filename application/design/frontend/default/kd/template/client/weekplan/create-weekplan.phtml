@@ -1,0 +1,51 @@
+<?php $format = KD::getModel('core/format'); ?>
+<form name="frmClientEditMaal" id="frmClientEditMaal" method="post" action="<?php echo $this->getUrl("client/weekplan/store-weekplan/id/" . $this->clientID ); ?>">
+        <input type="text" id="date-alt-field" name="date-alt-field" value="<?php echo date('Y-m-d'); ?>" />
+        <table width="100%" border="0" cellspacing="4" cellpadding="0" id="clientEditMaalTbl">
+    <tr class="CURNONPOINTER">
+		<th class="TSLRTDCENTER" width="50%"><?php echo $this->translate('Date');?></th>
+		<th class="TSLRTDCENTER" width="50%"><?php echo $this->translate('Time'); ?></th>
+      </tr>
+    <tr>
+          <td class="nonecls"><span class="tdbg"><input type="text" name="weekplan_date" value="<?php echo $format->FormatDate(date('Y-m-d'));?>" data-validation="required" readonly  id="weekplan_date" class="DyndatepickerImage1 width70"/></span></td>
+          <td class="nonecls">
+              <span class="tdbg">
+                  <input type="text" id="weekplan_time" name="weekplan_time" value="12:00" />
+              </span>
+          </td>
+      </tr>
+    <tr>
+        <td><?php echo $this->translate('Title');?></td>
+        <td>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" class="nonecls">
+              <span class="tdbg">
+                  <input type="text" id="weekplan_title" name="weekplan_title" value="" />
+              </span>
+        </td>
+    </tr>
+    <tr>
+        <td><?php echo $this->translate('Description'); ?></td>
+        <td></td>
+    </tr>
+    <tr>
+          <td class="nonecls" colspan="2"><span class="tdbg1c"><textarea class="bordernone" name="weekplan_desc" id="weekplan_desc" data-validation="" ></textarea></span></td>
+	</tr>
+
+</table>
+<div class="mtodroplist2">
+	<div class="OPPRETTB"><input type="submit" class="OPPRETTBA" value="<?php echo $this->translate('Save');?>"/></div>
+</div>
+</form>
+
+<script type="text/javascript">
+   /** (function() {
+        console.log(Mtg.Config.Timepicker, $('#weekplan_time').val(), $('#weekplan_date').val());
+        $('#weekplan_time').timepicker(Mtg.Config.Timepicker);
+        $('#weekplan_time').click(function() {
+            console.log('woopa');
+        });
+    }());**/
+</script>

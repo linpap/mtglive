@@ -1,0 +1,66 @@
+<?php 	
+		$session = new Zend_Session_Namespace('Acl');
+		$formatModel = KD::getModel('core/format');
+		if(in_array($session->userRole,array('A','S','D')))
+		{
+			$deptList = KD::getModel('department/department')->loadList('active','all');
+		}
+		else
+		{
+			$deptList = KD::getModel('department/department')->loadList();
+		}
+?>
+			
+<div class="KKI1">
+	
+	
+<?php /*?><form name="frmInfoAdd" id="frmInfoAdd" method="post" action="<?php echo $this->getUrl("info/info/add/id/".$this->infoCollection['info_id']."/type/".$this->infoCollection['info_type']);?>">	
+<input type="hidden" name="info_id" id="info_id" value="<?php echo $this->infoCollection['info_id'] ?>">	
+<input type="hidden" name="info_type" id="info_type" value="<?php echo $this->infoCollection['info_type'] ?>" />	<?php */?>
+<div class="KKI1WRAPPER">
+	<div class="KKI1C">
+		<div class="KKI1C1">
+			<?php echo $this->translate('Info Title');?>
+		</div>
+		<span class="tdbg888p"><?php /*?><input type="text" name="info_title" id="info_title"  value="<?php echo $this->infoCollection['info_title'] ?>" maxlength="255" data-validation="required" data-validation-length="max255"><?php */?><?php echo $this->infoCollection['info_title'] ?></span>
+
+	</div>
+	
+	<div class="KKI1C">
+		<div class="KKI1C1">
+			<?php echo $this->translate('Info Department');?>
+		</div>
+		<span class="tdbg888p">
+		<?php 
+			if(in_array($session->userRole,array('A','S','D')))
+			{
+				echo '<select name="info_deptIDs[]" id="info_deptIDs" multiple="multiple" disabled data-validation="required">';
+			}
+			else
+			{
+				echo '<select name="info_deptIDs" id="info_deptIDs" disabled data-validation="required">';
+			}
+			$data = explode(',',$this->infoCollection['info_deptIDs']);
+		?>
+				<?php foreach($deptList as $key=>$department):?>
+				<option value="<?php echo $department['dept_id'];?>" <?php echo (in_array($department['dept_id'],$data))?'selected="selected"':'';?>><?php echo $department['dept_name'];?></option>
+				<?php endforeach;?>
+            </select> 
+        </span>
+	</div>
+
+	<div class="KKI1C">
+		<div class="KKI1C1">
+			<?php echo $this->translate('Info Description');?>
+		</div>
+		<span class="tdbg888p">
+			<?php /*?><textarea onkeyup="textAreaAdjust(this)" name="info_desc" data-validation="required" id="info_desc" style="overflow:hidden;width: 100%; border: none; height:auto;"><?php echo $this->infoCollection['info_desc'];?></textarea><?php */?>
+			<?php echo $this->infoCollection['info_desc'];?>
+		</span>
+	</div>
+
+	<?php /*?><div class="OPPRETTB"><input type="submit" class="OPPRETTBA" value="<?php echo $this->translate('Create');?>"></div><?php */?>
+</div>
+<?php /*?></form>	<?php */?>
+</div>
+

@@ -1,0 +1,63 @@
+<?php if(!$this->isAjax):?>
+<div class="PSUBTCWRAPPER">
+	<div class="PSUBTCLEFTH2"><?php echo $this->translate('M.T.O');?></div>
+    <div class="KITITWRAPPER">
+    	<div class="PSUBTCLEFT"><?php echo $this->translate('%s Type',$this->translate('M.T.O'));?>:</div>
+        <div class="KITINRDLISTW">
+        	<span class="KITINRDLISTWSPAN">
+            	<select class="get-ajax" data-action="<?php echo $this->getUrl('client/mto/');?>" data-load="<div class='ajax-loading'><div>" data-text="AJAX IS WORKING" data-target="mtoContent">
+                	<option value="/maal/isAjax/1/id/<?php echo $this->clientID;?>"><?php echo $this->translate('Goal');?></option>
+                    <option value="/govtiltak/isAjax/1/id/<?php echo $this->clientID;?>"><?php echo $this->translate('%s %s',$this->translate('Goverment'),$this->translate('Measure'));?></option>
+					<option value="/instiltak/isAjax/1/id/<?php echo $this->clientID;?>"><?php echo $this->translate('%s %s',$this->translate('Institute'),$this->translate('Measure'));?></option>
+					<option value="/featiltak/isAjax/1/id/<?php echo $this->clientID;?>"><?php echo $this->translate('%s %s',$this->translate('Future'),$this->translate('Measure'));?></option>
+                    <option value="/observation/isAjax/1/id/<?php echo $this->clientID;?>" selected="selected"><?php echo $this->translate('Observations');?></option>
+				</select> 
+			</span>  	
+		</div>
+	</div>
+	<div class="CLEARBBORDER4"></div>
+
+	<!-- OPPTION 1 -->  
+	<div class="KKI2C" id="mtoContent">
+<?php endif;?>
+	<div id="BORDERTABS1R">
+     	<ul id="tabs6">
+        	<li class="INACTIVTAB" <?php if($this->defaultTabs =='tab61') echo 'id="current6"';?>><a href="#" name="tab61"><div class="ACTIVETLZI TLZI"><?php echo $this->translate('Observations');?></div></a></li>
+            <li class="INACTIVTAB" <?php if($this->defaultTabs =='tab62') echo 'id="current6"';?>><a href="#" name="tab62"><div class="ACTIVETLZI TLZI"><?php echo $this->translate('Archived %s',$this->translate('Observations'));?></div></a></li>
+		</ul>
+		<div id="content6">
+			<div class="tablebg">
+				<div style="display: block; padding:0 10px" id="tab61">
+                	<?php echo $this->partial('mto/tabs/observation/clientActiveObservation.phtml',array('clientID'=>$this->clientID,'observationCollection'=>$this->observationCollection,'tiltakCollection'=>$this->tiltakCollection,'maalCollection'=>$this->maalCollection,'isAjax'=>$this->isAjax,'page'=>$this->page));?>
+                </div>
+                <div style="display: block; padding:0 10px" id="tab62">
+                	<?php echo $this->partial('mto/tabs/observation/clientArchivedObservation.phtml',array('clientID'=>$this->clientID,'observationArchiveCollection'=>$this->observationArchiveCollection));?>
+				</div>
+			</div>
+		</div>
+	</div> 
+<?php if(!$this->isAjax):?>   
+    </div>
+</div>
+<?php endif;?>
+<?php if($this->isAjax):?>
+<script language="javascript" type="text/javascript">
+	$("#content6").find("[id^='tab']").hide();
+	$("#tabs6 li").attr("id",""); //Reset id's
+	$("#content").find("[name^='tab61']").parent().attr("id","current6");
+	$("#content #tab61").fadeIn();
+	
+	$('#tabs6 a').click(function(e) {
+        e.preventDefault();
+        if ($(this).closest("li").attr("id") == "current6"){ //detection for current tab
+         return;       
+        }
+        else{             
+          $("#content6").find("[id^='tab']").hide(); // Hide all content
+          $("#tabs6 li").attr("id",""); //Reset id's
+          $(this).parent().attr("id","current6"); // Activate this
+          $('#' + $(this).attr('name')).fadeIn(); // Show content for the current tab
+        }
+    });
+</script>
+<?php endif;?>

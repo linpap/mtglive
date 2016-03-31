@@ -1,0 +1,54 @@
+<table cellspacing=0 cellpadding="0" border="0px" width="100%">
+  <tr>
+	<td style="padding:0px;">
+		<table cellspacing=0 cellpadding="5" border="0px" style="border-collapse:collapse; margin-left:0pt" width="100%" class="bordercolor">
+			<thead>
+				<tr>
+					<th style="width: 100%;" colspan="2"><h2>2.10 &sect; 24 Nekte beboeren &aring; bruke elektroniske kommunikasjonsmidler<!--&sect; 24 Denying the resident to use electronic means--></h2></th>
+				</tr>
+			</thead>
+			<tbody>
+			 <tr><td colspan="2">Hver hjemmel st&aring;r p&aring; egen siden, da det kun er den dokumentasjonen som er utfylt, som skal oversendes Fylkesmannen uten ugrunnet opphold.<!--Each authority is on their side, since only the documentation is completed, which shall be submitted to the County without undue delay.--></td></tr>
+			 <tr><td colspan="2"><u>For &aring; benytte denne bestemmelsen m&aring; beboer v&aelig;re plassert med hjemmel i barnevernloven &sect;&sect; 4-24, 4-26 eller 4-25 annet ledd.<!--To use this provision must inmate being placed pursuant to the Child Welfare Act &sect; &sect; 4-24, 4-26 or 4-25, second paragraph.--></u></td></tr>
+			 <tr>
+				<td class="title1" width="60%">
+					Redegj&oslash;r for de individuelle og konkrete forhold som tilsier at det er n&oslash;dvendig &aring; nekte beboeren &aring; bruke elektroniske kommunikasjonsmidler av hensyn t il behandlingen eller form&aring;let med plasseringen:<!--Describe the individual and specific circumstances indicating that it is necessary to deny the resident to use electronic means of regard t il treatment or purpose of the location:-->
+				</td>
+				<td class="value1 nonecls1" width="40%"><span class="tdbg1">
+					<?php echo (isset($this->forceInfo['force_txta210_factor']) && $this->forceInfo['force_txta210_factor']!='')?$this->forceInfo['force_txta210_factor']:'';?></span>
+				</td>
+			  </tr>
+			  <tr>
+				<td class="title1">Hvor lenge er det n&oslash;dvendig &aring; sette begrensninger i beboerens rett til &aring; bruke elektroniske kommunikasjonsmidler:<!--How long is it necessary to put restrictions on the resident&#39;s right to use electronic means:--><br />(Begrunn tidsaspektet opp mot form&aring;let med plasseringen.)<!--(Justify the time aspect to the purpose of the placement.)--></td>
+				<td class="value1 nonecls1"><span class="tdbg1">
+					<?php echo (isset($this->forceInfo['force_txta210_howlong']) && $this->forceInfo['force_txta210_howlong']!='')?$this->forceInfo['force_txta210_howlong']:'';?></span>
+				</td>
+			  </tr>	
+		 	  <tr>
+				<td class="title1">Er kommunikasjonsmidlet inndratt?<!--If communication is revoked?--></td>
+				<td class="value1 nonecls1"><span class="tdbg1">
+					<select onkeyup="textAreaAdjust(this)" style="overflow:visible;width: 100%; border: none; height:auto;" class="width98 validation" name="force2511[force_sel210_revoke]" id="force_sel210_revoke" onchange="changeAreaClass(this.value,'','rem','#force_txta210_revoke_res','yes');" readonly="readonly" disabled="disabled">
+						<option value="" <?php echo (!isset($this->forceInfo['force_sel210_revoke']) || $this->forceInfo['force_sel210_revoke']=='')?'selected="selected"':'';?>>Velg<!--Select--></option>
+						<option value="yes" <?php echo (isset($this->forceInfo['force_sel210_revoke']) && $this->forceInfo['force_sel210_revoke']=='yes')?'selected="selected"':'';?>>  yes<!--Yes--></option>
+						<option value="no" <?php echo (isset($this->forceInfo['force_sel210_revoke']) && $this->forceInfo['force_sel210_revoke']=='no')?'selected="selected"':'';?>>  no<!--No--></option>
+					 </select></span>
+					
+				</td>
+			  </tr>
+			  <tr>
+				<td class="title1">Hvis yes:<!--If yes:--><br />Hvilke(t) kommunikasjonsmiddel/-midler er inndratt:<!--Which (t) communication / assets are confiscated:--></td>
+				<td class="value1 nonecls1"><span class="tdbg1">
+					<?php echo (isset($this->forceInfo['force_txta210_revoke_res']) && $this->forceInfo['force_txta210_revoke_res']!='')?$this->forceInfo['force_txta210_revoke_res']:'';?></span>
+				</td>
+			  </tr>
+			  <tr>
+				<td class="title1">Begrunn hvorfor kommunikasjonsmidlet/midlene er inndratt:<!--Explain why communication means / funds are withdrawn:--></td>
+				<td class="value1 nonecls1"><span class="tdbg1">
+					<?php echo (isset($this->forceInfo['force_txta210_why']) && $this->forceInfo['force_txta210_why']!='')?$this->forceInfo['force_txta210_why']:'';?></span>
+				</td>
+			  </tr>					  
+			</tbody>
+		</table>
+	</td>
+  </tr>
+</table>

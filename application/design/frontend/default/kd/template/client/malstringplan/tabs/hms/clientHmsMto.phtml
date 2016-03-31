@@ -1,0 +1,41 @@
+<div class="PSUBTCWRAPPER">
+	<div class="PSUBTCLEFTH2"><?php echo $this->translate('M.T.O');?></div>
+    <div class="KITITWRAPPER">
+    	<div class="PSUBTCLEFT"><?php echo $this->translate('%s Type',$this->translate('M.T.O'));?>:</div>
+        <div class="KITINRDLISTW">
+        	<span class="KITINRDLISTWSPAN">
+            	<select>
+                	<option value="0"><?php echo $this->translate('Goal');?></option>
+                    <option value="1"><?php echo $this->translate('Measure');?></option>
+                    <option value="2"><?php echo $this->translate('Observations');?></option>
+				</select> 
+			</span>  	
+		</div>
+	</div>
+	<div class="CLEARBBORDER4"></div>
+	<!-- OPPTION 1 -->  
+	<div class="KKI2C">
+
+	<div id="BORDERTABS71">
+     	<ul id="tabs71" class="third-level-tabs">
+        	<li class="INACTIVTAB" id="current71"><a href="#" name="tab711"><?php echo $this->translate('Goal');?></a></li>
+            <li class="INACTIVTAB"><a href="#" name="tab712"><?php echo $this->translate('Completed').' '.$this->translate('Goal') ;?></a></li>
+            <li class="INACTIVTAB"><a href="#" name="tab713"><?php echo $this->translate('Archived %s',$this->translate('Goal'));?></a></li>
+		</ul>
+		<div id="content71" class="third-level-content">
+			<div class="tablebg">
+				<div style="display: block; padding:0 10px" id="tab711">
+                	<?php echo $this->partial('info/tabs/hms/mto/clientHmsMtoMaal.phtml');?>
+                </div>
+                <div style="display: block; padding:0 10px" id="tab712">
+                	<?php echo $this->partial('info/tabs/hms/mto/clientHmsMtoOppnaadd.phtml');?>
+				</div>
+                <div style="display: block; padding:0 10px" id="tab713">
+                	<?php echo $this->partial('info/tabs/hms/mto/clientHmsMtoArkiv.phtml');?>
+				</div>
+			</div>
+		</div>
+		<div class="bot_shadow"><img src="<?php echo $this->getMediaUrl('timg/bot-shadow.png');?>" width="834" height="21"></div>
+	</div>    
+    </div>
+</div>

@@ -1,0 +1,111 @@
+<?php $format = KD::getModel('core/format');?>
+<div class="PSUBTCWRAPPER">
+	<div class="PSUBTCLEFT">
+    	<?php echo $this->translate('Documents');?>
+    </div>
+</div>
+<div class="CLEARBBORDER"></div>
+<div class="VVGBG">
+<form name="frmUpdateUserDocuement" id="frmUpdateUserDocuement" method="post" action="<?php echo $this->getUrl("user/info/index");?>">
+<input type="hidden" name="user_id" id="user_id" value="<?php echo $this->userCollection['user_id']; ?>">	
+<input type="hidden" name="counterStatus" id="counterStatus" value="1" />
+<input type="hidden" name="counter" id="counter" value="1" />
+	<div>
+		<span id="dragandrophandler">Dra og slipp filer her for &aring; laste det inn i programmet</span>
+		<span id="status1"></span>
+		<div class="CLEARBBORDER2"></div>
+	</div>
+	<table width="100%" border="0" cellspacing="4" cellpadding="0">
+      <tr class="CURNONPOINTER">
+        <?php /*?><td class="TSLRTDNUMBER">
+        <span class="tdbg">
+        	<input type="checkbox" name="checkboxG0" id="checkboxG0" class="css-checkbox" />
+            <label for="checkboxG0" class="css-label"></label>
+        </span>
+        </td><?php */?>
+        <th class="TSLRTDCENTER"><strong><?php echo $this->translate('No.');?></strong></th>
+        <th class="TSLRTDCENTER"><strong><?php echo $this->translate('Doc Name');?></strong></th>
+        <th class="TSLRTDCENTER"><strong><?php echo $this->translate('Doc Type');?></strong></th>
+        <th class="TSLRTDCENTER"><strong><?php echo $this->translate('Dato');?></strong></th>
+        <th class="TSLRTDCENTER"><strong><?php echo $this->translate('Uploaded by');?></strong></th>
+      </tr>
+	  <?php foreach($this->userCollection['documents'] as $document):?>
+	  <tr>
+        <?php /*?><td class="TSLRTDNUMBER bgwhite">
+        	<span class="tdbg" style="width: 20px;">
+                <input type="checkbox" name="checkboxG1" id="checkboxG1" class="css-checkbox" />
+                <label for="checkboxG1" class="css-label"></label>
+       		</span>
+        </td><?php */?>
+        
+        <td class="BDTDSPACE"><span class="tdbg"><?php echo $document['document_id'];?></span></td>
+       <!-- <td class="BDTDSPACE"><span class="tdbg"><?php echo $document['document_filename'];?></span></td>-->
+	     <td class="BDTDSPACE"><span class="tdbg"><a href="<?php echo $this->getUrl('user/info/getdocument/id/'). $document['document_id'];?>" target="_blank"><?php echo $document['document_filename'];?></a></span></td>
+        <td class="BDTDSPACE"><span class="tdbg"><?php echo $document['document_mimetype'];?></span></td>
+        <td class="BDTDSPACE"><span class="tdbg"><?php echo $format->FormatDate($document['date_of_creation']);?></span></td>
+        <td><span class="tdbg"><?php echo KD::getModel('user/user')->getUser($document['created_by']);?></span></td>
+      </tr>
+	  <?php endforeach;?>
+    </table>
+</div>
+</form>
+<link rel="stylesheet" href="<?php echo $this->getMediaUrl('drag-drop.css','css');?>" title="default" />
+<script src="<?php echo $this->getMediaUrl('drag-drop.js','js');?>"></script>
+<script language="javascript" type="text/javascript">
+	$(document).ready(function()
+		{
+		var obj = $("#dragandrophandler");
+		obj.on('dragenter', function (e)
+		{
+			e.stopPropagation();
+			e.preventDefault();
+			$(this).css('border', '2px solid #0B85A1');
+		});
+		obj.on('dragover', function (e)
+		{
+			 e.stopPropagation();
+			 e.preventDefault();
+		});
+		obj.one('drop', function (e)
+		{
+			 
+			 $(this).css('border', '2px dotted #0B85A1');
+			 e.stopPropagation();
+			 e.preventDefault();
+			 var files = e.originalEvent.dataTransfer.files;
+			 var button_type = 'user_document';
+			 
+			 var pasientId = $('#user_id').val();
+			 if(pasientId<0)
+			 {
+			 	alert("System facing some problem so refresh page and wait while page fullyloaded.");
+				return false;
+			 }
+			 
+ 			 //We need to send dropped files to Server
+			if($('#counter').val()==1)
+			{
+			 	handleFileUpload('<?php echo $this->getUrl('user/info/uploadfile/id/'. $this->userCollection['user_id']);?>',files,obj,button_type,pasientId);
+			}
+			 $('#counter').val($('#counter').val()+1);
+		});
+		
+		$(document).on('dragenter', function (e)
+		{
+			e.stopPropagation();
+			e.preventDefault();
+		});
+		$(document).on('dragover', function (e)
+		{
+		  e.stopPropagation();
+		  e.preventDefault();
+		  obj.css('border', '2px dotted #0B85A1');
+		});
+		$(document).on('drop', function (e)
+		{
+			e.stopPropagation();
+			e.preventDefault();
+		});
+		
+	});
+</script>

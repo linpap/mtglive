@@ -1,0 +1,213 @@
+<?php
+$ns = new Zend_Session_Namespace('Acl');
+$btnFlag=false;
+
+if(isset($ns->userRole) && in_array($ns->userRole,array('A','S')))
+{
+	$btnFlag=true;
+}
+?>
+
+<div class="PSUBTCWRAPPER">
+	<div class="PSUBTCLEFT width40">
+    	<?php echo $this->translate('Update Department').' '.$this->departmentInfo['dept_name'].'';?>
+    </div>
+</div>
+<div>
+<form name="frmUpdateDepartment" id="frmUpdateDepartment" method="post" action="<?php echo $this->getUrl("department/info/index");?>">
+<input type="hidden" name="dept_id" id="dept_id" value="<?php echo $this->departmentInfo['dept_id'] ?>" maxlength="32">	
+<input type="hidden" name="counterStatus" id="counterStatus" value="1" />
+<input type="hidden" name="counter" id="counter" value="1" />	
+<div class="CLEARBBORDER"></div>
+<div class="KKI1">
+	<div class="imageframe">
+		<span id="imageUpload" style="display:inline-block">
+		<div class="KKI1PICBG" style="overflow:visible;display:inline-block">
+			<?php if(isset($this->departmentInfo['dept_image']) && $this->departmentInfo['dept_image']>0)
+			{ 
+				$data = KD::getModel('client/document')->getDocument($this->departmentInfo['dept_image']);
+				if(in_array($data['document_mimetype'],array('image/png','image/jpg','image/jpeg','image/gif')))
+				{
+					echo '<div class="imageAuto" style="'.((isset($data['document_imagewidth']) && $data['document_imagewidth']>0)?'width:'.$data['document_imagewidth']:'').'px; '.((isset($data['document_imageheight']) && $data['document_imageheight']>0)?' height:'.$data['document_imageheight']:'').'px;"><img src= "data:'.$data['document_mimetype'].';base64,'.base64_encode($data['document_filecontent']).'" /></div>';
+				}
+				else
+				{
+				?>
+					<div class="KKI1PH"></div>
+				<?php 
+				}
+			?>
+			<?php 
+			}
+			else
+			{
+			?>
+				<div class="KKI1PH"></div>
+			<?php 
+			}?>
+		</div>
+		</span>
+		<span id="status1"  style="display:inline-block"></span>
+	</div>
+	<div class="KKI1WRAPPER">
+	<div class="KKI1C">
+		<div class="KKI1C1">
+			<?php echo $this->translate('Department');?>
+		</div>
+		<span class="tdbg888p"><input type="text" name="dept_name" id="dept_name" value="<?php echo $this->departmentInfo['dept_name'] ?>" data-validation="required" maxlength="64"/></span>
+	</div>
+	<div class="KKI1C">
+		<div class="KKI1C1">
+			<?php echo $this->translate('ID');?>
+		</div>
+		<span class="tdbg888p greyBG"><input type="text" name="dept_code" id="dept_code" readonly class="greyBG" disabled="disabled" value="<?php echo $this->departmentInfo['dept_code'] ?>" data-validation="required" maxlength="32"/></span>
+	</div>
+	<div class="KKI1C">
+		<div class="KKI1C1">
+			<?php echo $this->translate('Address');?> 1
+		</div>
+		<span class="tdbg888p"><input type="text" name="dept_address1" id="dept_address1"  value="<?php echo $this->departmentInfo['dept_address1'] ?>" maxlength="255" data-validation="required" data-validation-length="max255"/></span>
+	</div>
+	<div class="KKI1C">
+		<div class="KKI1C1">
+			<?php echo $this->translate('Address');?> 2
+		</div>
+		<span class="tdbg888p"><input type="text" name="dept_address2" id="dept_address2"  value="<?php echo $this->departmentInfo['dept_address2'] ?>" maxlength="255" data-validation="length" data-validation-length="max255"/></span>
+	</div>
+	<div class="KKI1C">
+		<div class="KKI1C1">
+			<?php echo $this->translate('Zip Code');?>
+		</div>
+		<span class="tdbg888p"><input type="text" value="<?php echo $this->departmentInfo['dept_zip'] ?>" name="dept_zip" id="dept_zip" maxlength="16" data-validation="required"  data-validation="length" data-validation-length="max16"/></span>
+	</div>
+	<div class="KKI1C">
+		<div class="KKI1C1">
+			<?php echo $this->translate('Location');?>
+		</div>
+		<span class="tdbg888p"><input type="text" value="<?php echo $this->departmentInfo['dept_city'] ?>" name="dept_city" id="dept_city" data-validation="required" data-validation-length="max64" maxlength="64"/></span>
+	</div>
+	<div class="KKI1C">
+		<div class="KKI1C1">
+			<?php echo $this->translate('Municipality');?>
+		</div>
+		<span class="tdbg888p"><input type="text" value="<?php echo $this->departmentInfo['dept_municipality'] ?>" name="dept_municipality" id="dept_municipality" data-validation="required" data-validation-length="max255" maxlength="255"/></span>
+	</div>
+	<div class="KKI1C">
+		<div class="KKI1C1">
+			<?php echo $this->translate('County/State');?>
+		</div>
+		<span class="tdbg888p"><input type="text" value="<?php echo $this->departmentInfo['dept_state'] ?>" name="dept_state" id="dept_state" data-validation="required" data-validation-length="max64" maxlength="64"/></span>
+	</div>
+	<div class="KKI1C">
+		<div class="KKI1C1">
+			<?php echo $this->translate('Phone');?>
+		</div>
+		<span class="tdbg888p"><input type="text" value="<?php echo $this->departmentInfo['dept_phone1'] ?>" name="dept_phone1" id="dept_phone1" data-validation="required" data-validation-length="max32" maxlength="32"/></span>
+	</div>
+	<div class="KKI1C">
+		<div class="KKI1C1">
+			<?php echo $this->translate('Email');?>
+		</div>
+		<span class="tdbg888p"><input type="text" value="<?php echo $this->departmentInfo['dept_mail1'] ?>" name="dept_mail1" id="dept_mail1" data-validation="email"  maxlength="132"/></span>
+	</div>
+</div>
+</div>
+
+<div class="CLEARBBORDER2"></div>
+<div class="KKI2C">
+	<table width="100%" border="0" cellspacing="4" cellpadding="0">
+	<tr>
+		<th class="noborder"><?php echo $this->translate('Expertise');?> - <?php echo $this->translate('Describe');?></th>
+	</tr>
+	<tr>
+		<td class="nonecls"><span class="tdbg1c">
+				<textarea name="dept_expertise" onkeyup="textAreaAdjust(this)" style="overflow:hidden;width: 100%; border: none; height:auto;" data-validation="required"><?php echo $this->departmentInfo['dept_expertise'] ?></textarea>
+			</span>
+		</td>
+	</tr>
+</table> 
+</div>
+<div class="CLEARBBORDER2"></div>
+<div class="KKI2C">
+	
+	<table width="100%" border="0" cellspacing="4" cellpadding="0">
+	<tr>
+		<th class="noborder"><?php echo $this->translate('Capacity');?> - <?php echo $this->translate('Describe');?></th>
+	</tr>
+	<tr>
+		<td class="nonecls"><span class="tdbg1c">
+				<textarea onkeyup="textAreaAdjust(this)" name="dept_capacity" style="overflow:hidden;width: 100%; border: none; height:auto;" data-validation="required"><?php echo $this->departmentInfo['dept_capacity'] ?></textarea>
+			</span>
+		</td>
+	</tr>
+</table> 
+</div>
+
+    
+    
+
+	<?php if($btnFlag):?>
+		<div class="CANCELB"><a class="CANCELBA" href="#"><?php echo $this->translate('Cancel');?></a></div>
+       <div class="OPPRETTB"><input type="submit" class="OPPRETTBA" value="<?php echo $this->translate('Save');?>"></div>
+	<?php endif?>
+</form>
+</div>
+<link rel="stylesheet" href="<?php echo $this->getMediaUrl('drag-drop.css','css');?>" title="default" />
+<script src="<?php echo $this->getMediaUrl('drag-drop.js','js');?>"></script>
+<script language="javascript" type="text/javascript">
+	$(document).ready(function()
+		{
+		var obj = $("#imageUpload");
+		obj.on('dragenter', function (e)
+		{
+			e.stopPropagation();
+			e.preventDefault();
+			$(this).css('border', '2px solid #0B85A1');
+		});
+		obj.on('dragover', function (e)
+		{
+			 e.stopPropagation();
+			 e.preventDefault();
+		});
+		obj.one('drop', function (e)
+		{
+			 //if ( e.type!="dragstop" ) return; 
+			 $(this).css('border', '2px dotted #0B85A1');
+			 e.stopPropagation();
+			 e.preventDefault();
+			 var files = e.originalEvent.dataTransfer.files;
+			 var button_type = 'dept_image';
+			 
+			 var pasientId = $('#dept_id').val();
+			 if(pasientId<0)
+			 {
+			 	alert("System facing some problem so refresh page and wait while page fullyloaded.");
+				return false;
+			 }
+ 			 //We need to send dropped files to Server
+			 if($('#counter').val()==1)
+			 {
+			 	 handleFileUpload('<?php echo $this->getUrl('department/info/uploadfile/id/'.$this->userCollection['user_id']);?>',files,obj,button_type,pasientId);
+			 }
+			 $('#counter').val($('#counter').val()+1);
+		});
+		
+		$(document).on('dragenter', function (e)
+		{
+			e.stopPropagation();
+			e.preventDefault();
+		});
+		$(document).on('dragover', function (e)
+		{
+		  e.stopPropagation();
+		  e.preventDefault();
+		  obj.css('border', '2px dotted #0B85A1');
+		});
+		$(document).on('drop', function (e)
+		{
+			e.stopPropagation();
+			e.preventDefault();
+		});
+		
+	});
+</script>

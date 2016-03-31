@@ -1,0 +1,84 @@
+<?php $format = KD::getModel('core/format');?>
+<ul id="tabs1">
+	<li class="INACTIVTAB"><a href="#" name="tab11"><div class="ACTIVETLZI TLZI"><?php echo $this->translate('Meeting Log');?></div></a></li>
+	<li class="INACTIVTAB"><a href="#" name="tab12"><div class="ACTIVETLZI TLZI"><?php echo $this->translate('Phone Log');?></div></a></li>
+	<li class="INACTIVTAB"><a href="#" name="tab13"><div class="ACTIVETLZI TLZI"><?php echo $this->translate('Others');?></div></a></li>
+</ul>
+<div id="content1">
+	<div class="tablebg">
+		<div style="display: block; padding:0 10px" id="tab11">
+			<table cellpadding="4" cellspacing="0" border="0" width="100%">
+			  <tr>
+			    <th width="5%"><?php echo $this->translate('Sr No');?></th>
+				<th width="15%"><?php echo $this->translate('Lock Date');?></th>
+				<th width="55%"><?php echo $this->translate('Description');?></th>
+				<th width="25%"><?php echo $this->translate('Create By');?></th>
+			  </tr>
+			<?php  $cnt = 0; foreach($this->loggM as $loggM): $cnt++;?>
+			  <tr>
+			    <td><?php echo $cnt;?></td>
+				<td><?php echo $format->FormatDate($loggM['logg_locked_at']);?></td>
+				<td><?php echo $loggM['logg_desc'];?></td>
+				<td><?php echo KD::getModel('user/user')->getUser($loggM['logg_locked_by']);?></td>
+			  </tr>
+			<?php endforeach;?>
+			</table>
+		</div>
+		<div style="display: block; padding:0 10px" id="tab12">
+			<table cellpadding="4" cellspacing="0" border="0" width="100%">
+			  <tr>
+			    <th width="5%"><?php echo $this->translate('Sr No');?></th>
+				<th width="15%"><?php echo $this->translate('Lock Date');?></th>
+				<th width="55%"><?php echo $this->translate('Description');?></th>
+				<th width="25%"><?php echo $this->translate('Description');?></th>
+			  </tr>
+			<?php  $cnt = 0; foreach($this->loggP as $loggP): $cnt++;?>
+			  <tr>
+			    <td><?php echo $cnt;?></td>
+				<td><?php echo $format->FormatDate($loggP['logg_locked_at']);?></td>
+				<td><?php echo $loggP['logg_desc'];?></td>
+				<td><?php echo KD::getModel('user/user')->getUser($loggP['logg_locked_by']);?></td>
+			  </tr>
+			<?php endforeach;?>
+			</table>
+		</div>
+		<div style="display: block; padding:0 10px" id="tab13">
+			<table cellpadding="4" cellspacing="0" border="0" width="100%">
+			  <tr>
+			    <th width="5%"><?php echo $this->translate('Sr No');?></th>
+				<th width="15%"><?php echo $this->translate('Lock Date');?></th>
+				<th width="55%"><?php echo $this->translate('Description');?></th>
+				<th width="25%"><?php echo $this->translate('Description');?></th>
+			  </tr>
+			<?php  $cnt = 0; foreach($this->loggO as $loggO): $cnt++;?>
+			  <tr>
+			    <td><?php echo $cnt;?></td>
+				<td><?php echo $format->FormatDate($loggO['logg_locked_at']);?></td>
+				<td><?php echo $loggO['logg_desc'];?></td>
+				<td><?php echo KD::getModel('user/user')->getUser($loggO['logg_locked_by']);?></td>
+			  </tr>
+			<?php endforeach;?>
+			</table>
+		</div>
+	</div>
+</div>
+<script src="<?php echo $this->getMediaUrl('ajax-load-custom.js','js');?>" language="javascript" type="text/javascript"></script>
+<script language="javascript" type="text/javascript">
+	$("#content1").find("[id^='tab']").hide();
+	$("#tabs1 li").attr("id",""); //Reset id's
+	$("#content").find("[name^='tab11']").parent().attr("id","current1");
+	$("#content #tab11").fadeIn();
+	
+	$('#tabs1 a').click(function(e) {
+        e.preventDefault();
+        if ($(this).closest("li").attr("id") == "current1"){ //detection for current tab
+         return;       
+        }
+        else{             
+          $("#content1").find("[id^='tab']").hide(); // Hide all content
+          $("#tabs1 li").attr("id",""); //Reset id's
+          $(this).parent().attr("id","current1"); // Activate this
+          $('#' + $(this).attr('name')).fadeIn(); // Show content for the current tab
+        }
+    });
+</script>

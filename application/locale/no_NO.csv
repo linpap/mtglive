@@ -1,0 +1,425 @@
+%s %s;%s %s
+%s Date;%s Dato
+%s Deviation;%s Avviket
+%s Info;%s Info
+%s List;%s Liste
+%s Measure;%s Tiltak
+%s No;%s Nr
+%s Reason;%s &Aringrsak
+%s Type;%s Type
+;Pusse tennene
+;Velg navn her!
+Action;Handling
+Active %s;Aktive %s
+Active;Aktiv
+Activities that only takes place certain weekdays;Aktiviteter som bare<br />foregår enkelte ukedager
+Activities that take place less than once a week;Aktiviteter som foregår<br />sjeldnere enn en gang i uken
+Add %s(s);Legg til %s(er)
+Additional Information;Tillegsinformasjon
+Additional;Tillegs
+Address List;Adresseliste
+Address;Adresse
+Advances in treatment and challenges ahead;Fremskritt i behandling og utfordringer videre
+All observations in graph;Alle observasjoner i graf
+All observations in list;Alle observasjoner i liste
+All;Alle
+Archive;Arkiver
+Archived %s;Arkiverte %s
+Attachment to scorecard plan;"Vedlegg til m&aring;lstyringsplanen"
+Available;Ledige
+Avvik No;Avvik nr
+Avvik Type Here!;Avvikstype Her!
+Avvik Type;Avvikstype
+Avvik;Avvik
+BIRK.;BIRK.
+Cancel;Avbryt
+Capacity;Kapasitet
+Change;Endre
+Checklist;Skjekkliste
+Child Welfare;Barnevern
+Client Information;Klientopplysninger
+Client;Klient
+Clients;Klienter
+"Coercion Report undergone with departmental and youth, and then sent (first overlapping after the event);Tvangsrapporter gjennomgått med avdelingsleder og ungdom, og deretter sendt (første overlapp etter hendelsen)";
+Completed;Oppnådd
+Conducted;Gjennomført
+County/State;Fylke
+Create %s;Opprett %s
+Create;Opprett
+Current Client;Aktuell klient
+Date %s;Dato %s
+Date of Join;Dato inn
+Date;Dato
+date;dato
+Dated;datert
+Decided Corrective;Besluttet korrigerende
+Decision;Vedtak
+Delete %s(s);Slett %s(er)
+Delete;Slett
+Department Leader;Avdelingsleder
+Department;Avdeling
+Describe Deviation;Beskriv avviket
+Describe;Beskriv
+Description of activities;Beskrivelse av akriviteter
+Description;Beskriv
+Doc Name;Doc navn
+Doc Type;Doc type
+Documents;Dokumenter
+Draggable Events;Draggable Events
+Edit;Rediger
+Education;Utdannelse
+Email;E-post
+End;Slutt
+Expertise;Ekspertise
+Finished;Ferdig
+First Name;Fornavn
+Force;Tvang
+Forced Protocol;Tvangsprotokoll
+Friday;Fredag
+From and To Date:;Dato fra og til:
+From Date;Fra Dato
+From Department;Fra avdeling
+from;fra
+From;Fra
+Fullfil;Fullf&oslashrte
+Future Measure;Fremtid Tiltak
+Future;Fremtid
+Goal from the Measurements;M&aringl fra tiltaksplanen
+Goal;Mål
+Government Measure;L&oslashpende Tiltak
+Government;Løpende
+Graph;Graf
+He has a day care;Vedkommende har et dagtilbud
+Here!;Her!
+History;Historikk
+Home;Hjem
+ID;ID
+"Identify relevant practical needs relation that she lives in a separate apartment, boututstyr, furniture, etc.;Kartlegge vedkommende praktiske behov ift at hun bor i egen leilighet, boututstyr, m&oslashbler, osv";
+In;Inn
+Institute Measure;Korttids Tiltak
+Institute;Korttids
+Investigation;Utredning
+Join;Ansatt
+Last Name;Etternavn
+Legal Placement;Plasseringshjemmel
+Legal;Hjemmel
+List Information;liste informasjon
+Location;Lokasjon
+Location;Sted
+Lock and Archives Security Report;Lås og arkiver vaktrapport
+Lock and Archives;Lås og arkiver
+Log Out;Logg ut
+Log Type Here!;Loggtype Her!
+Log;Logg
+M.T.O;M.T.O
+Mapping Template;Kartleggingsmal
+Mapping;Kartlegging
+Measure from scorecard plan;M&aringl fra m&aringlstyringsplanen
+Measure;Tiltak
+Measurement %s;Tiltaksplan %s
+Measurement;Tiltaksplan
+Measurements;Tiltaksplanen
+measures over time;tiltak over tid
+Medicine Name;Medisin navn
+Medicine;Medisinering
+Meeting Log;M&oslashtelogg
+Meeting with whom?;M&oslashte med hvem?
+Meetings conducted <br>in the period;M&oslashter gjennomf&oslashrt <br>i perioden
+Middle Name;Mellomnavn
+Mobile;Mobil
+Monday;Mandag
+Month;Mnd
+Monthly Summary;Mnd oppsummering
+Move to;Flytt til
+M-plan;Medisinerings plan
+Municipality;Kommune
+My Event;My Event
+Name;Navn
+Network;Nettverk
+No.;Nr.
+Not Complete;Ikke Oppnådd
+Number;Antall
+Observations;Observasjoner
+ODA;BIRK
+ODA No; BIRK Nr
+Ongoing Measure;Løpende tiltak
+Other;Andre
+Others;Annet
+Overall evaluation of objectives and measures;Samlet evaluering av mål og tiltak
+Owner;Eier
+Partial Complete;Delvis Oppnådd
+Period;Periode
+Person;Person
+Phone Log;Telefonlogg
+Phone;Telefon
+Placement;Plassering
+Position;Stilling
+PPT;PPT
+Primary;Prim&aeligr
+Proposed Corrective;Forslag til korrigerende
+Quarterly Report;Kvartalsrapport
+Quarterly Summary;Kvartalsoppsummering
+Read more;Les mer
+Reason for placement;&Aringrsak til plassering
+Received;Mottatt
+Record was Successfully Updated;Posten er oppdatert
+Referat;Referat
+Registered;Registrert
+Relatives;P&aringr&oslashrende
+Report;Rapport
+Reports;Rapporter
+Resources;Ressurser
+Restore;Gjennopprett
+Row (s);Rad (er)
+Row;Rad
+Saturday;L&oslashrdag
+Save;Lagre
+Save & Close; Lagre & Lukk
+School;Skole
+Scorecard Plan;Målstyringsplan
+Security Report For;Vaktrapport for klient:
+Security Report No .:;Vaktrapport nr.:
+Security Report Period From;Vakt periode fra
+Security Report Period To;Vakt periode til
+Security Report;Vaktrapport
+Security Reports;Vaktrapporter
+Select %s %s;Velg %s %s
+Select %s;Velg %s
+Select;Velg
+Short Measure;Korttids tiltak
+Signature;Signatur
+Sort;Sorter
+Start;Start
+Statistic Client;Statistikk Klient
+Statistic Department;Statistikk Avdeling
+Statistic;Statistikk
+Status;Status
+Sunday;S&oslashndag
+Super User;Superbruker
+System;System
+Team;Team
+The Treatment center Small Devices;Behandlingssenteret Sm&aring Enheter
+Thursday;Torsdag
+Time;Klokkeslett
+Titel Come Here!;Titell kommer her!
+To Date;Til Dato
+To Date;Til Dato
+to;til
+To;Til
+Total Remarks;Total merknader
+Tuesday;Tirsdag
+Type of Action;Handlingstype
+Uploaded by;Lastet opp av
+User Permission Type:;bruker rettighets type:
+User;Behandlere
+Valid %s;Gyldig %s
+Valid;Gyldig
+View;Vis
+Wednesday;Onsdag
+Week & Year;Uke &amp &Aringr
+Week;Uke
+Weekday;Ukedag
+Weekly Schedule;Ukeplan
+What is done to rectify;Hva er gjort for å rette
+When / how often;N&aringr/hvor ofte
+Year;&Aringr
+You are currently logged in as;Du er n&aring logget inn som
+Youngsters;Ungdommen
+Zip Code;Postnummer
+
+
+
+
+Parents;Foreldre
+Other Family;Andre familiemedlemmer
+Hospital;Sykehus
+Friends;Venner
+Document;Dokument
+Upload date;Opplastings dato
+Upload by;Opplastet av
+Psychiatry;Psykolog
+Neuro Phychologist;Nevropsykologisk
+Action Plan %s;Tiltaksplan Datert
+Government Tiltak;Løpende tiltak
+Institute Tiltak;Korttids tiltak
+Non Evaluated;Ikke evaluert
+Shown Vaktrapport;Vises i vaktrapport
+Period;Filter
+Lifetime;Ingen
+Quartal 1;Kvartal 1
+Quartal 2;Kvartal 2
+Quartal 3;Kvartal 3
+Quartal 4;Kvartal 4
+Medicine Plan;Medisineringsplan
+From-to;Fra dato til dato
+Week & year;Dag/Dato/Uke
+No. of Medicine;Antall doser/piller
+Take Time;Når skal medisinen tas (kl)
+Weekplan;Ukeplan
+Midicine Plan;Medisineringsplan
+Add %s; Opprett %s
+Select User Permission Type:;Brukerrettighet type:
+Doctor;Lege
+Update Department;Avdeling
+User Info;Info
+Statistikk For;Statistikk for klient:
+Statistikk For D;Statistikk for avdeling:
+Client Info;Klient:
+Name Format;Navn format
+Date Format;Dato format
+Page Size;Liste størelse
+Email Identity;System e-post signatur
+Error while showing some Government Tiltak For Vaktrapport listed Below:;Obs, se følgende feilmeldinger:
+FullScreen;Vis i fullskjerm
+Title;Tittel
+Description;Beskrivelse
+Create weekplan item;Opprett hendelse
+Weekplan for;Ukeplan for
+Change week;Bytt uke
+Choose week;Velg uke
+Choose year; Velg år
+No activities this week;Ingen aktiviteter denne uken
+Create active goal;Opprett løpende tiltak
+Create short term goal;Opprett korttids tiltak
+No log items found;Det er ikke loggført noe på denne vaktrapporten
+No events for today; Ingen aktiviteter idag
+Event;Aktivitet
+Reason why the measures are only partially or not implemented;Årsak til at tiltakene bare er delvis eller ikke gjennomført
+Role;Brukerrettigheter
+Normal User;Vanlig bruker
+State;Fylke
+City;By
+Code;Avdelings ID Nr
+Not Completet;Ikke gjennomført
+Partial Completet;Delvis gjennomført
+Completedt;Gjennomført
+Purpose of Stay;Årsak til plassering - Beskrivelse
+Contracting;Oppdragsgiver
+Create Client;Opprett Klient
+Create User;Opprett Bruker
+Create Department;Opprett Avdeling
+Goverment;Løpende
+Independant;Selvstendig
+System Configuration;System konfigurasjon
+Config;System
+Shown in;Vis valgte
+Vaktrapport Report;løpende tiltak i vaktrapporten
+Remove From;Fjern valgte
+Remove From Vaktrapport Report;Fjern valgte løpende tiltak i vaktrapporten
+Observations Type;Observasjons type
+Dependent;Knyttet til
+Next Report;Neste rapport
+Previous Report;Forrige rapport
+Carried out;Gjennomført
+Partial carried out;Delvis gjennomført
+Not carried out;Ikke gjennomført
+Show;Vis resultat
+Sr.No.;Nr
+Mapping for;Kartleggingsmal for
+Please Select;Velg klient her
+Force reports;Tvangsvedtak registrert i perioden
+Medicine2;Medisinerings
+Scorecard For;Målstyringsplan for
+Forgot Password?;Glemt passord?
+Loginn;Logg inn
+Vaktrapport Saved Successfully;Vaktrapporten er nå lagret
+Member Login;M.T.G Logg inn
+Report For;Rapport arkiv for
+MTO For;Mål, Tiltak, Observasjoner for
+Medicine Plan For;Medisineringsplan for
+Weekplan Plan For;Ukeplan for
+Info Management;Info fra ledelsen
+Scratch Pad;Notat blokk
+Created;Opprettet
+Sr No;Nr
+Lock Date;Låst dato
+Create By;Opprettet av
+Letter;Brev
+Complaints;Klager
+Economy;Økonomi
+%s was Successfully UpdatedUkeplan;Du har nå opprettet en aktivitet i ukeplanen
+Medicine Plan Saved successfully;Medisineringsplanen er nå lagret
+Some Fields are Empty while Inserting Medicine Name "%s" with Qty "%s" at "%s". So This Medicine are not addded the Medicine Plan;Noen felt som var obligatoriske ble ikke fyldt ut når du la til medisin navn %s med antall %s kl %s. Disse medikamentene ble ikke lagt til i medisineringsplanen.
+Government Tiltak is now Remove from Current Vaktrapport;Valgte løpende tiltak ble nå fjernet fra aktiv vaktrapporten
+Government Tiltak is now shown in Current Vaktrapport;Valgte løpende tiltak blir nå vist i aktiv vaktrapport
+was Successfully Updated;Løpende tiltaket ble nå oppdatert og lagret
+Search ID;Søk her
+All Department; Alle avdelinger
+Medicine;Medisinering
+Monthly Security Report For;Mnd oppsummering for
+Monthly Security Report For;Mnd oppsummering for
+Cause Circles;Årsak Sirkler
+Info Title;Tittel
+Info Department;Avdelinger
+Info Description;Beskjed
+Info Management;Info fra ledelsen
+You searched for "%s", but we found no client or treat with this ID;Du søkte på %s, men vi fant ingen klient eller behandle med denne ID
+Archived Error;Arkivering feilet, vennligst velg Info som skal aktiveres før du velger handlinger
+Deletion Error;Sletting feilet, vennligst velg Info som skal slettes før du velger handlinger
+Medicine Plan for Vaktrapport has been saved;Endringer gjort i medisineringsplanen for vaktrapporten er nå lagret
+Vaktrapport is not saved successfully, so you cant lock or freez that vaktrapport report;Vaktrapporten ble lagret men den er ikke låst og arkivert
+There is some problem while saving Vaktrapport data;Det opsto en feil under lagringen av vaktrapport data
+Vaktrapport Saved Successfully And New Shift is created;Vaktraporten er nå låst og arkivert og en ny vaktrapport er opprettet for neste skift
+Client record was Successfully Added;Ny klient er nå opprettet i systemet
+Department record was Successfully Added;Ny avdeling er nå opprettet i systemet
+MaalPlan Report saved Successfully;Målstyringsplanen er nå lagret
+Login Successfull;Pålogging vellykket
+Archived Successfully;Arkivering vellykket
+Restored Successfully;Gjennopretting vellykket
+Løpende tiltak was Successfully Added;Løpende tiltak ble lagt til
+Observation was Successfully Added;Observasjon ble lagt til
+L&oslash;pende tiltak was Successfully Added;Løpende tiltak ble opprettet
+Deleted Successfully;Valgte rader er nå slettet
+Maal was Successfully Updated;Mål er oppdatert
+Error While Updating Maal;Feil under oppdatering mål
+Maal was Successfully Added;Et nytt mål ble opprettet
+Government Measure was Successfully Updated;Løpende tiltak er oppdatert
+Institute Measure was Successfully Updated;Korttids tiltak er oppdatert
+Future Measure was Successfully Updated;Fremtidige korttids tiltak er oppdatert
+Observation was Successfully Updated;Observasjon er oppdatert
+Government Tiltak was Successfully Added;Et nytt løpende tiltak ble opprettet
+Institute Tiltak was Successfully Added;Et nytt korttids tiltak ble opprettet
+Future Tiltak was Successfully Added;Et nytt fremtidig tiltak ble opprettet
+Observation was Successfully Added;Et nytt observasjon ble opprettet
+Plassering Saved Successfully;Plassering lagret
+Placement Saved Successfully;Plassering årsak lagret
+%s Saved Successfully;Klientopplysninger lagret
+Client Adresslist Saved Successfully;Adresseliste lagret
+Network Saved Successfully;Nettverk lagret
+Logg Locked Successfully;Du har nå opprettet en logg
+Logg Created Successfully;Loggen er nå lagret, du kan fulføre loggen senere men må skje innen vakt periode
+Vaktrapport Saved Successfully But Logg is Active, So you cant Lock Vaktrapport Before Locking Active Logg;Vaktrapporten er lagret, men det finnes en aktiv logg i vaktrapportensom du må avslutte før du får låst og arkivert vaktrapporten
+
+Error while Removing Government Tiltak For Vaktrapport listed Below:;Feil under fjerning løpende tiltak fra vaktrapporten, Se under for hvilket løpende tiltak det gjelder:
+Lock Quarterly Security Report;Lås og arkiver kvartalsoppsummeringen
+Lock Monthly Security Report;Lås og arkiver månedsoppsummeringen
+Client record was Successfully Added;Klient opprettet
+Primary User;Primær behandler
+Please Select Prime;Velg her
+Record was Successfully Added;Beskjed er nå opprettet
+Ukeplan was Successfully Updated;Endringer er lagret
+User Moved Successfully to Team-;Team liste oppdatert
+Data Saved Successfully;Endringer lagret
+Copy %s;Kopier Medisineringsplan
+Medicine Plan Copy successfully;Medisineringsplanen ble kopiert
+Medicine Plan For Starts Date %s is Already Exist;Medisineringsplan for dato %s eksisterer allerede
+Invalid Request;Ugyldig forespørsel
+Institute Tiltak  was Successfully Added;Korttids tiltak opprettet
+You search Text is Empty;Ditt søk ga ingen treff
+
+Logg Sr No;Logg nr
+Vaktrapport No;Vaktrapport nr
+Log Description;Logg beskrivelse
+Received Time;Mottatt kl
+Monthly;Måneds
+Quarterly;Kvartal
+%sSecurity Report For;%soppsummering for
+Used;Brukt
+Quarter;Kvartal
+No Avvik items found;Ingen avvik funnet
+Deviation;Avvik
+Deviation Changed Successfully;Avvik er nå lagret, du må komme tilbake og låse og arkivere avviket før du kan låse og arkivere vaktrapporten ved vakt skift.
+Deviation Created Successfully;Et avvik er nå opprettet og kan videreutfylles under vaktperioden før du låser og arkiverer avviket.
+Deviation Locked Successfully;Et avvik er nå opprettet.
+Lock and Archives avvik;Lås og arkiver avvik
+Save avvik;Lagre avvik

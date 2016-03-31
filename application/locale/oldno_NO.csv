@@ -1,0 +1,312 @@
+%s %s;%s %s
+%s Date;%s Dato
+%s Deviation;%s Avviket
+%s Info;%s Info
+%s List;%s Liste
+%s Measure;%s Tiltak
+%s No;%s Nr
+%s Reason;%s &Aringrsak
+%s Type;%s Type
+;Pusse tennene
+;Velg navn her!
+Action;Handling
+Active %s;Aktive %s
+Active;Aktiv
+Activities that only takes place certain weekdays;Aktiviteter som bare<br />foregår enkelte ukedager
+Activities that take place less than once a week;Aktiviteter som foregår<br />sjeldnere enn en gang i uken
+Add %s(s);Legg til %s(er)
+Additional Information;Tillegsinformasjon
+Additional;Tillegs
+Address List;Adresseliste
+Address;Adresse
+Advances in treatment and challenges ahead;Fremskritt i behandling og utfordringer videre
+All observations in graph;Alle observasjoner i graf
+All observations in list;Alle observasjoner i liste
+All;Alle
+Archive;Arkiver
+Archived %s;Arkiverte %s
+Attachment to scorecard plan;"Vedlegg til m&aring;lstyringsplanen"
+Available;Ledige
+Avvik No;Avvik nr
+Avvik Type Here!;Avvikstype Her!
+Avvik Type;Avvikstype
+Avvik;Avvik
+BIRK.;BIRK.
+Cancel;Avbryt
+Capacity;Kapasitet
+Change;Endre
+Checklist;Skjekkliste
+Child Welfare;Barnevern
+Client Information;Klientopplysninger
+Client;Klient
+Clients;Klienter
+"Coercion Report undergone with departmental and youth, and then sent (first overlapping after the event);Tvangsrapporter gjennomgått med avdelingsleder og ungdom, og deretter sendt (første overlapp etter hendelsen)";
+Completed;Oppnådd
+Conducted;Gjennomført
+County/State;Fylke
+Create %s;Opprett %s
+Create;Opprett
+Current Client;Aktuell klient
+Date %s;Dato %s
+Date of Join;Dato inn
+Date;Dato
+date;dato
+Dated;datert
+Decided Corrective;Besluttet korrigerende
+Decision;Vedtak
+Delete %s(s);Slett %s(er)
+Delete;Slett
+Department Leader;Avdelingsleder
+Department;Avdeling
+Describe Deviation;Beskriv avviket
+Describe;Beskriv
+Description of activities;Beskrivelse av akriviteter
+Description;Beskriv
+Doc Name;Doc navn
+Doc Type;Doc type
+Documents;Dokumenter
+Draggable Events;Draggable Events
+Edit;Rediger
+Education;Utdannelse
+Email;E-post
+End;Slutt
+Expertise;Ekspertise
+Finished;Ferdig
+First Name;Fornavn
+Force;Tvang
+Forced Protocol;Tvangsprotokoll
+Friday;Fredag
+From and To Date:;Dato fra og til:
+From Date;Fra Dato
+From Department;Fra avdeling
+from;fra
+From;Fra
+Fullfil;Fullf&oslashrte
+Future Measure;Fremtid Tiltak
+Future;Fremtid
+Goal from the Measurements;M&aringl fra tiltaksplanen
+Goal;Mål
+Government Measure;L&oslashpende Tiltak
+Government;Løpende
+Graph;Graf
+He has a day care;Vedkommende har et dagtilbud
+Here!;Her!
+History;Historikk
+Home;Hjem
+ID;ID
+"Identify relevant practical needs relation that she lives in a separate apartment, boututstyr, furniture, etc.;Kartlegge vedkommende praktiske behov ift at hun bor i egen leilighet, boututstyr, m&oslashbler, osv";
+In;Inn
+Institute Measure;Korttids Tiltak
+Institute;Korttids
+Investigation;Utredning
+Join;Ansatt
+Last Name;Etternavn
+Legal Placement;Plasseringshjemmel
+Legal;Hjemmel
+List Information;liste informasjon
+Location;Lokasjon
+Location;Sted
+Lock and Archives Security Report;Lås og arkiver vaktrapport
+Lock and Archives;L&arings og arkiver
+Log Out;Logg ut
+Log Type Here!;Loggtype Her!
+Log;Logg
+M.T.O;M.T.O
+Mapping Template;Kartleggingsmal
+Mapping;Kartlegging
+Measure from scorecard plan;M&aringl fra m&aringlstyringsplanen
+Measure;Tiltak
+Measurement %s;Tiltaksplan %s
+Measurement;Tiltaksplan
+Measurements;Tiltaksplanen
+measures over time;tiltak over tid
+Medicine Name;Medisin navn
+Medicine;Medisinering
+Meeting Log;M&oslashtelogg
+Meeting with whom?;M&oslashte med hvem?
+Meetings conducted <br>in the period;M&oslashter gjennomf&oslashrt <br>i perioden
+Middle Name;Mellomnavn
+Mobile;Mobil
+Monday;Mandag
+Month;Mnd
+Monthly Summary;Mnd oppsummering
+Move to;Flytt til
+M-plan;Medisinerings plan
+Municipality;Kommune
+My Event;My Event
+Name;Navn
+Network;Nettverk
+No.;Nr.
+Not Complete;Ikke Oppnådd
+Number;Antall
+Observations;Observasjoner
+ODA;BIRK
+ODA No; BIRK Nr
+Ongoing Measure;Løpende tiltak
+Other;Andre
+Others;Annet
+Overall evaluation of objectives and measures;Samlet evaluering av mål og tiltak
+Owner;Eier
+Partial Complete;Delvis Oppnådd
+Period;Periode
+Person;Person
+Phone Log;Telefonlogg
+Phone;Telefon
+Placement;Plassering
+Position;Stilling
+PPT;PPT
+Primary;Prim&aeligr
+Proposed Corrective;Forslag til korrigerende
+Quarterly Report;Kvartalsrapport
+Quarterly Summary;Kvartalsoppsummering
+Read more;Les mer
+Reason for placement;&Aringrsak til plassering
+Received;Mottatt
+Record was Successfully Updated;Posten er oppdatert
+Referat;Referat
+Registered;Registrert
+Relatives;P&aringr&oslashrende
+Report;Rapport
+Reports;Rapporter
+Resources;Ressurser
+Restore;Gjennopprett
+Row (s);Rad (er)
+Row;Rad
+Saturday;L&oslashrdag
+Save;Lagre
+Save & Close; Lagre & Lukk
+School;Skole
+Scorecard Plan;Målstyringsplan
+Security Report For;Vaktrapport for klient:
+Security Report No .:;Vaktrapport nr.:
+Security Report Period From;Vakt periode fra
+Security Report Period To;Vakt periode til
+Security Report;Vaktrapport
+Security Reports;Vaktrapporter
+Select %s %s;Velg %s %s
+Select %s;Velg %s
+Select;Velg
+Short Measure;Korttids tiltak
+Signature;Signatur
+Sort;Sorter
+Start;Start
+Statistic Client;Statistikk Klient
+Statistic Department;Statistikk Avdeling
+Statistic;Statistikk
+Status;Status
+Sunday;S&oslashndag
+Super User;Superbruker
+System;System
+Team;Team
+The Treatment center Small Devices;Behandlingssenteret Sm&aring Enheter
+Thursday;Torsdag
+Time;Klokkeslett
+Titel Come Here!;Titell kommer her!
+To Date;Til Dato
+To Date;Til Dato
+to;til
+To;Til
+Total Remarks;Total merknader
+Tuesday;Tirsdag
+Type of Action;Handlingstype
+Uploaded by;Lastet opp av
+User Permission Type:;bruker rettighets type:
+User;Behandlere
+Valid %s;Gyldig %s
+Valid;Gyldig
+View;Vis
+Wednesday;Onsdag
+Week & Year;Uke &amp &Aringr
+Week;Uke
+Weekday;Ukedag
+Weekly Schedule;Ukeplan
+What is done to rectify;Hva er gjort for &aring rette
+When / how often;N&aringr/hvor ofte
+Year;&Aringr
+You are currently logged in as;Du er n&aring logget in som
+Youngsters;Ungdummen
+Zip Code;Postnummer
+
+
+Parents;Foreldre
+Other Family;Andre familiemedlemmer
+Hospital;Sykehus
+Friends;Venner
+Document;Dokument
+Upload date;Opplastings dato
+Upload by;Opplastet av
+Psychiatry;Psykolog
+Neuro Phychologist;Nevropsykologisk
+Action Plan %s;Tiltaksplan Datert
+Government Tiltak;Løpende tiltak
+Institute Tiltak;Korttids tiltak
+Non Evaluated;Ikke evaluert
+Shown Vaktrapport;Vises i vaktrapport
+Period;Filter
+Lifetime;Ingen
+Quartal 1;Kvartal 1
+Quartal 2;Kvartal 2
+Quartal 3;Kvartal 3
+Quartal 4;Kvartal 4
+Medicine Plan;Medisineringsplan
+From-to;Fra dato til dato
+Week & year;Dag/Dato/Uke
+No. of Medicine;Antall doser/piller
+Take Time;Når skal medisinen tas (kl)
+Weekplan;Ukeplan
+Midicine Plan;Medisineringsplan
+Add %s; Opprett %s
+Select User Permission Type:;Bruker rettighet type:
+Doctor;Lege
+Update Department;Avdeling
+User Info;Info
+Statistikk For;Statistikk for klient:
+Statistikk For D;Statistikk for avdeling:
+Client Info;Klient:
+Name Format;Navn format
+Date Format;Dato format
+Page Size;Liste størelse
+Email Identity;System e-post signatur
+Error while showing some Government Tiltak For Vaktrapport listed Below:;Obs, se følgende feilmeldinger:
+FullScreen;Vis i fullskjerm
+Title;Tittel
+Description;Beskrivelse
+Create weekplan item;Opprett hendelse
+
+Weekplan for;Ukeplan for
+Change week;Bytt uke
+Choose week;Velg uke
+Choose year; Velg år
+No activities this week;Ingen aktiviteter denne uken
+
+Create active goal;Opprett løpende tiltak
+Create short term goal;Opprett korttids tiltak
+
+No log items found;Det er ikke loggført noe på denne vaktrapporten
+
+No events for today; Ingen aktiviteter idag
+Event;Aktivitet
+
+Reason why the measures are only partially or not implemented;Årsak til at tiltakene bare er delvis eller ikke gjennomført
+Role;Brukerrettigheter
+Normal User;Vanlig bruker
+State;Fylke
+City;By
+Code;Avdelings ID Nr
+Not Completet;Ikke gjennomført
+Partial Completet;Delvis gjennomført
+Completedt;Gjennomført
+Purpose of Stay;Årsak til plassering - Beskrivelse
+Contracting;Oppdragsgiver
+Create Client;Opprett Klient
+Create User;Opprett Bruker
+Create Department;Opprett Avdeling
+Goverment;Løpende
+
+Independant;Selvstendig
+System Configuration;System konfigurasjon
+Config;System
+Shown in Vaktrapport Report;Vis valgte løpende tiltak i vaktrapporten
+Remove From Vaktrapport Report;Fjern valgte løpende tiltak i vaktrapporten
+Observations Type;Observasjons type
+Dependent;Knyttet til

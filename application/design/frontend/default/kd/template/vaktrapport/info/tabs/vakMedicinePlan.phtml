@@ -1,0 +1,209 @@
+<?php 
+$vaktFrom = $this->vaktrapInfo['vaktrap_from_date'];
+$vaktTo = $this->vaktrapInfo['vaktrap_from_date'];
+$vaktFromPreg = preg_match("/(\d{4})-(\d{2})-(\d{2})/",$vaktFrom,$matchFrom);
+$vaktToPreg = preg_match("/(\d{4})-(\d{2})-(\d{2})/",$vaktTo,$matchTo);
+if(isset($vaktFrom,$vaktTo) && $vaktFrom!='' && $vaktTo!='' && $vaktFromPreg==true && $vaktToPreg==true && count($matchFrom)>0 && $matchFrom[3]>0 && count($matchTo)>0 && $matchTo[3]>0):?>
+<?php $format = KD::getModel('core/format');?>
+<div class="VVGBG">
+<table width="100%" border="0" cellspacing="4" cellpadding="0">
+      <tr class="CURNONPOINTER">
+        <th class="TSLRTDCENTER"><?php echo $this->translate('Department');?></th>
+        <th class="TSLRTDCENTER"><?php echo $this->translate('Name');?></th>
+        <th class="TSLRTDCENTER"><?php echo $this->translate('%s No',$this->translate('M-plan'));?></th>
+      </tr>
+      <tr>
+        <td><span class="tdbg"><?php echo KD::getModel('department/department')->getDepartment($this->departmentID,'name');?></span></td>
+        <td><span class="tdbg"><?php echo KD::getModel('user/user')->getUser($this->userID,'name');?></span></td>
+        <td><span class="tdbg">0</span></td>
+      </tr>    
+</table>
+</div>      
+<div class="CLEARBBORDER2"></div>
+<form name="frmEditClientVaktrapMedicine" id="frmEditClientVaktrapMedicine" method="post" action="<?php echo $this->getUrl("vaktrapport/info/savemedicine/id/".$this->clientID);?>">
+<input type="hidden" name="medvak_vaktrapID" value="<?php echo $this->vaktrapID;?>" />
+<input type="hidden" name="medvak_patientID" value="<?php echo $this->clientID;?>" />
+<div class="VVGBG floatleft">
+<table width="100%" border="0" cellspacing="4" cellpadding="0">
+      <tr class="CURNONPOINTER">
+        <th class="TSLRTDCENTER" width="14%"><?php echo $this->translate('Dag/Dato/Uke');?></th>
+		<th width="86%">
+		<table cellpadding="0" cellspacing="0" border="0" width="100%">
+		<tr>
+        <th class="TSLRTDCENTER" width="36%"><?php echo $this->translate('Medicine Name');?></th>
+        <th class="TSLRTDCENTER" width="5%"><?php echo $this->translate('Number');?></th>
+        <th class="TSLRTDCENTER" width="6%"><?php echo $this->translate('Time');?></th>
+        <th class="TSLRTDCENTER" width="6%"><?php echo $this->translate('Received');?></th>
+        <th class="TSLRTDCENTER" width="6%"><?php echo $this->translate('Time');?></th>
+        <th class="TSLRTDCENTER" width="26%"><?php echo $this->translate('Avviks beskrivelse');?></th>
+        <th class="TSLRTDCENTER" width="15%"><?php echo $this->translate('Signature');?></th>
+		</tr>
+		</table>
+		</th>
+      </tr>
+<?php 
+	$weekDays = array(0=>'mon',1=>'tue',2=>'wed',3=>'thu',4=>'fri',5=>'sat',6=>'sun');
+	$medicineVaktrapArray = array();
+	$startDate = $this->vaktrapInfo['vaktrap_from_date']; 
+	$startDateObj = new DateTime($startDate); 
+	$endDate = $this->vaktrapInfo['vaktrap_to_date']; 
+	$vaktToPreg = preg_match("/(\d{4})-(\d{2})-(\d{2})/",$endDate,$matchTo);
+	if($matchTo[3]>0 && $matchTo[1]>0 && $matchTo[2]>0)
+	{
+		$showFlag = true;
+		$endDateObj = new DateTime($endDate);
+		$endDateObj->add(new DateInterval('P1D'));
+	}
+	else
+	{
+		$showFlag = false;
+		$endDateObj = new DateTime($startDate);
+		$endDateObj->add(new DateInterval('P7D'));
+	}
+	if($showFlag):
+	  while($startDateObj->format("Y-m-d")!=$endDateObj->format("Y-m-d")):
+
+		$show = false;
+		$medicines = array();
+		
+		$startDateVal = $format->FormatDate($startDate);
+		$week = $startDateObj->format("W");
+		$weekDay = $startDateObj->format("l");
+		$day = $startDateObj->format("D");
+		$day = strtolower($day);
+		$startDateObj = new DateTime($startDate);
+		if(isset($this->medicineVaktrapCollection[$day]) && count($this->medicineVaktrapCollection[$day])>0):
+			$show = true;
+			$medicines = $this->medicineVaktrapCollection[$day];
+			$rawspan = 'rowspan="'.count($medicines).'"';
+		endif;
+		$startDateObj->add(new DateInterval('P1D'));
+		$startDate = $startDateObj->format("Y-m-d");
+?>
+	<tr>
+        <td style="height:57px;" class="tdbgpaddingspace bgwhite floatleft width90 printcustomwidth"><span class="tdbg floatleft"><span class="width70 floatleft"><?php echo $this->translate($weekDay);?><br /><?php echo $startDateVal;?><br /><?php echo $this->translate('%s No',$this->translate('Week'));?>:<?php echo $week;?> </span><span class="width25 medicine_add floatright" data-day="<?php echo $day;?>"></span></span></td>
+		
+		<td class="tdbgpaddingspace bgwhite">
+		<table width="100%" cellpadding="0" cellspacing="2" border="0"  id="medicine_table_<?php echo $day;?>">
+		<?php $counter = 0; foreach($medicines as $medicine):$counter++;$medvak_id = $medicine['medvak_id'];$med_det_id = $medicine['med_det_id'];?>
+		<tr>
+		<td class="nonecls" width="36%">
+        	<span class="tdbgmed"><span class="width98" style="padding:0 2%;"><?php echo $medicine['med_det_name'];?></span></span>
+        </td>
+        <td class="nonecls" width="5%">
+        	<span class="tdbgmed width90"><span class="width80" style="padding:0 10%;"><?php echo $medicine['med_det_nos'];?></span></span>
+        </td>
+        
+        
+        
+        <td class="nonecls" width="6%">
+        	
+			<span><?php echo (isset($medicine['med_det_time']) && $medicine['med_det_time']!='')?$medicine['med_det_time']:'';?></span>
+        </td>
+        
+        
+        
+        <td class="nonecls" width="6%">
+        	<span class="tdbgmed width100cdm">
+            	<select name="<?php echo (isset($medvak_id) && $medvak_id>0)? 'medvak['.$medvak_id.'][took]':'med_det['.$med_det_id.'][took]';?>" class="width90">
+                    <option value=""><?php echo $this->translate('Select');?></option>
+				  <?php for($i=0;$i<=$medicine['med_det_nos'];$i++): ?>
+					<option value="<?php echo $i;?>" <?php echo (isset($medicine['medvak_took']) && $i==$medicine['medvak_took'])?'selected="selected"':'';?>><?php echo $i;?></option>
+				  <?php endfor;?>
+				</select> 
+			</span>
+        </td>
+        
+        
+        
+        
+        <td class="nonecls" width="6%">
+        	<span class="tdbgmed width90"><input class="timepicker width90 aligncenter" type="text" name="<?php echo (isset($medvak_id) && $medvak_id>0)? 'medvak['.$medvak_id.'][time]':'med_det['.$med_det_id.'][time]';?>" value="<?php echo (isset($medicine['medvak_time']) && $medicine['medvak_time']!='')?$medicine['medvak_time']:'';?>"></span></td>
+        
+        
+        <td class="nonecls" width="27%">
+        	<span class="tdbgmed floatleft width98"><textarea class="width98" onkeyup="textAreaAdjust(this)" style="overflow:hidden;width: 100%; border: none; height:auto;" name="<?php echo (isset($medvak_id) && $medvak_id>0)? 'medvak['.$medvak_id.'][desc]':'med_det['.$med_det_id.'][desc]';?>"><?php echo (isset($medicine['medvak_desc']) && $medicine['medvak_desc']!='')?$medicine['medvak_desc']:'';?></textarea></span>
+        </td>
+        <td class="nonecls" width="16%">
+        	
+			
+			<?php 
+				//if(isset($medvak_id) && $medvak_id>0)
+				{
+					if(isset($medicine['modified_by_mdv']) && $medicine['modified_by_mdv']>0)
+					{
+						echo KD::getModel('user/user')->getUser($medicine['modified_by_mdv']);
+					}
+					elseif(isset($medicine['created_by_mdv']) && $medicine['created_by_mdv']>0)
+					{
+						echo KD::getModel('user/user')->getUser($medicine['created_by_mdv']);
+					}
+					else
+					{
+						echo '';
+					}
+				}
+			?>
+			
+			
+        </td>
+		</tr>
+		<?php endforeach;?>
+		</table>
+		</td>
+		</tr>
+	</tr>
+<?php endwhile;
+	else:
+?>
+	<tr><td colspan="2">
+    Du har ikke valgt noe sluttdato i vaktrapoprten, derfor vises ikke medisineringsplanen. <br>
+Venligst gå tilbake til vaktrapporten og legg til sluttdato for vakt perioden og lagr.<br>
+Deretter kan du gå inn på medisineringsplanen.
+   
+    
+    </td></tr>
+<?php 
+	endif;?>
+</table>
+
+<div class="LAGREB2"><input type="submit" name="save_medicine" id="save_medicine" class="OPPRETTBA" value="<?php echo $this->translate('Save');?>"></div>
+</div>
+</form>
+<script language="javascript" type="text/javascript">
+$(document).ready(function(){
+	$(".medicine_add").unbind().click(function () { 
+		var day = $(this).attr('data-day');
+		if(typeof(day) != "undefined" && day !== null && day.length>0)
+		{
+			var option = '';
+			for(i=1;i<=10;i++)
+			{
+				option += '<option value="'+i+'">'+i+'</option>';
+			}
+			$("#medicine_table_"+day).each(function () {
+				var tds = '<tr>';
+				tds += '<td class="nonecls" width="40%" style="height:50px;"><span class="tdbgmed"><span class="width98" style="padding:0 2%;"><input type="text" class="width95" name="extra_name['+day+'][]"/></span></span></td>';
+				tds += '<td class="nonecls" width="5%"><span class="tdbgmed width90"><span class="width80" style="padding:0 10%;"><select name="extra_nos['+day+'][]" class="width90">'+option+'</select></span></span></td>';
+				tds += '<td class="nonecls" width="6%"><span class="tdbgmed width90"><select name="extra_took['+day+'][]" class="width90">'+option+'</select> </span></td>';
+				tds += '<td class="nonecls" width="6%"><span class="tdbgmed width90"><input class="timepicker width90 aligncenter" type="text" name="extra_time['+day+'][]" value=""></span></td>';
+				tds += '<td class="nonecls" width="27%"><span class="tdbgmed floatleft width98"><textarea class="width98" onkeyup="textAreaAdjust(this)" style="overflow:hidden;width: 100%; border: none; height:auto;" name="extra_desc['+day+'][]"></textarea></span></td>';
+				tds += '<td class="nonecls" width="16%"><span class="tdbgmed floatleft width98"><span class="width98"style="padding:0 2%;"></span></span></td>';
+				tds += '</tr>';
+				if ($('tbody', this).length > 0) {
+					$('tbody', this).append(tds);
+				} else {
+					$(this).append(tds);
+				}
+			});
+		} 
+		else
+		{
+			alert('Please Refpresh Page May be there is a problem!');
+		}
+
+		$('.timepicker').timepicker({'scrollDefault': 'now','timeFormat': 'H:i','step': 15 });
+	});
+});
+</script>
+<?php endif;?>

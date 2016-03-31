@@ -1,0 +1,33 @@
+
+
+<div class="tablebg">
+   <div style="display: block; padding:0 10px" id="tab1" class="main-report-section" data-url="<?php echo APPLICATION_URL . '/vaktrapport/info/index/id/' . $this->vaktrapInfo['vaktrap_id']; ?>">
+       <?php echo $this->partial('info/tabs/vakSecurityReport.phtml',array(
+        'vaktrapInfo'=>$this->vaktrapInfo,
+        'maalCollection'=>$this->maalCollection,
+        'instTiltakCollection'=>$this->instTiltakCollection,
+        'vakGovTiltakCollection'=>$this->vakGovTiltakCollection,
+        'observationCollection'=>$this->observationCollection,
+        'observationResCollection'=>$this->observationResCollection,
+        'initString'=>$this->initString,
+        'maalPlanInfo' => $this->maalPlanInfo,
+        'treatmentPersonnel' => $this->treatmentPersonnel,
+           'btnFlag'=>$this->btnFlag
+    ));?>
+   </div>
+   <div style="display: block; padding: 0px 10px;" id="tab2">
+    <?php echo $this->partial('info/tabs/vakForce.phtml',array('forceInfo'=>$this->forceInfo));?>
+   </div>
+   <div style="display: block; padding: 0px 10px;" id="tab6">
+    <?php echo $this->partial('info/tabs/vakAvvik.phtml',array('deviationInfo'=>$this->deviationInfo,'vaktrapInfo'=>$this->vaktrapInfo));?>
+   </div>
+   <div style="display: block; padding: 0px 10px;" id="tab3">
+    <?php echo $this->partial('info/tabs/vakLog.phtml',array('loggInfo'=>$this->loggInfo));?>                 
+   </div>
+   <div style="display: block; padding: 0px 10px;" id="tab4">
+    <?php echo $this->partial('info/tabs/vakMedicinePlan.phtml',array('medicineVaktrapCollection'=>$this->medicineVaktrapCollection,'userID'=>$this->userID,'departmentID'=>$this->departmentID,'clientID'=>$this->clientID,'vaktrapID'=>$this->vaktrapID,'vaktrapInfo'=>$this->vaktrapInfo));?>                 
+   </div>
+   <div style="display: block; padding: 0px 10px;" id="tab5">
+    <?php  echo $this->partial('info/tabs/vakWeekPlan.phtml',array('weekplanCollection'=>$this->weekplanCollection));?>
+   </div>
+</div>

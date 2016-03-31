@@ -1,0 +1,108 @@
+<?php $format = KD::getModel('core/format');?>
+<div class="PSUBTCWRAPPER">
+	<div class="PSUBTCLEFT">
+    	<?php echo $this->translate('Log');?>
+    </div>
+</div>
+<div class="CLEARBBORDER"></div>
+<form name="frmClientLogg" id="frmClientLogg" method="post" action="<?php echo $this->getUrl("vaktrapport/info/savelogg/id/".$this->loggInfo['patientId']);?>">
+<input type="hidden" name="logg_vaktrapID" value="<?php echo $this->loggInfo['vaktrapId'];?>" />
+<input type="hidden" name="logg_patientID" value="<?php echo $this->loggInfo['patientId'];?>" />
+<input type="hidden" name="logg_id" value="<?php echo (isset($this->loggInfo['logg_id']) && $this->loggInfo['logg_id']>0)?$this->loggInfo['logg_id']:0;?>" />
+<?php
+	$logg_type =  (isset($this->loggInfo['logg_type']) && $this->loggInfo['logg_type']!='')?$this->loggInfo['logg_type']:'';
+	$logg_desc =  (isset($this->loggInfo['logg_desc']) && $this->loggInfo['logg_desc']!='')?$this->loggInfo['logg_desc']:'';
+	$logg_modifyUserID =  (isset($this->loggInfo['modified_by']) && $this->loggInfo['modified_by']!='')?$this->loggInfo['modified_by']:0;
+	$logg_createUserID =  (isset($this->loggInfo['created_by']) && $this->loggInfo['created_by']!='')?$this->loggInfo['created_by']:0;
+	$userId = 0;
+	if(isset($logg_modifyUserID) && $logg_modifyUserID>0)
+	{
+		$userId = $logg_modifyUserID;
+		$dateTime = $this->loggInfo['date_of_modification'];
+	}
+	elseif(isset($logg_createUserID) && $logg_createUserID>0)
+	{
+		$userId = $logg_createUserID;
+		$dateTime = $this->loggInfo['date_of_creation'];
+	}
+
+?>
+<div class="VVGBG floatleft">
+<table width="100%" border="0">
+  <tr>
+    <td width="25%"><span class="tdbg"><?php echo $this->translate('Select %s',$this->translate('Log Type Here!'));?></span></td>
+    <td width="25%" class="nonecls">
+        <span class="tdbg">
+        <input type="radio" data-validation="required" data-error-message="Meeting Log Required" id="logg_type_M" name="logg_type" value="M" <?php echo ($logg_type=='M')?'checked="checked"':'';?> />
+        <label for="logg_type_M"><span></span><?php echo $this->translate('Meeting Log');?></label>
+        </span>
+    </td>
+    <td width="25%" class="nonecls">
+        <span class="tdbg">
+        <input type="radio" data-validation="required" data-error-message="Phone Log Required" id="logg_type_P" name="logg_type" value="P" <?php echo ($logg_type=='P')?'checked="checked"':'';?>/>
+        <label for="logg_type_P">
+        <span></span><?php echo $this->translate('Phone Log');?></label>
+        </span>
+    </td>
+        <td width="25%" class="nonecls">
+		<span class="tdbg">
+        <input type="radio" data-validation="required" data-error-message="Others Field Required" id="logg_type_O" name="logg_type" value="O" <?php echo ($logg_type=='O')?'checked="checked"':'';?>/>
+        <label for="logg_type_O"><span></span><?php echo $this->translate('Others');?></label>
+        </span>
+    </td>
+  </tr>
+</table>
+</div>
+<div class="CLEARBBORDER2"></div>
+<div class="VVGBG">
+<table width="100%" border="0">
+  <tr>
+    <th><?php echo $this->translate('Description');?></th>
+  </tr>
+  <tr>
+    <td class="nonecls"><span class="tdbg1c">
+    <textarea onkeyup="textAreaAdjust(this)" data-validation="required" data-error-message="Description Field Required" name="logg_desc" id="logg_desc" data-error-message="Logg beskrivelse er påkrevd" data-validation="required" style="overflow:hidden;width: 100%; border: none; height:auto;"><?php echo $logg_desc;?></textarea>
+    </span></td>
+  </tr>
+</table>
+</div>
+<div class="CLEARBBORDER2"></div>
+<div class="VVGBG">
+<table width="100%" border="0">
+  <tr>
+    <th><?php echo $this->translate('Signature');?></th>
+    <th><?php echo $this->translate('Date');?></th>
+  </tr>
+  <tr>
+    <td><span class="tdbg1c" style="min-height: 20px"><?php echo (isset($userId) && $userId>0)?KD::getModel('user/user')->getUser($userId):'';?></span></td>
+    <td><span class="tdbg1c" style="min-height: 20px">
+		<?php
+		if(isset($dateTime) && $dateTime!='')
+		{
+			echo $format->FormatDate($dateTime);
+			$dateTime = new DateTime($dateTime);
+			echo':'.$dateTime->format('h-m-s');
+		}
+		else
+		{
+			echo '';
+		}
+		?>
+		</span>
+	</td>
+  </tr>
+</table>
+</div>
+<div class="CLEARBBORDER2"></div>
+
+<div class="LAGREB"><input type="submit" name="save_logg" id="save_logg" class="LAGREBA" value="<?php echo $this->translate('Save');?>"/></div>
+<div class="OPPRETTB"><input type="submit" name="lock_logg" id="lock_logg" class="OPPRETTBA" value="<?php echo $this->translate('Create');?>"/></div>
+</form>
+
+<script type="text/javascript">
+
+
+    $(document).ready(function(){
+        $('#logg_desc').keyup();
+    });
+</script>

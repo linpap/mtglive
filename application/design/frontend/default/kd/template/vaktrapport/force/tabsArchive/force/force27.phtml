@@ -1,0 +1,35 @@
+<table cellspacing=0 cellpadding="0" border="0px">
+  <tr>
+	<td style="padding:0px;">
+		<table cellspacing=0 cellpadding="5" border="0px" style="border-collapse:collapse; margin-left:0pt" width="100%" class="bordercolor" >
+			<thead>
+				<tr>
+					<th style="width: 100%;" colspan="2"><h2>2.7 &sect; 20 Tilbakef&oslash;ring ved r&oslash;mming mot beboerens vilje <!--&sect; 20 Reversal escapes the resident&#39;s willingness--></h2></th>
+				</tr>
+			</thead>
+			<tbody>
+			  <tr><td colspan="2">Hver hjemmel st&aring;r &aring; p&aring; egen siden, da det kun er den dokumentasjonen som er utfylt, som skal oversendes Fylkesmannen uten ugrunnet opphold.<!--Each authority is on their side, since only the documentation is completed, which shall be submitted to the County without undue delay.--></td></tr>
+			  <tr><td colspan="2"><u>Rapport om tilb akef&oslash;ring ved r&oslash;mming skal ligge ved lagt tvangsprotokollen .<!--Report on acces akef&oslash;ring escapes shall be by coercion protocol.--></u></td></tr>
+			  <tr>
+				<td class="title1" width="40%">Redegj&oslash;r for hvorfor det var n&oslash;dvendig &aring; bruke tvang ved tilbakef&oslash;ringen:<!--Explain why it was necessary to restrain the reversal:--></td>
+				<td class="nonecls1 value1" width="60%"><span class="tdbg1"><?php echo (isset($this->forceInfo['force_txta27_reversal']) && $this->forceInfo['force_txta27_reversal']!='')?$this->forceInfo['force_txta27_reversal']:'';?></span></td>
+			  </tr>	
+			  <tr>
+				<td class="title1">Hvilke avgj&oslash;relser om bruk av tvang ble besluttet og iverksatt av institusjonen :<!--What decisions about the use of force was decided and implemented by the institution:--></td>
+				<td class="nonecls1 value1"><span class="tdbg1"><?php echo (isset($this->forceInfo['force_txta27_institute']) && $this->forceInfo['force_txta27_institute']!='')?$this->forceInfo['force_txta27_institute']:'';?></span></td>
+			  </tr>				  
+			  <tr>
+				<td class="title1">Besluttet barneverntjenestens leder at politiet skulle bist&aring; ved tilbakef&oslash;ringen, jf. barnevernloven &sect; 6-8?<!--Decided welfare service leads the police to assist in the reversal, cf Welfare Act &sect; 6-8?--></td>
+				<td class="nonecls1 value1"><span class="tdbg1">
+				  <select class="validation width98" id="force_sel27_welfare" name="force2511[force_sel27_welfare]" readonly="readonly" disabled="disabled">
+					<option value="" <?php echo (!isset($this->forceInfo['force_sel27_welfare']) || $this->forceInfo['force_sel27_welfare']=='')?'selected="selected"':'';?>>Velg<!--Select--></option>
+					<option value="yes" <?php echo (isset($this->forceInfo['force_sel27_welfare']) && $this->forceInfo['force_sel27_welfare']=='yes')?'selected="selected"':'';?>>  yes<!--Yes--></option>
+					<option value="no" <?php echo (isset($this->forceInfo['force_sel27_welfare']) && $this->forceInfo['force_sel27_welfare']=='no')?'selected="selected"':'';?>>  no<!--No--></option>
+				  </select></span>
+				</td>
+			  </tr>
+			</tbody>
+		</table>
+	</td>
+  </tr>
+</table>

@@ -1,0 +1,74 @@
+<div class="LMODULEW">
+  <div class="col-md-3">
+	<div class="dzscalendar skin-aurora" id="traurora" style="margin:0px auto;">
+		<div class="events">
+			<div class="event-tobe" data-repeat="everyyear" data-day="01" data-month="01" data-tag="weekend"></div>
+			<div class="event-tobe" data-repeat="everyyear" data-day="25" data-month="12" data-tag="weekend"></div>
+			<div class="event-tobe" data-repeat="everyyear" data-day="26" data-month="12" data-tag="weekend"></div>
+			<div class="event-tobe" data-repeat="everyyear" data-day="17" data-month="05" data-tag="weekend"></div>
+			<div class="event-tobe" data-repeat="everyyear" data-day="01" data-month="05" data-tag="weekend"></div>
+			<?php for($i=2000;$i<=2050;$i++):
+				$easterDay = getEaster($i);
+				$easterDayObj = new DateTime($easterDay);
+				echo '<div class="event-tobe" data-date="'.$easterDayObj->format('m-d-Y').'" data-tag="weekend"></div>';
+				$holydays = array('2','3');
+				foreach($holydays as $holyday):
+					$easterDayObj1 = clone $easterDayObj;
+					$easterDayObj1->sub(new DateInterval('P'.$holyday.'D'));
+					echo '<div class="event-tobe" data-date="'.$easterDayObj1->format('m-d-Y').'" data-tag="weekend"></div>';
+				endforeach;
+				
+				$holydays = array('1','39','49','50');
+				foreach($holydays as $holyday):
+					$easterDayObj1 = clone $easterDayObj;
+					$easterDayObj1->add(new DateInterval('P'.$holyday.'D'));
+					echo '<div class="event-tobe" data-date="'.$easterDayObj1->format('m-d-Y').'" data-tag="weekend"></div>';
+				endforeach;
+			endfor;?>
+
+            <?php if(!empty($this->client_events)): ?>
+            <?php foreach($this->client_events as $event): ?>
+                    <div class="event-tobe" data-date="<?php echo date('m-d-Y', strtotime($event)); ?>" data-tag="event"></div>
+            <?php endforeach; ?>
+            <?php endif; ?>
+
+			<?php /*?><div class="event-tobe" data-repeat="everymonth" data-day="09" data-tag="important">
+				<div class="CCWBG">
+				<div class="CERCICO">
+					<h5>FS Metro theme based<br />interface</h5>
+					<span class="label"><?php echo $this->translate('Date');?></span> 09-8-2012 at 6PM<br/>
+					<span class="label"><?php echo $this->translate('Location');?></span> Holterveien 4 B. 1448 Drøbak<br/>
+					<br/>Ny brukergrensesnitt med custome design er under veis.
+					<div class="CCENEWSREADM"><a class="CCENEWSREADMICON" href="#">Les mer ...</a></div>
+				</div>
+			</div></div>
+			<div class="event-tobe" data-repeat="everymonth" data-day="22" data-tag="important">
+				<div class="CCWBG">
+				<div class="CERCICO">
+					<h5>Payam har bursdag :)</h5>
+					<span class="label"><?php echo $this->translate('Date');?></span> 22-8-2012 at 6PM<br/>
+					<span class="label"><?php echo $this->translate('Location');?></span> Holterveien 4 B. 1448 Drøbak<br/>
+					<br/>Skal feires med masse god mat og digg deser :)
+				</div>
+			</div></div>
+			<div class="event-tobe" data-repeat="everymonth" data-day="10"></div><?php */?>
+		</div>
+	</div>
+  </div>
+</div>
+<?php
+function getEaster($year)
+{
+	$easterArray = array('2000'=>'2000-04-23','2001'=>'2001-04-15','2002'=>'2002-03-31','2003'=>'2003-04-20','2004'=>'2004-04-11','2005'=>'2005-03-27','2006'=>'2006-04-16','2007'=>'2007-04-08','2008'=>'2008-03-23','2009'=>'2009-04-12','2010'=>'2010-04-04','2011'=>'2011-04-24','2012'=>'2012-04-08','2013'=>'2013-03-31','2014'=>'2014-04-20','2015'=>'2015-04-05','2016'=>'2016-03-27','2017'=>'2017-04-16','2018'=>'2018-04-01','2019'=>'2019-04-21','2020'=>'2020-04-12','2021'=>'2021-04-04','2022'=>'2022-04-17','2023'=>'2023-04-09','2024'=>'2024-03-31','2025'=>'2025-04-20','2026'=>'2026-04-05','2027'=>'2027-04-28','2028'=>'2028-04-16','2029'=>'2029-04-01','2030'=>'2030-04-21','2031'=>'2031-04-13','2032'=>'2032-03-28','2033'=>'2033-04-17','2034'=>'2034-04-09','2035'=>'2035-03-25','2036'=>'2036-04-13','2037'=>'2037-04-05','2038'=>'2038-04-25','2039'=>'2039-04-10','2040'=>'2040-04-01','2041'=>'2041-04-21','2042'=>'2042-04-06','2043'=>'2043-03-29','2044'=>'2044-04-17','2045'=>'2045-04-09','2046'=>'2046-03-25','2047'=>'2047-04-14','2048'=>'2048-04-05','2049'=>'2049-04-18','2050'=>'2050-04-10','2051'=>'2051-04-02','2052'=>'2052-04-21');
+	
+	return $easterArray[$year];
+	/*for($i=1;$i<=7;$i++)
+	{
+		$date = $year.'-04-'.$i;
+		$dateObj = new DateTime($date);
+		if(strtolower($dateObj->format('D'))=='sun')
+		{
+			return $date;
+		}
+	}*/
+}

@@ -1,0 +1,5 @@
+<?php $format = KD::getModel('core/format');?>
+	<option value=""><?php echo $this->translate('Please Select');?></option>
+<?php foreach($this->clientCollection as $client):?>
+	<option value="<?php echo $client['patient_id'];?>"><?php echo $format->FormatName($client['patient_fname'],$client['patient_mname'],$client['patient_lname']);?></option>
+<?php endforeach;?>

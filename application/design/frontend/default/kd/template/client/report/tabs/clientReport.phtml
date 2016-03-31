@@ -1,0 +1,41 @@
+<div class="PSUBTCLEFTH2"><?php echo $this->translate('Reports');?></div>
+<div id="BORDERTABSR">
+	<ul id="tabs2">
+		<li class="INACTIVTAB" id="current2"><a href="#" name="tab21"><div class="ACTIVETLZI TLZI"><?php echo $this->translate('Security Reports');?></div></a></li>
+		<li class="INACTIVTAB"><a href="#" name="tab22"><div class="ACTIVETLZI TLZI"><?php echo $this->translate('Quarterly Report');?></div></a></li>
+		<li class="INACTIVTAB"><a href="#" name="tab23"><div class="ACTIVETLZI TLZI"><?php echo $this->translate('Monthly Summary');?></div></a></li>
+		<li class="INACTIVTAB"><a href="#" name="tab24"><div class="ACTIVETLZI TLZI"><?php echo $this->translate('Quarterly Summary');?></div></a></li>
+	</ul>
+	<div id="content2">
+		<div class="tablebg">
+			<div style="display: block; padding:0 10px" id="tab21">
+                <?php echo $this->partial('report/tabs/reports/clientSecurityReports.phtml',array(
+                    'vaktrapportCollection'=>$this->vaktrapportCollection,
+                    'clientID'=>$this->clientID,
+                    'pageSize'=>$this->pageSize,
+                    'page' => $this->page,
+                    'periodVaktrap'=>$this->periodVaktrap
+                ));?>
+			</div>
+			<div style="display: block; padding:0 10px" id="tab22">
+				<?php echo $this->partial('report/tabs/reports/clientQuarterlyReports.phtml',array(
+                    'quartalMaalPlanCollection' => $this->quartalMaalPlanCollection,
+                    'clientID' => $this->clientID,
+                    'pageSize' => $this->pageSize,
+                    'periodVaktrap' => $this->periodVaktrap
+                ));?>
+			</div>
+			<div style="display: block; padding:0 10px" id="tab23">
+				<?php echo $this->partial('report/tabs/reports/clientMonthlySummery.phtml',array(
+                    'clientID'=>$this->clientID,
+                    'vaktrapportMonthCollection'=>$this->vaktrapportMonthCollection,
+                    'pageSize'=>$this->pageSize,
+                    'periodVaktrap'=>$this->periodVaktrap
+                ));?>
+			</div>
+			<div style="display: block; padding:0 10px" id="tab24">
+				<?php echo $this->partial('report/tabs/reports/clientQuarterlySummery.phtml',array('clientID'=>$this->clientID,'vaktrapportQuartalCollection'=>$this->vaktrapportQuartalCollection,'pageSize'=>$this->pageSize,'periodVaktrap'=>$this->periodVaktrap));?>
+			</div>
+		</div>
+	</div>
+</div> 

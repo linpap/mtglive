@@ -1,0 +1,19 @@
+<?php $format = KD::getModel('core/format');?>
+<div class="VVGBG VV2IN1C2">
+<div class="printvisibeltitel">
+<div class="PSUBTCLEFTH26">Møter gjennomført i perioden</div>
+
+</div>
+<table width="100%" border="0" id="clientMeetingTbl">
+  <tr>
+    <th style="width:150px;"><?php echo $this->translate('Date');?></th>
+    <th><?php echo $this->translate('Meeting with whom?');?></th>
+  </tr>
+  <?php foreach($this->maalPlanMeeting as $meeting):?>
+  <tr>
+    <td class="nonecls1 width15"><span class="tdbg"><?php echo $format->FormatDate($meeting['maalplan_other_meetingDate']);?></span></td>
+    <td class="nonecls1 width80"><span class="tdbg1c"><?php echo $meeting['maalplan_other_meetingDesc'];?></span></td>
+  </tr>
+  <?php endforeach;?>
+</table>
+</div>

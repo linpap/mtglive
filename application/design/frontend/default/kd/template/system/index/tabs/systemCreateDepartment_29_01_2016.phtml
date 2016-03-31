@@ -1,0 +1,125 @@
+<div class="PSUBTCWRAPPER">
+	<div class="PSUBTCLEFT">
+    	<?php echo $this->translate('Create Department');?>
+    </div>
+</div>
+<div>
+<form name="newdepartment" id="frmNewDepartment" method="post" action="<?php echo $this->getUrl("system/index/index/tab/tab4");?>">
+<div class="CLEARBBORDER"></div>
+<div class="KKI1">
+	<div class="KKI1PIC">
+		<div class="KKI1PICBG">
+			<div class="KKI1PH"></div>
+		</div>
+	</div>
+	<div class="KKI1WRAPPER">
+	<div class="KKI1C">
+		<div class="KKI1C1">
+			<?php echo $this->translate('Department');?>
+		</div>
+		<span class="tdbg888p"><input type="text" name="department[dept_name]" id="dept_name" class="codeGenerator" value="<?php echo isset($_POST['dept_name'])?$_POST['dept_name']:'';?>" data-validation="required" maxlength="64" ></span>
+	</div>
+	<div class="KKI1C">
+		<div class="KKI1C1">
+			<?php echo $this->translate('ID');?>
+		</div>
+		<span class="tdbg888p greyBG"><input type="text" name="department[dept_code]" id="dept_code" readonly class="greyBG" data-validation="required" value="<?php echo isset($_POST['dept_code'])?$_POST['dept_code']:'';?>" maxlength="32"></span>
+	</div>
+	<div class="KKI1C">
+		<div class="KKI1C1">
+			<?php echo $this->translate('Address');?> 1
+		</div>
+		<span class="tdbg888p"><input type="text" name="department[dept_address1]" id="dept_address1"  data-validation="required" data-validation-length="max255" value="<?php echo isset($_POST['dept_address1'])?$_POST['dept_address1']:'';?>" maxlength="255"/></span>
+	</div>
+	<div class="KKI1C">
+		<div class="KKI1C1">
+			<?php echo $this->translate('Address');?> 2
+		</div>
+		<span class="tdbg888p"><input type="text" name="department[dept_address2]" id="dept_address2"  value="<?php echo isset($_POST['dept_address2'])?$_POST['dept_address2']:'';?>" data-validation="length" data-validation-length="max255" maxlength="255"></span>
+	</div>
+	<div class="KKI1C">
+		<div class="KKI1C1">
+			<?php echo $this->translate('Zip Code');?>
+		</div>
+		<span class="tdbg888p"><input type="text" name="department[dept_zip]" id="dept_zip" value="<?php echo isset($_POST['dept_zip'])?$_POST['dept_zip']:'';?>" data-validation="required" data-validation-length="max16" maxlength="16"/></span>
+	</div>
+	<div class="KKI1C">
+		<div class="KKI1C1">
+			<?php echo $this->translate('Location');?>
+		</div>
+		<span class="tdbg888p"><input type="text" name="department[dept_city]" id="dept_city" value="<?php echo isset($_POST['dept_city'])?$_POST['dept_city']:'';?>" data-validation="required" data-validation-length="max64" maxlength="64"/></span>
+	</div>
+	<div class="KKI1C">
+		<div class="KKI1C1">
+			<?php echo $this->translate('Municipality');?>
+		</div>
+		<span class="tdbg888p"><input type="text" name="department[dept_municipality]" id="dept_municipality" value="<?php echo isset($_POST['dept_municipality'])?$_POST['dept_municipality']:'';?>"  data-validation="required" data-validation-length="max255" maxlength="255"/></span>
+	</div>
+	<div class="KKI1C">
+		<div class="KKI1C1">
+			<?php echo $this->translate('County/State');?>
+		</div>
+		<span class="tdbg888p"><input type="text" name="department[dept_state]" id="dept_state" value="<?php echo isset($_POST['dept_state'])?$_POST['dept_state']:'';?>" data-validation="required" data-validation-length="max64" maxlength="64"/></span>
+	</div>
+	<div class="KKI1C">
+		<div class="KKI1C1">
+			<?php echo $this->translate('Phone');?>
+		</div>
+		<span class="tdbg888p"><input type="text" name="department[dept_phone1]" id="dept_phone1" value="<?php echo isset($_POST['dept_phone1'])?$_POST['dept_phone1']:'';?>" data-validation="required" data-validation-length="max32" maxlength="32"/></span>
+	</div>
+	<div class="KKI1C">
+		<div class="KKI1C1">
+			<?php echo $this->translate('Email');?>
+		</div>
+		<span class="tdbg888p"><input type="text" name="department[dept_mail1]" id="dept_mail1" value="<?php echo isset($_POST['dept_mail1'])?$_POST['dept_mail1']:'';?>" data-validation="email"  maxlength="132"></span>
+	</div>
+</div>
+</div>
+
+<div class="CLEARBBORDER2"></div>
+<div class="KKI2C">
+	<table width="100%" border="0" cellspacing="4" cellpadding="0">
+	<tr>
+		<th class="noborder"><?php echo $this->translate('Expertise');?> - <?php echo $this->translate('Describe');?></th>
+	</tr>
+	<tr>
+		<td class="nonecls"><span class="tdbg1c">
+				<textarea name="department[dept_expertise]" id="dept_expertise" onkeyup="textAreaAdjust(this)" style="overflow:hidden;width: 100%; border: none; height:auto;" data-validation=""><?php echo isset($_POST['dept_expertise'])?$_POST['dept_expertise']:'';?></textarea>
+			</span>
+		</td>
+	</tr>
+</table> 
+</div>
+<div class="CLEARBBORDER2"></div>
+<div class="KKI2C">
+	
+	<table width="100%" border="0" cellspacing="4" cellpadding="0">
+	<tr>
+		<th class="noborder"><?php echo $this->translate('Capacity');?> - <?php echo $this->translate('Describe');?></th>
+	</tr>
+	<tr>
+		<td class="nonecls"><span class="tdbg1c">
+				<textarea name="department[dept_capacity]" id="dept_capacity" onkeyup="textAreaAdjust(this)" style="overflow:hidden;width: 100%; border: none; height:auto;" data-validation=""><?php echo isset($_POST['dept_capacity'])?$_POST['dept_capacity']:'';?></textarea>
+			</span>
+		</td>
+	</tr>
+</table> 
+</div>
+
+    
+    
+<div class="CANCELB"><a class="CANCELBA" href="#"><?php echo $this->translate('Cancel');?></a></div>
+<div class="OPPRETTB"><input type="submit" name="create_dept" class="OPPRETTBA" value="<?php echo $this->translate('Create');?>"></div>
+</form>
+
+</div>
+<script language="javascript" type="text/javascript">
+$(document).ready(function() {
+    $(".codeGenerator").change(function(){
+		var str = $(this).val();
+		var code = str.substring(0,3);
+		code = code.toUpperCase(); 
+		$("#dept_code").val(code);
+	});
+});
+</script>

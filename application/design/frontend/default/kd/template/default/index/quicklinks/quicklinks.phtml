@@ -1,0 +1,15 @@
+<div class="CFULWRAPPER">
+    <div class="MTITLEW">
+        <div id="MTITLEBORDERIDL" class="MTITLEBORDER"></div>
+        <h2 class="MTITLET"><?php echo $this->translate('Security Reports');?></h2>
+        <div id="MTITLEBORDERIDR" class="MTITLEBORDER"></div>
+    </div>
+	<?php $vaktrapports = KD::getModel('vaktrapport/vaktrapport')->loadAllVaktrap('active');?>
+	<?php foreach($vaktrapports as $vaktrapport): ?>
+    <div class="QLCW">
+    	<div class="QLCLIENT"><a href="<?php echo $this->getUrl('client/info/index/id/'.$vaktrapport['vaktrap_patientID']);?>"><?php echo KD::getModel('client/client')->getClient($vaktrapport['vaktrap_patientID']);?></a></div>
+        <div class="QLBRIKN"><a href="<?php echo $this->getUrl('vaktrapport/info/index/id/'.$vaktrapport['vaktrap_id']);?>"><?php echo $this->translate('Security Report No .:');?> <?php echo $vaktrapport['last_report'];?></a></div>
+    </div>
+	<?php endforeach;?>
+    
+</div>

@@ -1,0 +1,239 @@
+<?php $format = KD::getModel('core/format');?>
+<form name="frmClientAddDecision" id="frmClientAddDecision" method="post" action="<?php echo $this->getUrl("client/additional/adddecision/id/".$this->clientID);?>">
+<input type="hidden" readonly name="patient_id" id="patient_id" value="<?php echo $this->clientID;?>" />
+<input type="hidden" readonly name="document_type" id="document_type" value="others" />
+<input type="hidden" name="counterStatus" id="counterStatus" value="1" />
+<div>
+<span id="dragandrophandler">Dra og slipp filer her for &aring; laste det inn i programmet</span>
+<span id="status1"></span>
+<div class="CLEARBBORDER2"></div>
+</div>
+<div class="clearboth">
+<table width="100%" border="0">
+  <tr>
+	<td class="nonecls"><span class="VVTAC"><div><input type="radio" readonly id="others_radio_tab11" name="others_radio" value="others_letter"/><label for="others_radio_tab11"><span></span></label><?php echo $this->translate('Letter');?></div></span></td>
+	<td class="nonecls"><span class="VVTAC"><div><input type="radio" readonly id="others_radio_tab12" name="others_radio" value="others_complain"/><label for="others_radio_tab12"><span></span></label><?php echo $this->translate('Complaints');?></div></span></td>
+	<td class="nonecls"><span class="VVTAC"><div><input type="radio" readonly id="others_radio_tab13" name="others_radio" value="others_nav"/><label for="others_radio_tab13"><span></span></label><?php echo $this->translate('NAV');?></div></span></td>
+	<td class="nonecls"><span class="VVTAC"><div><input type="radio" readonly id="others_radio_tab14" name="others_radio" value="others_job"/><label for="others_radio_tab14"><span></span></label><?php echo $this->translate('Job');?></div></span></td>
+	<td class="nonecls"><span class="VVTAC"><div><input type="radio" readonly id="others_radio_tab15" name="others_radio" value="others_economy"/><label for="others_radio_tab15"><span></span></label><?php echo $this->translate('Economy');?></div></span></td>
+	<td class="nonecls"><span class="VVTAC"><div><input type="radio" readonly id="others_radio_tab16" name="others_radio" value="others_other"/><label for="others_radio_tab16"><span></span></label><?php echo $this->translate('Others');?></div></span></td>
+  </tr>
+</table>
+<div class="CLEARBBORDER2"></div>
+</div>
+<ul id="tabs1">
+	<li class="INACTIVTAB"><a href="#" name="tab11"><div class="ACTIVETLZI TLZI"><?php echo $this->translate('Letter');?></div></a></li>
+	<li class="INACTIVTAB"><a href="#" name="tab12"><div class="ACTIVETLZI TLZI"><?php echo $this->translate('Complaints');?></div></a></li>
+	<li class="INACTIVTAB"><a href="#" name="tab13"><div class="ACTIVETLZI TLZI"><?php echo $this->translate('NAV');?></div></a></li>
+	<li class="INACTIVTAB"><a href="#" name="tab14"><div class="ACTIVETLZI TLZI"><?php echo $this->translate('Job');?></div></a></li>
+	<li class="INACTIVTAB"><a href="#" name="tab15"><div class="ACTIVETLZI TLZI"><?php echo $this->translate('Economy');?></div></a></li>
+	<li class="INACTIVTAB"><a href="#" name="tab16"><div class="ACTIVETLZI TLZI"><?php echo $this->translate('Others');?></div></a></li>
+</ul>
+<div id="content1">
+	<div class="tablebg">
+		<div style="display: block; padding:0 10px" id="tab11">
+			<table cellpadding="0" cellspacing="4" border="0" width="100%">
+			  <tr>
+			    <th width="5%"><?php echo $this->translate('Sr No');?></th>
+				<th width="55%"><?php echo $this->translate('Document');?></th>
+				<th width="15%"><?php echo $this->translate('Upload date');?></th>
+				<th width="25%"><?php echo $this->translate('Upload by');?></th>
+			  </tr>
+			<?php  $cnt = 0; foreach($this->documentLetter as $documentLetter): $cnt++;?>
+			  <tr>
+			    <td><?php echo $cnt;?></td>
+				<td><?php echo $documentLetter['document_filename'];?></td>
+				<td><?php echo $format->FormatDate($documentLetter['date_of_creation']);?></td>
+				<td><?php echo KD::getModel('user/user')->getUser($documentLetter['created_by']);?></td>
+			  </tr>
+			<?php endforeach;?>
+			</table>
+		</div>
+		<div style="display: block; padding:0 10px" id="tab12">
+			<table cellpadding="0" cellspacing="4" border="0" width="100%">
+			  <tr>
+			    <th width="5%"><?php echo $this->translate('Sr No');?></th>
+				<th width="55%"><?php echo $this->translate('Document');?></th>
+				<th width="15%"><?php echo $this->translate('Lock Date');?></th>
+				<th width="25%"><?php echo $this->translate('Create By');?></th>
+			  </tr>
+			<?php  $cnt = 0; foreach($this->documentComplain as $documentComplain): $cnt++;?>
+			  <tr>
+			    <td><?php echo $cnt;?></td>
+				<td><?php echo $documentComplain['document_filename'];?></td>
+				<td><?php echo $format->FormatDate($documentComplain['date_of_creation']);?></td>
+				<td><?php echo KD::getModel('user/user')->getUser($documentComplain['created_by']);?></td>
+			  </tr>
+			<?php endforeach;?>
+			</table>
+		</div>
+		<div style="display: block; padding:0 10px" id="tab13">
+			<table cellpadding="0" cellspacing="4" border="0" width="100%">
+			  <tr>
+			    <th width="5%"><?php echo $this->translate('Sr No');?></th>
+				<th width="55%"><?php echo $this->translate('Document');?></th>
+				<th width="15%"><?php echo $this->translate('Lock Date');?></th>
+				<th width="25%"><?php echo $this->translate('Create By');?></th>
+			  </tr>
+			<?php  $cnt = 0; foreach($this->documentNav as $documentNav): $cnt++;?>
+			  <tr>
+			    <td><?php echo $cnt;?></td>
+				<td><?php echo $documentNav['document_filename'];?></td>
+				<td><?php echo $format->FormatDate($documentNav['date_of_creation']);?></td>
+				<td><?php echo KD::getModel('user/user')->getUser($documentNav['created_by']);?></td>
+			  </tr>
+			<?php endforeach;?>
+			</table>
+		</div>
+		<div style="display: block; padding:0 10px" id="tab14">
+			<table cellpadding="0" cellspacing="4" border="0" width="100%">
+			  <tr>
+			    <th width="5%"><?php echo $this->translate('Sr No');?></th>
+				<th width="55%"><?php echo $this->translate('Document');?></th>
+				<th width="15%"><?php echo $this->translate('Lock Date');?></th>
+				<th width="25%"><?php echo $this->translate('Create By');?></th>
+			  </tr>
+			<?php  $cnt = 0; foreach($this->documentJob as $documentJob): $cnt++;?>
+			  <tr>
+			    <td><?php echo $cnt;?></td>
+				<td><?php echo $documentJob['document_filename'];?></td>
+				<td><?php echo $format->FormatDate($documentJob['date_of_creation']);?></td>
+				<td><?php echo KD::getModel('user/user')->getUser($documentJob['created_by']);?></td>
+			  </tr>
+			<?php endforeach;?>
+			</table>
+		</div>
+		<div style="display: block; padding:0 10px" id="tab16">
+			<table cellpadding="0" cellspacing="4" border="0" width="100%">
+			  <tr>
+			    <th width="5%"><?php echo $this->translate('Sr No');?></th>
+				<th width="55%"><?php echo $this->translate('Document');?></th>
+				<th width="15%"><?php echo $this->translate('Lock Date');?></th>
+				<th width="25%"><?php echo $this->translate('Create By');?></th>
+			  </tr>
+			<?php  $cnt = 0; foreach($this->documentEconomy as $documentEconomy): $cnt++;?>
+			  <tr>
+			    <td><?php echo $cnt;?></td>
+				<td><?php echo $documentEconomy['document_filename'];?></td>
+				<td><?php echo $format->FormatDate($documentEconomy['date_of_creation']);?></td>
+				<td><?php echo KD::getModel('user/user')->getUser($documentEconomy['created_by']);?></td>
+			  </tr>
+			<?php endforeach;?>
+			</table>
+		</div>
+		<div style="display: block; padding:0 10px" id="tab15">
+			<table cellpadding="0" cellspacing="4" border="0" width="100%">
+			  <tr>
+			    <th width="5%"><?php echo $this->translate('Sr No');?></th>
+				<th width="55%"><?php echo $this->translate('Document');?></th>
+				<th width="15%"><?php echo $this->translate('Lock Date');?></th>
+				<th width="25%"><?php echo $this->translate('Create By');?></th>
+			  </tr>
+			<?php  $cnt = 0; foreach($this->documentOther as $documentOther): $cnt++;?>
+			  <tr>
+			    <td><?php echo $cnt;?></td>
+				<td><?php echo $documentOther['document_filename'];?></td>
+				<td><?php echo $format->FormatDate($documentOther['date_of_creation']);?></td>
+				<td><?php echo KD::getModel('user/user')->getUser($documentOther['created_by']);?></td>
+			  </tr>
+			<?php endforeach;?>
+			</table>
+		</div>
+	</div>
+</div>
+</form>
+<link rel="stylesheet" href="<?php echo $this->getMediaUrl('drag-drop.css','css');?>" title="default" />
+<script src="<?php echo $this->getMediaUrl('drag-drop.js','js');?>"></script>
+<script language="javascript" type="text/javascript">
+	$("#content1").find("[id^='tab']").hide();
+	$("#tabs1 li").attr("id",""); //Reset id's
+	$("#content").find("[name^='tab11']").parent().attr("id","current1");
+	$("#content #tab11").fadeIn();
+	$('#others_radio_tab11').prop("checked", true)
+	
+	$('#tabs1 a').click(function(e) {
+        e.preventDefault();
+        if ($(this).closest("li").attr("id") == "current1"){ //detection for current tab
+         return;       
+        }
+        else{    
+		  $tabname =$(this).attr('name');       
+		  $('#others_radio_'+$tabname).prop("checked", true);
+          $("#content1").find("[id^='tab']").hide(); // Hide all content
+          $("#tabs1 li").attr("id",""); //Reset id's
+          $(this).parent().attr("id","current1"); // Activate this
+          $('#' + $(this).attr('name')).fadeIn(); // Show content for the current tab
+        }
+    });
+</script>
+<script language="javascript" type="text/javascript">
+	$(document).ready(function()
+		{
+		var obj = $("#dragandrophandler");
+		obj.on('dragenter', function (e)
+		{
+			e.stopPropagation();
+			e.preventDefault();
+			$(this).css('border', '2px solid #0B85A1');
+		});
+		obj.on('dragover', function (e)
+		{
+			 e.stopPropagation();
+			 e.preventDefault();
+		});
+		obj.on('drop', function (e)
+		{
+		 
+			 $(this).css('border', '2px dotted #0B85A1');
+			 e.preventDefault();
+			 var files = e.originalEvent.dataTransfer.files;
+			
+			 	var button_check = $("input[name=others_radio]:checked").val();
+				if(button_check)
+				{
+					var button_type =  'others';
+					var button_subtype = $("input[name=others_radio]:checked").val();
+					if(button_subtype === undefined || button_subtype == null || button_subtype.length <= 0)
+					{
+						alert('you have not choose any category for Others');
+						return false;
+					}
+					else
+					{
+						button_type = button_subtype;
+					}
+				}
+				else
+				{
+					alert('you have not choose any category for Others');
+					return false;
+				}
+			 
+			 var pasientId = $('#patient_id').val();
+			 if(pasientId<0)
+			 {
+			 	alert("System facing some problem so refresh page and wait while page fullyloaded.");
+				return false;
+			 }
+ 			 //We need to send dropped files to Server
+			 handleFileUpload('<?php echo $this->getUrl('client/additional/uploadfile/id/'.$this->clientID);?>',files,obj,button_type,pasientId);
+		});
+		
+		$(document).on('dragenter', function (e)
+		{
+			e.stopPropagation();
+			e.preventDefault();
+		});
+		$(document).on('dragover', function (e)
+		{
+		  e.stopPropagation();
+		  e.preventDefault();
+		  obj.css('border', '2px dotted #0B85A1');
+		});
+		$(document).on('drop', function (e)
+		{
+			e.stopPropagation();
+			e.preventDefault();
+		});
+		});
+	</script>

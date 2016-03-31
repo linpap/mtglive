@@ -1,0 +1,16 @@
+<?php
+    $this->error_message = isset($this->error_message) ? $this->error_message : '';
+?>
+<div class="editor_wrapper">
+    <div class="editor_button">
+        <input onClick="Mtg.TextEditor.create('<?php echo $this->key; ?>');" type="button" value="Vis editor">
+        <input onClick="Mtg.TextEditor.remove('<?php echo $this->key; ?>');" type="button" value="Skjul editor">
+    </div>
+    <div class="editor_container">
+        <div id="contents_<?php echo $this->key; ?>" class="padding5">
+            <textarea onkeyup="textAreaAdjust(this)" name="<?php echo $this->name; ?>" class="wysiwyg <?php echo empty($this->required) ? '' : 'validation'; ?> ckeditorClass minheight20 hidden" <?php echo $this->required; ?> <?php echo ($this->error_message !== '') ? 'data-error-message="' . $this->error_message . '"' : ''; ?> data-name="<?php echo $this->key; ?>" data-instance="editorExtra" id="editor_<?php echo $this->key; ?>" style="overflow:hidden;width: 100%; border: none; height:auto;"><?php echo $this->content;?></textarea>
+            <div class="textarea"contenteditable><?php echo $this->content; ?></div>
+        </div>
+    </div>
+</div>
+

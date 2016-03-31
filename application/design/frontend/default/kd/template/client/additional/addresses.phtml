@@ -1,0 +1,285 @@
+<form name="frmClientAddAddress" id="frmClientAddAddress" method="post" action="<?php echo $this->getUrl("client/additional/addressespost/id/".$this->clientID);?>">
+<input type="hidden" name="patient_id" id="patient_id" value="<?php echo $this->clientID;?>" />
+<ul id="tabs1">
+	<li class="INACTIVTAB"><a href="#" name="tab11"><div class="ACTIVETLZI TLZI"><?php echo $this->translate('Bufetat');?></div></a></li>
+	<li class="INACTIVTAB"><a href="#" name="tab12"><div class="ACTIVETLZI TLZI"><?php echo $this->translate('Child Welfare');?></div></a></li>
+	<li class="INACTIVTAB"><a href="#" name="tab13"><div class="ACTIVETLZI TLZI"><?php echo $this->translate('Parents');?></div></a></li>
+	<li class="INACTIVTAB"><a href="#" name="tab14"><div class="ACTIVETLZI TLZI"><?php echo $this->translate('Other Family');?></div></a></li>
+	<li class="INACTIVTAB"><a href="#" name="tab15"><div class="ACTIVETLZI TLZI"><?php echo $this->translate('BUP/DPS');?></div></a></li>
+	<li class="INACTIVTAB"><a href="#" name="tab16"><div class="ACTIVETLZI TLZI"><?php echo $this->translate('Hospital');?></div></a></li>
+	<li class="INACTIVTAB"><a href="#" name="tab17"><div class="ACTIVETLZI TLZI"><?php echo $this->translate('RGP');?></div></a></li>
+	<li class="INACTIVTAB"><a href="#" name="tab18"><div class="ACTIVETLZI TLZI"><?php echo $this->translate('School');?></div></a></li>
+	<li class="INACTIVTAB"><a href="#" name="tab19"><div class="ACTIVETLZI TLZI"><?php echo $this->translate('Friends');?></div></a></li>
+	<li class="INACTIVTAB"><a href="#" name="tab110"><div class="ACTIVETLZI TLZI"><?php echo $this->translate('Other');?></div></a></li>
+</ul>
+<div id="content1">
+	<div class="">
+		<div style="display: block; min-height:50px" class="padding5 border" id="tab11">
+            <?php echo $this->partial('partials/texteditor.phtml', [
+                'key' => 'patient_detail_address1',
+                'name' => 'address[patient_detail_address1]',
+                'content' => $this->clientDetail['patient_detail_address1'],
+                'required' => ''
+            ]); ?>
+			<?php /**
+            <div class="editor_button">
+				<input onClick="createEditor('patient_detail_address1');" type="button" value="Vis editor">
+				<input onClick="removeEditor('patient_detail_address1');" type="button" value="Skjul editor">
+			</div>
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td class="nonecls"><span class="tdbg1c">
+							<div id="contents_patient_detail_address1" class="padding5h">
+							<textarea onkeyup="textAreaAdjust(this)" name="address[patient_detail_address1]" class="validation ckeditorClass minheight20" data-name="patient_detail_address1" data-instance="" id="editor_patient_detail_address1" style="overflow:hidden;width: 100%; border: none;min-height:100px; height:auto;"><?php echo $this->clientDetail['patient_detail_address1'];?></textarea>
+							</div>
+						</span>
+					</td>
+				</tr>
+			</table> **/?>
+			<?php /*?><textarea id="address[patient_detail_address1]" name="address[patient_detail_address1]" onkeyup="textAreaAdjust(this)"  style="overflow:hidden;width: 100%; border: none;height:auto;" class="client_address"><?php echo $this->clientDetail['patient_detail_address1']; ?></textarea><?php */?>
+		</div>
+		<div style="display: block; min-height:50px" class="padding5 border"  id="tab12">
+            <?php echo $this->partial('partials/texteditor.phtml', [
+                'key' => 'patient_detail_address2',
+                'name' => 'address[patient_detail_address2]',
+                'content' => $this->clientDetail['patient_detail_address2'],
+                'required' => ''
+            ]); ?>
+            <?php /**
+			<div class="editor_button">
+				<input onClick="createEditor('patient_detail_address2');" type="button" value="Vis editor">
+				<input onClick="removeEditor('patient_detail_address2');" type="button" value="Skjul editor">
+			</div>
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td class="nonecls"><span class="tdbg1c">
+							<div id="contents_patient_detail_address2" class="padding5h">
+							<textarea onkeyup="textAreaAdjust(this)" name="address[patient_detail_address2]" class="validation ckeditorClass minheight20" data-name="patient_detail_address2" data-instance="" id="editorcontents_patient_detail_address2" style="overflow:hidden;width: 100%; border: none;min-height:100px; height:auto;"><?php echo $this->clientDetail['patient_detail_address2'];?></textarea>
+							</div>
+						</span>
+					</td>
+				</tr>
+			</table>**/ ?>
+			<?php /*?><textarea id="address[patient_detail_address2]" name="address[patient_detail_address2]" onkeyup="textAreaAdjust(this)"  style="overflow:hidden;width: 100%; border: none;height:auto;" class="client_address"><?php echo $this->clientDetail['patient_detail_address2']; ?></textarea><?php */?>
+		</div>
+		<div style="display: block; min-height:50px" class="padding5 border" id="tab13">
+            <?php echo $this->partial('partials/texteditor.phtml', [
+                'key' => 'patient_detail_address3',
+                'name' => 'address[patient_detail_address3]',
+                'content' => $this->clientDetail['patient_detail_address3'],
+                'required' => ''
+            ]); ?>
+            <?php /**
+			<div class="editor_button">
+				<input onClick="createEditor('patient_detail_address3');" type="button" value="Vis editor">
+				<input onClick="removeEditor('patient_detail_address3');" type="button" value="Skjul editor">
+			</div>
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td class="nonecls"><span class="tdbg1c">
+							<div id="contents_patient_detail_address3" class="padding5h">
+							<textarea onkeyup="textAreaAdjust(this)" name="address[patient_detail_address3]" class="validation ckeditorClass minheight20" data-name="patient_detail_address3" data-instance="" id="editorcontents_patient_detail_address3" style="overflow:hidden;width: 100%; border: none;min-height:100px; height:auto;"><?php echo $this->clientDetail['patient_detail_address3'];?></textarea>
+							</div>
+						</span>
+					</td>
+				</tr>
+			</table>
+             * **/?>
+			<?php /*?><textarea id="address[patient_detail_address3]" name="address[patient_detail_address3]" onkeyup="textAreaAdjust(this)"  style="overflow:hidden;width: 100%; border: none;height:auto;" class="client_address"><?php echo $this->clientDetail['patient_detail_address3']; ?></textarea><?php */?>
+		</div>
+		<div style="display: block; min-height:50px" class="padding5 border" id="tab14">
+            <?php echo $this->partial('partials/texteditor.phtml', [
+                'key' => 'patient_detail_address4',
+                'name' => 'address[patient_detail_address4]',
+                'content' => $this->clientDetail['patient_detail_address4'],
+                'required' => ''
+            ]); ?>
+            <?php /**
+            <div class="editor_button">
+				<input onClick="createEditor('patient_detail_address4');" type="button" value="Vis editor">
+				<input onClick="removeEditor('patient_detail_address4');" type="button" value="Skjul editor">
+			</div>
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td class="nonecls"><span class="tdbg1c">
+							<div id="contents_patient_detail_address4" class="padding5h">
+							<textarea onkeyup="textAreaAdjust(this)" name="address[patient_detail_address4]" class="validation ckeditorClass minheight20" data-name="patient_detail_address4" data-instance="" id="editorcontents_patient_detail_address4" style="overflow:hidden;width: 100%; border: none;min-height:100px; height:auto;"><?php echo $this->clientDetail['patient_detail_address4'];?></textarea>
+							</div>
+						</span>
+					</td>
+				</tr>
+			</table> **/?>
+			<?php /*?><textarea id="address[patient_detail_address4]" name="address[patient_detail_address4]" onkeyup="textAreaAdjust(this)"  style="overflow:hidden;width: 100%; border: none;height:auto;" class="client_address"><?php echo $this->clientDetail['patient_detail_address4']; ?></textarea><?php */?>
+		</div>
+		<div style="display: block; min-height:50px" class="padding5 border" id="tab15">
+            <?php echo $this->partial('partials/texteditor.phtml', [
+                'key' => 'patient_detail_address5',
+                'name' => 'address[patient_detail_address5]',
+                'content' => $this->clientDetail['patient_detail_address5'],
+                'required' => ''
+            ]); ?>
+            <?php /**
+			<div class="editor_button">
+				<input onClick="createEditor('patient_detail_address5');" type="button" value="Vis editor">
+				<input onClick="removeEditor('patient_detail_address5');" type="button" value="Skjul editor">
+			</div>
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td class="nonecls"><span class="tdbg1c">
+							<div id="contents_patient_detail_address5" class="padding5h">
+							<textarea onkeyup="textAreaAdjust(this)" name="address[patient_detail_address5]" class="validation ckeditorClass minheight20" data-name="patient_detail_address5" data-instance="" id="editorcontents_patient_detail_address5" style="overflow:hidden;width: 100%; border: none;min-height:100px; height:auto;"><?php echo $this->clientDetail['patient_detail_address5'];?></textarea>
+							</div>
+						</span>
+					</td>
+				</tr>
+			</table> **/?>
+			<?php /*?><textarea id="address[patient_detail_address5]" name="address[patient_detail_address5]" onkeyup="textAreaAdjust(this)"  style="overflow:hidden;width: 100%; border: none;height:auto;" class="client_address"><?php echo $this->clientDetail['patient_detail_address5']; ?></textarea><?php */?>
+		</div>
+		<div style="display: block; min-height:50px" class="padding5 border" id="tab16">
+            <?php echo $this->partial('partials/texteditor.phtml', [
+                'key' => 'patient_detail_address6',
+                'name' => 'address[patient_detail_address6]',
+                'content' => $this->clientDetail['patient_detail_address6'],
+                'required' => ''
+            ]); ?>
+            <?php /**
+			<div class="editor_button">
+				<input onClick="createEditor('patient_detail_address6');" type="button" value="Vis editor">
+				<input onClick="removeEditor('patient_detail_address6');" type="button" value="Skjul editor">
+			</div>
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td class="nonecls"><span class="tdbg1c">
+							<div id="contents_patient_detail_address6" class="padding5h">
+							<textarea onkeyup="textAreaAdjust(this)" name="address[patient_detail_address6]" class="validation ckeditorClass minheight20" data-name="patient_detail_address6" data-instance="" id="editorcontents_patient_detail_address6" style="overflow:hidden;width: 100%; border: none;min-height:100px; height:auto;"><?php echo $this->clientDetail['patient_detail_address6'];?></textarea>
+							</div>
+						</span>
+					</td>
+				</tr>
+			</table> **/?>
+			<?php /*?><textarea id="address[patient_detail_address6]" name="address[patient_detail_address6]" onkeyup="textAreaAdjust(this)"  style="overflow:hidden;width: 100%; border: none;height:auto;" class="client_address"><?php echo $this->clientDetail['patient_detail_address6']; ?></textarea><?php */?>
+		</div>
+		<div style="display: block; min-height:50px" class="padding5 border" id="tab17">
+            <?php echo $this->partial('partials/texteditor.phtml', [
+                'key' => 'patient_detail_address7',
+                'name' => 'address[patient_detail_address7]',
+                'content' => $this->clientDetail['patient_detail_address7'],
+                'required' => ''
+            ]); ?>
+            <?php /**
+            <div class="editor_button">
+				<input onClick="createEditor('patient_detail_address7');" type="button" value="Vis editor">
+				<input onClick="removeEditor('patient_detail_address7');" type="button" value="Skjul editor">
+			</div>
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td class="nonecls"><span class="tdbg1c">
+							<div id="contents_patient_detail_address7" class="padding5h">
+							<textarea onkeyup="textAreaAdjust(this)" name="address[patient_detail_address7]" class="validation ckeditorClass minheight20" data-name="patient_detail_address7" data-instance="" id="editorcontents_patient_detail_address7" style="overflow:hidden;width: 100%; border: none;min-height:100px; height:auto;"><?php echo $this->clientDetail['patient_detail_address7'];?></textarea>
+							</div>
+						</span>
+					</td>
+				</tr>
+			</table> **/ ?>
+			<?php /*?><textarea id="address[patient_detail_address7]" name="address[patient_detail_address7]" onkeyup="textAreaAdjust(this)"  style="overflow:hidden;width: 100%; border: none;height:auto;" class="client_address"><?php echo $this->clientDetail['patient_detail_address7']; ?></textarea><?php */?>
+		</div>
+		<div style="display: block; min-height:50px" class="padding5 border" id="tab18">
+            <?php echo $this->partial('partials/texteditor.phtml', [
+                'key' => 'patient_detail_address8',
+                'name' => 'address[patient_detail_address8]',
+                'content' => $this->clientDetail['patient_detail_address8'],
+                'required' => ''
+            ]); ?>
+            <?php /**
+			<div class="editor_button">
+				<input onClick="createEditor('patient_detail_address8');" type="button" value="Vis editor">
+				<input onClick="removeEditor('patient_detail_address8');" type="button" value="Skjul editor">
+			</div>
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td class="nonecls"><span class="tdbg1c">
+							<div id="contents_patient_detail_address8" class="padding5h">
+							<textarea onkeyup="textAreaAdjust(this)" name="address[patient_detail_address8]" class="validation ckeditorClass minheight20" data-name="patient_detail_address8" data-instance="" id="editorcontents_patient_detail_address8" style="overflow:hidden;width: 100%; border: none;min-height:100px; height:auto;"><?php echo $this->clientDetail['patient_detail_address8'];?></textarea>
+							</div>
+						</span>
+					</td>
+				</tr>
+			</table> **/ ?>
+			<?php /*?><textarea id="address[patient_detail_address8]" name="address[patient_detail_address8]" onkeyup="textAreaAdjust(this)"  style="overflow:hidden;width: 100%; border: none;height:auto;" class="client_address"><?php echo $this->clientDetail['patient_detail_address8']; ?></textarea><?php */?>
+		</div>
+		<div style="display: block; min-height:50px" class="padding5 border" id="tab19">
+            <?php echo $this->partial('partials/texteditor.phtml', [
+                'key' => 'patient_detail_address9',
+                'name' => 'address[patient_detail_address9]',
+                'content' => $this->clientDetail['patient_detail_address9'],
+                'required' => ''
+            ]); ?>
+
+            <?php /**
+            <div class="editor_button">
+				<input onClick="createEditor('patient_detail_address9');" type="button" value="Vis editor">
+				<input onClick="removeEditor('patient_detail_address9');" type="button" value="Skjul editor">
+			</div>
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td class="nonecls"><span class="tdbg1c">
+							<div id="contents_patient_detail_address9" class="padding5h">
+							<textarea onkeyup="textAreaAdjust(this)" name="address[patient_detail_address9]" class="validation ckeditorClass minheight20" data-name="patient_detail_address9" data-instance="" id="editorcontents_patient_detail_address9" style="overflow:hidden;width: 100%; border: none;min-height:100px; height:auto;"><?php echo $this->clientDetail['patient_detail_address9'];?></textarea>
+							</div>
+						</span>
+					</td>
+				</tr>
+			</table> **/ ?>
+			<?php /*?><textarea id="address[patient_detail_address9]" name="address[patient_detail_address9]" onkeyup="textAreaAdjust(this)"  style="overflow:hidden;width: 100%; border: none;height:auto;" class="client_address"><?php echo $this->clientDetail['patient_detail_address9']; ?></textarea><?php */?>
+		</div>
+		<div style="display: block; min-height:50px" class="padding5 border" id="tab110">
+            <?php echo $this->partial('partials/texteditor.phtml', [
+                'key' => 'patient_detail_address10',
+                'name' => 'address[patient_detail_address10]',
+                'content' => $this->clientDetail['patient_detail_address10'],
+                'required' => ''
+            ]); ?>
+            <?php /**
+			<div class="editor_button">
+				<input onClick="createEditor('patient_detail_address10');" type="button" value="Vis editor">
+				<input onClick="removeEditor('patient_detail_address10');" type="button" value="Skjul editor">
+			</div>
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td class="nonecls"><span class="tdbg1c">
+							<div id="contents_patient_detail_address10" class="padding5h">
+							<textarea onkeyup="textAreaAdjust(this)" name="address[patient_detail_address10]" class="validation ckeditorClass minheight20" data-name="patient_detail_address10" data-instance="" id="editorcontents_patient_detail_address10" style="overflow:hidden;width: 100%; border: none;min-height:100px; height:auto;"><?php echo $this->clientDetail['patient_detail_address10'];?></textarea>
+							</div>
+						</span>
+					</td>
+				</tr>
+			</table>
+             **/ ?>
+			<?php /*?><textarea id="address[patient_detail_address10]" name="address[patient_detail_address10]" onkeyup="textAreaAdjust(this)"  style="overflow:hidden;width: 100%; border: none;height:auto;" class="client_address"><?php echo $this->clientDetail['patient_detail_address10']; ?></textarea><?php */?>
+		</div>	
+	</div>
+</div>
+<div class="mtodroplist2">
+	<div class="OPPRETTB"><input type="submit" class="OPPRETTBA ckeditorClassSubmit" data-form="frmClientAddAddress" value="<?php echo $this->translate('Save');?>"/></div>
+</div>
+</form>
+<script src="<?php echo $this->getMediaUrl('ajax-load-custom.js','js');?>" language="javascript" type="text/javascript"></script>
+<script src="<?php echo $this->getMediaUrl('ckeditor/custom.js','js');?>"></script>
+<script language="javascript" type="text/javascript">
+	$("#content1").find("[id^='tab']").hide();
+	$("#tabs1 li:first").attr("id","current1"); // Activate the first tab
+	$("#content #tab11").fadeIn();
+	
+	$('#tabs1 a').click(function(e) {
+        e.preventDefault();
+        if ($(this).closest("li").attr("id") == "current1"){ //detection for current tab
+         return;       
+        }
+        else{             
+          $("#content1").find("[id^='tab']").hide(); // Hide all content
+          $("#tabs1 li").attr("id",""); //Reset id's
+          $(this).parent().attr("id","current1"); // Activate this
+          $('#' + $(this).attr('name')).fadeIn(); // Show content for the current tab
+        }
+    });
+</script>

@@ -1,0 +1,312 @@
+<?php /*?><div class="VVGBG">
+<table width="100%" border="0" cellspacing="4" cellpadding="0">
+  <tbody>
+    <tr>
+      <th scope="col"><?php echo $this->translate('Checklist');?></th>
+      <th scope="col"><?php echo $this->translate('From Date');?></th>
+      <th scope="col"><?php echo $this->translate('To Dato');?></th>
+    </tr>
+    <tr>
+      <td><span class="tdbg45"><?php echo $this->translate('Valid').' '.$this->translate('Measurement');?></span></td>
+      <td><span class="tdbg45"><input type="text" value="03/07-2014"></span></td>
+      <td><span class="tdbg45"><input type="text" value="03/07-2014"></span></td>
+    </tr>
+    <tr>
+      <td><span class="tdbg45"><?php echo $this->translate('Valid').' '.$this->translate('Scorecard Plan');?></span></td>
+      <td><span class="tdbg45"><input type="text" value="03/07-2014"></span></td>
+      <td><span class="tdbg45"><input type="text" value="03/07-2014"></span></td>
+    </tr>
+    
+  </tbody>
+</table>
+</div>
+    
+<div class="CLEARBBORDER2"></div><?php */?>
+<div class="PSUBTCWRAPPER">
+	<div class="PSUBTCLEFT">
+    	<?php echo $this->translate('Reason for placement');?>
+    </div>
+</div>
+<div class="CLEARBBORDER"></div>
+<div class="VVGBG">
+<table width="100%" border="0" cellspacing="4" cellpadding="0">
+        <tr>
+        	<th class="noborder"><?php echo $this->translate('Description');?></th>
+        </tr>
+        <tr>
+        	<td class="nonecls"><span class="tdbg1c">
+                    <textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden;width: 100%; border: none; height:auto;" name="patient[patient_location]" id="patient_location"><?php echo $this->clientInfoCollection['patient_location'];?></textarea>
+            	</span>
+        	</td>
+        </tr>
+</table> 
+</div>
+
+<div class="CLEARBBORDER2"></div> 
+<div class="PSUBTCWRAPPER">
+	<div class="PSUBTCLEFT">
+    	<?php echo $this->translate('Goal from the Measurements');?>
+    </div>
+</div>
+<div class="CLEARBBORDER"></div>
+<div class="VVGBG">
+<table width="100%" border="0" cellspacing="4" cellpadding="0">
+        <tr>
+        	<th class="noborder"><?php echo $this->translate('Description');?></th>
+        </tr>
+        <tr>
+        	<td class="nonecls"><span class="tdbg1c">
+                    <textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden;width: 100%; border: none; height:auto;" name="patient[patient_actionplan]" id="patient_actionplan"></textarea>
+            	</span>
+        	</td>
+        </tr>
+</table> 
+</div>
+<div class="CLEARBBORDER2"></div>
+<div class="PSUBTCWRAPPER">
+	<div class="PSUBTCLEFT">
+    	<?php echo $this->translate('Resources');?>
+    </div>
+</div>
+<div class="CLEARBBORDER"></div>
+<div class="VVGBG">
+<table width="100%" border="0" cellspacing="4" cellpadding="0">
+        <tr>
+        	<th class="noborder"><?php echo $this->translate('Description');?></th>
+        </tr>
+        <tr>
+        	<td class="nonecls"><span class="tdbg1c">
+                    <textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden;width: 100%; border: none; height:auto;" name="patient[patient_resource]" id="patient_resource"></textarea>
+            	</span>
+        	</td>
+        </tr>
+</table> 
+</div>
+<div class="CLEARBBORDER2"></div> 
+<?php /*?>
+<div class="PSUBTCWRAPPER">
+	<div class="PSUBTCLEFT">
+    	<?php echo $this->translate('Active %s',$this->translate('Scorecard Plan'));?>
+    </div>
+</div>
+<div class="CLEARBBORDER"></div>
+<div class="VVGBG">
+ <table width="100%" border="0" cellspacing="4" cellpadding="0">
+      <tr class="CURNONPOINTER">
+        <th class="TSLRTDNUMBER th2p">
+        <span class="tdbg2">
+        	<input type="checkbox" name="checkboxG0" id="checkboxG0" class="css-checkbox" />
+            <label for="checkboxG0" class="css-label"></label>
+        </span>
+        </th>
+        <th class="TSLRTDCENTER th2p"></th>
+        <th class="TSLRTDCENTER"><?php echo $this->translate('Goal');?></th>
+      </tr>
+      <tr>
+        <td class="TSLRTDNUMBER bgwhite">
+        	<span class="tdbg" style="width: 20px;">
+                <input type="checkbox" name="checkboxG1" id="checkboxG1" class="css-checkbox" />
+                <label for="checkboxG1" class="css-label"></label>
+       		</span>
+        </td>
+        <td><span class="tdbg">
+            	<a class="medisinpopup2" title="Opprett alternativ medisinering"><img height="20px" width="26px" alt="" src="<?php echo $this->getMediaUrl('timg/legg_till.png');?>"></a>
+			</span>
+        </td>
+		<td class="bgwhite"><span class="tdbg">Bli rus fri</span></td>
+      </tr>
+      <tr>
+        <td class="TSLRTDNUMBER bgwhite">
+        	<span class="tdbg" style="width: 20px;">
+                <input type="checkbox" name="checkboxG2" id="checkboxG2" class="css-checkbox" />
+                <label for="checkboxG2" class="css-label"></label>
+       		</span>
+        </td>
+        <td><span class="tdbg">
+            	<a class="medisinpopup2" title="Opprett alternativ medisinering"><img height="20px" width="26px" alt="" src="<?php echo $this->getMediaUrl('timg/legg_till.png');?>"></a>
+			</span>
+        </td>
+		<td class="bgwhite"><span class="tdbg">F� bedre relasjon med mor</span></td>
+      </tr>
+      <tr>
+        <td class="TSLRTDNUMBER bgwhite">
+        	<span class="tdbg" style="width: 20px;">
+                <input type="checkbox" name="checkboxG3" id="checkboxG3" class="css-checkbox" />
+                <label for="checkboxG3" class="css-label"></label>
+       		</span>
+        </td>
+        <td><span class="tdbg">
+            	<a class="medisinpopup2" title="Opprett alternativ medisinering"><img height="20px" width="26px" alt="" src="<?php echo $this->getMediaUrl('timg/legg_till.png');?>"></a>
+			</span>
+        </td>
+		<td class="bgwhite"><span class="tdbg">Begynne � trene fast 3 ganger i uka</span></td>
+      </tr>
+      <tr>
+        <td class="TSLRTDNUMBER bgwhite">
+        	<span class="tdbg" style="width: 20px;">
+                <input type="checkbox" name="checkboxG4" id="checkboxG4" class="css-checkbox" />
+                <label for="checkboxG4" class="css-label"></label>
+       		</span>
+        </td>
+        <td><span class="tdbg">
+            	<a class="medisinpopup2" title="Opprett alternativ medisinering"><img height="20px" width="26px" alt="" src="<?php echo $this->getMediaUrl('timg/legg_till.png');?>"></a>
+			</span>
+        </td>
+		<td class="bgwhite"><span class="tdbg">F� en jobb</span></td>
+      </tr>
+      <tr>
+        <td class="TSLRTDNUMBER bgwhite">
+        	<span class="tdbg" style="width: 20px;">
+                <input type="checkbox" name="checkboxG5" id="checkboxG5" class="css-checkbox" />
+                <label for="checkboxG5" class="css-label"></label>
+       		</span>
+        </td>
+        <td><span class="tdbg">
+            	<a class="medisinpopup2" title="Opprett alternativ medisinering"><img height="20px" width="26px" alt="" src="<?php echo $this->getMediaUrl('timg/legg_till.png');?>"></a>
+			</span>
+        </td>
+		<td class="bgwhite"><span class="tdbg">Test</span></td>
+      </tr>
+ </table>
+<div class="slettrad"><a class="slettrada" href="#"><?php echo $this->translate('Delete %s(s)',$this->translate('Row'));?></a></div>
+<div class="leggtilrad"><a class="leggtilrada" href="#"><?php echo $this->translate('Add %s(s)',$this->translate('Row'));?></a></div>
+</div>
+<div class="CLEARBBORDER2"></div>
+<div class="PSUBTCWRAPPER">
+	<div class="PSUBTCLEFT">
+    	<?php echo $this->translate('Team');?> 1
+    </div>
+</div>
+<div class="CLEARBBORDER"></div>
+<div class="ALT2C">
+<table width="100%" border="0" cellspacing="4" cellpadding="0">
+      <tr class="CURNONPOINTER">
+        <th class="TSLRTDNUMBER bgwhite" width="30px">
+        <span class="tdbg2">
+        	<input type="checkbox" name="checkboxG0" id="checkboxG0" class="css-checkbox" />
+            <label for="checkboxG0" class="css-label"></label>
+        </span>
+        </th>
+        <th class="TSLRTDCENTER"><?php echo $this->translate('Name');?></th>
+        <th class="TSLRTDCENTER"><?php echo $this->translate('ID');?></th>
+        <th class="TSLRTDCENTER"><?php echo $this->translate('Phone');?></th>
+        <th class="TSLRTDCENTER"><?php echo $this->translate('Mobile');?></th>
+        <th class="TSLRTDCENTER"><?php echo $this->translate('Email');?></th>
+        <th class="TSLRTDCENTER"><?php echo $this->translate('Registered');?></th>
+      </tr>
+
+      <tr>
+        <td class="TSLRTDNUMBER bgwhite">
+        	<span class="tdbg" style="width: 20px;">
+                <input type="checkbox" name="checkboxG1" id="checkboxG1" class="css-checkbox" />
+                <label for="checkboxG1" class="css-label"></label>
+       		</span>
+        </td>
+            <td class="bgwhite"><span class="tdbg">Payam Afshar</span></td>
+            <td class="bgwhite"><span class="tdbg">223355445</span></td>
+            <td class="bgwhite"><span class="tdbg">421 34 435</span></td>
+            <td class="bgwhite"><span class="tdbg">64945555</span></td>
+            <td class="bgwhite"><span class="tdbg">test@test.com</span></td>
+            <td class="bgwhite"><span class="tdbg">01.05.2014</span></td>
+      </tr> 
+       <tr>
+        <td class="TSLRTDNUMBER bgwhite">
+        	<span class="tdbg" style="width: 20px;">
+                <input type="checkbox" name="checkboxG1" id="checkboxG1" class="css-checkbox" />
+                <label for="checkboxG1" class="css-label"></label>
+       		</span>
+        </td>
+            <td class="bgwhite"><span class="tdbg">Payam Afshar</span></td>
+            <td class="bgwhite"><span class="tdbg">223355445</span></td>
+            <td class="bgwhite"><span class="tdbg">421 34 435</span></td>
+            <td class="bgwhite"><span class="tdbg">64945555</span></td>
+            <td class="bgwhite"><span class="tdbg">test@test.com</span></td>
+            <td class="bgwhite"><span class="tdbg">01.05.2014</span></td>
+      </tr> 
+</table>
+</div>
+<div class="CLEARBBORDER2"></div>
+<div class="PSUBTCWRAPPER">
+	<div class="PSUBTCLEFT">
+    	<?php echo $this->translate('Team');?> 2
+    </div>
+</div>
+<div class="CLEARBBORDER"></div>
+<div class="ALT2C">
+<table width="100%" border="0" cellspacing="4" cellpadding="0">
+      <tr class="CURNONPOINTER">
+        <th class="TSLRTDNUMBER bgwhite" width="30px">
+        <span class="tdbg2">
+        	<input type="checkbox" name="checkboxG0" id="checkboxG0" class="css-checkbox" />
+            <label for="checkboxG0" class="css-label"></label>
+        </span>
+        </th>
+        <th class="TSLRTDCENTER"><?php echo $this->translate('Name');?></th>
+        <th class="TSLRTDCENTER"><?php echo $this->translate('ID');?></th>
+        <th class="TSLRTDCENTER"><?php echo $this->translate('Phone');?></th>
+        <th class="TSLRTDCENTER"><?php echo $this->translate('Mobile');?></th>
+        <th class="TSLRTDCENTER"><?php echo $this->translate('Email');?></th>
+        <th class="TSLRTDCENTER"><?php echo $this->translate('Registered');?></th>
+      </tr>
+
+      <tr>
+        <td class="TSLRTDNUMBER bgwhite">
+        	<span class="tdbg" style="width: 20px;">
+                <input type="checkbox" name="checkboxG1" id="checkboxG1" class="css-checkbox" />
+                <label for="checkboxG1" class="css-label"></label>
+       		</span>
+        </td>
+            <td class="bgwhite"><span class="tdbg">Payam Afshar</span></td>
+            <td class="bgwhite"><span class="tdbg">223355445</span></td>
+            <td class="bgwhite"><span class="tdbg">421 34 435</span></td>
+            <td class="bgwhite"><span class="tdbg">64945555</span></td>
+            <td class="bgwhite"><span class="tdbg">test@test.com</span></td>
+            <td class="bgwhite"><span class="tdbg">01.05.2014</span></td>
+      </tr>  
+</table>
+</div>
+<div class="CLEARBBORDER2"></div>
+<div class="PSUBTCWRAPPER">
+	<div class="PSUBTCLEFT">
+    	<?php echo $this->translate('Team');?> 3
+    </div>
+</div>
+<div class="CLEARBBORDER"></div>
+<div class="ALT2C">
+<table width="100%" border="0" cellspacing="4" cellpadding="0">
+      <tr class="CURNONPOINTER">
+        <th class="TSLRTDNUMBER bgwhite" width="30px">
+        <span class="tdbg2">
+        	<input type="checkbox" name="checkboxG0" id="checkboxG0" class="css-checkbox" />
+            <label for="checkboxG0" class="css-label"></label>
+        </span>
+        </th>
+        <th class="TSLRTDCENTER"><?php echo $this->translate('Name');?></th>
+        <th class="TSLRTDCENTER"><?php echo $this->translate('ID');?></th>
+        <th class="TSLRTDCENTER"><?php echo $this->translate('Phone');?></th>
+        <th class="TSLRTDCENTER"><?php echo $this->translate('Mobile');?></th>
+        <th class="TSLRTDCENTER"><?php echo $this->translate('Email');?></th>
+        <th class="TSLRTDCENTER"><?php echo $this->translate('Registered');?></th>
+      </tr>
+
+      <tr>
+        <td class="TSLRTDNUMBER bgwhite">
+        	<span class="tdbg" style="width: 20px;">
+                <input type="checkbox" name="checkboxG1" id="checkboxG1" class="css-checkbox" />
+                <label for="checkboxG1" class="css-label"></label>
+       		</span>
+        </td>
+            <td class="bgwhite"><span class="tdbg">Payam Afshar</span></td>
+            <td class="bgwhite"><span class="tdbg">223355445</span></td>
+            <td class="bgwhite"><span class="tdbg">421 34 435</span></td>
+            <td class="bgwhite"><span class="tdbg">64945555</span></td>
+            <td class="bgwhite"><span class="tdbg">test@test.com</span></td>
+            <td class="bgwhite"><span class="tdbg">01.05.2014</span></td>
+      </tr>  
+</table>
+</div>
+<?php */?>
+
+
+<div class="CANCELB"><a class="CANCELBA" href="#"><?php echo $this->translate('Cancel');?></a></div>
+<div class="OPPRETTB"><input type="submit" name="create_report" class="OPPRETTBA" value="<?php echo $this->translate('Create');?>"></div>	

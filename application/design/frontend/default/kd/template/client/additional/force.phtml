@@ -1,0 +1,19 @@
+<?php $format = KD::getModel('core/format');?>
+<div style="display: block; padding:0 10px" id="tab11">
+	<table cellpadding="4" cellspacing="0" border="0" width="100%">
+	  <tr>
+		<th width="5%"><?php echo $this->translate('Sr No');?></th>
+		<th width="15%"><?php echo $this->translate('Lock Date');?></th>
+		<th width="55%"><?php echo $this->translate('Action');?></th>
+		<th width="25%"><?php echo $this->translate('Create By');?></th>
+	  </tr>
+	<?php $cnt = 0; foreach($this->force as $force): $cnt++;?>
+	  <tr>
+		<td><?php echo $cnt;?></td>
+		<td><?php echo ($force['force_lock_by']>0 && strpos($force['force_lock_date'],'-00-')<=0)?$format->FormatDate($force['force_lock_date']):$format->FormatDate($force['date_of_creation']);?></td>
+		<td><a href="<?php echo $this->getUrl('vaktrapport/force/info/id/'.$force['force_patientID'].'/fid/'.$force['force_id']);?>"><?php echo ($force['force_continue']=='yes')?$this->translate('Show & Edit Force'):$this->translate('Show Force');?></a></td>
+		<td><?php echo ($force['force_lock_by']>0 && strpos($force['force_lock_date'],'-00-')<=0)?KD::getModel('user/user')->getUser($force['force_lock_by']):KD::getModel('user/user')->getUser($force['created_by']);?></td>
+	  </tr>
+	<?php endforeach;?>
+	</table>
+</div>

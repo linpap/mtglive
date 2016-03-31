@@ -1,0 +1,44 @@
+<form name="frmClientAddPlacement" id="frmClientAddPlacement" method="post" action="<?php echo $this->getUrl("client/additional/detailpost/id/".$this->clientID);?>">
+<input type="hidden" name="patient_id" id="patient_id" value="<?php echo $this->clientID;?>" />
+<div id="details">
+<div class="skjul customKDTab">
+
+  <table width="100%" border="0" cellspacing="4" cellpadding="0">
+	<thead>
+		<tr>
+			<th class="vrtFont" width="20%"><h4 style="margin:0px">Omr&aring;de</h4></th>
+			<th class="vrtFont"><h4 style="margin:0px">Opplysninger</h4></th>
+		</tr>
+	</thead>
+	<tbody>
+
+		<tr><td class="">Plasseringsparagraf</td><td><textarea id="detail[patient_detail_location]" name="detail[patient_detail_location]" onkeyup="textAreaAdjust(this)"  style="overflow:hidden;width: 100%; border: none;height:auto;" class="client_info"><?php echo $this->clientDetail['patient_detail_location']; ?></textarea></td></tr>
+		<tr><td class="">Sykdom</td><td><textarea id="detail[patient_detail_desease]" name="detail[patient_detail_desease]" onkeyup="textAreaAdjust(this)"  style="overflow:hidden;width: 100%; border: none;height:auto;" class="client_info"><?php echo $this->clientDetail['patient_detail_desease']; ?></textarea></td></tr>
+		<tr><td class="">Allergi</td><td><textarea id="detail[patient_detail_allergy]" name="detail[patient_detail_allergy]" onkeyup="textAreaAdjust(this)"  style="overflow:hidden;width: 100%; border: none;height:auto;" class="client_info"><?php echo $this->clientDetail['patient_detail_allergy']; ?></textarea></td></tr>
+		<tr><td class="">Motorikk</td><td><textarea id="detail[patient_detail_motorskill]" name="detail[patient_detail_motorskill]" onkeyup="textAreaAdjust(this)"  style="overflow:hidden;width: 100%; border: none;height:auto;" class="client_info"><?php echo $this->clientDetail['patient_detail_motorskill']; ?></textarea></td></tr>
+		<tr><td class="">Hjelpemidler</td><td><textarea id="detail[patient_detail_aids]" name="detail[patient_detail_aids]" onkeyup="textAreaAdjust(this)"  style="overflow:hidden;width: 100%; border: none;height:auto;" class="client_info" ><?php echo $this->clientDetail['patient_detail_aids']; ?></textarea></td></tr>
+		<tr><td class="">Kosthold</td><td><textarea id="detail[patient_detail_diet]" name="detail[patient_detail_diet]" onkeyup="textAreaAdjust(this)"  style="overflow:hidden;width: 100%; border: none;height:auto;" class="client_info" ><?php echo $this->clientDetail['patient_detail_diet']; ?></textarea></td></tr>
+		<tr><td class="">Hygiene</td><td><textarea id="detail[patient_detail_hegiene]" name="detail[patient_detail_hegiene]" onkeyup="textAreaAdjust(this)"  style="overflow:hidden;width: 100%; border: none;height:auto;" class="client_info" ><?php echo $this->clientDetail['patient_detail_hegiene']; ?></textarea></td></tr>
+		<tr><td class="">Diagnoser</td><td><textarea id="detail[patient_detail_diagnoses]" name="detail[patient_detail_diagnoses]" onkeyup="textAreaAdjust(this)"  style="overflow:hidden;width: 100%; border: none;height:auto;" class="client_info" ><?php echo $this->clientDetail['patient_detail_diagnoses']; ?></textarea></td></tr>
+		<tr><td class="">Kognitive utredninger</td><td><textarea id="detail[patient_detail_cognitive]" name="detail[patient_detail_cognitive]" onkeyup="textAreaAdjust(this)"  style="overflow:hidden;width: 100%; border: none;height:auto;" class="client_info" ><?php echo $this->clientDetail['patient_detail_cognitive']; ?></textarea></td></tr>
+		<tr><td class="">Psykisk helse</td><td><textarea id="detail[patient_detail_mental]" name="detail[patient_detail_mental]" onkeyup="textAreaAdjust(this)"  style="overflow:hidden;width: 100%; border: none;height:auto;" class="client_info" ><?php echo $this->clientDetail['patient_detail_mental']; ?></textarea></td></tr>
+		<tr><td class="">Rushistorikk</td><td><textarea id="detail[patient_detail_rushi]" name="detail[patient_detail_rushi]" onkeyup="textAreaAdjust(this)"  style="overflow:hidden;width: 100%; border: none;height:auto;" class="client_info" ><?php echo $this->clientDetail['patient_detail_rushi']; ?></textarea></td></tr>
+		<tr><td class="">Sosial fungering</td><td><textarea id="detail[patient_detail_social]" name="detail[patient_detail_social]" onkeyup="textAreaAdjust(this)"  style="overflow:hidden;width: 100%; border: none;height:auto;" class="client_info" ><?php echo $this->clientDetail['patient_detail_social']; ?></textarea></td></tr>
+		<tr><td class="">Skole</td><td><textarea id="detail[patient_detail_school]" name="detail[patient_detail_school]" onkeyup="textAreaAdjust(this)"  style="overflow:hidden;width: 100%; border: none;height:auto;" class="client_info" ><?php echo $this->clientDetail['patient_detail_school']; ?></textarea></td></tr>
+		<tr><td class="">PPT</td><td><textarea id="detail[patient_detail_ppt]" name="detail[patient_detail_ppt]" onkeyup="textAreaAdjust(this)"  style="overflow:hidden;width: 100%; border: none;height:auto;" class="client_info" ><?php echo $this->clientDetail['patient_detail_ppt']; ?></textarea></td></tr>
+		<tr><td class="">Religion</td><td><textarea id="detail[patient_detail_religion]" name="detail[patient_detail_religion]" onkeyup="textAreaAdjust(this)"  style="overflow:hidden;width: 100%; border: none;height:auto;" class="client_info" ><?php echo $this->clientDetail['patient_detail_religion']; ?></textarea></td></tr>
+		<tr><td class="">Spr&aring;k</td><td><textarea id="detail[patient_detail_language]" name="detail[patient_detail_language]" onkeyup="textAreaAdjust(this)"  style="overflow:hidden;width: 100%; border: none;height:auto;" class="client_info" ><?php echo $this->clientDetail['patient_detail_language']; ?></textarea></td></tr>
+		<tr><td class="">Interesser, aktiviteter</td><td><textarea id="detail[patient_detail_interest]" name="detail[patient_detail_interest]" onkeyup="textAreaAdjust(this)"  style="overflow:hidden;width: 100%; border: none;height:auto;" class="client_info" ><?php echo $this->clientDetail['patient_detail_interest']; ?></textarea></td></tr>
+		<tr><td class="">Hjelpeverge</td><td><textarea id="detail[patient_detail_support]" name="detail[patient_detail_support]" onkeyup="textAreaAdjust(this)"  style="overflow:hidden;width: 100%; border: none;height:auto;" class="client_info" ><?php echo $this->clientDetail['patient_detail_support']; ?></textarea></td></tr>
+		<tr><td class="">Nav</td><td><textarea id="detail[patient_detail_nav]" name="detail[patient_detail_nav]" onkeyup="textAreaAdjust(this)"  style="overflow:hidden;width: 100%; border: none;height:auto;" class="client_info" ><?php echo $this->clientDetail['patient_detail_nav']; ?></textarea></td></tr>
+		<tr><td class="">&Oslash;konomi</td><td><textarea id="detail[patient_detail_economy]" name="detail[patient_detail_economy]" onkeyup="textAreaAdjust(this)"  style="overflow:hidden;width: 100%; border: none;height:auto;" class="client_info" ><?php echo $this->clientDetail['patient_detail_economy']; ?></textarea></td></tr>
+		<tr><td class="">BUP/DPS</td><td><textarea id="detail[patient_detail_bup_dps]" name="detail[patient_detail_bup_dps]" onkeyup="textAreaAdjust(this)"  style="overflow:hidden;width: 100%; border: none;height:auto;" class="client_info" ><?php echo $this->clientDetail['patient_detail_bup_dps']; ?></textarea></td></tr>
+		<tr><td class="">Annet</td><td><textarea id="detail[patient_detail_others]" name="detail[patient_detail_others]" onkeyup="textAreaAdjust(this)"  style="overflow:hidden;width: 100%; border: none;height:auto;" class="client_info" ><?php echo $this->clientDetail['patient_detail_others']; ?></textarea></td></tr>
+	</tbody>
+  </table>
+</div>
+</div>
+<div class="mtodroplist2">
+	<div class="OPPRETTB"><input type="submit" class="OPPRETTBA" value="<?php echo $this->translate('Save');?>"/></div>
+</div>
+</form>

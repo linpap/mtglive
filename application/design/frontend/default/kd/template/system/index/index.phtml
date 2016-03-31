@@ -1,0 +1,39 @@
+<?php 
+#CODE FOR DEPT RESTRICTION
+$session = new Zend_Session_Namespace('Acl');
+#CODE FOR DEPT RESTRICTION
+?>
+<div class="tablebg">
+    <div style="display: block; padding:0 10px" id="tab1">
+    <?php echo $this->partial('index/tabs/systemCreateScorecard.phtml',array('departmentCollection'=>$this->departmentCollection));?>
+    </div>
+    <div style="display: block; padding:0 10px" id="tab2">
+    <?php echo $this->partial('index/tabs/systemCreateClient.phtml',array('departmentCollection'=>$this->departmentCollection));?>
+    </div>
+	<div style="display: block; padding:0 10px" id="tab3">
+	<?php echo $this->partial('index/tabs/systemCreateUser.phtml',array('departmentCollection'=>$this->departmentCollection));?>
+	</div>
+	<?php /* #CODE FOR DEPT RESTRICTION */?>
+	<?php if(in_array($session->userRole,array('A','S','D'))):?>
+		<div style="display: block; padding:0 10px" id="tab4">
+		<?php echo $this->partial('index/tabs/systemCreateDepartment.phtml');?>
+		</div>
+		<div style="display: block; padding:0 10px" id="tab5">
+		<?php 
+		$deptId = $this->deptId;
+		if(isset($deptId) && $deptId>0)
+		{
+			$dataArray = array('deptId'=>$deptId,'departmentCollection'=>$this->departmentCollection,'userAvailableCollection'=>$this->userAvailableCollection,'userTeam1Collection'=>$this->userTeam1Collection,'userTeam2Collection'=>$this->userTeam2Collection,'userTeam3Collection'=>$this->userTeam3Collection);
+		}
+		else
+		{
+			$dataArray = array('deptId'=>$deptId,'departmentCollection'=>$this->departmentCollection);
+		}
+		echo $this->partial('index/tabs/systemTeam.phtml',$dataArray);?>
+		</div>
+		<div style="display: block; padding:0 10px" id="tab6">
+		<?php $systemCollection = $this->systemCollection;echo $this->partial('index/tabs/systemConfiguration.phtml',array('systemCollection'=>$this->systemCollection,'departmentCollection'=>$this->departmentCollection))?>
+		</div>
+	<?php endif;?>
+	<?php /* #CODE FOR DEPT RESTRICTION */?>
+</div>

@@ -1,0 +1,2153 @@
+<?php $format = KD::getModel('core/format');
+
+//print_r($this->vaktrapInfo);
+	$vaktrapFromDate = $this->vaktrapInfo['vaktrap_from_date'];
+
+	$vaktrapToDate = $this->vaktrapInfo['vaktrap_to_date'];
+
+   // $vaktrapToDate="";
+/*echo '<pre>';
+print_r(unserialize($this->vaktrapInfo['vaktrap_counters']));
+echo '<pre>';*/
+
+
+$counter_b = 0;
+foreach($this->vakGovTiltakCollection as $maalId=>$vakGovTiltaks){
+	if(count($this->vakGovTiltakCollection[$maalId])>0){
+		foreach($vakGovTiltaks as $cnt=>$vakGovTiltak){
+			$counter_b++;				
+		}
+	}
+
+
+}
+$counter_c = 0;
+foreach($this->instTiltakCollection as $maalId=>$instTiltaks){
+	if(count($this->instTiltakCollection[$maalId])>0){
+		foreach($instTiltaks as $cnt=>$instTiltak){
+		 	$counter_c++;	
+		 }
+				
+	}
+}			
+
+
+			
+	if(!empty($this->vaktrapInfo['vaktrap_counters']))
+
+	{
+
+		$vaktrapCounters = unserialize($this->vaktrapInfo['vaktrap_counters']);
+
+	}
+
+	else
+
+	{
+		$vaktrapCounters = array('gov'=>0,'ins'=>0,'force'=>0,'medicine'=>0,'logg'=>0,'avvik'=>0);
+
+	}
+
+
+
+
+?>
+
+<?php $minVak = new DateTime($vaktrapFromDate);?>
+
+<?php $maxVak = new DateTime($vaktrapFromDate);$maxVak = $maxVak->add(new DateInterval('P6D'));?>
+
+<div class="PSUBTCWRAPPER">
+
+	<div class="PSUBTCLEFT vaklh">
+
+    <?php echo $this->translate('Security Report');?>
+
+    <div class="tcontentmenu">
+
+	    <a href="<?php echo $this->getUrl('client/report/index/id/'.$this->vaktrapInfo['vaktrap_patientID']);?>" class="vslkap" >
+
+        	<?php echo $this->translate('Arkiv');?>
+
+        </a>
+
+    	<a href="<?php echo $this->getUrl('client/info/index/id/'.$this->vaktrapInfo['vaktrap_patientID']);?>" class="vslkip">
+
+        	<?php echo $this->translate('Klient info side');?>
+
+        </a>
+
+		<?php  if($this->vaktrapInfo['previousLink'] != "") {?>
+
+		<a href="<?php echo $this->getUrl($this->vaktrapInfo['previousLink']); ?>" class="vslkip"><?php echo $this->translate('Next Report');?></a>
+
+		<?php }?>
+
+		<?php if($this->vaktrapInfo['nextLink'] != "") {?>
+
+		<a href="<?php echo $this->getUrl($this->vaktrapInfo['nextLink']); ?>" class="vslkip"><?php echo $this->translate('Previous Report');?></a>
+
+		 <?php } ?>
+
+    </div>
+
+    </div>
+
+</div>
+
+<div class="CLEARBBORDER"></div>
+
+<form name="frmEditClientVaktrapport" id="frmEditClientVaktrapport" method="post" action="<?php echo $this->getUrl("vaktrapport/info/save");?>">
+
+<div id="section1">
+
+<input type="hidden" name="vaktrap_id" id="vaktrap_id" value="<?php echo $this->vaktrapInfo['vaktrap_id'];?>" />
+
+<input type="hidden" name="vaktrap_patientID" id="vaktrap_patientID" value="<?php echo $this->vaktrapInfo['vaktrap_patientID'];?>" />
+
+<div class="VVGBG VV2IN1C2">
+
+<table width="100%" border="0">
+
+  <tr>
+
+    <th class="th12p"><?php echo $this->translate('Security Report Period From');?></th>
+
+    <th class="th12p"><?php echo $this->translate('Security Report Period To');?></th>
+
+    <th class="th25p"><?php echo $this->translate('Current Client');?></th>
+
+    <th class="th25p"><?php echo $this->translate('Legal Placement');?></th>
+
+    <th class="th25p"><?php echo $this->translate('User');?></th>
+
+  </tr>
+
+  <tr>
+
+    <td width="15%"><span class="tdbg"><input type="text" class="disabled width70" name="vaktrap_from_date" id="vaktrap_from_date" readonly value="<?php echo $format->FormatDate($vaktrapFromDate); ?>" data-toValidateId="vaktrap_to_date" data-validation="required" data-toValidateInterval="D6" data-error-message="Vaktrapport fra dato er påkrevd"/></span></td>
+
+    <td width="15%" class="nonecls"><span class="tdbg"><input type="text" data-validation="required" data-error-message="Vaktrapport til dato er påkrevd" class="datepickerto disabled width70" name="vaktrap_to_date"  id="vaktrap_to_date" readonly value="<?php echo $format->FormatDate($vaktrapToDate); ?>" data-mindate="<?php echo $format->FormatDate($minVak->format('Y-m-d'));?>" data-maxdate="<?php echo $format->FormatDate($maxVak->format('Y-m-d'));?>"/></span></td>
+
+    <td width="25%"><a href="<?php echo $this->getUrl('client/info/index/id/'.$this->vaktrapInfo['vaktrap_patientID']);?>"><span class="tdbg"><?php echo $format->FormatName($this->vaktrapInfo['patient_fname'],$this->vaktrapInfo['patient_mname'],$this->vaktrapInfo['patient_lname']);?></span></a></td>
+
+    <td width="20%"><span class="tdbg"><?php echo $this->vaktrapInfo['patient_legal'];?></span></td>
+
+    <td width="20%">
+
+        <?php if(!empty($this->treatmentPersonnel)): ?>
+
+            <?php foreach($this->treatmentPersonnel as $personnel): ?>
+
+                <a href="<?php echo $this->getUrl('user/info/index/id/' . $personnel['id']); ?>">
+
+                    <span class="tdbg">
+
+                        <?php echo $personnel['name']; ?>
+
+                    </span>
+
+                </a>
+
+            <?php endforeach; ?>
+
+        <?php endif; ?>
+
+    </td>
+
+  </tr>
+
+</table>
+
+</div>
+
+<div class="CLEARBBORDER2"></div>
+
+<div class="VVGBG VV2IN1C2">
+
+<table width="100%" border="0">
+
+  <tr>
+
+    <th class="th50p"><?php echo $this->translate('Checklist');?></th>
+
+    <th></th>
+    <th></th>
+
+  </tr>
+
+  <tr>
+
+    <td><span class="tdbg">Tiltaksplan datert</span></td>
+
+    <td class="">
+
+    	<span class="tdbg height30" style="width:100% !important"><input type="text" class="datepickerImage disabled width70 validation" name="vaktrap_tilspan_from_date" id="vaktrap_tilspan_from_date" readonly value="<?php echo $format->FormatDate($this->vaktrapInfo['vaktrap_tilspan_from_date']); ?>"></span>
+    </td>
+    <td>
+    
+            <span class="tdbg height30 right" style="width:100% !important"><input type="text" class="datepickerImage disabled width70 validation" name="vaktrap_tilspan_to_date" id="vaktrap_tilspan_to_date" readonly style=" <?php echo $format->getColorStyle($this->vaktrapInfo['vaktrap_tilspan_to_date']);?>" value="<?php echo $format->FormatDate($this->vaktrapInfo['vaktrap_tilspan_to_date']); ?>"></span>
+    
+    </td>
+
+  </tr>
+
+  <tr>
+
+    <td><span class="tdbg">Målstyringsplan</span></td>
+
+    <td class="">
+
+		<span class="tdbg height30" style="width:100% !important">
+
+            <input type="text" class="datepickerImage disabled width70 validation" name="vaktrap_maalpan_from_date" id="vaktrap_maalpan_from_date" readonly value="<?php echo $format->FormatDate($this->vaktrapInfo['vaktrap_maalplan_from_date']); ?>"></span>
+
+		</td>
+        <td>
+        
+        <span class="tdbg height30 right" style="width:100% !important"><input type="text" class="datepickerImage disabled width70 validation" name="vaktrap_maalpan_to_date" id="vaktrap_maalpan_to_date" readonly style=" <?php echo $format->getColorStyle($this->vaktrapInfo['vaktrap_maalpan_to_date']);?>" value="<?php echo $format->FormatDate($this->vaktrapInfo['vaktrap_maalplan_to_date']); ?>"></span>
+        
+        
+        </td>
+
+  </tr>
+</table>
+
+
+
+
+
+
+
+
+
+
+<table width="100%" border="0" cellspacing="4" cellpadding="0">
+  <tbody>
+ <tr>
+
+    <td width="50%"><span class="tdbg">Tvangsvedtak registrert i vaktperioden</span></td>
+
+    <td width="50%"><span class="tdbg"><?php echo isset($vaktrapCounters['force'])?$vaktrapCounters['force']:0;?></span></td>
+
+  </tr>
+
+  <tr>
+
+    <td><span class="tdbg">Logg registret i vaktperioden</span></td>
+
+    <td><span class="tdbg"><?php echo isset($vaktrapCounters['logg'])?$vaktrapCounters['logg']:0;?></span></td>
+
+  </tr>
+ <tr>
+
+     <td><span class="tdbg">Avvik registret i vaktperioden</span></td>
+
+     <td><span class="tdbg"><?php echo isset($vaktrapCounters['avvik'])?$vaktrapCounters['avvik']:0;?></span></td>
+
+ </tr>
+
+  <tr>
+
+    <td><span class="tdbg">Medisiner som gjenstår å bli utgitt til klient</span></td>
+
+    <td><span class="tdbg"><?php echo isset($vaktrapCounters['medicine'])?$vaktrapCounters['medicine']:0;?></span></td>
+
+  </tr>
+
+  <tr>
+
+    <td><span class="tdbg">Antall Tiltak som er tatt i brukt i vaktrapporten</span></td>
+
+    <!--<td><span class="tdbg"><?php echo (isset($vaktrapCounters['gov'])?$vaktrapCounters['gov']:0) + (isset($vaktrapCounters['ins'])?$vaktrapCounters['ins']:0);?></span></td>-->
+	<td><span class="tdbg"><?php echo ($counter_b + $counter_c);?></span></td>
+
+  </tr>
+
+</tbody></table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+<div class="CLEARBBORDER2"></div>
+
+<div class="VVGBG VV2IN1C2">
+
+<table width="100%" border="0">
+
+  <tr>
+
+    <th class="th2p">A )</th>
+
+    <th class="th2p"></th>
+
+    <th class="th95p"><?php echo $this->translate('Measure from scorecard plan');?></th>
+
+  </tr>
+
+  <?php
+
+
+  foreach($this->maalCollection as $maal):
+  ?>
+
+  <tr>
+
+    <td class="bgwhite"><span class="tdbg71p"><?php echo $maal['counter'];?></span></td>
+
+    <td class="bgwhite">
+
+        <span class="tdbgtextacenter">
+
+            <a href="#" class="maalClck" data-url="<?php echo APPLICATION_URL . '/client/mto/create-short-term-goal/id/' . $this->vaktrapInfo['vaktrap_patientID'] . '/vaktrapid/' . $this->vaktrapInfo['vaktrap_id'].'/maalid/' . $maal['maal_id'];?>" data-title="<?php echo $this->translate('Create short term goal'); ?>" onclick="Mtg.Client.Scorecard.Goal.createShortTermGoal(this);">+</a>
+
+        </span>
+
+    </td>
+
+    <td><span class="tdbg"><?php echo $maal['maal_desc'];?></span></td>
+
+  </tr>
+
+  <?php endforeach;?>
+
+</table>
+
+</div>
+
+<div class="CLEARBBORDER2"></div>
+
+<div class="VVGBG VV2IN1C2">
+
+<table width="100%" border="0">
+
+  <tr>
+
+    <th class="th2p">B )</th>
+
+    <th class="th66p"><?php echo $this->translate('Ongoing Measure');?>( <?php echo $this->translate('measures over time');?> )</th>
+
+    <th class="th10p"><?php echo $this->translate('Gjennomført');?></th>
+
+    <th class="th10p"><?php echo $this->translate('Delvis gjennomført');?></th>
+
+    <th class="th10p"><?php echo $this->translate('Ikke gjennomført');?></th>
+
+  </tr>
+
+  <?php $explainGovs = array();
+		$counter = 0;
+		$show_h = 0;
+  		foreach($this->vakGovTiltakCollection as $maalId=>$vakGovTiltaks):?>
+
+	  <?php if(count($this->vakGovTiltakCollection[$maalId])>0):?>
+
+	  <tr><td class="head-content"><?php echo $this->maalCollection[$maalId]['counter'];?></td><td colspan="4" class="head-content"><?php echo $this->maalCollection[$maalId]['maal_desc'];?></td></tr>
+
+		<?php 
+			
+			foreach($vakGovTiltaks as $cnt=>$vakGovTiltak):
+						
+			if($vakGovTiltak['vaktrap_tilgov_result'] != ''){	
+				$counter++;
+				 if($vakGovTiltak['vaktrap_tilgov_result'] == '2'){
+				 	$show_h = '2';
+				 }
+			}
+			//echo '==================='.$vakGovTiltak['vaktrap_tilgov_result'];
+			$explainGovs[] = array('id' => $vakGovTiltak['vaktrap_tilgov_id'], 'explanation' => $vakGovTiltak['vaktrap_tilgov_explanation'], 'result' => $vakGovTiltak['vaktrap_tilgov_result'], 'no' => $this->maalCollection[$maalId]['counter'].'.'.($cnt+1));?>
+
+		  <tr class="rdcheck redcheck_b" id="redcheck_<?php echo $vakGovTiltak['vaktrap_tilgov_id'];?>">
+
+			<td class="bgwhite"><span class="tdbg71p"><?php echo $this->maalCollection[$maalId]['counter'].'.'.($cnt+1);?></span></td>
+
+			<td><span class="tdbg"><?php echo $vakGovTiltak['vaktrap_tilgov_desc'];?><?php echo $vakGovTiltak['vaktrap_tilgov_result'];?></span></td>
+
+			<td><span class="tdbg VVTAC"><div><input type="radio" id="vakGovTiltak2[<?php echo $vakGovTiltak['vaktrap_tilgov_id'];?>]" name="vakGovTiltakRes[<?php echo $vakGovTiltak['vaktrap_tilgov_id'];?>]" <?php echo ($vakGovTiltak['vaktrap_tilgov_result']=='2')?'checked="checked"':'';?> value="2" class="hideexplanation validation govtiltak-<?php echo $vakGovTiltak['vaktrap_tilgov_id']; ?>" data-explaination="govExplainID<?php echo $vakGovTiltak['vaktrap_tilgov_id'];?>" data-relation="govExplainID<?php echo $vakGovTiltak['vaktrap_tilgov_id']; ?>" /><label for="vakGovTiltak2[<?php echo $vakGovTiltak['vaktrap_tilgov_id'];?>]"><span></span></label></div></span></td>
+
+			<td><span class="tdbg VVTAC"><div><input type="radio" id="vakGovTiltak1[<?php echo $vakGovTiltak['vaktrap_tilgov_id'];?>]" name="vakGovTiltakRes[<?php echo $vakGovTiltak['vaktrap_tilgov_id'];?>]" <?php echo ($vakGovTiltak['vaktrap_tilgov_result']=='1')?'checked="checked"':'';?> value="1" class="showexplanation validation govtiltak-<?php echo $vakGovTiltak['vaktrap_tilgov_id']; ?>" data-explaination="govExplainID<?php echo $vakGovTiltak['vaktrap_tilgov_id'];?>" data-relation="govExplainID<?php echo $vakGovTiltak['vaktrap_tilgov_id']; ?>" /><label for="vakGovTiltak1[<?php echo $vakGovTiltak['vaktrap_tilgov_id'];?>]"><span></span></label></div></span></td>
+
+			<td><span class="tdbg VVTAC"><div><input type="radio" id="vakGovTiltak0[<?php echo $vakGovTiltak['vaktrap_tilgov_id'];?>]" name="vakGovTiltakRes[<?php echo $vakGovTiltak['vaktrap_tilgov_id'];?>]" <?php echo ($vakGovTiltak['vaktrap_tilgov_result']=='0')?'checked="checked"':'';?> value="0" class="showexplanation validation govtiltak-<?php echo $vakGovTiltak['vaktrap_tilgov_id']; ?>" data-explaination="govExplainID<?php echo $vakGovTiltak['vaktrap_tilgov_id'];?>" data-relation="govExplainID<?php echo $vakGovTiltak['vaktrap_tilgov_id']; ?>" /><label for="vakGovTiltak0[<?php echo $vakGovTiltak['vaktrap_tilgov_id'];?>]"><span></span></label></div></span></td>
+
+
+			<?php 
+			      echo $this->partial('partials/blankcondision.phtml', [
+
+                                'key' => 'blankcondision_'.$vakGovTiltak['vaktrap_tilgov_id'],
+
+                                'name' => 'blankcondision_'.$vakGovTiltak['vaktrap_tilgov_id'],
+								'required' => 'required',
+								
+								'error_message' => 'Felt B ('.$this->maalCollection[$maalId]['counter'].'.'.($cnt+1).') er påkrevd'
+								
+
+                            ]); 
+							
+			?>
+
+
+
+			<?php /*?><td><span class="tdbg VVTAC"><div><input type="radio" id="tk31" name="tk" /><label for="tk31"><span></span></label></div></span></td>
+
+			<td><span class="tdbg VVTAC"><div><input type="radio" id="tk32" name="tk" /><label for="tk32"><span></span></label></div></span></td>
+
+			<td><span class="tdbg VVTAC"><div><input type="radio" id="tk33" name="tk" /><label for="tk33"><span></span></label></div></span></td><?php */?>
+
+		  </tr>
+
+		<?php endforeach;?>
+
+  	<?php endif;?>
+
+  <?php endforeach;?>
+
+</table>
+
+<div class="CLEARBBORDER2"></div>
+
+<div class="margintop">
+
+<table width="100%" border="0">
+
+  <tr>
+
+    <th class="th3p">B.1 )</th>
+
+    <th class="th97p"><?php echo $this->translate('Reason why the measures are only partially or not implemented');?></th>
+
+  </tr>
+
+    <?php
+
+	foreach ($explainGovs as $explainGov):
+
+		if ($explainGov['result']==2 || is_null($explainGov['result'])) {$show_hide = 'style="display:none"';$required='';}
+
+		else {$show_hide = '';$required = 'required';}
+
+	?>
+
+	<tr id="govExplainID<?php echo $explainGov['id'];?>" <?php echo $show_hide;?> class="govExplainID<?php echo $vakGovTiltak['vaktrap_tilgov_id'];?>">
+
+		<td class="bgwhite"><span class="tdbg71p"><?php echo $explainGov['no'];?></span></td>
+
+		<td class="nonecls"><span class="tdbg1c" style="padding: 5px !important">
+
+            	<?php echo $this->partial('partials/texteditor.phtml', [
+
+                    'key' => 'govExplainID' . $explainGov['id'],
+
+                    'name' => 'vakGovTiltakExpl[' . $explainGov['id'] .']',
+
+                    'content' => isset($explainGov['explanation']) ? $explainGov['explanation'] : '',
+
+				     'required' => '',
+
+                    'error_message' => 'Felt B.1 ( '.$explainGov['no'].' ) er påkrevd'
+
+                ]); ?>
+
+			<?php /**
+
+                <div class="editor_button">
+
+				<input onClick="createEditor('govExplainID<?php echo $explainGov['id'];?>');" type="button" value="Vis editor">
+
+				<input onClick="removeEditor('govExplainID<?php echo $explainGov['id'];?>');" type="button" value="Skjul editor">
+
+			</div>
+
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+
+				<tr>
+
+					<td class="nonecls"><span class="tdbg1c"  style="padding:0px !important;">
+
+						<div id="contents_govExplainID<?php echo $explainGov['id'];?>" class="padding5">
+
+						<textarea onkeyup="textAreaAdjust(this)" name="vakGovTiltakExpl[<?php echo $explainGov['id'];?>]" class="ckeditorClass minheight20" data-name="govExplainID<?php echo $explainGov['id'];?>" data-instance="" id="editor_govExplainID<?php echo $explainGov['id'];?>" style="overflow:hidden;width: 100%; border: none; height:auto;" <?php echo $required;?>><?php echo isset($explainGov['explanation'])?$explainGov['explanation']:'';?></textarea>
+
+						</div>
+
+					</span>
+
+					</td>
+
+				</tr>
+
+			</table>**/ ?>
+
+                 </span>
+
+		</td>
+
+    </tr>
+
+	<?php
+
+	endforeach;
+
+	?>
+
+</table>
+
+</div>
+
+</div>
+
+<div class="CLEARBBORDER2"></div>
+
+<div class="VVGBG VV2IN1C2">
+
+<table width="100%" border="0">
+
+  <tr>
+
+    <th class="th2p">C )</th>
+
+	<th class="th66p"><?php echo $this->translate('Short Measure');?></th>
+
+    <th class="th10p"><?php echo $this->translate('Gjennomført');?></th>
+
+    <th class="th10p"><?php echo $this->translate('Delvis gjennomført');?></th>
+
+    <th class="th10p"><?php echo $this->translate('Ikke gjennomført');?></th>
+
+  </tr>
+
+  <?php
+
+  	$explainInsts = array();
+	$counter_1 = 0;
+	$show_h_1 = 0;
+  	foreach($this->instTiltakCollection as $maalId=>$instTiltaks):?>
+
+	  <?php if(count($this->instTiltakCollection[$maalId])>0):?>
+
+	  <tr><td class="head-content"><?php echo $this->maalCollection[$maalId]['counter'];?></td><td colspan="4" class="head-content"><?php echo $this->maalCollection[$maalId]['maal_desc'];?></td></tr>
+
+		<?php foreach($instTiltaks as $cnt=>$instTiltak):
+		    if($instTiltak['tilins_result'] != ''){
+				$counter_1++;
+				 if($instTiltak['tilins_result'] == '2'){
+				 	$show_h_1 = '2';
+				 }
+				
+			}
+			//echo '==================='.$instTiltak['tilins_result'];
+			$explainInsts[] = array('id' => $instTiltak['tilins_id'], 'explanation' => $instTiltak['tilins_explanation'], 'result' => $instTiltak['tilins_result'], 'no' => $this->maalCollection[$maalId]['counter'].'.'.($cnt+1));?>
+
+		 
+		  <tr class="rdcheck redcheck_c" id="redcheck_c_<?php echo $instTiltak['tilins_id'];?>">
+			<td class="bgwhite"><span class="tdbg71p"><?php echo $this->maalCollection[$maalId]['counter'].'.'.($cnt+1);?></span></td>
+
+			<td><span class="tdbg"><?php echo $instTiltak['tilins_desc'];?></span></td>
+
+			<td><span class="tdbg VVTAC"><div><input type="radio" id="vakInsTiltak2[<?php echo $instTiltak['tilins_id'];?>]" name="vakInsTiltakRes[<?php echo $instTiltak['tilins_id'];?>]" data-explaination="instExplainID<?php echo $instTiltak['tilins_id'];?>" <?php echo ($instTiltak['tilins_result']=='2')?'checked="checked"':'';?>  value="2" class="hideexplanation validation instExplainID<?php echo $instTiltak['tilins_id'];?>" data-relation="instExplainID<?php echo $instTiltak['tilins_id']; ?>" /><label for="vakInsTiltak2[<?php echo $instTiltak['tilins_id'];?>]"><span></span></label></div></span></td>
+
+			<td><span class="tdbg VVTAC"><div><input type="radio" id="vakInsTiltak1[<?php echo $instTiltak['tilins_id'];?>]" name="vakInsTiltakRes[<?php echo $instTiltak['tilins_id'];?>]" data-explaination="instExplainID<?php echo $instTiltak['tilins_id'];?>" <?php echo ($instTiltak['tilins_result']=='1')?'checked="checked"':'';?>  value="1" class="showexplanation validation instExplainID<?php echo $instTiltak['tilins_id'];?>" data-relation="instExplainID<?php echo $instTiltak['tilins_id']; ?>" /><label for="vakInsTiltak1[<?php echo $instTiltak['tilins_id'];?>]"><span></span></label></div></span></td>
+
+			<td><span class="tdbg VVTAC"><div><input type="radio" id="vakInsTiltak0[<?php echo $instTiltak['tilins_id'];?>]" name="vakInsTiltakRes[<?php echo $instTiltak['tilins_id'];?>]" data-explaination="instExplainID<?php echo $instTiltak['tilins_id'];?>" <?php echo ($instTiltak['tilins_result']=='0')?'checked="checked"':'';?>  value="0" class="showexplanation validation instExplainID<?php echo $instTiltak['tilins_id'];?>" data-relation="instExplainID<?php echo $instTiltak['tilins_id']; ?>" /><label for="vakInsTiltak0[<?php echo $instTiltak['tilins_id'];?>]"><span></span></label></div></span></td>
+
+
+
+
+			<?php 
+			      echo $this->partial('partials/blankcondision.phtml', [
+
+                                'key' => 'blankcondision_c_'.$instTiltak['tilins_id'],
+
+                                'name' => 'blankcondision_c_'.$instTiltak['tilins_id'],
+								'required' => 'required',
+								
+								'error_message' => 'Felt C ('.$this->maalCollection[$maalId]['counter'].'.'.($cnt+1).') er påkrevd'
+								
+
+                            ]); 
+							
+			?>
+		  </tr>
+
+		<?php endforeach;?>
+
+  	<?php endif;?>
+
+  <?php endforeach;?>
+
+</table>
+
+<div class="CLEARBBORDER2"></div>
+
+<div class="margintop">
+
+<table width="100%" border="0">
+
+  <tr>
+
+    <th class="th3p">C.1 )</th>
+
+    <th class="th97p"><?php echo $this->translate('Reason why the measures are only partially or not implemented');?></th>
+
+  </tr>
+
+   <?php
+
+	foreach ($explainInsts as $explainInst):
+
+		if ($explainInst['result']==2 || is_null($explainInst['result'])) {$show_hide = 'style="display:none"';$required='data-validation=""';}
+
+		else {$show_hide = '';$required = 'data-validation="required"';}
+
+	?>
+
+	<tr id="instExplainID<?php echo $explainInst['id'];?>" <?php echo $show_hide;?> class="instExplainID<?php echo $instTiltak['tilins_id'];?>">
+
+		<td class="bgwhite"><span class="tdbg71p"><?php echo $explainInst['no'];?></span></td>
+
+		<td class="nonecls"><span class="tdbg1c" style="padding: 5px !important">
+
+				<?php echo $this->partial('partials/texteditor.phtml', [
+
+                    'key' => 'instExplainID' . $explainInst['id'],
+
+                    'name' => 'vakInsTiltakExpl[' . $explainInst['id'] . ']',
+
+                    'content' => isset($explainInst['explanation'])?$explainInst['explanation']:'',
+
+				     'required' => '',
+
+                    'error_message' => 'Felt C.1 (' . $explainInst['no'] . ') er påkrevd'
+
+                ]); ?>
+
+<?php /**
+
+                <div class="editor_button">
+
+				<input onClick="createEditor('instExplainID<?php echo $explainInst['id'];?>');" type="button" value="Vis editor">
+
+				<input onClick="removeEditor('instExplainID<?php echo $explainInst['id'];?>');" type="button" value="Skjul editor">
+
+			</div>
+
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+
+				<tr>
+
+					<td class="nonecls"><span class="tdbg1c"  style="padding:0px !important;">
+
+							<div id="contents_instExplainID<?php echo $explainInst['id'];?>" class="padding5h">
+
+							<textarea onkeyup="textAreaAdjust(this)" name="vakInsTiltakExpl[<?php echo $explainInst['id'];?>]" class="ckeditorClass minheight20" data-name="instExplainID<?php echo $explainInst['id'];?>" data-instance="" id="editor_instExplainID<?php echo $explainInst['id'];?>" style="overflow:hidden;width: 100%; border: none; height:auto;" <?php echo $required;?>><?php echo isset($explainInst['explanation'])?$explainInst['explanation']:'';?></textarea>
+
+							</div>
+
+						</span>
+
+					</td>
+
+				</tr>
+
+			</table>
+
+                 * **/?>
+
+		</span></td>
+
+    </tr>
+
+	<?php
+
+	endforeach;
+
+	?>
+
+</table>
+
+</div>
+
+</div>
+
+<div class="CLEARBBORDER2"></div>
+
+
+
+
+
+
+
+<div class="VVGBG VV2IN1C2">
+
+<table width="100%" border="0">
+
+  <tr>
+
+	<?php
+
+	$vaktrapFromDate = $this->vaktrapInfo['vaktrap_from_date'];
+
+	$vaktrapToDate = $this->vaktrapInfo['vaktrap_to_date'];
+
+	$begin = new DateTime($vaktrapFromDate);
+
+	$endcheck = new DateTime($vaktrapToDate);
+
+	$hideObservation = false;
+
+	$difference = $endcheck->diff($begin)->format("%a");
+
+	if(isset($vaktrapToDate) && $vaktrapToDate!='' && (strpos($vaktrapToDate,'0000')===false) && $difference<=7)
+
+	{
+
+		$end = new DateTime($vaktrapToDate);
+
+	}
+
+	else
+
+	{
+
+		$end = clone $begin;
+
+		$end->add(new DateInterval('P6D'));
+
+		$hideObservation = true;
+
+	}
+
+	$end = $end->modify( '+1 day' );
+
+	$interval = new DateInterval('P1D');
+
+	$daterange = new DatePeriod($begin, $interval ,$end);
+
+	?>
+
+	<th class="th2p">D )</th>
+
+    <th class="<?php echo (!$hideObservation)?'th76p':'th50p';?>">Tall på observasjoner, jf.mål (EKS, utagering, selvskading, manglende oppmøte skole)</th>
+
+	<?php
+
+	//if(!$hideObservation) // Code For Not shown Observation First
+
+	{
+
+		foreach($daterange as $date){
+            $day='';
+            switch ($date->format("D")) {
+                case "Mon":
+                    $day="M";
+                    break;
+                case "Tue":
+                    $day="T";
+                    break;
+                case "Wed":
+                    $day="O";
+                    break;
+                case "Thu":
+                    $day="T";
+                    break;
+                case "Fri":
+                    $day="F";
+                    break;
+                case "Sat":
+                    $day="L";
+                    break;
+                default:
+                    $day="S";
+            }
+
+			echo '<th class="th2p">'.$day.'<br />'.$date->format("d").'</th>';
+
+		}
+
+	}
+
+	// Code For Not shown Observation First Starts
+
+	/*else
+
+	{
+
+		echo '<th style="width:50%;color:#ff0000"><span class="width100">Please Select Vaktrapport To Date And save after that it will active Or your to date is more than 7 days</span></th>';
+
+	}*/
+
+	// Code For Not shown Observation First Ends
+
+	?>
+
+  </tr>
+
+  <?php
+
+  $observationUiIndex = 0;
+
+  foreach($this->observationCollection as $observationID => $observation):
+
+      $observationID = $observation['observation_id'];
+
+      $observationUiIndex += 1;
+
+  ?>
+
+  <tr>
+
+    <td class="bgwhite"><span class="tdbg71p"><?php echo $observationUiIndex; ?></span></td>
+
+    <td><span class="tdbg"><?php echo $observation['observation_desc'];?><input type="hidden" name="observationDesc[<?php echo $observationID;?>]" value="<?php echo $observation['observation_desc'];?>"/></span></td>
+
+	<?php //if(!$hideObservation) // Code For Not shown Observation First
+
+	{
+
+		$observationResult = $this->observationResCollection;
+
+		$obserCnt = 1;
+
+		$observationResDates = array();
+
+		foreach($daterange as $date):
+
+			$obj = isset($observationResult[$observationID][$date->format('y-m-d')])?$observationResult[$observationID][$date->format('y-m-d')]:false;
+
+
+
+			if(isset($observationResult[$observationID]) && $obj && count($observationResult[$observationID])>0):
+
+		?>
+
+			<td  class="bgwhite"><span class="tdbg" style="width: 20px;"><input type="checkbox" name="observation[<?php echo $observationID;?>][<?php echo $obj['vaktrap_obser_id'];?>]" id="observation[<?php echo $observationID;?>][<?php echo $obj['vaktrap_obser_id'];?>]" <?php echo ($obj['vaktrap_obser_res']==1)?'checked="checked"':'';?> class="css-checkbox" /><label for="observation[<?php echo $observationID;?>][<?php echo $obj['vaktrap_obser_id'];?>]" class="css-label"></label></span></td>
+
+		<?php
+
+			else:
+
+		?>
+
+			<td  class="bgwhite"><span class="tdbg" style="width: 20px;"><input type="checkbox" name="observationNew[<?php echo $observationID;?>][<?php echo $date->format('Y-m-d');?>]" id="observationNew[<?php echo $observationID;?>][<?php echo $obserCnt;?>]" class="css-checkbox"  value="1"/><label for="observationNew[<?php echo $observationID;?>][<?php echo $obserCnt;?>]"class="css-label"></label></span></td>
+
+		<?php endif;
+
+			$obserCnt++;
+
+		endforeach;
+
+
+
+	}
+
+	// Code For Not shown Observation First Starts
+
+	/*else
+
+	{
+
+		echo '<td class="width50"><span class="width100"></span></td>';
+
+	}*/
+
+	// Code For Not shown Observation First Ends
+
+	?>
+
+  </tr>
+
+  <?php endforeach;?>
+
+</table>
+
+</div>
+
+<div class="CLEARBBORDER2"></div>
+
+	<div class="KKI2C">
+
+        <table width="100%" border="0" cellspacing="4" cellpadding="0">
+
+            <tr>
+
+                <th class="noborder">E ) Beskriv kort fremgang i behandlingen</th>
+
+            </tr>
+
+            <tr>
+
+                <td class="nonecls"><span class="tdbg1c" style="padding: 5px !important">
+
+                    <?php echo $this->partial('partials/texteditor.phtml', [
+
+                        'key' => 'vaktrap_fremgang',
+
+                        'name' => 'vaktrap_fremgang',
+
+                        'content' => $this->vaktrapInfo['vaktrap_fremgang'],
+
+                        'required' => '',
+
+                        'error_message' => 'Felt E er påkrevd',
+
+                    ]); ?>
+
+                    </span>
+
+                </td>
+
+            </tr>
+
+		</table>
+
+    </div>
+
+    <div class="CLEARBBORDER2"></div>
+
+    <div class="KKI2C">
+
+        <table width="100%" border="0" cellspacing="4" cellpadding="0">
+
+            <tr>
+
+                <th class="noborder">F ) Helt spesielle hendelser i perioden</th>
+
+            </tr>
+
+            <tr>
+
+                <td class="nonecls"><span class="tdbg1c" style="padding: 5px !important">
+
+                    	<?php echo $this->partial('partials/texteditor.phtml', [
+
+                            'key' => 'vaktrap_hendelser',
+
+                            'name' => 'vaktrap_hendelser',
+
+                            'content' => $this->vaktrapInfo['vaktrap_hendelser'],
+
+                            'error_message' => 'Felt F er påkrevd'
+
+                        ]); ?>
+
+                    </span>
+
+                </td>
+
+            </tr>
+
+		</table>
+
+    </div>
+
+    <div class="CLEARBBORDER2"></div>
+
+    <div class="KKI2C pagebreakprint">
+
+		<table width="100%" border="0">
+
+		  <tr>
+
+			<th>G.1 )&nbsp;&nbsp;&nbsp;Årsaksforklaring</th>
+
+		  </tr>
+
+		  <tr>
+
+			<td class="nonecls"><span class="tdbg1c" style="padding: 5px !important">
+
+					<?php echo $this->partial('partials/texteditor.phtml', [
+
+                        'key' => 'vaktrap_aarsak',
+
+                        'name' => 'vaktrap_aarsak',
+
+                        'content' => $this->vaktrapInfo['vaktrap_aarsak'],
+
+                        'required' => '',
+
+                        'error_message' => 'Felt G.1 er påkrevd',
+
+                    ]); ?>
+
+			</span></td>
+
+		  </tr>
+
+		</table>
+
+
+
+
+
+
+
+    <div class="CLEARBBORDER2"></div>
+
+    <div id="genogram-container">
+<div>
+    <div class="PSUBTCLEFTH2"><?php echo $this->translate('Årsakssirkler');?>
+    	<div class="floatright litenhedtext">
+            <a href="#" onClick="Mtg.Genogram.Fullscreen.display('#genogram-canvas', '<?php echo $this->translate('Mapping Template');?>');" class="fullscreen-btn">
+                <?php echo $this->translate('FullScreen'); ?>
+            </a>
+        </div>
+    </div>
+
+    </div>
+    <?php
+
+        echo $this->partial('partials/genogram/editor.phtml', array(
+
+            'clientID' => $this->clientID,
+
+            'initString' => $this->initString,
+
+            'title' => 'Rediger',
+
+            'editor' => 'behaviour'
+
+        ));
+
+    ?>
+
+    </div>
+
+<?php /**
+
+	<form id="frmEditGEnogram" method="post">
+
+		<input type="hidden" name="pasientId" id="pasientId" value="<?php echo $this->clientID; ?>" />
+
+		<textarea id="mySavedModel" style="width:100%;height:300px;display:none;">
+
+			<?php echo $this->initString;?>
+
+		</textarea>
+
+		<div id="sample">
+
+		  <div style="width:100%; white-space:nowrap;">
+
+
+
+			<!----- File Open and Close Code ---->
+
+			<div id="PaletteAndDiagram" style="position: relative; width: 100%;">
+
+				<div id="sideBar" style="width:100%; min-height: 140px; text-align:center;padding:0px 0px;">
+
+					<div class="wrapperPR">
+
+						<div class="handle">Palett:</div>
+
+						<div id="myPalette" style="width: 100%; min-height: 70px"></div>
+
+					</div>
+
+
+
+				</div>
+
+				<div id="myDiagram" style="position: relative; border: solid 3px #E6E6E6; width:99%; max-height:550px; min-height:350px; padding:0px 0px; background-color:white; border-radius:3px;"></div>
+
+				<div id="customTextEditor" style="width: 85px; height: 15px; border: 1px solid black; background-color: white; visibility: visible;">
+
+				</div>
+
+			</div>
+
+
+
+			<div id="openDocument" class="draggable" style="visibility:hidden">
+
+			  <div id="openDraggableHandle" class="handle">Open File</div>
+
+			  <div id="openText" class="elementText">Choose file to open...</div>
+
+			  <select id="mySavedFiles" class="mySavedFiles" ></select>
+
+			  <br />
+
+			  <button id="openBtn" class="elementBtn" type="button" onClick="load()" style="margin-left:70px">Open</button>
+
+			  <button id="cancelBtn"class="elementBtn" type="button" onClick="closeElement()" >Cancel</button>
+
+			</div>
+
+
+
+			<div id="removeDocument" class="draggable" style="visibility:hidden">
+
+				<div id="removeDraggableHandle" class="handle">Delete File</div>
+
+				<div id="removeText" class="elementText">Choose file to remove...</div>
+
+				<select id="mySavedFiles2" class="mySavedFiles" ></select>
+
+				<br />
+
+				<button id="removeBtn" class="elementBtn" type="button" onClick="removeFile()" style="margin-left:70px">Remove</button>
+
+				<button id="cancelBtn2"class="elementBtn" type="button" onClick="closeElement()">Cancel</button>
+
+			</div>
+
+		  </div>
+
+		  <div class="LAGREB2" style="margin-top:0px;"><a class="LAGREBA2" href="#" onClick="saveDocument()" ><?php echo $this->translate('Save');?></a></div>
+
+		</div>
+
+		<div class="clearBoth"></div>
+
+	</form>**/ ?>
+
+</div>
+
+	<div id="merknader" 
+	style="<?php echo 'display:none;';
+				/* if(($counter == 0) && ($counter_1 == 0)){ 
+					echo 'display:none;';
+				 }else{
+				 	if(($show_h == '2') || ($show_h_1 == '2')){ 
+						echo 'display:none;';
+					} else {
+						echo 'display:block;';
+					} 
+				 }*/
+			?>">
+
+		<div class="CLEARBBORDER2"></div><?php /* echo $counter.'-----'.$counter_1;*/ ?>
+
+		<div class="KKI2C">
+
+			<table width="100%" border="0">
+
+			  <tr>
+
+				<th>H) Merknader til rapporten</th>
+
+			  </tr>
+
+			  <tr>
+
+				<td class="nonecls">
+
+                    <span class="tdbg1c" style="padding: 5px !important">
+
+                        	<?php echo $this->partial('partials/texteditor.phtml', [
+
+                                'key' => 'vaktrap_merknader',
+
+                                'name' => 'vaktrap_merknader',
+
+                                'content' => $this->vaktrapInfo['vaktrap_merknader'],
+
+                                'required' => '',
+								
+								 'error_message' => 'Felt H er påkrevd'
+
+                            ]); ?>
+
+                    </span>
+
+                </td>
+
+			  </tr>
+
+			</table>
+
+		</div>
+
+	 </div>
+
+	 <div class="CLEARBBORDER2"></div>
+
+
+
+<div class="CANCELB"><a class="CANCELBA" href="#"><?php echo $this->translate('Cancel');?></a></div>
+
+<?php /*?><div class="LAGREB3"><a class="LAGREBA2" href="#"><?php echo $this->translate('Save');?></a></div><?php */?>
+
+<div class="OPPRETTB floatleft marginleft20"><input type="submit" name="save_report" id="save_report" class="OPPRETTBA ckeditorClassSubmit" data-form="frmEditClientVaktrapport" value="<?php echo $this->translate('Save');?>"></div>
+
+<div class="OPPRETTB floatleft marginleft20"><input type="submit" name="new_report" id="new_report" class="OPPRETTBA LAASARKIVERBA ckeditorClassSubmit" data-form="frmEditClientVaktrapport" value="<?php echo $this->translate('Lock and Archives Security Report');?>"></div>
+
+<?php /*?><div class="lasogarkivervaktraport"><a class="LAASARKIVERBA" href="#"><?php echo $this->translate('Lock and Archives Security Report');?></a></div><?php */?>
+
+
+<?php if($this->btnFlag):?>
+<div class="OPPRETTB"><input type="submit" name="freez_report" id="freez_report" class="OPPRETTBA FERDIGBA ckeditorClassSubmit" data-form="frmEditClientVaktrapport" value="<?php echo $this->translate('Finished');?>"><?php /*?><a class="FERDIGBA" href="#"><?php echo $this->translate('Finished');?></a><?php */?></div>
+<?php endif;?>
+
+
+
+
+<div class="vaktraportlastcont">
+
+	<strong><?php echo $this->translate('Save');?>:</strong> Lagrer alle endringer uten å endre status på rapporten<br /><strong><?php echo $this->translate('Lock and Archives Security Report');?>:</strong> Lagrer alle endringer, avslutter rapport og oppretter ny rapport for neste skift<br /><strong><?php echo $this->translate('Finished');?>:</strong> Lagrer alle endringer og avslutter rapporten. Det opprettes ingen ny rapport.
+
+</div>
+
+
+<script src="<?php echo $this->getMediaUrl('ckeditor/custom-ckeditor.js','js');?>"></script>
+
+<?php /*?><script src="<?php echo $this->getMediaUrl('jquery.validate.min.js','js');?>"></script><?php */?>
+
+    <div id="conformdialog" title="Confirm" style="display: none;">
+        <p>Are you shur you want to lock and archive scorcard?</p>
+        <br>
+        <button id="yes">Yes</button> <button id="no">No</button>
+    </div>
+
+<script language="javascript" type="text/javascript">
+    var flag="false";
+	$(document).ready(function(e){
+
+        flag=$('#yes').click(function(){
+            flag="True";
+            $(this).closest('.ui-dialog-content').dialog('close');
+            if(flag=="True"){
+                $("#new_report").unbind().click();
+               // $("#new_report").submit();
+            }
+        });
+        flag=$('#no').click(function(){
+            flag="false";
+            $(this).closest('.ui-dialog-content').dialog('close');
+        });
+
+
+
+
+        var conditionalValidationFields = [];
+
+
+
+			$(".showexplanation").unbind().click(function(){
+
+				var desireId = '#'+$(this).data('explaination'),
+
+                    validationIndex = $(this).attr('data-relation'),
+
+                    index = conditionalValidationFields.indexOf(validationIndex);
+
+
+
+                if(index > -1) {
+
+                    conditionalValidationFields.splice(index, 1);
+
+                }
+
+//alert(desireId);
+var ignoreValidation;
+var count = 0;
+ $('.hideexplanation').each(function () {
+	ignoreValidation = $(this,':checked').val()
+	if($(this).is(':checked')) { if(ignoreValidation == '2'){count++;} }
+ });
+ 
+    if(count < 1){
+		//$('#merknader').show();
+	}
+//$("div #merknader").css("display","block");
+				$(desireId).show();
+				
+				//$('#editor_'+$(this).data('explaination')).attr('data-validation','required');
+				$('#editor_'+$(this).data('explaination')).attr('data-validation','');
+				//$('editorcontents_'+desireId).attr('data-validation','required');
+
+			});
+
+
+
+			$(".hideexplanation").unbind().click(function(){
+
+				var desireId = '#'+$(this).data('explaination'),
+
+                    validationIndex = $(this).attr('data-relation');
+
+
+
+                if(conditionalValidationFields.indexOf(validationIndex) < 0) {
+
+                    conditionalValidationFields.push(validationIndex);
+
+                }
+
+
+
+				//$('editorcontents_'+desireId).attr('data-validation','');
+
+				$('#editor_'+$(this).data('explaination')).attr('data-validation','');
+
+                $(desireId).hide();
+				
+				
+				//$("#merknader").hide();
+			});
+
+
+
+
+/*
+        $("#save_report").unbind().click(function(e){
+            e.preventDefault();
+            $('.validation').each(function () {
+				if($(this).is(':checked')) { 
+                $(this).attr( "data-validation", 'required' );
+				}
+            });
+            $('#vaktrap_merknader').attr( "data-validation", '' );
+            editorToTextare($(this));
+        });
+
+*/
+
+
+
+		 $("#save_report").unbind().click(function(e){
+            e.preventDefault();
+            $('.validation').each(function () {
+				if($(this).is(':checked')) { 
+			     	 $(this).attr( "data-validation", 'required' );
+				}
+            });
+			
+			 
+				 var redcheck_b = '';
+				 var res = '';				
+				 $('.redcheck_b').each(function () {				 	
+					redcheck_b = $(this).attr('id');
+					res = redcheck_b.split("_");
+					$('#blankcondision_'+res[1]).attr( "data-validation", '' );
+				 });
+				 
+				 var redcheck_c = '';
+				 var res_c = '';				
+				 $('.redcheck_c').each(function () {					
+					redcheck_c = $(this).attr('id');
+					res_c = redcheck_c.split("_");
+					$('#blankcondision_c_'+res_c[2]).attr( "data-validation", '' );
+									 
+				 });
+				 
+				 
+            $('#vaktrap_merknader').attr( "data-validation", '' );
+            editorToTextare($(this));
+        });
+
+//			$("#save_report").unbind().click(function(e){
+//
+//                console.log("Test");
+//
+//                e.preventDefault();
+//
+//
+//                $('.validation').each(function () {
+//
+//					$(this).attr( "data-validation", '' );
+//
+//				});
+//
+//				var ignoreValidation;
+//				var count = 0;
+//				 var validationIndex ='';
+//				 var get_val = '';
+//				 $('.hideexplanation').each(function () {
+//					ignoreValidation = $(this,':checked').val();
+//					if($(this).is(':checked')) { if(ignoreValidation == '2'){count++;}}
+//				 });
+//
+//
+//						 $('.showexplanation').each(function () {
+//								if($(this).is(':checked')) {
+//									validationIndex = $(this).attr('data-relation');
+//									get_val = $('#editor_'+validationIndex).val();
+//
+//								}
+//
+//				 		  });
+//
+//
+//
+//				if($('#merknader').is(':visible')) {
+//
+//					$('#editor_vaktrap_merknader').attr( "data-validation", 'required' );
+//
+//				} else {
+//
+//
+//
+//					if(get_val == ''){
+//					alert('Du prøver å arkivere en vaktrapport hvor alle obligatoriske felt ikke er utfylt.' +
+//
+//                    "\n\n" +
+//
+//                    'Fyll utt alle obligatoriske felt som er merkert med rød markering eller fyll ut felt H ) Merknader til rapporten hvorfor ikke alle obligatoriske felt er utfyldte.'
+//
+//                    + "\n\n" +
+//
+//                    'Utfylling av felt H) Merknader til rapporten vil deaktivere alle obligatoriske felt');
+//						$('#merknader').show();
+//					} else {
+//						$('#merknader').hide();
+//							$('#vaktrap_merknader').attr( "data-validation", '' );
+//							editorToTextare($(this));
+//					}
+//
+//               // $('#merknader').show();
+//                return false;
+//
+//			}
+//
+//
+//				$('#vaktrap_merknader').attr( "data-validation", '' );
+//				editorToTextare($(this));
+//
+//			});
+
+
+
+        /** Archive the report and create a new one **/
+		
+		
+		$("#new_report").unbind().click(function(e){
+			//alert("Test" + flagt);
+
+                console.log("Test");
+
+                e.preventDefault();
+
+									
+                $('.validation').each(function () {
+
+					$(this).attr( "data-validation", '' );
+
+				});
+				//$( ".rdcheck" ).removeClass( "rdcheck_ns" );
+				
+				 var editor_vaktrap_merknader = $('#editor_vaktrap_merknader').val();
+				 var specall = '';
+				 var redcheck_b = '';
+				 var res = '';
+				 var resval = '';
+				 var checkedcheck = '';
+				 $('.redcheck_b').each(function () {
+					$(this).removeClass( "rdcheck_ns" );
+				 	checkedcheck = '';
+					redcheck_b = $(this).attr('id');
+					res = redcheck_b.split("_");
+					resval = $('#blankcondision_'+res[1]).attr('data-validation');
+					
+					 $('.govtiltak-'+res[1]).each(function () {					 	
+							if($(this).is(':checked')) {checkedcheck ='checked';}						
+				 	  });
+					 
+					  if((resval == 'required') && (checkedcheck == '')){ 
+					  	$("#redcheck_"+res[1]).addClass("rdcheck_ns"); 
+						if(editor_vaktrap_merknader == ''){
+							$('#blankcondision_'+res[1]).attr( "data-validation", 'required' );
+							specall = 'requ';							
+						} else {
+							$('#blankcondision_'+res[1]).attr( "data-validation", '' );
+						}						
+					  } else {
+					  	$('#blankcondision_'+res[1]).attr( "data-validation", '' );
+					  }
+				 
+				 });
+				 
+				  
+				 
+				 
+				 var redcheck_c = '';
+				 var res_c = '';
+				 var resval_c = '';
+				 var checkedcheck_c = '';
+				 $('.redcheck_c').each(function () {
+					$(this).removeClass( "rdcheck_ns" );
+				 	checkedcheck_c = '';
+					redcheck_c = $(this).attr('id');
+					res_c = redcheck_c.split("_");
+					resval_c = $('#blankcondision_c_'+res_c[2]).attr('data-validation'); 
+					
+					 $('.instExplainID'+res_c[2]).each(function () {		 		 	
+							if($(this).is(':checked')) {checkedcheck_c ='checked';}						
+				 	  });
+					 
+					  if((resval_c == 'required') && (checkedcheck_c == '')){ 					
+					  	$("#redcheck_c_"+res_c[2]).addClass("rdcheck_ns"); 	
+						
+						if(editor_vaktrap_merknader == ''){
+							$('#blankcondision_c_'+res_c[2]).attr( "data-validation", 'required' );
+							specall = 'requ';	
+						} else {
+							$('#blankcondision_c_'+res_c[2]).attr( "data-validation", '' );
+						}					
+					  } else {
+					  	$('#blankcondision_c_'+res_c[2]).attr( "data-validation", '' );
+					  }
+				 
+				 });
+				
+				 
+				var ignoreValidation;
+				var count = 0;
+				 var validationIndex ='';
+				 var get_val = '';
+				 var get_select = '';
+				  var count_1 = 0;
+				 $('.hideexplanation').each(function () {
+					ignoreValidation = $(this,':checked').val();					
+					if($(this).is(':checked')) { if(ignoreValidation == '2'){count_1++;}}
+					
+					count++;
+				 });
+				  
+				 
+						
+						//alert(editor_vaktrap_merknader);
+						var hcounter = 0;
+						var hcounter_1 = 0;
+						var ignoreValidation_1;
+						 $('.showexplanation').each(function () {
+						 		ignoreValidation_1 = $(this,':checked').val();
+								if(ignoreValidation_1 != '2'){													
+									if($(this).is(':checked')) { 									
+										validationIndex = $(this).attr('data-relation'); 
+										get_val = $('#editor_'+validationIndex).val();
+										if(editor_vaktrap_merknader == ''){
+											$('#editor_'+$(this).data('explaination')).attr('data-validation','required');
+										} else {
+											$('#editor_'+$(this).data('explaination')).attr('data-validation','');
+										}
+										get_select = 'checked_val';
+										
+										if(get_val != ''){
+											hcounter++;
+										}
+										hcounter_1++;
+									}
+								}
+								
+				 		  });
+						 
+						
+					// alert(hcounter);
+					// alert(hcounter_1);
+				if(count_1 == count){
+					$('#editor_vaktrap_merknader').attr( "data-validation", '' );
+					 
+				} else {
+					
+						if($('#merknader').is(':visible')) {
+							if(hcounter_1 == hcounter){
+								if(specall == 'requ'){
+									$('#editor_vaktrap_merknader').attr( "data-validation", 'required' );
+								} else {
+									$('#editor_vaktrap_merknader').attr( "data-validation", '' );
+								}
+								
+							} else {
+								$('#editor_vaktrap_merknader').attr( "data-validation", 'required' );
+							}
+		
+						} else {
+							$('.showexplanation').each(function () {													
+									if($(this).is(':checked')) { 									
+										$('#editor_'+$(this).data('explaination')).attr('data-validation','required');
+									}		
+							 });
+							 
+								  
+							if(get_val == ''){ 
+							
+							alert('Du prøver å arkivere en vaktrapport hvor alle obligatoriske felt ikke er utfylt.' +
+		
+							"\n\n" +
+		
+							'Fyll utt alle obligatoriske felt som er merkert med rød markering eller fyll ut felt H ) Merknader til rapporten hvorfor ikke alle obligatoriske felt er utfyldte.'
+		
+							+ "\n\n" +
+		
+							'Utfylling av felt H) Merknader til rapporten vil deaktivere alle obligatoriske felt');	
+							
+										
+								$('#merknader').show();
+								
+								if(get_select == 'checked_val'){
+									editorToTextare($(this));
+								} else {
+									editorToTextare_ar0($(this));
+								}
+								
+							}else {
+								
+								if(hcounter_1 == hcounter){
+									if(specall == 'requ'){
+										$('#editor_vaktrap_merknader').attr( "data-validation", '' );
+										$('#merknader').show();
+
+									} else {
+										$('#editor_vaktrap_merknader').attr( "data-validation", '' );
+										$('#merknader').hide();
+										 if(flag.toString()!="True"){
+											$( "#conformdialog" ).dialog();
+											return false;
+                                        }
+                                        return false;
+									}
+									
+								} else {
+									$('#merknader').show();
+								}
+																  
+
+
+								 	$('#vaktrap_merknader').attr( "data-validation", '' );
+									console.log(flag.toString());
+
+                                    if(flag.toString()!="True"){
+                                        $( "#conformdialog" ).dialog();
+                                        return false;
+                                    }
+                                return false;
+									editorToTextare($(this));
+							}
+							//$('#vaktrap_merknader').attr( "data-validation", '' );
+					   // $('#merknader').show();
+						return false;
+		
+					}
+				}
+
+				
+				$('#vaktrap_merknader').attr( "data-validation", '' );
+					console.log(flag.toString());
+                if(flag.toString()!="True"){
+                    $( "#conformdialog" ).dialog();
+                    return false;
+                }
+            return false;
+				return editorToTextare($(this));
+
+			});
+
+
+			
+
+  /*      $("#new_report").click(function(e){
+
+            e.preventDefault();
+
+            var validation = '',
+
+                form = $(this).closest('form');
+
+                commentSection = $('#merknader'),
+
+                hasComment = (commentSection.is(':visible') && (commentSection.find('.textarea').html() != ''))
+
+                    ? true
+
+                    : false;
+
+
+
+            $('.validation').each(function () {
+
+                var ignoreValidation = conditionalValidationFields.indexOf($(this).attr('data-name'));
+
+                validation = ($(this).is(':radio') || ignoreValidation >= 0) ? '' : 'required';
+
+                $(this).attr( "data-validation", (hasComment ? '' : validation) );
+
+            });
+
+				 var ignoreValidation;
+				 var count = 0;
+				 var validationIndex ='';
+				 var get_val = '';
+				 
+				 $('.hideexplanation').each(function () {
+					ignoreValidation = $(this,':checked').val()
+					if($(this).is(':checked')) { if(ignoreValidation == '2'){count++;} }
+				 });
+				 
+				
+			
+						 $('.showexplanation').each(function () {													
+								if($(this).is(':checked')) { 									
+									validationIndex = $(this).attr('data-relation'); 
+									get_val = $('#editor_'+validationIndex).val();
+									
+								}
+								
+				 		  });
+						
+				 
+            if($('#merknader').is(':visible')) {
+
+				$('#editor_vaktrap_merknader').attr( "data-validation", 'required' );
+				
+			} else {
+
+                alert('Du prøver å arkivere en vaktrapport hvor alle obligatoriske felt ikke er utfylt.' +
+
+                    "\n\n" +
+
+                    'Fyll utt alle obligatoriske felt som er merkert med rød markering eller fyll ut felt H ) Merknader til rapporten hvorfor ikke alle obligatoriske felt er utfyldte.'
+
+                    + "\n\n" +
+
+                    'Utfylling av felt H) Merknader til rapporten vil deaktivere alle obligatoriske felt');
+					
+					 
+					
+					if(get_val == ''){
+						$('#merknader').show();
+						//$('#editor_vaktrap_merknader').attr( "data-validation", 'required' );
+					} else if(count < 1){
+						$('#merknader').show();
+						//$('#editor_vaktrap_merknader').attr( "data-validation", 'required' );
+					}else {
+						$('#merknader').hide();
+					}
+					
+               // $('#merknader').show();
+                return false;
+
+			}
+ 				return editorToTextare($(this));
+					
+			
+
+		});
+
+
+*/
+			$("#freez_report").unbind().click(function(e){
+
+                e.preventDefault();
+
+				if($('#merknader').is(':visible'))
+
+				{
+
+					$('.validation').each(function () {
+
+						if($(this).is(':radio'))
+
+						{
+
+							$(this).attr( "data-validation", '' );
+
+							//$(this).data('validation','radio');
+
+						}
+
+						else
+
+						{
+
+							$(this).attr( "data-validation", '' );
+
+							//$(this).data('validation','required');
+
+						}
+
+					});
+
+					$('#editorcontents_vaktrap_merknader').attr( "data-validation", 'required' );
+
+				}
+
+				else
+
+				{
+
+					$('.validation').each(function () {
+
+						if($(this).is(':radio'))
+
+						{
+
+							$(this).attr( "data-validation", 'radio' );
+
+							//$(this).data('validation','radio');
+
+						}
+
+						else
+
+						{
+
+							$(this).attr( "data-validation", 'required' );
+
+							//$(this).data('validation','required');
+
+						}
+
+					});
+
+					$('#merknader').show();
+
+				}
+
+                /*var ignoreValidation;
+				var count = 0;
+				 $('.hideexplanation').each(function () {
+					ignoreValidation = $(this,':checked').val()
+					if($(this).is(':checked')) { if(ignoreValidation == '2'){count++;} }
+				 });
+				 
+					if(count < 1){
+						$('#merknader').show();
+					} else {
+						$('#merknader').hide();
+					}*/
+					
+					
+				 var ignoreValidation;
+				 var count = 0;
+				 var validationIndex ='';
+				 var get_val = '';
+				 
+				 $('.hideexplanation').each(function () {
+					ignoreValidation = $(this,':checked').val()
+					if($(this).is(':checked')) { if(ignoreValidation == '2'){count++;} }
+				 });
+				 
+							
+						 $('.showexplanation').each(function () {													
+								if($(this).is(':checked')) { 									
+									validationIndex = $(this).attr('data-relation'); 
+									get_val = $('#editor_'+validationIndex).val();
+									
+								}
+								
+				 		  });
+						
+						  	if(get_val == ''){
+								$('#merknader').show();
+							} else if(count <= 1){
+								$('#merknader').show();
+							}else {
+								$('#merknader').hide();
+							}
+					
+				editorToTextare($(this));
+
+			});
+
+
+
+
+
+			/*$("#d").click(function(){
+
+			   if (section2Validator.form()) {
+
+					// do something when form is valid
+
+			   }
+
+			});*/
+
+
+
+        $('input[type=radio]').on('click', function() {
+
+            var measures = $(".rdcheck");
+
+            if(measures.find("input:radio:checked").length === measures.length) {
+
+                //$('#merknader').hide();
+            }
+        });
+        $('.maalClck').click(function(){
+            setTimeout(function(){
+                $('#frmClientEditMaal').submit(function( event ) {
+                    var dptxt=$('.dptxt').val();
+                    if(dptxt!=""){
+                        $('.cltdbg').css('border','1px solid white');
+                    }else{
+                        $('.cltdbg').css('border','1px solid red');
+                        return false;
+                    }
+                });
+            },800);
+        });
+	 });
+
+function editorToTextare(_el)
+
+{
+
+	var editors = $("textarea.ckeditorClass");
+
+	if (editors.length) {
+
+		editors.each(function() {
+
+			/*var instanceName =  $(this).attr("data-name");
+
+			var instance = CKEDITOR.instances[instanceName];
+
+			if (instance)
+
+			{
+
+				$('#editorcontents_'+instanceName).css('display','block');
+
+				$('#editorcontents_'+instanceName).val($(this).val(instance.getData()));
+
+				$('#contents_'+name).css('display','block');
+
+			}*/
+
+			var name = $(this).attr('data-name');
+
+			if(name != null && name !== undefined && name!='')
+
+			{
+
+				var editorExtra = $(this).attr('data-instance');
+
+				if (editorExtra!= null && editorExtra!== undefined && editorExtra!='')
+
+				{
+
+					$('#editorcontents_'+name).val(CKEDITOR.instances[editorExtra].getData());
+
+					CKEDITOR.remove(editorExtra);
+
+					$('#editor_'+name).html('');
+
+					$('#contents_'+name).css('display','block');
+
+					$(this).css('display','block');
+
+					$(this).attr('data-instance','');
+
+				}
+
+				else
+
+				{
+
+					$('#editorcontents_'+name).val($('#editor_'+name).html());
+
+				}
+
+			}
+
+			else
+
+			{
+
+				return;
+
+			}
+
+		});
+
+	}
+
+
+
+    saveDocument(function(result) {
+        if (result) {
+
+            var form = $('#'+$('.ckeditorClassSubmit').attr('data-form'));
+
+            form.append('<input name="'+_el.attr('name')+'" type="hidden" value="'+_el.val()+'" />');
+
+            form.submit();
+
+        }
+
+    });
+
+}
+
+
+function editorToTextare_ar0(_el)
+
+{
+
+	var editors = $("textarea.ckeditorClass");
+
+	if (editors.length) {
+
+		editors.each(function() {
+
+			/*var instanceName =  $(this).attr("data-name");
+
+			var instance = CKEDITOR.instances[instanceName];
+
+			if (instance)
+
+			{
+
+				$('#editorcontents_'+instanceName).css('display','block');
+
+				$('#editorcontents_'+instanceName).val($(this).val(instance.getData()));
+
+				$('#contents_'+name).css('display','block');
+
+			}*/
+
+			var name = $(this).attr('data-name');
+
+			if(name != null && name !== undefined && name!='')
+
+			{
+
+				var editorExtra = $(this).attr('data-instance');
+
+				if (editorExtra!= null && editorExtra!== undefined && editorExtra!='')
+
+				{
+
+					$('#editorcontents_'+name).val(CKEDITOR.instances[editorExtra].getData());
+
+					CKEDITOR.remove(editorExtra);
+
+					$('#editor_'+name).html('');
+
+					$('#contents_'+name).css('display','block');
+
+					$(this).css('display','block');
+
+					$(this).attr('data-instance','');
+
+				}
+
+				else
+
+				{
+
+					$('#editorcontents_'+name).val($('#editor_'+name).html());
+
+				}
+
+			}
+
+			else
+
+			{
+
+				return;
+
+			}
+
+		});
+
+	}
+	
+	 saveDocument(function(result) {
+        if (result) {
+				var form = $('#'+$('.ckeditorClassSubmit').attr('data-form'));
+	
+				form.append('<input name="'+_el.attr('name')+'" type="hidden" value="'+_el.val()+'" />');
+				//$( ".rdcheck" ).addClass( "rdcheck_ns" );
+				
+				form.submit();
+
+        }
+
+    });
+	
+}
+</script>
+
+<script language="javascript" type="text/javascript">
+
+// saves the current floorplan to local storage
+
+	  function saveDocument(_callback) {
+
+          _callback = _callback || function() {};
+
+		var genogramStr = myDiagram.model.toJson();
+
+		var vaktrapId = $('#vaktrap_id').val();
+
+		var uploadURL ='<?php echo $this->getUrl('vaktrapport/info/savegenogram');?>'; //Upload URL
+
+		var extraData ={}; //Extra Data.
+
+		var formData = new FormData();
+
+		formData.append('genogram_str', genogramStr);
+
+		formData.append('vaktrapId', vaktrapId);
+
+		var jqXHR=$.ajax({
+
+			url: uploadURL,
+
+			type: "POST",
+
+			contentType:false,
+
+			processData: false,
+
+				cache: false,
+
+				data: formData,
+
+				success: function(data){
+
+					//data = JSON.parse(data);
+
+                    _callback(data);
+
+				    //location.reload();
+
+				},
+
+				error:function(data)
+
+				{
+
+					//data = JSON.parse(data);
+
+					alert(data);
+					//alert('Invalid Request');
+				},
+
+				complete: function(msg)
+
+				{
+
+				}
+
+		});
+
+
+
+	  }
+
+</script>
+<style type="text/css">
+.rdcheck_ns td{border: 1px solid #c90312 !important}
+</style>
+</div>
+
+</form>

@@ -1,0 +1,104 @@
+<?php $format=KD::getModel('core/format');?>
+<form name="frmClientMaal" id="frmClientMaal" method="post" action="<?php echo $this->getUrl("client/index/maal");?>">
+<div class="PSUBTCWRAPPER">
+	<div class="PSUBTCLEFT">
+    	<?php echo $this->translate('Goal');?>
+    </div>
+</div>
+<div class="CLEARBBORDER"></div>
+<div class="KKI2C">
+<table width="100%" border="0" cellspacing="4" cellpadding="0" id="client_maal_table">
+      <tr class="CURNONPOINTER">
+        <th class="TSLRTDNUMBER">
+        <span class="tdbg2">
+        	<input type="checkbox" name="checkbox_all" id="checkbox_all" class="css-checkbox" />
+            <label for="checkbox_all" class="css-label"></label>
+        </span>
+        </th>
+		<th class="TSLRTDCENTER" width="70%"><?php echo $this->translate('Active %s',$this->translate('Goal'));?></th>
+		<th class="TSLRTDCENTER" width="15%"><?php echo $this->translate('%s Date',$this->translate('From'));?></th>
+        <th class="TSLRTDCENTER" width="15%"><?php echo $this->translate('%s Date',$this->translate('To'));?></th>
+      </tr>
+      <?php /*?><tr>
+        <td class="TSLRTDNUMBER bgwhite">
+        	<span class="tdbg" style="width: 20px;">
+                <input type="checkbox" name="checkboxG1" id="checkboxG1" class="css-checkbox" />
+                <label for="checkboxG1" class="css-label"></label>
+       		</span>
+        </td>
+        <td><span class="tdbg">Vedkommende utsetter seg ikke for alvorlige selvdestrukte handlinger</span></td>
+        <td class="bgwhite"><span class="tdbg">01/09-2014</span></td>
+        <td class="bgwhite"><span class="tdbg">14/12-2014</span></td>
+      </tr>
+      <tr>
+        <td class="TSLRTDNUMBER bgwhite">
+        	<span class="tdbg" style="width: 20px;">
+                <input type="checkbox" name="checkboxG1" id="checkboxG1" class="css-checkbox" />
+                <label for="checkboxG1" class="css-label"></label>
+       		</span>
+        </td>
+        <td><span class="tdbg">Vedkommende mottar behandling for spiseforstyrrelsen ved Capio</span></td>
+        <td class="bgwhite"><span class="tdbg">01/09-2014</span></td>
+        <td class="bgwhite"><span class="tdbg">14/12-2014</span></td>
+      </tr>
+      <tr>
+        <td class="TSLRTDNUMBER bgwhite">
+        	<span class="tdbg" style="width: 20px;">
+                <input type="checkbox" name="checkboxG1" id="checkboxG1" class="css-checkbox" />
+                <label for="checkboxG1" class="css-label"></label>
+       		</span>
+        </td>
+        <td><span class="tdbg">Vedkommende f�lger oppsatt skoleplan</span></td>
+        <td><span class="tdbg">01/09-2014</span></td>
+        <td><span class="tdbg">14/12-2014</span></td>
+      </tr>
+      <tr>
+        <td class="TSLRTDNUMBER bgwhite">
+        	<span class="tdbg" style="width: 20px;">
+                <input type="checkbox" name="checkboxG1" id="checkboxG1" class="css-checkbox" />
+                <label for="checkboxG1" class="css-label"></label>
+       		</span>
+        </td>
+        <td><span class="tdbg">Opsatt ukeplan og ing�tte avtaler f�lges</span></td>
+        <td><span class="tdbg">01/09-2014</span></td>
+        <td><span class="tdbg">14/12-2014</span></td>
+      </tr><?php */?>
+</table>
+</div>
+<div class="mtodroplist1">
+<div class="mtodroplist11">
+    <span class="KITINRDLISTWSPAN">
+    	<select>
+        	<option value="" style=" font-weight:bold;"><?php echo $this->translate('Select %s %s',$this->translate('Type of Action'),$this->translate('Here!'));?></option>
+            <option value="0"><?php echo $this->translate('Change');?></option>
+            <option value="1"><?php echo $this->translate('%s %s',$this->translate('Archive'),$this->translate('Goal'));?></option>
+            <option value="2"><?php echo $this->translate('Delete %s(s)',$this->translate('Goal'));?></option>
+        </select> 
+    </span>  	
+</div>
+</div>
+<div class="mtodroplist2">
+	<div class="CANCELB"><a class="leggtilrada" id="client_maal_add"><?php echo $this->translate('Add %s(s)',$this->translate('Row'));?></a></div>
+	<?php /*?><div class="leggtilrad"><a class="LAGREBA2" href="#"><?php echo $this->translate('Create');?></a></div><?php */?>
+	<div class="OPPRETTB"><input type="submit" class="OPPRETTBA" value="<?php echo $this->translate('Create');?>"></div>
+</div>
+
+<script language="javascript" type="text/javascript">
+$("#client_maal_add").unbind("click").click(function () { 
+
+    $("#client_maal_table").each(function () {
+       
+        var tds = "";
+		tds += '<tr><td class="TSLRTDNUMBER bgwhite"><span class="tdbg" style="width: 20px;"><label for="" class="css-label"></label></span></td><td class="nonecls"><span class="tdbg"><input type="text" name="maalIds1" id="maalIds1" data-validation="required" /></span></td><td class="nonecls"><span class="tdbg"><input type="text" name="fromDates" data-validation="required"  id="fromDates" class="DyndatepickerImage width70"/></span></td><td class="nonecls"><span class="tdbg"><input type="text" name="toDates" id="toDates" class="DyndatepickerImage width70" data-validation="required" /></span></td></tr>';
+
+        if ($('tbody', this).length > 0) {
+            $('tbody', this).append(tds);
+        } else {
+            $(this).append(tds);
+        }
+		$(".DyndatepickerImage").datepicker(Mtg.Config.Datepicker);
+	});
+		
+});
+</script>
+</form>

@@ -1,0 +1,53 @@
+<?php $format = KD::getModel('core/format');?>
+<form name="userArchiveList" id="userArchiveList" action="" method="post">
+<table width="100%" border="0" cellspacing="4" cellpadding="0">
+  <tr class="CURNONPOINTER">
+	<th class="TSLRTDNUMBER">
+	<span class="tdbg2">
+		<input type="checkbox" name="checkbox_all1" id="checkbox_all1" class="css-checkbox" data-form="userArchiveList" />
+		<label for="checkbox_all1" class="css-label"></label>
+	</span>
+	</td>
+	<th class="TSLRTDCENTER"><?php echo $this->translate('Name');?></th>	
+	<?php /*?><th class="TSLRTDCENTER"><?php echo $this->translate('ID');?></th><?php */?>	
+	<th class="TSLRTDCENTER"><?php echo $this->translate('Role');?></th>	
+	<th class="TSLRTDCENTER"><?php echo $this->translate('Department');?></th>	
+	<th class="TSLRTDCENTER"><?php echo $this->translate('Mobile');?></th>
+	<th class="TSLRTDCENTER"><?php echo $this->translate('Email');?></th>
+  </tr>
+
+<?php 
+if(count($this->userArchiveCollection)>0):
+foreach($this->userArchiveCollection as $user): ?>
+<?php $id = $user['user_id']; ?>
+  <tr>
+	<td class="TSLRTDNUMBER">
+		<span class="tdbg" style="width: 20px;">
+		<input type="checkbox" name="<?php echo 'checkbox_'.$id;?>" id="<?php echo 'checkbox_'.$id;?>" class="css-checkbox" />
+		<label for="<?php echo 'checkbox_'.$id;?>" class="css-label"></label>
+		</span>
+	</td>
+	<td><span class="tdbg"><a href="<?php echo $this->getUrl('user/info/index/id/'.$id,null,false,false);?>"><?php echo $format->FormatName($user['user_fname'],$user['user_mname'],$user['user_lname']); ?></a></span></td>	
+	<td><span class="tdbg"><?php echo $this->translate(ucfirst($user['role_name'])); ?></span></td>
+	<td><span class="tdbg"><?php echo $user['dept_name'] ?></span></td>
+	<td><span class="tdbg"><?php echo $user['user_mobile'] ?></span></td>
+	<td><span class="tdbg"><?php echo $user['user_email'] ?></span></td>
+  </tr>
+
+<?php endforeach; 
+endif;?>
+<?php echo $this->paginationControl($this->userArchiveCollection, 'Sliding', 'control.phtml', array('page'=>'pageUA','tab'=>'tab2'));?>
+</table>
+<div class="listdroplist">
+	<?php echo $this->translate('Select').' '.$this->translate('Type of Action');?>
+	<div class="KITINRDLISTW">
+		<span class="KITINRDLISTWSPAN">
+			<select name="selAction" class="onSelectAction" data-form="userArchiveList">
+				<option ><?php echo $this->translate('Select').' '.$this->translate('Type of Action').' '.$this->translate('Here!');?></option>
+				<option value="<?php echo $this->getUrl('user/index/restore');?>"><?php echo $this->translate('Restore');?></option>
+				<option value="<?php echo $this->getUrl('user/index/delete');?>"><?php echo $this->translate('Delete');?></option>
+			</select> 
+		</span>  	
+	</div>
+</div>
+</form>

@@ -1,0 +1,20 @@
+<div class="tablebg">
+   <div style="display: block; padding:0 10px" id="tab1">
+  	<?php echo $this->partial('info/tabsArchive/vakArchiveSecurityReport.phtml',array('vaktrapInfo'=>$this->vaktrapInfo,'maalCollection'=>$this->maalCollection,'instTiltakCollection'=>$this->instTiltakCollection,'vakGovTiltakCollection'=>$this->vakGovTiltakCollection,'observationCollection'=>$this->observationCollection,'observationResCollection'=>$this->observationResCollection,'vakGovTiltakNextCollection'=>$this->vakGovTiltakNextCollection,'instTiltakNextCollection'=>$this->instTiltakNextCollection,'initString'=>$this->initString));?>
+   </div>
+   <div style="display: block; padding: 0px 10px;" id="tab2">
+    <?php echo $this->partial('info/tabsArchive/vakArchiveForce.phtml');?>               
+   </div>
+   <?php /*?><div style="display: block; padding: 0px 10px;" id="tab3">
+    <?php echo $this->partial('info/tabsArchive/vakArchiveAvvik.phtml');?> 
+   </div><?php */?>
+   <div style="display: block; padding: 0px 10px;" id="tab3">
+    <?php echo $this->partial('info/tabsArchive/vakArchiveLog.phtml', array('logArchive' => $this->logArchive));?>
+   </div>
+   <div style="display: block; padding: 0px 10px;" id="tab4">
+    <?php echo $this->partial('info/tabsArchive/vakArchiveMedicinePlan.phtml');?>                 
+   </div>
+   <div style="display: block; padding: 0px 10px;" id="tab5">
+	<?php  echo $this->partial('info/tabsArchive/vakArchiveWeekPlan.phtml',array('weekplanCollection'=>$this->weekplanCollection));?> 
+   </div>
+</div>

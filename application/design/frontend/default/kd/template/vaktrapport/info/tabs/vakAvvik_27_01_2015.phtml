@@ -1,0 +1,138 @@
+<?php
+$format = KD::getModel('core/format');
+?>
+<div class="PSUBTCWRAPPER">
+	<div class="PSUBTCLEFT">
+    	<?php echo $this->translate('Avvik');?>
+    </div>
+</div>
+
+<div class="CLEARBBORDER"></div>
+<form name="frmClientLogg" id="frmClientLogg" method="post" action="<?php echo $this->getUrl("vaktrapport/info/savedeviation/id/".$this->deviationInfo['patientId']);?>">
+  <input type="hidden" name="deviation_vaktrapID" value="<?php echo $this->deviationInfo['vaktrapId'];?>" />
+  <input type="hidden" name="deviation_patientID" value="<?php echo $this->deviationInfo['patientId'];?>" />
+  <input type="hidden" name="deviation_deptID" value="<?php echo $this->vaktrapInfo['vaktrap_deptID'];?>" />
+  <input type="hidden" name="deviation_id" value="<?php echo (isset($this->deviationInfo['deviation_id']) && $this->deviationInfo['deviation_id']>0)?$this->deviationInfo['deviation_id']:0;?>" />
+  <?php
+  $format = KD::getModel('core/format');
+
+  $logg_type =  (isset($this->deviationInfo['deviation_type']) && $this->deviationInfo['deviation_type']!='')?$this->deviationInfo['deviation_type']:'';
+  $logg_desc =  (isset($this->deviationInfo['deviation_desc']) && $this->deviationInfo['deviation_desc']!='')?$this->deviationInfo['deviation_desc']:'';
+  $correct_deviation =  (isset($this->deviationInfo['correct_deviation']) && $this->deviationInfo['correct_deviation']!='')?$this->deviationInfo['correct_deviation']:'';
+  $deviation_proposed_measures =  (isset($this->deviationInfo['deviation_proposed_measures']) && $this->deviationInfo['deviation_proposed_measures']!='')?$this->deviationInfo['deviation_proposed_measures']:'';
+  $decided_proposed_measures =  (isset($this->deviationInfo['deviation_decided_measures']) && $this->deviationInfo['deviation_decided_measures']!='')?$this->deviationInfo['deviation_decided_measures']:'';
+  $logg_modifyUserID =  (isset($this->deviationInfo['modified_by']) && $this->deviationInfo['modified_by']!='')?$this->deviationInfo['modified_by']:0;
+  $logg_createUserID =  (isset($this->deviationInfo['created_by']) && $this->deviationInfo['created_by']!='')?$this->deviationInfo['created_by']:0;
+  $deviation_type=isset($this->deviationInfo['deviation_type'])?$this->deviationInfo['deviation_type']:"";
+  $deviation_status="Ny";
+  if(isset($this->deviationInfo['deviation_status'])){
+    if($this->deviationInfo['deviation_status'])
+      $deviation_status="Pågående";
+    else
+      $deviation_status="Ny";
+  }
+  $userId = 0;
+  if(isset($logg_modifyUserID) && $logg_modifyUserID>0)
+  {
+    $userId = $logg_modifyUserID;
+    $dateTime = $this->deviationInfo['date_of_modification'];
+  }
+  elseif(isset($logg_createUserID) && $logg_createUserID>0)
+  {
+    $userId = $logg_createUserID;
+    $dateTime = $this->deviationInfo['date_of_creation'];
+  }
+
+  ?>
+
+<div class="VVGBG">
+<table width="100%" border="0">
+  <tr>
+    <th width="19%"><?php echo $this->translate('Department');?></th>
+    <th width="19%"><?php echo $this->translate('Name');?></th>
+    <th width="19%"><?php echo $this->translate('Status');?></th>
+    <th width="19%"><?php echo $this->translate('Select %s',$this->translate('Avvik Type'));?></th>
+    <th width="19%"><?php echo $this->translate('Avvik No');?></th>
+  </tr>
+  <tr>
+    <td><span class="tdbg"><?php echo $format->FormatName($this->vaktrapInfo['dept_name']);?></span></td>
+    <td><span class="tdbg">
+    <?php echo $format->FormatName($this->vaktrapInfo['patient_fname'],$this->vaktrapInfo['patient_mname'],$this->vaktrapInfo['patient_lname']);?>
+
+    </span></td>
+    <td><span class="tdbg"><?php echo $deviation_status;?></span></td>
+    <td>
+    	<span class="tdbg96p">
+             <select name="deviation_type">
+               <option value="" style=" font-weight:bold;"><?php echo $this->translate('Select %s',$this->translate('Avvik Type Here!'));?></option>
+               <option value="M" <?php if($deviation_type=="M"){?> selected <?php }?>><?php echo $this->translate('Youngsters');?></option>
+               <option value="P" <?php if($deviation_type=="P"){?> selected <?php }?>><?php echo $this->translate('%s %s',$this->translate('Others'),$this->translate('Avvik'));?></option>
+        	</select>
+        </span>
+    </td>
+    <td><span class="tdbg">Utogenerate avvik nr +1</span></td>
+  </tr>
+</table>
+</div>
+<div class="CLEARBBORDER2"></div>
+<div class="VVGBG">
+<table width="100%" border="0">
+  <tr>
+    <th><?php echo $this->translate('%s Deviation',$this->translate('Describe'));?></th>
+  </tr>
+  <tr>
+    <td><span class="tdbg1c"><textarea name="deviation_desc" data-error-message="Avvik beskrivelse er påkrevd" data-validation="required" onkeyup="textAreaAdjust(this)" style="overflow:hidden;width: 100%; border: none; height:auto;"><?php echo $logg_desc;?></textarea></span></td>
+  </tr>
+  <tr>
+    <th class="TABLESPACET"><?php echo $this->translate('%s Deviation',$this->translate('What is done to rectify'));?></th>
+  </tr>
+  <tr>
+    <td><span class="tdbg1c"><textarea name="correct_deviation" data-error-message="Riktig avvik beskrivelse er påkrevd" data-validation="required" onkeyup="textAreaAdjust(this)" style="overflow:hidden;width: 100%; border: none; height:auto;"><?php echo $correct_deviation;?></textarea></span></td>
+  </tr>
+  <tr>
+    <th class="TABLESPACET"><?php echo $this->translate('%s Measure',$this->translate('Proposed Corrective'));?></th>
+  </tr>
+  <tr>
+    <td><span class="tdbg1c"><textarea name="deviation_proposed_measures" data-error-message="Forslag Korrigerende beskrivelse er påkrevd" data-validation="required" onkeyup="textAreaAdjust(this)" style="overflow:hidden;width: 100%; border: none; height:auto;"><?php echo $deviation_proposed_measures;?></textarea></span></td>
+  </tr>
+  <tr>
+    <th class="TABLESPACET"><?php echo $this->translate('%s Measure',$this->translate('Decided Corrective'));?></th>
+  </tr>
+  <tr>
+    <td><span class="tdbg1c"><textarea name="deviation_decided_measures" data-error-message="Besluttet Korrigerende beskrivelse er påkrevd" data-validation="required" onkeyup="textAreaAdjust(this)" style="overflow:hidden;width: 100%; border: none; height:auto;"><?php echo $decided_proposed_measures;?></textarea></span></td>
+  </tr>
+</table>
+</div>
+<div class="CLEARBBORDER2"></div>
+<div class="VVGBG">
+<table width="100%" border="0">
+  <tr>
+    <th><?php echo $this->translate('Signature');?></th>
+    <th><?php echo $this->translate('Date');?></th>
+  </tr>
+  <tr>
+    <td><span class="tdbg1c" style="min-height: 20px"><?php echo (isset($userId) && $userId>0)?KD::getModel('user/user')->getUser($userId):'';?></span></td>
+    <td><span class="tdbg1c" style="min-height: 20px">
+		<?php
+        if(isset($dateTime) && $dateTime!='')
+        {
+          echo $format->FormatDate($dateTime);
+          $dateTime = new DateTime($dateTime);
+          echo':'.$dateTime->format('h-m-s');
+        }
+        else
+        {
+          echo '';
+        }
+        ?>
+		</span>
+    </td>
+  </tr>
+</table>
+</div>
+<div class="CLEARBBORDER2"></div>
+
+  <div class="LAGREB"><input type="submit" name="save_deviation" id="save_deviation" class="LAGREBA" value="<?php echo $this->translate('Save');?>"/></div>
+  
+  <div class="OPPRETTB"><input type="submit" name="lock_deviation" id="lock_deviation" class="OPPRETTBA" value="<?php echo $this->translate('Lock and Archives avvik');?>"/></div>
+</form>

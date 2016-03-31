@@ -1,0 +1,64 @@
+<?php $format = KD::getModel('core/format'); ?>
+
+<form name="frmClientEditMaal" id="frmClientEditMaal" method="post" action="<?php echo $this->getUrl("client/mto/create/pid/" . $this->clientID); ?>">
+    <input type="hidden" name="patient_id" id="patient_id" value="<?php echo $this->clientID;?>"/>
+    <input type="hidden" name="redirectUrl" value="<?php echo $this->redirectUrl; ?>">
+    <table width="100%" border="0" cellspacing="4" cellpadding="0" id="clientGovTiltakTbl">
+        <tr class="CURNONPOINTER">
+            <th class="TSLRTDCENTER" width="20%"><?php echo $this->translate('Owner');?></th>
+            <th class="TSLRTDCENTER" width="20%"><?php echo $this->translate('Goal');?></th>
+            <th class="TSLRTDCENTER" width="30%"><?php echo $this->translate('Løpende tiltak');?></th>
+            <th class="TSLRTDCENTER" width="15%"><?php echo $this->translate('From Date');?></th>
+            <th class="TSLRTDCENTER" width="15%"><?php echo $this->translate('To Date');?></th>
+        </tr>
+
+        <tr>
+            <td class="nonecls">
+                <span class="tdbg VVTAC">
+                    <div>
+                        <span>
+                            <?php echo $this->translate('A');?><input type="radio" id="tilgovowner-1" value="A" name="tilgovowner" data-validation="radio"/>
+                            <label for="tilgovowner-1"><span></span></label>
+                        </span>
+                        <span>
+                            <?php echo $this->translate('U');?><input type="radio" data-validation="radio" value="U" id="tilgovowner-2" name="tilgovowner" />
+                            <label for="tilgovowner-2"><span></span></label>
+                        </span>
+                        <span>
+                            <?php echo $this->translate('M');?><input type="radio" data-validation="radio" value="M" id="tilgovowner-3" name="tilgovowner" />
+                            <label for="tilgovowner-3"><span></span></label>
+                        </span>
+                    </div>
+                </span>
+            </td>
+            <td class="nonecls">
+                <span class="tdbg" >
+                    <select name="goalId" id="maalIds[]" data-validation="required">
+                        <option value=""><?php echo $this->translate('Select %s %s',$this->translate('Goal'),$this->translate('Here!'));?></option>
+                        <?php foreach($this->maalCollection as $maal):?>
+                            <option value="<?php echo $maal['maal_id'];?>"><?php echo $maal['maal_desc'];?></option>
+                        <?php endforeach;?>
+                    </select>
+                </span>
+            </td>
+            <td class="nonecls">
+                <span class="tdbg">
+                    <input type="text" name="description" id="tilgovDescs[]" data-validation="required" class="width96" />
+                </span>
+            </td>
+            <td class="nonecls">
+                <span class="tdbg">
+                    <input type="text" name="from-date" data-validation="required"  id="fromDates" class="DyndatepickerImage width60"/>
+                </span>
+            </td>
+            <td class="nonecls">
+                <span class="tdbg">
+                    <input type="text" name="to-date" data-validation="required"  id="toDates" class="DyndatepickerImage width60"/>
+                </span>
+            </td>
+        </tr>
+    </table>
+    <div class="mtodroplist2">
+        <div class="OPPRETTB"><input type="submit" class="OPPRETTBA" value="<?php echo $this->translate('Save');?>"/></div>
+    </div>
+</form>

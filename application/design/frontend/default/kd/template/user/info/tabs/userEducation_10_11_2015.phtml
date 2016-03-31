@@ -1,0 +1,26 @@
+<div class="PSUBTCWRAPPER">
+	<div class="PSUBTCLEFT">
+    	<?php echo $this->translate('Education');?>
+    </div>
+</div>
+<div class="CLEARBBORDER"></div>
+<form name="frmUpdateUserEducation" id="frmUpdateUserEducation" method="post" action="<?php echo $this->getUrl("user/info/index");?>">
+<input type="hidden" name="user_id" value="<?php echo $this->userCollection['user_id'] ?>" >
+<input type="hidden" name="user_code" value="<?php echo $this->userCollection['user_code'] ?>" >
+<div class="KKI2C">
+        <table width="100%" border="0" cellspacing="4" cellpadding="0">
+            
+            <tr>
+                <td><span class="tdbg1c">
+                        <textarea onkeyup="textAreaAdjust(this)"  name="user_education" id="user_education" style="overflow:hidden;width: 100%; border: none; height:auto;" data-validation="required"><?php echo $this->userCollection['user_education'] ?></textarea>
+                    </span>
+                </td>
+            </tr>
+		</table> 
+    </div>
+
+
+<div class="CANCELB"><a class="CANCELBA" href="#"><?php echo $this->translate('Cancel');?></a></div>
+<?php /*?><div class="LAGREB2"><a class="LAGREBA2" href="#"><?php echo $this->translate('Save');?></a></div><?php */?>
+<div class="OPPRETTB"><input type="submit" class="OPPRETTBA" value="<?php echo $this->translate('Save');?>"></div>
+</form>	

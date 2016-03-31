@@ -1,0 +1,63 @@
+<?php $format = KD::getModel('core/format');?>
+<div class="VVGBG VV2IN1C2">
+<div class="printvisibeltitel">
+<div class="PSUBTCLEFTH26">Møter gjennomført i perioden</div>
+
+</div>
+<table width="100%" border="0" id="clientMeetingTbl">
+  <tr>
+    <th style="width:150px;"><?php echo $this->translate('Date');?></th>
+    <th><?php echo $this->translate('Meeting with whom?');?></th>
+  </tr>
+  <?php foreach($this->loggM as $loggm):?>
+  <tr>
+    <td class="nonecls1 width15"><span class="tdbg"><?php echo $format->FormatDate($loggm['logg_locked_at']);?></span></td>
+    <td class="nonecls1 width80"><span class="tdbg1c"><?php echo $loggm['logg_desc'];?></span></td>
+  </tr>
+   <?php endforeach;?>
+  <?php foreach($this->maalPlanMeeting as $meeting):?>
+  <tr>
+    <td class="nonecls1 width15"><span class="tdbg"><input type="text" name="maalplanmeeting[<?php echo $meeting['maalplan_other_id'];?>][maalplan_other_meetingDate]" readonly value="<?php echo $format->FormatDate($meeting['maalplan_other_meetingDate']);?>" class="DyndatepickerImage width70 validation"></span></td>
+    <td class="nonecls1 width80"><span class="tdbg1c"><textarea onkeyup="textAreaAdjust(this)" name="maalplanmeeting[<?php echo $meeting['maalplan_other_id'];?>][maalplan_other_meetingDesc]" style="overflow:hidden; width: 100%; border: none; height:auto;" class="validation"><?php echo $meeting['maalplan_other_meetingDesc'];?></textarea></span></td>
+  </tr>
+<?php /*?>  
+  <tr>
+    <td class="bgwhite"><span class="tdbg"><input type="text" value="03/07-2014"></span></td>
+    <td>
+    <span class="tdbg1c">
+    	<textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden; width: 100%; border: none; height:auto;"></textarea>
+    </span>
+    </td>
+  </tr><?php */?>
+  <?php endforeach;?>
+</table>
+	<div class="mtodroplist2">
+		<div class="CANCELB"><a class="leggtilrada" id="clientAddMeeting" data-val="1"><?php echo $this->translate('Add %s(s)',$this->translate('Row'));?></a></div>
+	</div>
+</div>
+<div class="printvisibeltitel">
+<div class="CLEARBBORDER2"></div>
+</div>
+<script language="javascript" type="text/javascript">
+// Code For adding New Raw to For add new element
+$("#clientAddMeeting").unbind("click").click(function () { 
+
+	var id = $(this).data('val');
+    $("#clientMeetingTbl").each(function () {
+       
+        var tds = "";
+		tds += '<tr><td class="nonecls1  width15"><span class="tdbg"><input type="text" name="meeting[maalplan_other_meetingDate][]" readonly id="maalplan_other_meetingDate'+id+'" class="DyndatepickerImage width70 validation"/></span></td><td class="nonecls1 width80"><span class="tdbg1c"><textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden; width: 100%; border: none; height:auto;" name="meeting[maalplan_other_meetingDesc][]" id="maalplan_other_meetingDesc'+id+'" class="validation"></textarea></span></td></tr>';
+
+        if ($('tbody', this).length > 0) {
+            $('tbody', this).append(tds);
+        } else {
+            $(this).append(tds);
+        }
+		
+		$(".DyndatepickerImage").datepicker(Mtg.Config.Datepicker);
+	});
+	$(this).data('val',id+1);
+		
+});
+
+</script>

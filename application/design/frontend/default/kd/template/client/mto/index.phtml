@@ -1,0 +1,27 @@
+<?php if(!$this->isAjax):?>
+<div class="tablebg">
+  <div style="display: block; padding:0 10px" id="tab1">
+	<?php //$clientInfoArray = $this->clientInfo;echo $this->partial('info/tabs/clientInfo.phtml',array('clientInfo'=>$clientInfoArray));?>
+  </div>
+  <div style="display: block; padding: 0px 10px;" id="tab2">
+	<?php //echo $this->partial('info/tabs/clientReports.phtml');?>
+  </div>
+  <div style="display: block; padding:0 10px" id="tab3">
+    <?php //echo $this->partial('info/tabs/clientScoreCard.phtml');?>
+  </div>
+  <div style="display: block; padding:0 10px" id="tab4">
+    <?php //echo $this->partial('info/tabs/clientMapping.phtml');?>
+  </div>
+  <div style="display: block; padding:0 10px" id="tab5">
+    <?php //echo $this->partial('info/tabs/clientStatistic.phtml');?>
+  </div>
+  <div style="display: block; padding:0 10px" id="tab6">
+<?php endif;?>
+    <?php echo $this->partial('mto/tabs/clientMaal.phtml',array('clientID'=>$this->id,'isAjax'=>$this->isAjax,'defaultTabs'=>$this->defaultTabs,'maalCollection'=>$this->maalCollection,'maalArchiveCollection'=>$this->maalArchiveCollection,'maalAchivedCollection'=>$this->maalAchivedCollection));?>
+<?php if(!$this->isAjax):?>
+  </div>
+  <div style="display: block; padding:0 10px" id="tab7">
+    <?php //echo $this->partial('info/tabs/clientHMS.phtml');?>
+  </div>
+</div>
+<?php endif;?>

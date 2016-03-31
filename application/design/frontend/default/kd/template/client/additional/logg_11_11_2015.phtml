@@ -1,0 +1,133 @@
+<?php $format = KD::getModel('core/format');?>
+<ul id="tabs1">
+	<li class="INACTIVTAB"><a href="#" name="tab11"><div class="ACTIVETLZI TLZI"><?php echo $this->translate('Meeting Log');?></div></a></li>
+	<li class="INACTIVTAB"><a href="#" name="tab12"><div class="ACTIVETLZI TLZI"><?php echo $this->translate('Phone Log');?></div></a></li>
+	<li class="INACTIVTAB"><a href="#" name="tab13"><div class="ACTIVETLZI TLZI"><?php echo $this->translate('Others');?></div></a></li>
+</ul>
+<div id="content1">
+	<div class="tablebg">
+		<div style="display: block; padding:0 10px" id="tab11">
+			<table cellpadding="4" cellspacing="0" border="0" width="100%">
+			  <tr>
+			    <th width="5%"><?php echo $this->translate('Sr No');?></th>
+				<th width="15%"><?php echo $this->translate('Lock Date');?></th>
+				<th width="55%"><?php echo $this->translate('Description');?></th>
+				<th width="25%"><?php echo $this->translate('Create By');?></th>
+			  </tr>
+			<?php  $cnt = 0; foreach($this->loggM as $loggM): $cnt++;?>
+			  <tr>
+			    <td><?php echo $cnt;?></td>
+				<td><span class="dialog-ajax1" data-url="<?php echo $this->getUrl('client/additional/showlogg/id/'.$loggM['logg_id']);?>" data-title="<?php echo 'Logg'; ?>"><?php echo $format->FormatDate($loggM['logg_locked_at']);?></span></td>
+				<td><span class="dialog-ajax1" data-url="<?php echo $this->getUrl('client/additional/showlogg/id/'.$loggM['logg_id']);?>" data-title="<?php echo 'Logg'; ?>"><?php echo $loggM['logg_desc'];?></span></td>
+				<td><?php echo KD::getModel('user/user')->getUser($loggM['logg_userID']);?></td>
+			  </tr>
+			<?php endforeach;?>
+			</table>
+		</div>
+		<div style="display: block; padding:0 10px" id="tab12">
+			<table cellpadding="4" cellspacing="0" border="0" width="100%">
+			  <tr>
+			    <th width="5%"><?php echo $this->translate('Sr No');?></th>
+				<th width="15%"><?php echo $this->translate('Lock Date');?></th>
+				<th width="55%"><?php echo $this->translate('Description');?></th>
+				<th width="25%"><?php echo $this->translate('Description');?></th>
+			  </tr>
+			<?php  $cnt = 0; foreach($this->loggP as $loggP): $cnt++;?>
+			  <tr>
+			    <td><?php echo $cnt;?></td>
+				<td><span class="dialog-ajax1" data-url="<?php echo $this->getUrl('client/additional/showlogg/id/'.$loggP['logg_id']);?>" data-title="<?php echo 'Logg'; ?>"><?php echo $format->FormatDate($loggP['logg_locked_at']);?></span></td>
+				<td><span class="dialog-ajax1" data-url="<?php echo $this->getUrl('client/additional/showlogg/id/'.$loggP['logg_id']);?>" data-title="<?php echo 'Logg'; ?>"><?php echo $loggP['logg_desc'];?></span></td>
+				<td><?php echo KD::getModel('user/user')->getUser($loggP['logg_locked_by']);?></td>
+			  </tr>
+			<?php endforeach;?>
+			</table>
+		</div>
+		<div style="display: block; padding:0 10px" id="tab13">
+			<table cellpadding="4" cellspacing="0" border="0" width="100%">
+			  <tr>
+			    <th width="5%"><?php echo $this->translate('Sr No');?></th>
+				<th width="15%"><?php echo $this->translate('Lock Date');?></th>
+				<th width="55%"><?php echo $this->translate('Description');?></th>
+				<th width="25%"><?php echo $this->translate('Description');?></th>
+			  </tr>
+			<?php  $cnt = 0; foreach($this->loggO as $loggO): $cnt++;?>
+			  <tr>
+			    <td><?php echo $cnt;?></td>
+				<td><span class="dialog-ajax1" data-url="<?php echo $this->getUrl('client/additional/showlogg/id/'.$loggO['logg_id']);?>" data-title="<?php echo 'Logg'; ?>"><?php echo $format->FormatDate($loggO['logg_locked_at']);?></span></td>
+				<td><span class="dialog-ajax1" data-url="<?php echo $this->getUrl('client/additional/showlogg/id/'.$loggO['logg_id']);?>" data-title="<?php echo 'Logg'; ?>"><?php echo $loggO['logg_desc'];?></span></td>
+				<td><?php echo KD::getModel('user/user')->getUser($loggO['logg_locked_by']);?></td>
+			  </tr>
+			<?php endforeach;?>
+			</table>
+		</div>
+	</div>
+</div>
+<script src="<?php echo $this->getMediaUrl('ajax-load-custom.js','js');?>" language="javascript" type="text/javascript"></script>
+<script language="javascript" type="text/javascript">
+	$("#content1").find("[id^='tab']").hide();
+	$("#tabs1 li").attr("id",""); //Reset id's
+	$("#content").find("[name^='tab11']").parent().attr("id","current1");
+	$("#content #tab11").fadeIn();
+	
+	$('#tabs1 a').click(function(e) {
+        e.preventDefault();
+        if ($(this).closest("li").attr("id") == "current1"){ //detection for current tab
+         return;       
+        }
+        else{             
+          $("#content1").find("[id^='tab']").hide(); // Hide all content
+          $("#tabs1 li").attr("id",""); //Reset id's
+          $(this).parent().attr("id","current1"); // Activate this
+          $('#' + $(this).attr('name')).fadeIn(); // Show content for the current tab
+        }
+    });
+	$(document).ready(function(){
+		$('.dialog-ajax1').unbind("click").click(function(){   
+			var tag = $("<div></div>"); //This tag will the hold the dialog content.
+			var url = $(this).data('url');
+			var title = $(this).data('title');
+			$.ajax({
+			  url: $(this).data('url'),
+			  type: 'GET',
+			  beforeSend: function() {$("#loading-image").show();},
+			  error: function() { alert('Could not load form') },
+			  success: function(data, textStatus, jqXHR) {
+				if(typeof data == "object" && data.html) { //response is assumed to be JSON
+				  tag.html(data.html).dialog({modal:true, title: title}).dialog('open');
+				} else { //response is assumed to be HTML
+//					var t='<div id="PTCWRAPPER">'
+//						+'<div id="PTCLEFTVAKTRAPORT"> Vaktrapport for klient: Prøve Dukke </div>'
+//						+'<div id="PTCRIGHT">'
+//						+'<a id="doPrint" class="PRINTBUTTON" title="Print" href="#"></a>'
+//						+'</div>'
+//						+'</div>';
+				  tag.html(data).dialog({modal: true, title: title, height: 'auto', width:800, hide: "scale", show : "scale",
+						open: function (event, ui) {
+							var startDate = $(".DyndatepickerImage1");
+							startDate.unbind();
+							startDate.datepicker(Mtg.Config.Datepicker);
+							$.validate({
+								form : '#frmClientEditMaal', 
+								validateOnBlur : false,
+								borderColorOnError : '#C90312',
+								addValidClassOnAll : true,
+								showHelpOnFocus : false,
+								addSuggestions : false,
+								errorMessagePosition : 'top',
+								scrollToTopOnError : true
+							});
+							$("#loading-image").hide();
+						},
+						close: function (event, ui) {
+							$('input.DyndatepickerImage1').datepicker("destroy");
+							$(this).dialog("destroy");
+							$(this).remove();
+						}
+					}).dialog('open');
+					
+				}
+			  }
+			});
+		  });	  
+	});
+</script>

@@ -1,0 +1,44 @@
+	<?php $pageLabel = ''; if(isset($this->page) && $this->page!=''): $pageLabel = $this->page;endif;?>
+	<?php //$tab = $this->defaultTab;/*$tab = '1'; if(isset($this->t) && $this->t!=''): $tab = $this->t;endif;*/?>
+	<?php $tabs = '1'; if(isset($this->tt) && $this->tt!=''): $tabs = $this->tt;endif;?>
+	<?php 	$url_array = array();
+			$url_array['isAjax'] = NULL;
+			//$url_array['t'] = $tab;
+			$url_array['tt'] = $tabs;?>
+	<?php 	if ($this->pageCount): ?>
+    <!-- First page link -->
+    <?php if (isset($this->previous)): $url_array[$pageLabel] = $this->first;?>
+      <a href="<?php echo $this->url($url_array); ?>">
+        Første side
+      </a> |
+    <?php else: ?>
+      <span class="disabled">Første side</span> |
+    <?php endif; ?>
+     
+    <!-- Previous page link -->
+    <?php if (isset($this->previous)): $url_array[$pageLabel] = $this->previous;?>
+      <a href="<?php echo $this->url($url_array); ?>">
+        &lt; Forrige side
+      </a> |
+    <?php else: ?>
+      <span class="disabled">&lt; Forrige side</span> |
+    <?php endif; ?>
+     
+    <!-- Next page link -->
+    <?php if (isset($this->next)): $url_array[$pageLabel] = $this->next;?>
+      <a href="<?php echo $this->url($url_array); ?>">
+        Neste side &gt;
+      </a> |
+    <?php else: ?>
+      <span class="disabled">Neste side &gt;</span> |
+    <?php endif; ?>
+     
+    <!-- Last page link -->
+    <?php if (isset($this->next)): $url_array[$pageLabel] = $this->last;?>
+      <a href="<?php echo $this->url($url_array); ?>">
+        Siste side
+      </a>
+    <?php else: ?>
+      <span class="disabled">Siste side</span>
+    <?php endif; ?>
+    <?php endif; ?>

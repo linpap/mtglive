@@ -1,0 +1,189 @@
+<?php $format = KD::getModel('core/format');?>
+<div class="PSUBTCLEFTH2"><?php echo $this->translate('Medicine Plan');?></div>
+
+<form name="frmClientMedicinePlan" id="frmClientMedicinePlan" method="post" action="<?php echo $this->getUrl("client/medicine/createpost/id/".$this->clientID);?>">
+<input type="hidden" id="medicine_patientID" name="medicine_patientID" value="<?php echo $this->clientID;?>" />
+<input type="hidden" id="medicineID" name="medicineID" value="<?php echo (isset($this->medicinCollection['medicine_id']) && $this->medicinCollection['medicine_id']>0)?$this->medicinCollection['medicine_id']:0;?>" />
+<div class="PSUBTCWRAPPER floatleft width98">
+	<div class="VVGBG VV2IN1C2 floatleft">
+	  <div class="width20 floatleft" style="line-height: 40px;">
+		<div class="floatleft"><?php echo $this->translate('From Date');?></div>
+		<span class="tdbg888p floatleft marginleft20 width60" style="margin-top:5px;">
+			<?php if(isset($this->medicinCollection['medicine_end_date']) && $this->medicinCollection['medicine_end_date']>0): $startDate = $this->medicinCollection['medicine_start_date'];?>
+				<input type="text" readonly data-toSetId="medicine_to_date" data-validation="required" value="<?php echo $format->FormatDate($this->medicinCollection['medicine_start_date']);?>" name="medicine_from_date" id="medicine_from_date" />
+			<?php else:?>
+			
+				<input type="text" readonly data-toSetId="medicine_to_date" data-validation="required" class="datepickerWeekImage width70" name="medicine_from_date" id="medicine_from_date" />
+			<?php endif;?>
+		</span>
+	  </div>
+	  <div class="width20 floatleft marginleft20" style="line-height: 40px;">
+		<div class="floatleft"><?php echo $this->translate('To Date');?></div>
+		<span class="tdbg888p floatleft width60 marginleft20" style="margin-top:5px;">
+			<?php if(isset($this->medicinCollection['medicine_end_date']) && $this->medicinCollection['medicine_end_date']>0):?>
+			  <input type="text" disabled="disabled" data-toSetId="" name="medicine_to_date" value="<?php echo $format->FormatDate($this->medicinCollection['medicine_end_date']);?>" data-validation="required" id="medicine_to_date" />
+			<?php else:?>
+			  <input type="text" disabled="disabled" data-toSetId="" name="medicine_to_date" data-validation="required" id="medicine_to_date" />
+			<?php endif;?>
+		</span>
+	  </div>
+	</div>
+</div>
+<?php $weekDays = array(0=>'mon',1=>'tue',2=>'wed',3=>'thu',4=>'fri',5=>'sat',6=>'sun');?>
+<?php 
+$weekArray 	= array();
+$week = '';
+if(isset($startDate) && $startDate != '' && (strpos($startDate,'0000')===false))
+{
+	foreach($weekDays as $counter=>$day)
+	{
+		$medicineDateObj = new DateTime($startDate);
+		$medicineDateObj->add(new DateInterval('P'.$counter.'D'));
+		$medicineDate = $medicineDateObj->format("Y-m-d");
+		$medicineDay = $this->translate($medicineDateObj->format("l"));
+		$medicineDate = $format->FormatDate($medicineDate);
+		$weekArray[$day] = array('date'=>$medicineDate,'day'=>$medicineDay);
+	}
+	$week = $medicineDateObj->format("W");
+}
+else
+{
+	$days = array(0=>$this->translate('Monday'),1=>$this->translate('Tuesday'),2=>$this->translate('Wednesday'),3=>$this->translate('Thursday'),4=>$this->translate('Friday'),5=>$this->translate('Saturday'),6=>$this->translate('Sunday'));
+	foreach($weekDays as $counter=>$day)
+	{
+		$weekArray[$day] = array('date'=>$days[$counter],'day'=>'');	
+	}
+	$week = '';
+}
+?>
+<table width="100%" border="0" cellspacing="4" cellpadding="0" id="clientEditMaalTbl">
+  <tr class="CURNONPOINTER">
+	<th class="TSLRTDCENTER" width="20%"><?php echo $this->translate('Week & year');?></th>
+	<th class="TSLRTDCENTER" width="48%"><?php echo $this->translate('Medicine Name');?></th>
+	<th class="TSLRTDCENTER" width="16%"><?php echo $this->translate('No. of Medicine');?></th>
+	<th class="TSLRTDCENTER" width="16%"><?php echo $this->translate('Take Time');?></th>
+  </tr>
+  <?php
+  foreach($weekDays as $counter=>$day) 
+  {
+  ?>
+  <tr>
+    <td class="valign"><span class="width70 floatleft" id="duration<?php echo ($counter+1);?>"><?php echo $weekArray[$day]['day'];?><br /><span id="day<?php echo ($counter+1);?>"><?php echo $weekArray[$day]['date'];?></span><br /><?php echo $this->translate('Week No.');?><span id="week<?php echo ($counter+1);?>"><?php echo $week;?></span></span><span class="width25 floatright"><span class="medicine_add" data-day="<?php echo $day;?>"></span></span></td>
+	<td colspan="3">
+		<table cellpadding="0" cellspacing="5" border="0" width="100%" id="medicine_table_<?php echo $day;?>">
+		<?php if(isset($this->medicineDetailCollection[$day]) && count($this->medicineDetailCollection[$day])>0):?>
+		<?php foreach($this->medicineDetailCollection[$day] as $medicineDetail):?>
+		  <tr>
+			<td class="nonecls" width="60%"><span class="tdbg"><input class="width98" data-validation="required" name="medicine_<?php echo $medicineDetail['med_det_id'];?>" value="<?php echo $medicineDetail['med_det_name'];?>"/></td>
+			<td class="nonecls" width="20%"><span class="tdbg">
+				<select data-validation="required" class="width98" name="medicine_no_<?php echo $medicineDetail['med_det_id'];?>">
+					<?php for($i=1;$i<=10;$i++):?>
+					<option value="<?php echo $i;?>" <?php echo ($medicineDetail['med_det_nos']==$i)?'selected="selected"':'';?>><?php echo $i;?></option>
+					<?php endfor;?>
+				</select></span>
+			</td>
+			<td class="nonecls" width="20%"><span class="tdbg"><input type="text" data-validation="required" name="medicine_time_<?php echo $medicineDetail['med_det_id'];?>" value="<?php echo $medicineDetail['med_det_time'];?>" class="timepicker width95" /></span></td>
+		  </tr>
+		<?php endforeach;?>
+		<?php endif;?>
+		</table>
+	</td>
+  </tr>
+  <?php 
+  }
+  ?>
+</table>
+	<div class="OPPRETTB"><input type="submit" class="OPPRETTBA" value="<?php echo $this->translate('Save');?>"/></div>
+<?php if(isset($this->medicinCollection['medicine_id']) && $this->medicinCollection['medicine_id']>0):?>
+	<div class="OPPRETTB floatleft marginleft20"><span class="dialog-ajax addmedicine" data-url="<?php echo $this->getUrl('client/medicine/copymedicine/isAjax/1/id/'.$this->clientID.'/mdid/'.$this->medicinCollection['medicine_id']);?>" data-title="<?php echo $this->translate('Copy %s',$this->translate('Midicine Plan'));?>"><?php echo $this->translate('Copy %s',$this->translate('Midicine Plan'));?></span></div>
+<?php endif;?>
+
+<script language="javascript" type="text/javascript">
+$(document).ready(function(){
+	$(".datepickerWeekImage").datepicker({weekHeader: 'W', showWeek: true, firstDay: 1, dateFormat:'<?php echo $format->getDateFormatJS();?>',showOtherMonths: true,selectOtherMonths: true,showOn: "button",buttonImage: "<?php echo $this->getMediaUrl('timg/calendar_event_box_ico.png');?>", showOtherMonths: true,selectOtherMonths: true,buttonImageOnly: true,changeMonth: true,changeYear: true,
+		beforeShowDay:function(date){
+			return [date.getDay() == 1, ''];
+		},
+		onClose: function() {
+			if($(this).attr('data-toSetId'))
+			{
+				var fromDate = $(this).datepicker( "getDate");
+				var dateFormat = $(this).datepicker("option","dateFormat");
+				var week = $.datepicker.iso8601Week(fromDate);
+				fromDate.setDate(fromDate.getDate());
+				$('#day1').text($.datepicker.formatDate(dateFormat, fromDate));
+				$('#week1').text(week);
+				for(var i=2;i<=7;i++)
+				{
+					fromDate.setDate(fromDate.getDate()+1);
+					$('#day'+i).text($.datepicker.formatDate(dateFormat, fromDate));
+					$('#week'+i).text(week);
+				}
+				var targetId = '#'+$(this).attr('data-toSetId');
+				$(targetId).val($.datepicker.formatDate(dateFormat, fromDate));
+			}			
+		}
+	});
+	$('.dialogBox').unbind().click(function(){   
+		var boxID = $(this).attr('data-boxID');
+		if(typeof(boxID) != "undefined" && boxID !== null && boxID.length>0)
+		{
+			var tag = $("#"+boxID); //This tag will the hold the dialog content.
+			tag.dialog({modal: true, title: 'Copy Medicine Plan', height: 200, width:800, hide: "scale", show : "scale",/*buttons: {
+						"Save": function () {
+							// Manually submit the form                       
+							var form = $('#frmCopyMedicinePlan');
+							alert(form.attr('action'));
+							$(form).submit();
+						},
+						"Cancel": function () { $(this).dialog('close'); }
+					},*/close: function (event, ui) {
+						$('input.DyndatepickerImage1').datepicker("destroy");
+						$(this).dialog("destroy");
+						$(this).remove();
+					}}).dialog('open');
+		}
+		else
+		{
+			alert('Dialog Id not Set');
+		}
+	  });
+	$(".medicine_add").unbind().click(function () { 
+		var day = $(this).attr('data-day');
+		$("#medicine_table_"+day).each(function () {
+			var tds = '';
+			
+			tds += '<tr><td class="nonecls" width="60%"><span class="tdbg"><input class="width98" name="'+day+'[med_det_medicine][]" value=""/></td>';
+			tds += '<td class="nonecls" width="20%"><span class="tdbg"><select class="width98" name="'+day+'[med_det_nos][]">';
+			for(i=1;i<=10;i++)
+			{
+				tds += '<option value="'+i+'">'+i+'</option>';
+			}
+			tds += '</select></span></td>'
+			tds += '<td class="nonecls" width="20%"><span class="tdbg"><input type="text" name="'+day+'[med_det_time][]" class="timepicker width95" /></span></td><tr>';
+
+			if ($('tbody', this).length > 0) {
+				$('tbody', this).append(tds);
+			} else {
+				$(this).append(tds);
+			}
+		});
+		$('.timepicker').timepicker({'scrollDefault': 'now','timeFormat': 'H:i','step': 15 });
+	});
+	// Code For Validation of form
+	$.validate({
+		form : '#frmClientMedicinePlan', 
+		validateOnBlur : false,
+		borderColorOnError : '#C90312',
+		addValidClassOnAll : true,
+		showHelpOnFocus : false,
+		addSuggestions : false,
+		errorMessagePosition : 'top',
+		scrollToTopOnError : true
+	});
+	
+});
+</script>
+<?php if($this->isAjax):?>   
+<script src="<?php echo $this->getMediaUrl('ajax-load-custom.js','js');?>" language="javascript" type="text/javascript"></script>
+<?php endif;?>

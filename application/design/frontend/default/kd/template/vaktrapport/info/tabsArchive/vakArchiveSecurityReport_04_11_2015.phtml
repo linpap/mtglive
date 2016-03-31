@@ -1,0 +1,443 @@
+<?php $format = KD::getModel('core/format');
+	$vaktrapFromDate = $this->vaktrapInfo['vaktrap_from_date'];
+	$vaktrapToDate = $this->vaktrapInfo['vaktrap_to_date'];
+	if(!empty($this->vaktrapInfo['vaktrap_counters']))
+	{
+		$vaktrapCounters = unserialize($this->vaktrapInfo['vaktrap_counters']);
+	}
+	else
+	{
+		$vaktrapCounters = array('gov'=>0,'ins'=>0,'force'=>0,'medicine'=>0,'logg'=>0,'avvik'=>0);
+	}
+?>
+<?php $minVak = new DateTime($vaktrapFromDate);?>
+<?php $maxVak = new DateTime($vaktrapFromDate);$maxVak = $maxVak->add(new DateInterval('P6D'));?>
+<div class="PSUBTCWRAPPER">
+	<div class="PSUBTCLEFT vaklh">
+    <?php echo $this->translate('Security Report');?>
+    <div class="tcontentmenu">
+	    <a href="<?php echo $this->getUrl('client/report/index/id/'.$this->vaktrapInfo['vaktrap_patientID']);?>" class="vslkap" >
+        	<?php echo $this->translate('Arkiv');?>
+        </a>
+    	<a href="<?php echo $this->getUrl('client/info/index/id/'.$this->vaktrapInfo['vaktrap_patientID']);?>" class="vslkip">
+        	<?php echo $this->translate('Klient info side');?>
+        </a>
+		
+		<?php  if($this->vaktrapInfo['previousLink'] != "") {?>
+		<a href="<?php echo $this->getUrl($this->vaktrapInfo['previousLink']); ?>" class="vslkip"><?php echo $this->translate('Next Report');?></a>
+		<?php }?>
+		<?php if($this->vaktrapInfo['nextLink'] != "") {?>
+		<a href="<?php echo $this->getUrl($this->vaktrapInfo['nextLink']); ?>" class="vslkip"><?php echo $this->translate('Previous Report');?></a>
+		 <?php } ?>
+    </div>
+    </div>
+</div>
+<div class="CLEARBBORDER"></div>
+<div id="section1">
+<div class="VVGBG VV2IN1C2 floatleft">
+<table width="100%" border="0">
+  <tr>
+    <th class="th12p"><?php echo $this->translate('Security Report Period From');?></th>
+    <th class="th12p"><?php echo $this->translate('Security Report Period To');?></th>
+    <th class="th25p"><?php echo $this->translate('Current Client');?></th>
+    <th class="th25p"><?php echo $this->translate('Legal Placement');?></th>
+    <th class="th25p"><?php echo $this->translate('User');?></th>
+  </tr>
+  <tr>
+    <td width="15%"><span class="tdbg"><?php echo $format->FormatDate($vaktrapFromDate); ?></span></td>
+    <td width="15%"><span class="tdbg"><?php echo $format->FormatDate($vaktrapToDate); ?></span></td>
+    <td width="25%"><a href="<?php echo $this->getUrl('client/info/index/id/'.$this->vaktrapInfo['vaktrap_patientID']);?>"><span class="tdbg"><?php echo $format->FormatName($this->vaktrapInfo['patient_fname'],$this->vaktrapInfo['patient_mname'],$this->vaktrapInfo['patient_lname']);?></span></a></td>
+    <td width="20%"><span class="tdbg"><?php echo $this->vaktrapInfo['patient_legal'];?></span></td>
+    <td width="20%">
+    	<a href="<?php echo $this->getUrl('user/info/index/id/'.$this->vaktrapInfo['vaktrap_userID']);?>">
+        	<span class="tdbg"><?php echo $format->FormatName($this->vaktrapInfo['user_fname'],$this->vaktrapInfo['user_mname'],$this->vaktrapInfo['user_lname']);?></span>
+    	</a>
+    </td>
+  </tr>
+</table>
+</div>
+<div class="CLEARBBORDER2"></div>
+<div class="VVGBG VV2IN1C2">
+<table width="100%" border="0">
+  <tr>
+    <th class="th50p"><?php echo $this->translate('Checklist');?></th>
+    <th class="th50p"></th>
+  </tr>
+  <tr>
+    <td><span class="tdbg">Tiltaksplan datert</span></td>
+    <td>
+    	<span class="tdbg" style="width:50% !important"><span><?php echo $format->FormatDate($this->vaktrapInfo['vaktrap_tilspan_from_date']); ?></span></span>
+        <span class="tdbg right" style="width:49% !important"><span><?php echo $format->FormatDate($this->vaktrapInfo['vaktrap_tilspan_to_date']);?></span></span>
+    </td>
+  </tr>
+  <tr>
+    <td><span class="tdbg">Målstyringsplan</span></td>
+    <td>
+		<span class="tdbg" style="width:50% !important"><span><?php echo $format->FormatDate($this->vaktrapInfo['vaktrap_maalpan_from_date']); ?></span></span>
+		<span class="tdbg right" style="width:49% !important"><span><?php echo $format->FormatDate($this->vaktrapInfo['vaktrap_maalpan_to_date']); ?></span></span>
+	</td>
+  </tr>
+  <tr>
+    <td><span class="tdbg">Tvangsvedtak registrert i vaktperioden</span></td>
+    <td><span class="tdbg"><?php echo isset($vaktrapCounters['force'])?$vaktrapCounters['force']:0;?></span></td>
+  </tr>
+  <tr>
+    <td><span class="tdbg">Logg registret i vaktperioden</span></td>
+    <td><span class="tdbg"><?php echo isset($vaktrapCounters['logg'])?$vaktrapCounters['logg']:0;?></span></td>
+  </tr>
+  <tr>
+    <td><span class="tdbg">Medisiner som gjenstår å bli utgitt til klient</span></td>
+    <td><span class="tdbg"><?php echo isset($vaktrapCounters['medicine'])?$vaktrapCounters['medicine']:0;?></span></td>
+  </tr>
+  <tr>
+    <td><span class="tdbg">Antall Tiltak som er tatt i brukt i vaktrapporten</span></td>
+    <td><span class="tdbg"><?php echo (isset($vaktrapCounters['gov'])?$vaktrapCounters['gov']:0) + (isset($vaktrapCounters['ins'])?$vaktrapCounters['ins']:0);?></span></td>
+</table>
+</div>
+<div class="CLEARBBORDER2"></div>
+<div class="VVGBG VV2IN1C2">
+<table width="100%" border="0">
+  <tr>
+    <th class="th2p">A )</th>
+    <th class="th95p"><?php echo $this->translate('Measure from scorecard plan');?></th>
+  </tr>
+  <?php 
+  foreach($this->maalCollection as $maal):
+  ?>
+  <tr>
+    <td class="bgwhite"><span class="tdbg71p"><?php echo $maal['counter'];?></span></td>
+    <td><span class="tdbg"><?php echo $maal['maal_desc'];?></span></td>
+  </tr>
+  <?php endforeach;?>
+</table>
+</div>
+<div class="CLEARBBORDER2"></div>
+<div class="VVGBG VV2IN1C2">
+<table width="100%" border="0">
+  <tr>
+    <th class="th2p">B )</th>
+    <th class="th66p"><?php echo $this->translate('Ongoing Measure');?>( <?php echo $this->translate('measures over time');?> )</th>
+    <th class="th10p"><?php echo $this->translate('Gjennomført');?></th>
+    <th class="th10p"><?php echo $this->translate('Delvis gjennomført');?></th>
+    <th class="th10p"><?php echo $this->translate('Ikke gjennomført');?></th>
+  </tr>
+  <?php $explainGovs = array();
+  		foreach($this->vakGovTiltakCollection as $maalId=>$vakGovTiltaks):?>
+	  <?php if(count($this->vakGovTiltakCollection[$maalId])>0):?>
+	  <tr><td class="head-content"><?php echo $this->maalCollection[$maalId]['counter'];?></td><td colspan="4" class="head-content"><?php echo $this->maalCollection[$maalId]['maal_desc'];?></td></tr>
+		<?php foreach($vakGovTiltaks as $cnt=>$vakGovTiltak):
+			$explainGovs[] = array('id' => $vakGovTiltak['vaktrap_tilgov_id'], 'explanation' => $vakGovTiltak['vaktrap_tilgov_explanation'], 'result' => $vakGovTiltak['vaktrap_tilgov_result'], 'no' => $this->maalCollection[$maalId]['counter'].'.'.($cnt+1));?>
+		  <tr>
+			<td class="bgwhite"><span class="tdbg71p"><?php echo $this->maalCollection[$maalId]['counter'].'.'.($cnt+1);?></span></td>
+			<td><span class="tdbg"><?php echo $vakGovTiltak['vaktrap_tilgov_desc'];?></span></td>
+			<td><span class="tdbg VVTAC"><div><input type="radio" id="vakGovTiltak2[<?php echo $vakGovTiltak['vaktrap_tilgov_id'];?>]" name="vakGovTiltakRes[<?php echo $vakGovTiltak['vaktrap_tilgov_id'];?>]" <?php echo ($vakGovTiltak['vaktrap_tilgov_result']=='2')?'checked="checked"':'';?> value="2" class="disabled" disabled="disabled" data-explaination="govExplainID<?php echo $vakGovTiltak['vaktrap_tilgov_id'];?>" /><label for="vakGovTiltak2[<?php echo $vakGovTiltak['vaktrap_tilgov_id'];?>]"><span></span></label></div></span></td>
+			<td><span class="tdbg VVTAC"><div><input type="radio" id="vakGovTiltak1[<?php echo $vakGovTiltak['vaktrap_tilgov_id'];?>]" name="vakGovTiltakRes[<?php echo $vakGovTiltak['vaktrap_tilgov_id'];?>]" <?php echo ($vakGovTiltak['vaktrap_tilgov_result']=='1')?'checked="checked"':'';?> value="1" class="disabled" disabled="disabled"data-explaination="govExplainID<?php echo $vakGovTiltak['vaktrap_tilgov_id'];?>" /><label for="vakGovTiltak1[<?php echo $vakGovTiltak['vaktrap_tilgov_id'];?>]"><span></span></label></div></span></td>
+			<td><span class="tdbg VVTAC"><div><input type="radio" id="vakGovTiltak0[<?php echo $vakGovTiltak['vaktrap_tilgov_id'];?>]" name="vakGovTiltakRes[<?php echo $vakGovTiltak['vaktrap_tilgov_id'];?>]" <?php echo ($vakGovTiltak['vaktrap_tilgov_result']=='0')?'checked="checked"':'';?> value="0" class="disabled" disabled="disabled"data-explaination="govExplainID<?php echo $vakGovTiltak['vaktrap_tilgov_id'];?>" /><label for="vakGovTiltak0[<?php echo $vakGovTiltak['vaktrap_tilgov_id'];?>]"><span></span></label></div></span></td>
+			
+			<?php /*?><td><span class="tdbg VVTAC"><div><input type="radio" id="tk31" name="tk" /><label for="tk31"><span></span></label></div></span></td>
+			<td><span class="tdbg VVTAC"><div><input type="radio" id="tk32" name="tk" /><label for="tk32"><span></span></label></div></span></td>
+			<td><span class="tdbg VVTAC"><div><input type="radio" id="tk33" name="tk" /><label for="tk33"><span></span></label></div></span></td><?php */?>
+		  </tr>
+		<?php endforeach;?>
+  	<?php endif;?>
+  <?php endforeach;?>
+</table>
+<div class="CLEARBBORDER2"></div>
+<div class="margintop">
+<table width="100%" border="0">
+  <tr>
+    <th class="th3p">B.1 )</th>
+    <th class="th97p"><?php echo $this->translate('Årsak til at tiltakene bare er delvis eller ikke gjennomført');?></th>
+  </tr>
+    <?php
+	foreach ($explainGovs as $explainGov):
+		if ($explainGov['result']==2 || is_null($explainGov['result'])) {$show_hide = 'style="display:none"';$required='data-validation=""';}
+		else {$show_hide = '';$required = 'data-validation="required"';}
+	?>
+	<tr id="govExplainID<?php echo $explainGov['id'];?>" <?php echo $show_hide;?>>
+		<td class="bgwhite"><span class="tdbg71p"><?php echo $explainGov['no'];?></span></td>
+		<td class="bgwhite"><span class="tdbg1c"><?php echo isset($explainGov['explanation'])?$explainGov['explanation']:'';?></span></td>
+    </tr>
+	<?php 
+	endforeach;
+	?> 
+</table>
+</div>
+</div>
+<div class="CLEARBBORDER2"></div>
+<div class="VVGBG VV2IN1C2">
+<table width="100%" border="0">
+  <tr>
+    <th class="th2p">C )</th>
+	<th class="th66p"><?php echo $this->translate('Short Measure');?></th>
+    <th class="th10p"><?php echo $this->translate('Gjennomført');?></th>
+    <th class="th10p"><?php echo $this->translate('Delvis djennomført');?></th>
+    <th class="th10p"><?php echo $this->translate('Ikke gjennomført');?></th>
+  </tr>
+  <?php 
+  	$explainInsts = array();
+  	foreach($this->instTiltakCollection as $maalId=>$instTiltaks):?>
+	  <?php if(count($this->instTiltakCollection[$maalId])>0):?>
+	  <tr><td class="head-content"><?php echo $this->maalCollection[$maalId]['counter'];?></td><td colspan="4" class="head-content"><?php echo $this->maalCollection[$maalId]['maal_desc'];?></td></tr>
+		<?php foreach($instTiltaks as $cnt=>$instTiltak):
+			$explainInsts[] = array('id' => $instTiltak['tilins_id'], 'explanation' => $instTiltak['tilins_explanation'], 'result' => $instTiltak['tilins_result'], 'no' => $this->maalCollection[$maalId]['counter'].'.'.($cnt+1));?>
+		  <tr>
+			<td class="bgwhite"><span class="tdbg71p"><?php echo $this->maalCollection[$maalId]['counter'].'.'.($cnt+1);?></span></td>
+			<td class="bgwhite"><span class="tdbg"><?php echo $instTiltak['tilins_desc'];?></span></td>
+			<td class="bgwhite"><span class="tdbg VVTAC"><div><input type="radio" id="vakInsTiltak2[<?php echo $instTiltak['tilins_id'];?>]" name="vakInsTiltakRes[<?php echo $instTiltak['tilins_id'];?>]" data-explaination="instExplainID<?php echo $instTiltak['tilins_id'];?>" <?php echo ($instTiltak['tilins_result']=='2')?'checked="checked"':'';?>  value="2" class="disable" disabled="disabled" /><label for="vakInsTiltak2[<?php echo $instTiltak['tilins_id'];?>]"><span></span></label></div></span></td>
+			<td class="bgwhite"><span class="tdbg VVTAC"><div><input type="radio" id="vakInsTiltak1[<?php echo $instTiltak['tilins_id'];?>]" name="vakInsTiltakRes[<?php echo $instTiltak['tilins_id'];?>]" data-explaination="instExplainID<?php echo $instTiltak['tilins_id'];?>" <?php echo ($instTiltak['tilins_result']=='1')?'checked="checked"':'';?>  value="1" class="disable" disabled="disabled" /><label for="vakInsTiltak1[<?php echo $instTiltak['tilins_id'];?>]"><span></span></label></div></span></td>
+			<td class="bgwhite"><span class="tdbg VVTAC"><div><input type="radio" id="vakInsTiltak0[<?php echo $instTiltak['tilins_id'];?>]" name="vakInsTiltakRes[<?php echo $instTiltak['tilins_id'];?>]" data-explaination="instExplainID<?php echo $instTiltak['tilins_id'];?>" <?php echo ($instTiltak['tilins_result']=='0')?'checked="checked"':'';?>  value="0" class="disable" disabled="disabled" /><label for="vakInsTiltak0[<?php echo $instTiltak['tilins_id'];?>]"><span></span></label></div></span></td>
+		  </tr>
+		<?php endforeach;?>
+  	<?php endif;?>
+  <?php endforeach;?>
+</table>
+<div class="CLEARBBORDER2"></div>
+<div class="margintop">
+<table width="100%" border="0">
+  <tr>
+    <th class="th3p">C.1 )</th>
+    <th class="th97p"><?php echo $this->translate('Årsak til at tiltakene bare er delvis eller ikke gjennomført');?></th>
+  </tr>
+   <?php
+	foreach ($explainInsts as $explainInst):
+		if ($explainInst['result']==2 || is_null($explainInst['result'])) {$show_hide = 'style="display:none"';$required='data-validation=""';}
+		else {$show_hide = '';$required = 'data-validation="required"';}
+	?>
+	<tr id="instExplainID<?php echo $explainInst['id'];?>" <?php echo $show_hide;?>>
+		<td class="bgwhite"><span class="tdbg71p"><?php echo $explainInst['no'];?></span></td>
+		<td><span class="tdbg1c"><?php echo isset($explainInst['explanation'])?$explainInst['explanation']:'';?></span></td>
+    </tr>
+	<?php 
+	endforeach;
+	?> 
+</table>
+</div>
+</div>
+<div class="CLEARBBORDER2"></div>
+
+
+
+<div class="VVGBG VV2IN1C2">
+<table width="100%" border="0">
+  <tr>
+	<?php
+	$vaktrapFromDate = $this->vaktrapInfo['vaktrap_from_date'];
+	$vaktrapToDate = $this->vaktrapInfo['vaktrap_to_date'];
+	$begin = new DateTime($vaktrapFromDate);
+	$endcheck = new DateTime($vaktrapToDate);
+	$hideObservation = false;
+	$difference = $endcheck->diff($begin)->format("%a");
+	if(isset($vaktrapToDate) && $vaktrapToDate!='' && (strpos($vaktrapToDate,'0000')===false) && $difference<=7)
+	{
+		$end = new DateTime($vaktrapToDate);
+	}
+	else
+	{
+		$end = clone $begin;
+		$end->add(new DateInterval('P6D'));
+		$hideObservation = true;
+	}
+	$end = $end->modify( '+1 day' );
+	$interval = new DateInterval('P1D');
+	$daterange = new DatePeriod($begin, $interval ,$end);
+	?>
+	<th class="th2p">D )</th>
+	<th class="<?php echo (!$hideObservation)?'th76p':'th50p';?>">Tall på observasjoner, jf.mål (EKS, utagering, selvskading, manglende oppmøte skole)</th>
+	<?php
+	if(!$hideObservation)
+	{
+		foreach($daterange as $date){
+			echo '<th class="th2p">'.substr($date->format("D"),0,1).'<br />'.$date->format("d").'</th>';
+		}
+	}
+	else
+	{
+		echo '<th style="width:50%;color:#ff0000"><span class="width100">Please Select Vaktrapport To Date And save after that it will active Or your to date is more than 7 days</span></th>';
+	}
+	?>
+  </tr>
+  <?php 
+  foreach($this->observationCollection as $observationID => $observation):
+	$observationID = $observation['observation_id'];
+  ?>
+  <tr>
+	<td class="bgwhite"><span class="tdbg71p">1</span></td>
+	<td><span class="tdbg"><?php echo $observation['observation_desc'];?></span></td>
+	<?php if(!$hideObservation)
+	{
+		$observationResult = $this->observationResCollection;
+		$obserCnt = 1;
+		$observationResDates = array();
+		foreach($daterange as $date):
+			$obj = isset($observationResult[$observationID][$date->format('y-m-d')])?$observationResult[$observationID][$date->format('y-m-d')]:false;
+			
+			if(isset($observationResult[$observationID]) && $obj && count($observationResult[$observationID])>0):
+		?>
+			<td  class="bgwhite"><span class="tdbg" style="width: 20px;"><input type="checkbox" disabled="disabled" name="observation[<?php echo $observationID;?>][<?php echo $obj['vaktrap_obser_id'];?>]" id="observation[<?php echo $observationID;?>][<?php echo $obj['vaktrap_obser_id'];?>]" <?php echo ($obj['vaktrap_obser_res']==1)?'checked="checked"':'';?> class="css-checkbox" /><label for="observation[<?php echo $observationID;?>][<?php echo $obj['vaktrap_obser_id'];?>]" class="css-label"></label></span></td>
+		<?php 
+			else:
+		?>
+			<td  class="bgwhite"><span class="tdbg" style="width: 20px;"><input type="checkbox" disabled="disabled" name="observationNew[<?php echo $observationID;?>][<?php echo $obserCnt;?>]" id="observationNew[<?php echo $observationID;?>][<?php echo $obserCnt;?>]" class="css-checkbox"  value="<?php echo $date->format('y-m-d');?>"/><label for="observationNew[<?php echo $observationID;?>][<?php echo $obserCnt;?>]"class="css-label"></label></span></td>
+		<?php endif;
+			$obserCnt++;
+		endforeach;
+		
+	}
+	else
+	{
+		echo '<td class="width50"><span class="width100"></span></td>';
+	}?>
+  </tr>
+  <?php endforeach;?>
+</table>
+</div>
+<div class="CLEARBBORDER2"></div>
+<div class="KKI2C">
+	<table width="100%" border="0" cellspacing="4" cellpadding="0">
+		<tr>
+			<th class="noborder">E ) Beskriv kort fremgang i behandlingen</th>
+		</tr>
+		<tr>
+			<td><span class="tdbg1c"><?php echo $this->vaktrapInfo['vaktrap_fremgang'];?></span></td>
+		</tr>
+	</table> 
+</div>
+<div class="CLEARBBORDER2"></div>
+<div class="KKI2C">
+	<table width="100%" border="0" cellspacing="4" cellpadding="0">
+		<tr>
+			<th class="noborder">F ) Helt spesielle hendelser i perioden</th>
+		</tr>
+		<tr>
+			<td><span class="tdbg1c"><?php echo $this->vaktrapInfo['vaktrap_hendelser'];?></span></td>
+		</tr>
+	</table> 
+</div>
+<div class="CLEARBBORDER2"></div>
+<div class="KKI2C">
+	<table width="100%" border="0">
+	  <tr>
+		<th>G.1 )&nbsp;&nbsp;&nbsp;Årsaksforklaring</th>
+	  </tr>
+	  <tr>
+		<td><span class="tdbg1c"><?php echo $this->vaktrapInfo['vaktrap_aarsak'];?></span></td>
+	  </tr>
+	</table>
+</div>
+<div class="CLEARBBORDER2"></div>
+<div class="KKI2C">
+	<form id="frmEditGEnogram" method="post">
+		<input type="hidden" name="pasientId" id="pasientId" value="<?php echo $this->clientID; ?>" />
+		<textarea id="mySavedModel" style="width:100%;height:300px;display:none;">	
+			<?php echo $this->initString;?>
+		</textarea>
+		<div id="sample">
+		  <div style="width:100%; white-space:nowrap;">
+		  
+			<!----- File Open and Close Code ---->
+			<div id="PaletteAndDiagram" style="position: relative; width: 100%;">
+				<?php /*?><div id="sideBar" style="width:100%; min-height: 140px; text-align:center;padding:0px 0px;">
+					<div class="wrapperPR">
+						<div class="handle">Palett:</div>
+						<div id="myPalette" style="width: 100%; min-height: 70px"></div>
+					</div>
+
+				</div><?php */?>
+				<div id="myDiagram" style="position: relative; border: solid 3px #E6E6E6; width:99%; max-height:550px; min-height:350px; padding:0px 0px; background-color:white; border-radius:3px;"></div>
+				<div id="customTextEditor" style="width: 85px; height: 15px; border: 1px solid black; background-color: white; visibility: visible;">
+				</div>
+			</div>
+		
+			<div id="openDocument" class="draggable" style="visibility:hidden">
+			  <div id="openDraggableHandle" class="handle">Open File</div>
+			  <div id="openText" class="elementText">Choose file to open...</div>
+			  <select id="mySavedFiles" class="mySavedFiles" ></select>
+			  <br />
+			  <button id="openBtn" class="elementBtn" type="button" onClick="load()" style="margin-left:70px">Open</button>
+			  <button id="cancelBtn"class="elementBtn" type="button" onClick="closeElement()" >Cancel</button>
+			</div>
+		
+			<div id="removeDocument" class="draggable" style="visibility:hidden">
+				<div id="removeDraggableHandle" class="handle">Delete File</div>
+				<div id="removeText" class="elementText">Choose file to remove...</div>
+				<select id="mySavedFiles2" class="mySavedFiles" ></select>
+				<br />
+				<button id="removeBtn" class="elementBtn" type="button" onClick="removeFile()" style="margin-left:70px">Remove</button>
+				<button id="cancelBtn2"class="elementBtn" type="button" onClick="closeElement()">Cancel</button>
+			</div>
+		  </div>
+		  <?php /*?><div class="LAGREB2" style="margin-top:0px;"><a class="LAGREBA2" href="#" onClick="saveDocument()" ><?php echo $this->translate('Save');?></a></div><?php */?>
+		</div>
+		<div class="clearBoth"></div>
+	</form>
+</div>
+<?php if(isset($this->vaktrapInfo['vaktrap_merknader']) && $this->vaktrapInfo['vaktrap_merknader']!=''):?>
+<div class="CLEARBBORDER2"></div>
+<div class="KKI2C">
+	<table width="100%" border="0">
+	  <tr>
+		<th>H) Merknader til rapporten</th>
+	  </tr>
+	  <tr>
+		<td><span class="tdbg1c"><?php echo $this->vaktrapInfo['vaktrap_merknader'];?></span></td>
+	  </tr>
+	</table>
+</div>
+<?php endif;?>
+<div class="CLEARBBORDER2"></div>
+<div class="VVGBG VV2IN1C2">
+	<table width="100%" border="0">
+	  <tr>
+		<th class="th3p">I )</th>
+		<th class="th97p"><?php echo $this->translate('Løpende tiltak for neste skift. (Gamle tiltak byttes ut når oppnådd eller vurdert)');?></th>
+	  </tr>
+		<?php
+		$countGov = 1;
+		foreach ($this->vakGovTiltakNextCollection as $vakGovTiltak):
+		?>
+		<tr>
+			<td class="bgwhite"><span class="tdbg71p"><?php echo $countGov++;?></span></td>
+			<td class="bgwhite"><span class="tdbg1c"><?php echo isset($vakGovTiltak['vaktrap_tilgov_desc'])?$vakGovTiltak['vaktrap_tilgov_desc']:'';?></span></td>
+		</tr>
+		<?php 
+		endforeach;
+		?> 
+	</table>
+</div>
+<div class="CLEARBBORDER2"></div>
+<div class="VVGBG VV2IN1C2">
+	<table width="100%" border="0">
+	  <tr>
+		<th class="th3p">J )</th>
+		<th class="th97p"><?php echo $this->translate('Korttids tiltak for neste skift. (Gamle tiltak byttes ut når oppnådd eller vurdert)');?></th>
+	  </tr>
+		<?php
+		$countIns = 1;
+		foreach ($this->instTiltakNextCollection as $instTiltakNext):
+		?>
+		<tr>
+			<td class="bgwhite"><span class="tdbg71p"><?php echo $countIns++;?></span></td>
+			<td class="bgwhite"><span class="tdbg1c"><?php echo isset($instTiltakNext['tilins_desc'])?$instTiltakNext['tilins_desc']:'';?></span></td>
+		</tr>
+		<?php 
+		endforeach;
+		?> 
+	</table>
+</div>
+
+<div class="CLEARBBORDER2"></div>
+
+    
+<?php /*?><div class="CANCELB"><a class="CANCELBA" href="#"><?php echo $this->translate('Cancel');?></a></div>
+
+<div class="OPPRETTB floatleft marginleft20"><input type="submit" name="save_report" id="save_report" class="OPPRETTBA" value="<?php echo $this->translate('Save');?>"></div>
+<div class="OPPRETTB floatleft marginleft20"><input type="submit" name="new_report" id="new_report" class="OPPRETTBA LAASARKIVERBA" value="<?php echo $this->translate('Lock and Archives Security Report');?>"></div>
+
+<div class="OPPRETTB"><input type="submit" name="freez_report" id="freez_report" class="OPPRETTBA FERDIGBA" value="<?php echo $this->translate('Finished');?>"></div>
+
+
+<div class="vaktraportlastcont">
+	<strong><?php echo $this->translate('Save');?>:</strong> Lagrer alle endringer uten å endre status på rapporten<br /><strong><?php echo $this->translate('Lock and Archives Security Report');?>:</strong> Lagrer alle endringer, avslutter rapport og oppretter ny rapport for neste skift<br /><strong><?php echo $this->translate('Finished');?>:</strong> Lagrer alle endringer og avslutter rapporten. Det opprettes ingen ny rapport.
+</div>
+<?php */?></div>

@@ -1,0 +1,267 @@
+<?php $format = KD::getModel('core/format');?>
+<div id="genogram-container" class="VVGBG">
+        <div>
+    <div class="PSUBTCLEFTH2"><?php echo $this->translate('Genogram');?>
+    	<div class="floatright litenhedtext">
+            <a href="#" onClick="Mtg.Genogram.Fullscreen.display('#genogram-canvas', '<?php echo $this->translate('Mapping Template');?>');" class="fullscreen-btn">
+                <?php echo $this->translate('FullScreen'); ?>
+            </a>
+        </div>
+    </div>
+
+    </div>
+
+	<?php
+
+    echo $this->partial('partials/genogram/editor.phtml', [
+        'clientID' => $this->clientID,
+        'initString' => $this->initString,
+        'editor' => 'relationships',
+
+    ]);
+    ?>
+
+	
+</div>
+<form name="frmEditMapping" id="frmEditMapping" method="post" action="<?php echo $this->getUrl('client/mapping/save/id/'.$this->clientID);?>">
+<input type="hidden" name="client_id" value="<?php echo $this->clientID;?>" />
+<div class="CLEARBBORDER2"></div>
+
+
+    <div class="KKI2C">
+        <table width="100%" border="0" cellspacing="4" cellpadding="0">
+            <tr>
+                <th class="noborder"><div class="PSUBTCLEFTH2">
+<?php echo $this->translate('Reason for placement');?> - <?php echo $this->translate('Description');?>
+
+    </div></th>
+            </tr>
+            <tr>
+                <td><span class="tdbg1c">
+                        <?php echo $this->partial('partials/texteditor.phtml', [
+                            'key' => 'patient_location',
+                            'id'=>'patient_location',
+                            'name' => 'patient_location',
+                            'content' => isset($this->plassering)?$this->plassering:'',
+                            'required' => '',
+                            'error_message' => ''
+                        ]); ?>
+
+                    </span>
+                </td>
+            </tr>
+		</table>
+    </div>
+<div class="CLEARBBORDER2"></div>
+
+
+
+
+
+<div class="KKI2C">
+
+<div class="PSUBTCLEFTH2">
+<?php echo $this->translate('Ønsket resultat av behandlingen');?>
+
+    </div>
+    <div class="KKI2C">
+
+Ønsket resultat bidrar til utformingen av felles mål </div>
+
+<table width="100%" border="0" cellspacing="4" cellpadding="0" id="clientType1Tbl">
+      <tr class="CURNONPOINTER">
+        <th class="TSLRTDNUMBER">
+        <span class="tdbg92pborder padding5" style="width: 20px;">
+                <input type="checkbox" name="checkboxG0" id="checkboxG0" class="css-checkbox" />
+                <label for="checkboxG0" class="css-label"></label>
+       		</span>
+        </th>
+        <th class="TSLRTDCENTER">Akt&oslash;ren</th>
+        <th class="TSLRTDCENTER">&nbsp;&nbsp;&nbsp;Aktørens beskrivelse av ønsket mål med oppholdet</th>
+      </tr>
+	  <?php foreach($this->type1Collection as $type1):?>
+      <tr>
+        <td class="nonecls1" style="width: 20px;  vertical-align: top;">
+        	<span class="tdbg" style="width:70% !important;">
+                <input type="checkbox" name="checkboxG1" id="checkboxG1" class="css-checkbox" />
+                <label for="checkboxG1" class="css-label"></label>
+       		</span>
+        </td>
+       
+        <td class="nonecls1" style="vertical-align: top;"><span class="tdbg1">
+        	<select name="type1[desc1][<?php echo $type1['geno_extra_id'];?>]" id="type1_<?php echo $type1['geno_extra_id'];?>">
+
+            	<option value="Barneverntjenesten" <?php echo ($type1['geno_extra_desc1'] == "Barneverntjenesten") ? "selected" : "";?>>Barneverntjenesten</option>
+            	<option value="Mor" <?php echo ($type1['geno_extra_desc1'] == "Mor") ? "selected" : "";?>>Mor</option>
+                <option value="Far" <?php echo ($type1['geno_extra_desc1'] == "Far") ? "selected" : "";?>>Far</option>
+                <option value="Foresatte" <?php echo ($type1['geno_extra_desc1'] == "Foresatte") ? "selected" : "";?>>Foresatte</option>
+                <option value="Skole" <?php echo ($type1['geno_extra_desc1'] == "Skole") ? "selected" : "";?>>Skole</option>
+                <option value="Individualterapeut" <?php echo ($type1['geno_extra_desc1'] == "Individualterapeut") ? "selected" : "";?>>Individualterapeut</option>
+                <option value="Annen familie" <?php echo ($type1['geno_extra_desc1'] == "Annen familie") ? "selected" : "";?>>Annen familie</option>
+                <option value="Venner" <?php echo ($type1['geno_extra_desc1'] == "Venner") ? "selected" : "";?>>Venner</option>
+                <option value="Andre" <?php echo ($type1['geno_extra_desc1'] == "Andre") ? "selected" : "";?>>Andre</option>
+
+
+                </select></span></td>
+        <td class="nonecls1"><span class="tdbg1"><textarea onkeyup="textAreaAdjust(this)" name="type1[desc2][<?php echo $type1['geno_extra_id'];?>]" data-validation="required" id="type2_<?php echo $type1['geno_extra_id'];?>" style="overflow:hidden;width: 100%; border: none; height:auto;"><?php echo $type1['geno_extra_desc2'];?></textarea></span></td>
+      </tr>
+	  <?php endforeach;?>
+</table>
+
+<div class="mtodroplist2">
+		<div class="CANCELB"><a class="leggtilrada" id="clientType1" data-val="1"><?php echo $this->translate('Add %s(s)',$this->translate('Row'));?></a></div>
+	</div>
+</div>
+<div class="CLEARBBORDER2"></div>
+
+<div class="KKI2C">
+
+<div class="PSUBTCLEFTH2">
+<?php echo $this->translate('Systemets resurser og utfordringer');?>
+
+    </div>
+<div class="KKI2C">
+
+Akøtens beskrivelser av resurser og utfordringer. "Resurser" føres inn i Målstringsplanen. "Utfordringer" bidrar til utforming av nye mål.</div>
+
+
+
+<table width="100%" border="0" cellspacing="4" cellpadding="0" id="clientType2Tbl">
+      <tr class="CURNONPOINTER">
+        <th class="TSLRTDNUMBER">
+        <span class="tdbg92pborder padding5" style="width:20px;">
+                <input type="checkbox" name="checkboxG3" id="checkboxG3" class="css-checkbox" />
+                <label for="checkboxG3" class="css-label"></label>
+       		</span>
+        </th>
+        <th class="TSLRTDCENTER" width="33%">Akt&oslash;ren</th>
+        <th class="TSLRTDCENTER" width="33%">Resurser (styrker)</th>
+        <th class="TSLRTDCENTER" width="33%">Utfordringer (problemer, svakheter)</th>
+      </tr>
+	  <?php foreach($this->type2Collection as $type2):?>
+      <tr>
+        <td class="nonecls1"  style="vertical-align: top; width: 20px;">
+        	<span class="tdbg" style="width:27px !important;">
+                <input type="checkbox" name="checkboxG4" id="checkboxG4" class="css-checkbox" />
+                <label for="checkboxG4" class="css-label"></label>
+       		</span>
+        </td>
+          <td class="nonecls1" style="vertical-align: top;"><span class="tdbg1">
+          <select name="type2[desc3][<?php echo $type2['geno_extra_id'];?>]" id="type3_<?php echo $type2['geno_extra_id'];?>">
+	          <option value="Barneverntjenesten" <?php echo ($type2['geno_extra_desc3'] == "Barneverntjenesten") ? "selected" : "";?>>Barneverntjenesten</option>
+                <option value="Mor" <?php echo ($type2['geno_extra_desc3'] == "Mor") ? "selected" : "";?>>Mor</option>
+                <option value="Far" <?php echo ($type2['geno_extra_desc3'] == "Far") ? "selected" : "";?>>Far</option>
+                <option value="Foresatte" <?php echo ($type2['geno_extra_desc3'] == "Foresatte") ? "selected" : "";?>>Foresatte</option>
+                <option value="Skole" <?php echo ($type2['geno_extra_desc3'] == "Skole") ? "selected" : "";?>>Skole</option>
+                <option value="Individualterapeut" <?php echo ($type2['geno_extra_desc3'] == "Individualterapeut") ? "selected" : "";?>>Individualterapeut</option>
+                <option value="Annen familie" <?php echo ($type2['geno_extra_desc3'] == "Annen familie") ? "selected" : "";?>>Annen familie</option>
+                <option value="Venner" <?php echo ($type2['geno_extra_desc3'] == "Venner") ? "selected" : "";?>>Venner</option>
+                <option value="Andre" <?php echo ($type2['geno_extra_desc3'] == "Andre") ? "selected" : "";?>>Andre</option>
+
+
+            </select></span></td>
+          <td class="nonecls1"><span class="tdbg1"><textarea onkeyup="textAreaAdjust(this)" name="type2[desc4][<?php echo $type2['geno_extra_id'];?>]" id="type4_<?php echo $type2['geno_extra_id'];?>" data-validation="required" style="overflow:hidden;width: 100%; border: none; height:auto;"><?php echo $type2['geno_extra_desc4'];?></textarea></span></td>
+        <td class="nonecls1"><span class="tdbg1"><textarea onkeyup="textAreaAdjust(this)" name="type2[desc5][<?php echo $type2['geno_extra_id'];?>]" id="type5_<?php echo $type2['geno_extra_id'];?>" data-validation="required" style="overflow:hidden;width: 100%; border: none; height:auto;"><?php echo $type2['geno_extra_desc5'];?></textarea></span></td>
+      </tr>
+	  <?php endforeach;?>
+</table>
+
+<div class="mtodroplist2">
+	<div class="CANCELB"><a class="leggtilrada" id="clientType2" data-val="1"><?php echo $this->translate('Add %s(s)',$this->translate('Row'));?></a></div>
+</div>
+</div>
+
+
+
+<div class="OPPRETTB floatright marginleft20"><input type="submit" name="save_maalplan" id="save_maalplan" class="OPPRETTBA" value="<?php echo $this->translate('Save');?>"></div>
+</form>
+<script language="javascript" type="text/javascript">
+    $(document).ready(function() {
+        $('textarea').trigger('keyup');
+    });
+    $('#save_maalplan').on('click', function(e) {
+        saveDocument(function() {
+            $('form#frmEditMapping').submit();
+        });
+    });
+// saves the current floorplan to local storage
+	  function saveDocument(fn) {
+	/*	var genogramStr = myDiagram.model.toJson();
+		var pasientId = $('#pasientId').val();
+		var uploadURL ='<?php echo $this->getUrl('client/mapping/savegenogram');?>'; //Upload URL
+		var extraData ={}; //Extra Data.
+		var formData = new FormData();
+		formData.append('genogram_str', genogramStr);
+		formData.append('patient_id', pasientId);
+		var jqXHR=$.ajax({
+			url: uploadURL,
+			type: "POST",
+			contentType:false,
+			processData: false,
+				cache: false,
+				data: formData,
+				success: function(data){
+					//data = JSON.parse(data);
+                    if(typeof(fn) == 'function') {
+                        return fn(data);
+                    }
+					alert(data);
+				},
+				error:function(data)
+				{
+					//data = JSON.parse(data);
+                    if(typeof(fn) == 'function') {
+                        return fn(data);
+                    }
+					alert(data);
+				},
+				complete: function(msg)
+				{
+				}
+		});
+*/
+	  }
+</script>
+<script language="javascript" type="text/javascript">
+// Code For adding New Raw to For add new element
+$("#clientType1").unbind("click").click(function () {
+
+	var id = $(this).data('val');
+    $("#clientType1Tbl").each(function () {
+
+        var tds = "";
+	
+		tds += '<tr><td class="nonecls1" style="width:20px; vertical-align: top;"><span class="tdbg" style="width:95% !important;"><input type="checkbox" name="checkbox_'+id+'" id="checkbox_'+id+'" class="css-checkbox" /><label for="checkbox_'+id+'" class="css-label"></label></span></td><td class="nonecls1" style="vertical-align: top;"><span class="tdbg1 width97 padding5"><select name="geno[desc1][]" id="geno_desc1_'+id+'"><option value="Mor">Mor</option><option value="Far">Far</option><option value="Skole">Skole</option></select></span></td><td class="nonecls1"><span class="tdbg1 width97 padding5"><textarea onkeyup="textAreaAdjust(this)" name="geno[desc2][]" data-error-message="Aktørens beskrivelse'+id+'  er påkrevd" data-validation="required"  id="geno_desc2_'+id+'" style="overflow:hidden;width: 100%; border: none; height:auto;"></textarea></span></td></tr>';
+        if ($('tbody', this).length > 0) {
+            $('tbody', this).append(tds);
+        } else {
+            $(this).append(tds);
+        }
+
+	});
+	$(this).data('val',id+1);
+
+});
+
+
+$("#clientType2").unbind("click").click(function () {
+
+	var id = $(this).data('val');
+    $("#clientType2Tbl").each(function () {
+
+        var tds = "";
+	
+		tds += '<tr><td class="nonecls1" style="width: 20px; vertical-align: top;"><span class="tdbg" style="width:95% !important;"><input type="checkbox" name="checkbox_'+id+'" id="checkbox_'+id+'" class="css-checkbox" /><label for="checkbox_'+id+'" class="css-label"></label></span></td><td class="nonecls1" style="vertical-align: top;"><span class="tdbg1  width97 padding5"><select name="geno[desc3][]" id="geno_desc3_'+id+'"><option value="Mor">Mor</option><option value="Far">Far</option><option value="Skole">Skole</option></select></span></td><td class="nonecls1"><span class="tdbg1  width97 padding5"><textarea onkeyup="textAreaAdjust(this)" name="geno[desc4][]" id="geno_desc4_'+id+'" data-error-message="Resurser'+id+' er påkrevd"  data-validation="required" style="overflow:hidden;width: 100%; border: none; height:auto;"></textarea></span></td><td class="nonecls1"><span class="tdbg1  width97 padding5"><textarea onkeyup="textAreaAdjust(this)" name="geno[desc5][]" id="geno_desc5_'+id+'" data-error-message="Utfordringer'+id+' er påkrevd"  data-validation="required" style="overflow:hidden;width: 100%; border: none; height:auto;"></textarea></span></td></tr>';
+
+        if ($('tbody', this).length > 0) {
+            $('tbody', this).append(tds);
+        } else {
+            $(this).append(tds);
+        }
+
+	});
+	$(this).data('val',id+1);
+
+});
+
+</script>

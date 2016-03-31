@@ -1,0 +1,28 @@
+<?php $format = KD::getModel('core/format');?>
+<div class="PSUBTCLEFTH2"><?php echo $this->translate('Medicine Plan');?></div>
+
+<div class="VVGBG VV2IN1C2 KRV">
+ 	<table width="100%" border="0" cellspacing="4" cellpadding="0">
+      <tr class="CURNONPOINTER">
+        <th class="TSLRTDCENTER" width="5%"><?php echo $this->translate('Sr.No.');?></th>
+		<th class="TSLRTDCENTER" width="20%"><?php echo $this->translate('Week & Year');?></th>
+        <th class="TSLRTDCENTER" width="50%"><?php echo $this->translate('From-to');?></th>
+        <th class="TSLRTDCENTER" width="25%"><?php echo $this->translate('Action');?></th>
+      </tr>
+	  <?php
+	    $medicineCnt = 1;
+		foreach($this->medicineCollection as $medicine):
+	  ?>
+      <tr>
+        <td><span class="tdbg"><?php echo $medicineCnt++;?></span></td>
+		<td><a href="<?php echo $this->getUrl('client/medicine/create/t/7/id/'.$this->clientID.'/mdid/'.$medicine['medicine_id']);?>"><span class="tdbg"><?php echo $medicine['medicine_week'].' - '.substr($medicine['medicine_start_date'],0,4);?></span></a></td>
+        <td><a href="<?php echo $this->getUrl('client/medicine/create/t/7/id/'.$this->clientID.'/mdid/'.$medicine['medicine_id']);?>"><span class="tdbg"><?php echo $format->FormatDate($medicine['medicine_start_date']). ' - '.$format->FormatDate($medicine['medicine_end_date']); ?></span></a></td>
+        <td><a href="<?php echo $this->getUrl('client/medicine/create/t/7/id/'.$this->clientID.'/mdid/'.$medicine['medicine_id']);?>"><span class="tdbg"><?php echo 'Rediger medisineringsplan';?></span></a></td>
+      </tr>
+	  <?php endforeach;?>
+    </table>
+	<?php echo $this->paginationControl($this->medicineCollection, 'Sliding', 'control.phtml', array('page'=>'pageMD')); ?>  
+</div>
+<div class="mtodroplist2">
+	<div class="OPPRETTB"><a class="leggtilrada" href="<?php echo $this->getUrl('client/medicine/create/t/7/id/'.$this->clientID);?>"><?php echo $this->translate('Add %s',$this->translate('Midicine Plan'));?></a></div>
+</div>

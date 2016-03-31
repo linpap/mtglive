@@ -1,0 +1,224 @@
+<?php $format = KD::getModel('core/format');?>
+<div class="PSUBTCWRAPPER">
+	<div class="PSUBTCLEFT">
+		<?php echo $this->translate('Available').' '.$this->translate('User');?>
+	</div>
+</div>
+<div class="CLEARBBORDER"></div>
+<div class="ALT2C">
+<form name="availableUser" id="availableUser" action="" method="post">
+<table width="100%" border="0" cellspacing="4" cellpadding="0">
+	  <tr class="CURNONPOINTER">
+		<th class="TSLRTDNUMBER bgwhite" width="30px">
+		<span class="tdbg2">
+			<input type="checkbox" name="checkbox_all" id="checkbox_all" class="css-checkbox" data-form="availableUser"/>
+			<label for="checkbox_all" class="css-label"></label>
+		</span>
+		<input type="hidden" name="team_deptId" id="team_deptId" value="<?php echo $this->deptId;?>" />
+		</th>
+		<th class="TSLRTDCENTER"><?php echo $this->translate('Name');?></th>
+		<th class="TSLRTDCENTER"><?php echo $this->translate('ID');?></th>
+		<th class="TSLRTDCENTER"><?php echo $this->translate('Phone');?></th>
+		<th class="TSLRTDCENTER"><?php echo $this->translate('Mobile');?></th>
+		<th class="TSLRTDCENTER"><?php echo $this->translate('Email');?></th>
+		<th class="TSLRTDCENTER"><?php echo $this->translate('Registered');?></th>
+	  </tr>
+		<?php foreach($this->userAvailableCollection as $key=>$user):?>
+	  <tr>
+		<td class="TSLRTDNUMBER bgwhite">
+			<span class="tdbg" style="width: 20px;">
+				<input type="checkbox" name="checkbox_<?php echo $user['user_id'];?>" id="checkbox_<?php echo $user['user_id'];?>" class="css-checkbox" />
+				<label for="checkbox_<?php echo $user['user_id'];?>" class="css-label"></label>
+			</span>
+		</td>
+			<td class="bgwhite"><span class="tdbg"><?php echo $format->FormatName($user['user_fname'],$user['user_mname'],$user['user_lname']); ?></span></td>
+			<td class="bgwhite"><span class="tdbg"><?php echo $user['user_id']; ?></span></td>
+			<td class="bgwhite"><span class="tdbg"><?php echo $user['user_phone']; ?></span></td>
+			<td class="bgwhite"><span class="tdbg"><?php echo $user['user_mobile']; ?></span></td>
+			<td class="bgwhite"><span class="tdbg"><?php echo $user['user_email']; ?></span></td>
+			<td class="bgwhite"><span class="tdbg"><?php echo $format->FormatDate($user['user_date_joining']); ?></span></td>
+	  </tr>
+		<?php endforeach;?>  
+</table>
+<div class="ALT2C1">
+	<div class="ALT1C1"><?php echo $this->translate('Select').' '.$this->translate('Action');?></div>
+	<span class="tdbgkinfo2">
+		<select name="selAction" class="onSelectAction" data-form="availableUser">
+			<option value="">Velg her</option>
+			<option value="<?php echo $this->getUrl('system/index/moveteam/id/1');?>"><?php echo $this->translate('Move to').' '. $this->translate('Team');?> 1</option>
+			<option value="<?php echo $this->getUrl('system/index/moveteam/id/2');?>"><?php echo $this->translate('Move to').' '. $this->translate('Team');?> 2</option>
+			<option value="<?php echo $this->getUrl('system/index/moveteam/id/3');?>"><?php echo $this->translate('Move to').' '. $this->translate('Team');?> 3</option>
+		</select> 
+	</span>
+</div>
+</form>
+</div>
+<div class="CLEARBBORDER2"></div>
+<div class="PSUBTCWRAPPER">
+	<div class="PSUBTCLEFT">
+		<?php echo $this->translate('Team');?> 1
+	</div>
+</div>
+<div class="CLEARBBORDER"></div>
+<div class="ALT2C">
+<form name="team1User" id="team1User" action="" method="post">
+<table width="100%" border="0" cellspacing="4" cellpadding="0">
+	  <tr class="CURNONPOINTER">
+		<th class="TSLRTDNUMBER bgwhite" width="30px">
+		<span class="tdbg2">
+			<input type="checkbox" name="checkbox_all1" id="checkbox_all1" class="css-checkbox"  data-form="team1User"/>
+			<label for="checkbox_all1" class="css-label"></label>
+		</span>
+		<input type="hidden" name="team_deptId" id="team1_deptId" value="<?php echo $this->deptId;?>" />
+		</th>
+		<th class="TSLRTDCENTER"><?php echo $this->translate('Name');?></th>
+		<th class="TSLRTDCENTER"><?php echo $this->translate('ID');?></th>
+		<th class="TSLRTDCENTER"><?php echo $this->translate('Phone');?></th>
+		<th class="TSLRTDCENTER"><?php echo $this->translate('Mobile');?></th>
+		<th class="TSLRTDCENTER"><?php echo $this->translate('Email');?></th>
+		<th class="TSLRTDCENTER"><?php echo $this->translate('Registered');?></th>
+	  </tr>
+		<?php foreach($this->userTeam1Collection as $key=>$user):?>
+	  <tr>
+		<td class="TSLRTDNUMBER bgwhite">
+			<span class="tdbg" style="width: 20px;">
+				<input type="checkbox" name="checkbox_<?php echo $user['user_id'];?>" id="checkbox_<?php echo $user['user_id'];?>" class="css-checkbox" />
+				<label for="checkbox_<?php echo $user['user_id'];?>" class="css-label"></label>
+			</span>
+		</td>
+			<td class="bgwhite"><span class="tdbg"><?php echo $format->FormatName($user['user_fname'],$user['user_mname'],$user['user_lname']); ?></span></td>
+			<td class="bgwhite"><span class="tdbg"><?php echo $user['user_id']; ?></span></td>
+			<td class="bgwhite"><span class="tdbg"><?php echo $user['user_phone']; ?></span></td>
+			<td class="bgwhite"><span class="tdbg"><?php echo $user['user_mobile']; ?></span></td>
+			<td class="bgwhite"><span class="tdbg"><?php echo $user['user_email']; ?></span></td>
+			<td class="bgwhite"><span class="tdbg"><?php echo $format->FormatDate($user['user_date_joining']); ?></span></td>
+	  </tr>
+		<?php endforeach;?> 
+</table>
+<div class="ALT2C1">
+	<div class="ALT1C1"><?php echo $this->translate('Select').' '.$this->translate('Action');?></div>
+	<span class="tdbgkinfo2">
+		<select name="selAction" class="onSelectAction" data-form="team1User">
+			<option value="">Velg her</option>
+			<option value="<?php echo $this->getUrl('system/index/moveteam/id/0');?>"><?php echo $this->translate('Remove From').' '. $this->translate('Team');?> 1</option>
+			<option value="<?php echo $this->getUrl('system/index/moveteam/id/2');?>"><?php echo $this->translate('Move to').' '. $this->translate('Team');?> 2</option>
+			<option value="<?php echo $this->getUrl('system/index/moveteam/id/3');?>"><?php echo $this->translate('Move to').' '. $this->translate('Team');?> 3</option>
+		</select> 
+	</span>
+</div>
+</form>
+</div>
+<div class="CLEARBBORDER2"></div>
+<div class="PSUBTCWRAPPER">
+	<div class="PSUBTCLEFT">
+		<?php echo $this->translate('Team');?> 2
+	</div>
+</div>
+<div class="CLEARBBORDER"></div>
+<div class="ALT2C">
+<form name="team2User" id="team2User" action="" method="post">
+<table width="100%" border="0" cellspacing="4" cellpadding="0">
+	  <tr class="CURNONPOINTER">
+		<th class="TSLRTDNUMBER bgwhite" width="30px">
+		<span class="tdbg2">
+			<input type="checkbox" name="checkbox_all2" id="checkbox_all2" class="css-checkbox"  data-form="team2User"/>
+			<label for="checkbox_all2" class="css-label"></label>
+		</span>
+		<input type="hidden" name="team_deptId" id="team2_deptId" value="<?php echo $this->deptId;?>" />
+		</th>
+		<th class="TSLRTDCENTER"><?php echo $this->translate('Name');?></th>
+		<th class="TSLRTDCENTER"><?php echo $this->translate('ID');?></th>
+		<th class="TSLRTDCENTER"><?php echo $this->translate('Phone');?></th>
+		<th class="TSLRTDCENTER"><?php echo $this->translate('Mobile');?></th>
+		<th class="TSLRTDCENTER"><?php echo $this->translate('Email');?></th>
+		<th class="TSLRTDCENTER"><?php echo $this->translate('Registered');?></th>
+	  </tr>
+
+	  	<?php foreach($this->userTeam2Collection as $key=>$user):?>
+	  <tr>
+		<td class="TSLRTDNUMBER bgwhite">
+			<span class="tdbg" style="width: 20px;">
+				<input type="checkbox" name="checkbox_<?php echo $user['user_id'];?>" id="checkbox_<?php echo $user['user_id'];?>" class="css-checkbox" />
+				<label for="checkbox_<?php echo $user['user_id'];?>" class="css-label"></label>
+			</span>
+		</td>
+			<td class="bgwhite"><span class="tdbg"><?php echo $format->FormatName($user['user_fname'],$user['user_mname'],$user['user_lname']); ?></span></td>
+			<td class="bgwhite"><span class="tdbg"><?php echo $user['user_id']; ?></span></td>
+			<td class="bgwhite"><span class="tdbg"><?php echo $user['user_phone']; ?></span></td>
+			<td class="bgwhite"><span class="tdbg"><?php echo $user['user_mobile']; ?></span></td>
+			<td class="bgwhite"><span class="tdbg"><?php echo $user['user_email']; ?></span></td>
+			<td class="bgwhite"><span class="tdbg"><?php echo $format->FormatDate($user['user_date_joining']); ?></span></td>
+	  </tr>
+		<?php endforeach;?>  
+</table>
+<div class="ALT2C1">
+	<div class="ALT1C1"><?php echo $this->translate('Select').' '.$this->translate('Action');?></div>
+	<span class="tdbgkinfo2">
+		<select name="selAction" class="onSelectAction" data-form="team2User">
+			<option value="">Velg her</option>
+			
+			<option value="<?php echo $this->getUrl('system/index/moveteam/id/1');?>"><?php echo $this->translate('Move to').' '. $this->translate('Team');?> 1</option>
+			<option value="<?php echo $this->getUrl('system/index/moveteam/id/0');?>"><?php echo $this->translate('Remove From').' '. $this->translate('Team');?> 2</option>
+			<option value="<?php echo $this->getUrl('system/index/moveteam/id/3');?>"><?php echo $this->translate('Move to').' '. $this->translate('Team');?> 3</option>
+		</select> 
+	</span>
+</div>
+</form>
+</div>
+<div class="CLEARBBORDER2"></div>
+<div class="PSUBTCWRAPPER">
+	<div class="PSUBTCLEFT">
+		<?php echo $this->translate('Team');?> 3
+	</div>
+</div>
+<div class="CLEARBBORDER"></div>
+<div class="ALT2C">
+<form name="team3User" id="team3User" action="" method="post">
+<table width="100%" border="0" cellspacing="4" cellpadding="0">
+	  <tr class="CURNONPOINTER">
+		<th class="TSLRTDNUMBER bgwhite" width="30px">
+		<span class="tdbg2">
+			<input type="checkbox" name="checkbox_all3" id="checkbox_all3" class="css-checkbox"  data-form="team3User"/>
+			<label for="checkbox_all3" class="css-label"></label>
+		</span>
+		<input type="hidden" name="team_deptId" id="team3_deptId" value="<?php echo $this->deptId;?>" />
+		</th>
+		<th class="TSLRTDCENTER"><?php echo $this->translate('Name');?></th>
+		<th class="TSLRTDCENTER"><?php echo $this->translate('ID');?></th>
+		<th class="TSLRTDCENTER"><?php echo $this->translate('Phone');?></th>
+		<th class="TSLRTDCENTER"><?php echo $this->translate('Mobile');?></th>
+		<th class="TSLRTDCENTER"><?php echo $this->translate('Email');?></th>
+		<th class="TSLRTDCENTER"><?php echo $this->translate('Registered');?></th>
+	  </tr>
+
+	  	<?php foreach($this->userTeam3Collection as $key=>$user):?>
+	  <tr>
+		<td class="TSLRTDNUMBER bgwhite">
+			<span class="tdbg" style="width: 20px;">
+				<input type="checkbox" name="checkbox_<?php echo $user['user_id'];?>" id="checkbox_<?php echo $user['user_id'];?>" class="css-checkbox" />
+				<label for="checkbox_<?php echo $user['user_id'];?>" class="css-label"></label>
+			</span>
+		</td>
+			<td class="bgwhite"><span class="tdbg"><?php echo $format->FormatName($user['user_fname'],$user['user_mname'],$user['user_lname']); ?></span></td>
+			<td class="bgwhite"><span class="tdbg"><?php echo $user['user_id']; ?></span></td>
+			<td class="bgwhite"><span class="tdbg"><?php echo $user['user_phone']; ?></span></td>
+			<td class="bgwhite"><span class="tdbg"><?php echo $user['user_mobile']; ?></span></td>
+			<td class="bgwhite"><span class="tdbg"><?php echo $user['user_email']; ?></span></td>
+			<td class="bgwhite"><span class="tdbg"><?php echo $format->FormatDate($user['user_date_joining']); ?></span></td>
+	  </tr>
+		<?php endforeach;?>   
+</table>
+<div class="ALT2C1">
+	<div class="ALT1C1"><?php echo $this->translate('Select').' '.$this->translate('Action');?></div>
+	<span class="tdbgkinfo2">
+		<select name="selAction" class="onSelectAction" data-form="team3User">
+			<option value="">Velg her</option>
+			<option value="<?php echo $this->getUrl('system/index/moveteam/id/1');?>"><?php echo $this->translate('Move to').' '. $this->translate('Team');?> 1</option>
+			<option value="<?php echo $this->getUrl('system/index/moveteam/id/2');?>"><?php echo $this->translate('Move to').' '. $this->translate('Team');?> 2</option>
+			<option value="<?php echo $this->getUrl('system/index/moveteam/id/0');?>"><?php echo $this->translate('Remove From').' '. $this->translate('Team');?> 3</option>
+		</select> 
+	</span>
+</div>
+</form>
+</div>
+<script src="<?php echo $this->getMediaUrl('ajax-load-custom.js','js');?>" language="javascript" type="text/javascript"></script>

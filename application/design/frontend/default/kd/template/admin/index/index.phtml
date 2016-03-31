@@ -1,0 +1,19 @@
+<div class="USER_LOGIN_WRAPPER">
+ <div class="USER_TITLE"><?php echo $this->translate('Member Login');?></div>
+ <div class="USER_LOGIN">
+  <form name="userLogin" method="post" action="<?php echo KD::getHelper('view/getUrl')->getUrl("admin/index/logincheck");?>">
+    <div class="ADMIN_LOGIN">
+		<div class="ADMIN_USER"></div>
+		<span class="ADMIN_TEXT"><input type="text" data-validation="required" maxlength="64"id="username" name="username"></span>
+	</div>
+	<div class="ADMIN_LOGIN">
+		<div class="ADMIN_PASS"></div>
+		<span class="ADMIN_TEXT"><input type="password" data-validation="required" maxlength="64" id="password" name="password"></span>
+	</div>
+	<div class="ADMIN_SUBMIT">  <input type="submit" name="submit" value="<?php echo $this->translate('Loginn');?>" class="BUTTON"/></div>
+	<div class="ADMIN_LOGIN">
+		<span class=""><a href="<?php echo $this->getUrl('admin/forgot');?>"><?php echo $this->translate('Forgot Password?');?></a></span>
+	</div>
+  </form>
+ </div>
+</div>

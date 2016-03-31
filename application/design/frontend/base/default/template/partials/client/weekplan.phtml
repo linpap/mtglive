@@ -1,0 +1,54 @@
+<?php $format = KD::getModel('core/format');?>
+    <div class="VVGBG VV2IN1C2 KRV">
+        <?php if(empty($this->weekplanCollection)): ?>
+        <div><?php echo $this->translate('No activities this week'); ?>
+        <?php else: ?>
+        <table width="100%" border="0" cellspacing="4" cellpadding="0" id="clientWeekplanTbl">
+            <tr class="CURNONPOINTER">
+                <th class="TSLRTDCENTER" width="5%"><?php echo $this->translate('Sr.No.');?></th>
+                <th class="TSLRTDCENTER" width="20%"><?php echo $this->translate('Date');?></th>
+                <th class="TSLRTDCENTER" width="10%"><?php echo $this->translate('Time'); ?></th>
+                <th class="TSLRTDCENTER" width="20%"><?php echo $this->translate('Title'); ?></th>
+                <th class="TSLRTDCENTER" width="40%"><?php echo $this->translate('Description');?></th>
+                <th class="TSLRTDCENTER" width="5%"><?php echo $this->translate('Action');?></th>
+            </tr>
+            <?php $weekplanCnt = 1; ?>
+
+            <?php foreach($this->weekplanCollection as $weekplan):
+                $date = new DateTime($weekplan['weekplan_date']);
+                ?>
+                <tr data-id="<?php echo $weekplan['weekplan_id']; ?>">
+                    <td><span class="tdbg"><?php echo $weekplanCnt++;?></span></td>
+                    <td><span class="tdbg"><?php echo $format->FormatDate($weekplan['weekplan_date']);  echo ' - '.$date->format("l");?></span></td>
+                    <td><span class="tdbg"><?php echo $format->FormatTime($weekplan['weekplan_date']); ?></span></td>
+                    <td><span class="tdbg"><?php echo $weekplan['weekplan_title'];?></span></td>
+                    <td><span class="tdbg"><?php echo $weekplan['weekplan_desc'];?></span></td>
+                    <td><span class="tdbg dialog-ajax1" data-url="<?php echo $this->getUrl('client/weekplan/editweekplan/id/'.$weekplan['weekplan_id']);?>" data-title="<?php echo $format->FormatDate($weekplan['weekplan_date']); ?>"><?php echo $this->translate('Edit'); ?></span></td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+        <?php endif; ?>
+
+        <div id="weekplan-change-week" data-url="<?php echo $this->getUrl('client/weekplan/index/t/8/id/' . $this->clientID); ?>/">
+            <?php echo $this->translate('Change week'); ?>
+            <select id="week-selector" name="week" class="input-small">
+                <option>-- <?php echo $this->translate('Choose week'); ?>--</option>
+                <?php for($week = 1; $week <= $this->weeksInYear; $week++): ?>
+                    <option value="<?php echo $week; ?>" <?php echo ($this->weekNumber == $week) ? 'selected="selected"' : ''; ?>'><?php echo $week; ?></option>
+                <?php endfor; ?>
+            </select>
+            <select id="year-selector" name="year" class="input-small">
+                <option>-- <?php echo $this->translate('Choose year'); ?> --</option>
+                <?php for($year = ($this->year - 2); $year <= ($this->year + 2); $year++): ?>
+                    <option value="<?php echo $year; ?>" <?php echo ($this->year == $year) ? 'selected="selected"' : ''; ?>'><?php echo $year; ?></option>
+                <?php endfor;?>
+            </select>
+            <button class="button" onclick="Mtg.Client.Weekplan.changeWeek(this);"><?php echo $this->translate('Change week'); ?></button>
+        </div>
+            <div class="clearbborder"></div>
+        </div>
+
+    <div class="mtodroplist2">
+        <br/>
+        <div class="button" data-url="<?php echo $this->getUrl('client/weekplan/create-weekplan/user-id/' . $this->clientID); ?>" data-title="<?php echo $this->translate('Create weekplan item'); ?>" onclick="Mtg.Client.Weekplan.create(this);"><?php echo $this->translate('Add %s',$this->translate('Row'));?></div>
+    </div>

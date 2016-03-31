@@ -1,0 +1,53 @@
+<?php $format = KD::getModel('core/format');?>
+
+<div class="VVGBG VV2IN1C2">
+<div class="printvisibeltitel">
+<div class="PSUBTCLEFTH26">Aktiviteter som foregår sjeldnere enn en gang i uken</div>
+
+</div>
+<table width="100%" border="0" id="clientActivityTbl">
+  <tr>
+    <th class="malstyringstable50"><?php echo $this->translate('Description of activities');?></th>
+    <th><?php echo $this->translate('When / how often');?></th>
+  </tr>
+  <?php foreach($this->maalPlanActivity as $activity):?>
+  <tr>
+    <td class="nonecls1 width50"><span class="tdbg1c"><textarea onkeyup="textAreaAdjust(this)" name="maalplanactivity[<?php echo $activity['maalplan_other_id'];?>][maalplan_other_activityDesc1]" style="overflow:hidden; width: 100%; border: none; height:auto;" class="validation"><?php echo $activity['maalplan_other_activityDesc1'];?></textarea></span></td>
+    <td class="nonecls1"><span class="tdbg1c"><textarea onkeyup="textAreaAdjust(this)" name="maalplanactivity[<?php echo $activity['maalplan_other_id'];?>][maalplan_other_activityDesc2]" style="overflow:hidden; width: 100%; border: none; height:auto;" class="validation"><?php echo $activity['maalplan_other_activityDesc2'];?></textarea></span></td>
+  </tr>
+<?php /*?>  <tr>
+    <td><span class="tdbg985p"><textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden; width: 100%; border: none; height:auto;"></textarea></span></td>
+    <td><span class="tdbg985p"><textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden; width: 100%; border: none; height:auto;"></textarea></span></td>
+  </tr><?php */?>
+  <?php endforeach;?>
+</table>
+	<div class="mtodroplist2">
+		<div class="CANCELB"><a class="leggtilrada" id="clientAddActivity" data-val="1"><?php echo $this->translate('Add %s(s)',$this->translate('Row'));?></a></div>
+	</div>
+</div>
+<div class="printvisibeltitel">
+<div class="CLEARBBORDER2"></div>
+</div>
+<script language="javascript" type="text/javascript">
+// Code For adding New Raw to For add new element
+$("#clientAddActivity").unbind("click").click(function () { 
+
+	var id = $(this).data('val');
+    $("#clientActivityTbl").each(function () {
+       
+        var tds = "";
+		tds += '<tr><td class="nonecls1"><span class="tdbg1c"><textarea name="activity[maalplan_other_activityDesc1][]" id="maalplan_other_activityDesc1'+id+'" onkeyup="textAreaAdjust(this)" style="overflow:hidden; width: 100%; border: none; height:auto;" class="validation"/></textarea></span></td><td class="nonecls1"><span class="tdbg1c"><textarea name="activity[maalplan_other_activityDesc2][]" onkeyup="textAreaAdjust(this)" style="overflow:hidden; width: 100%; border: none; height:auto;" id="maalplan_other_activityDesc2'+id+'" class="validation"/></textarea></span></td></tr>';
+
+        if ($('tbody', this).length > 0) {
+            $('tbody', this).append(tds);
+        } else {
+            $(this).append(tds);
+        }
+		
+		$(".DyndatepickerImage").datepicker(Mtg.Config.Datepicker);
+	});
+	$(this).data('val',id+1);
+		
+});
+
+</script>

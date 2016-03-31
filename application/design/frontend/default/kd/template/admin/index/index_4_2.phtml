@@ -1,0 +1,34 @@
+<?php echo $this->action;?>  
+  <form name="register" method="post" action="<?php echo KD::getHelper('view/getUrl')->getUrl("admin/index/logincheck");?>">
+  <table>
+    <tr>
+	  <td><?php echo "User Name"?></td>
+	  <td><input type="text" name="username"></td>
+	</tr>
+    <tr>
+	  <td><?php echo "Password"?></td>
+	  <td><input type="password" name="password"></td>
+	</tr>	
+  </table>
+  <input type="submit" name="submit" value="Submit">
+  </form>
+<?php /*?><?php  
+echo "<br>--------------acl values login.phtml-----------------------<br>";
+
+	$ns = new Zend_Session_Namespace('Account');
+	
+	if(isset($ns->useracl)){
+       
+	   $aclsession = $ns->useracl;
+	   
+	   foreach ($aclsession->getResources() as $inherit) {
+				echo "<br>";
+				print_r($inherit);
+		}
+	
+echo "<br>--------------acl values login.phtml-----------------------<br>";
+echo "<br>";			 
+	}else{
+
+		echo "session not set login.phtml";
+	}<?php */?>

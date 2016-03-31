@@ -1,0 +1,34 @@
+<?php if($this->show):?>
+<?php $format = KD::getModel('core/format');?>
+
+<table width="100%" border="0">
+  <tbody>
+        <tr>
+      <th class="nonecls1"><span class="padding5h"><strong><?php echo $this->translate('Logg Sr No');?></strong></span></th>
+      <th class="nonecls1"><span class="padding5h"><strong><?php echo $this->translate('Vaktrapport No');?></strong></span></th>
+      <th class="nonecls1"><span class="padding5h"><strong><?php echo $this->translate('Lock Date');?></strong></span></th>
+      <th class="nonecls1"><span class="padding5h"><strong><?php echo $this->translate('Create By');?></strong></span></th>
+    </tr>
+    <tr>
+      <td class="nonecls1"><span class="tdbg"><span class="padding5h"><?php echo $this->logg['logg_id'];?></span></span></td>
+      <td class="nonecls1"><span class="tdbg"><span class="padding5h"><?php echo $this->logg['logg_vaktrapID'];?></span></span></td>
+      <td class="nonecls1"><span class="tdbg"><span class="padding5h"><?php echo $format->FormatDate($this->logg['logg_locked_at']);?></span></span></td>
+      <td class="nonecls1"><span class="tdbg"><span class="padding5h"><?php echo KD::getModel('user/user')->getUser($this->logg['logg_locked_by']);?></span></span></td>
+    </tr>
+
+  </tbody>
+  </table>
+<br />
+<table width="100%" border="0">
+  <tbody>
+    <tr>
+      <th class="nonecls1"><span class="padding5h"><strong><?php echo $this->translate('Log Description');?></strong></span></th>
+    </tr>
+    <tr>
+      <td class="nonecls1"><span class="tdbg"  style="height:auto;"><span class="padding5h"><?php echo $this->logg['logg_desc'];?></span></span></td>
+    </tr>
+  </tbody>
+</table>
+<?php else:?>
+<div>We have not Data for this ID</div>
+<?php endif;?>

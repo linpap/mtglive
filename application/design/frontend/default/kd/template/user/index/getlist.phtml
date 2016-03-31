@@ -1,0 +1,5 @@
+<?php $format = KD::getModel('core/format');?>
+	<option value=""><?php echo $this->defaultOption;?></option>
+<?php foreach($this->userCollection as $user):?>
+	<option value="<?php echo $user['user_id'];?>"><?php echo $format->FormatName($user['user_fname'],$user['user_mname'],$user['user_lname']);?></option>
+<?php endforeach;?>

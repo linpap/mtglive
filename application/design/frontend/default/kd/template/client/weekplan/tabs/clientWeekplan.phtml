@@ -1,0 +1,75 @@
+<?php $format = KD::getModel('core/format');?>
+<div class="PSUBTCLEFTH2">
+    <?php echo $this->translate('Weekplan') . ' (' . $this->translate('Week') . ' ' . $this->weekNumber . ' - '  . $this->year . ')'; ?>
+</div>
+
+<?php echo $this->partial('partials/client/weekplan.phtml', [
+    'clientID' => $this->clientID,
+    'weekplanCollection' => $this->weekplanCollection,
+    'weeksInYear' => $this->weeksInYear,
+    'weekNumber' => $this->weekNumber,
+    'year' => $this->year
+]); ?>
+
+<script language="javascript" type="text/javascript">
+
+// Code For Validation of form
+$.validate({
+	form : '#frmClientAddWeekplan', 
+	validateOnBlur : false,
+	borderColorOnError : '#C90312',
+	addValidClassOnAll : true,
+	showHelpOnFocus : false,
+	addSuggestions : false,
+	errorMessagePosition : 'top',
+	scrollToTopOnError : true
+});
+// Code For Get Dialog on click of class dialog-ajax
+$(document).ready(function(){
+
+	$('.dialog-ajax1').unbind("click").click(function(){
+        var tag = $("<div></div>"); //This tag will the hold the dialog content.
+		var url = $(this).data('url');
+		var title = $(this).data('title');
+		$.ajax({
+		  url: $(this).data('url'),
+		  type: 'GET',
+		  beforeSend: function() {$("#loading-image").show();},
+		  error: function() { alert('Could not load form') },
+		  success: function(data, textStatus, jqXHR) {
+			if(typeof data == "object" && data.html) { //response is assumed to be JSON
+			  tag.html(data.html).dialog({modal:true, title: title}).dialog('open');
+			} else { //response is assumed to be HTML
+			  tag.html(data).dialog({modal: true, title: title, height: 350, width:800, hide: "scale", show : "scale",
+					open: function (event, ui) {
+						var startDate = $(".DyndatepickerImage1");
+                        $('#weekplan_time').timepicker(Mtg.Config.Timepicker);
+						startDate.unbind();
+						startDate.datepicker(Mtg.Config.Datepicker);
+						$.validate({
+							form : '#frmClientEditMaal', 
+							validateOnBlur : false,
+							borderColorOnError : '#C90312',
+							addValidClassOnAll : true,
+							showHelpOnFocus : false,
+							addSuggestions : false,
+							errorMessagePosition : 'top',
+							scrollToTopOnError : true
+						});
+						$("#loading-image").hide();
+					},
+					close: function (event, ui) {
+						$('input.DyndatepickerImage1').datepicker("destroy");
+						$(this).dialog("destroy");
+						$(this).remove();
+					}
+				}).dialog('open');
+			}
+		  }
+		});
+	  });	  
+});
+</script>
+<?php if($this->isAjax):?>   
+<script src="<?php echo $this->getMediaUrl('ajax-load-custom.js','js');?>" language="javascript" type="text/javascript"></script>
+<?php endif;?>

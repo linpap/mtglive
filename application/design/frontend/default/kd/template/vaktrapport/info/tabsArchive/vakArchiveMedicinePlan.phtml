@@ -1,0 +1,250 @@
+Denne funksjonen kommer snart. Du vil kunne se medisineringsplanen for gjelden vaktperiode :)
+<!--<div class="VVGBG">
+<table width="100%" border="0" cellspacing="4" cellpadding="0">
+      <tr class="CURNONPOINTER">
+        <th class="TSLRTDCENTER"><?php echo $this->translate('Department');?></th>
+        <th class="TSLRTDCENTER"><?php echo $this->translate('Name');?></th>
+        <th class="TSLRTDCENTER"><?php echo $this->translate('%s No',$this->translate('M-plan'));?></th>
+      </tr>
+      <tr>
+        <td><span class="tdbg">Vollen</span></td>
+        <td><span class="tdbg">Andreas Balchen</span></td>
+        <td><span class="tdbg">0</span></td>
+      </tr>    
+</table>
+</div>      
+ <div class="CLEARBBORDER2"></div>
+<div class="VVGBG">
+<table width="100%" border="0" cellspacing="4" cellpadding="0">
+      <tr class="CURNONPOINTER">
+        <th class="TSLRTDCENTER" width="10%"><?php echo $this->translate('Signature');?></th>
+        <th class="TSLRTDCENTER" width="15%"><?php echo $this->translate('Medicine Name');?></th>
+        <th class="TSLRTDCENTER" width="10%"><?php echo $this->translate('Number');?></th>
+        <th class="TSLRTDCENTER" width="10%"><?php echo $this->translate('Received');?></th>
+        <th class="TSLRTDCENTER" width="10%"><?php echo $this->translate('Time');?></th>
+        <th class="TSLRTDCENTER" width="25%">Avviks beskrivelse</th>
+        <th class="TSLRTDCENTER" width="20%"><?php echo $this->translate('Signature');?></th>
+      </tr>
+      <tr>
+        <td class="tdbgpaddingspace bgwhite"><span class="tdbg"><?php echo $this->translate('Monday');?><br />27/10-2014<br /><?php echo $this->translate('%s No',$this->translate('Week'));?>: <a  class="medisinpopup" href="include/pcontent/vaktraport/medisinplanpopup.php" title="Opprett alternativ medisinering"><img height="20px" width="26px" alt="" src="<?php echo $this->getMediaUrl('timg/legg_till.png');?>"></a></span></td>
+        <td class="tdbgpaddingspace">
+        	<span class="tdbgborder mplanspace tdbgbordermax1500_1"><input type="text" value="Paracet"></span>
+            <span class="tdbgborder tdbgbordermax1500_1"><input type="text" value="Ibux">
+        </td>
+        <td class="tdbgpaddingspace">
+        	<span class="tdbgbordertext mplanspace"><input type="text" value="3"></span>
+        	<span class="tdbgbordertext"><input type="text" value="3"></span>
+        </td>
+        <td class="tdbgpaddingspace">
+        	<span class="tdbg92pborder mplanspace">
+            	<select>
+                	<option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+				</select> 
+			</span>
+            <span class="tdbg92pborder">
+            	<select>
+                	<option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+				</select> 
+			</span>
+        </td>
+        <td class="tdbgpaddingspace">
+        	<span class="tdbgbordertext mplanspace tdbgbordermax1500_2"><input type="text" value="15:35"></span>
+        	<span class="tdbgbordertext tdbgbordermax1500_2"><input type="text" value="15:35"></span>
+        </td>
+        <td class="tdbgpaddingspace">
+        	<span class="tdbg963pborder mplanspace"><textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden;width: 100%; border: none; height:auto;"></textarea></span>
+            <span class="tdbg963pborder"><textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden;width: 100%; border: none; height:auto;"></textarea></span>
+        </td>
+        <td class="tdbgpaddingspace">
+        	<span class="tdbgborder mplanspace"><input type="text" value=""></span>
+            <span class="tdbgborder mplanspace"><input type="text" value=""></span>
+        </td>
+      </tr>
+      <tr>
+        <td class="tdbgpaddingspace bgwhite"><span class="tdbg"><?php echo $this->translate('Tuesday');?><br />28/10-2014<br /><?php echo $this->translate('%s No',$this->translate('Week'));?>:</span></td>
+        <td class="tdbgpaddingspace"><span class="tdbgborder tdbgbordermax1500_1"><input type="text" value=""></span></td>
+        <td class="tdbgpaddingspace"><span class="tdbgbordertext"><input type="text" value=""></span></td>
+        <td class="tdbgpaddingspace">
+        	<span class="tdbg92pborder">
+            	<select>
+                	<option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+				</select> 
+			</span>
+        </td>
+        <td class="tdbgpaddingspace">
+        	<span class="tdbgbordertext mplanspace tdbgbordermax1500_2"><input type="text" value="15:35"></span>
+        </td>
+        <td class="tdbgpaddingspace"><span class="tdbg963pborder"><textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden;width: 100%; border: none; height:auto;" ></textarea></span></td>
+        <td class="tdbgpaddingspace"><span class="tdbgborder"><input type="text" value=""></span></td>
+      </tr>
+      <tr>
+        <td class="tdbgpaddingspace bgwhite"><span class="tdbg"><?php echo $this->translate('Wednesday');?><br />28/10-2014<br /><?php echo $this->translate('%s No',$this->translate('Week'));?>:</span></td>
+        <td class="tdbgpaddingspace tdbgbordermax1500_1"><span class="tdbgborder"><input type="text" value=""></span></td>
+        <td class="tdbgpaddingspace"><span class="tdbgbordertext"><input type="text" value=""></span></td>
+        <td class="tdbgpaddingspace">
+        	<span class="tdbg92pborder">
+            	<select>
+                	<option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+				</select> 
+			</span>
+        </td>
+        <td class="tdbgpaddingspace">
+        	<span class="tdbgbordertext tdbgbordermax1500_2"><input type="text" value="15:35"></span>
+        </td>
+        <td class="tdbgpaddingspace"><span class="tdbg963pborder"><textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden;width: 100%; border: none; height:auto;"></textarea></span></td>
+        <td class="tdbgpaddingspace"><span class="tdbgborder"><input type="text" value=""></span></td>
+      </tr>
+      <tr>
+        <td class="tdbgpaddingspace bgwhite"><span class="tdbg"><?php echo $this->translate('Thirsday');?><br />29/10-2014<br /><?php echo $this->translate('%s No',$this->translate('Week'));?>:</span></td>
+        <td class="tdbgpaddingspace tdbgbordermax1500_1"><span class="tdbgborder"><input type="text" value=""></span></td>
+        <td class="tdbgpaddingspace"><span class="tdbgbordertext"><input type="text" value=""></span></td>
+        <td class="tdbgpaddingspace">
+        	<span class="tdbg92pborder">
+            	<select>
+                	<option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+				</select> 
+
+			</span>
+        </td>
+        <td class="tdbgpaddingspace">
+        	<span class="tdbgbordertext tdbgbordermax1500_2"><input type="text" value="15:35"></span>
+        </td>
+        <td class="tdbgpaddingspace"><span class="tdbg963pborder"><textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden;width: 100%; border: none; height:auto;"></textarea></span></td>
+        <td class="tdbgpaddingspace"><span class="tdbgborder"><input type="text" value=""></span></td>
+      </tr>
+      <tr>
+        <td class="tdbgpaddingspace bgwhite"><span class="tdbg"><?php echo $this->translate('Friday');?><br />30/10-2014<br /><?php echo $this->translate('%s No',$this->translate('Week'));?>:</span></td>
+        <td class="tdbgpaddingspace tdbgbordermax1500_1"><span class="tdbgborder"><input type="text" value=""></span></td>
+        <td class="tdbgpaddingspace"><span class="tdbgbordertext"><input type="text" value=""></span></td>
+        <td class="tdbgpaddingspace">
+        	<span class="tdbg92pborder">
+            	<select>
+                	<option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+				</select> 
+			</span>
+        </td>
+        <td class="tdbgpaddingspace">
+        	<span class="tdbgbordertext mplanspace tdbgbordermax1500_2"><input type="text" value="15:35"></span>
+        </td>
+        <td class="tdbgpaddingspace"><span class="tdbg963pborder"><textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden;width: 100%; border: none; height:auto;"></textarea></span></td>
+        <td class="tdbgpaddingspace"><span class="tdbgborder"><input type="text" value=""></span></td>
+      </tr>
+      <tr>
+        <td class="tdbgpaddingspace bgwhite"><span class="tdbg"><?php echo $this->translate('Saturday');?><br />31/10-2014<br /><?php echo $this->translate('%s No',$this->translate('Week'));?>:</span></td>
+        <td class="tdbgpaddingspace tdbgbordermax1500_1"><span class="tdbgborder"><input type="text" value=""></span></td>
+        <td class="tdbgpaddingspace"><span class="tdbgbordertext"><input type="text" value=""></span></td>
+        <td class="tdbgpaddingspace">
+        	<span class="tdbg92pborder">
+            	<select>
+                	<option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+				</select> 
+			</span>
+        </td>
+        <td class="tdbgpaddingspace">
+        	<span class="tdbgbordertext mplanspace tdbgbordermax1500_2"><input type="text" value="15:35"></span>
+        </td>
+        <td class="tdbgpaddingspace"><span class="tdbg963pborder"><textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden;width: 100%; border: none; height:auto;"></textarea></span></td>
+        <td class="tdbgpaddingspace"><span class="tdbgborder"><input type="text" value=""></span></td>
+      </tr>
+      <tr>
+        <td class="tdbgpaddingspace bgwhite"><span class="tdbg"><?php echo $this->translate('Sunday');?><br />1/11-2014<br /><?php echo $this->translate('%s No',$this->translate('Week'));?>:</span></td>
+        <td class="tdbgpaddingspace tdbgbordermax1500_1"><span class="tdbgborder"><input type="text" value=""></span></td>
+        <td class="tdbgpaddingspace"><span class="tdbgbordertext"><input type="text" value=""></span></td>
+        <td class="tdbgpaddingspace">
+        	<span class="tdbg92pborder">
+            	<select>
+                	<option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+				</select> 
+			</span>
+        </td>
+        <td class="tdbgpaddingspace">
+        	<span class="tdbgbordertext tdbgbordermax1500_2"><input type="text" value="15:35"></span>
+        </td>
+        <td class="tdbgpaddingspace"><span class="tdbg963pborder"><textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden;width: 100%; border: none; height:auto;"></textarea></span></td>
+        <td class="tdbgpaddingspace"><span class="tdbgborder"><input type="text" value=""></span></td>
+      </tr>   
+</table>
+</div>
+
+<div class="LAGREB2"><a class="LAGREBA2" href="#"><?php echo $this->translate('Save');?></a></div>
+      -->

@@ -1,0 +1,76 @@
+<?php 
+	$format = KD::getModel('core/format'); 
+	$session = new Zend_Session_Namespace('Acl');
+?>
+<div class="LMODULEW">
+    <div id="UTOPTEXTW">
+        <?php echo $this->translate('You are currently logged in as');?>
+    </div>
+  
+        
+		
+		<?php if(isset($_SESSION['Acl']['userImage']) && $_SESSION['Acl']['userImage']>0)
+		{ 
+			$data = KD::getModel('client/document')->getDocument($_SESSION['Acl']['userImage']);
+			if(in_array($data['document_mimetype'],array('image/png','image/jpg','image/jpeg','image/gif')))
+			{
+				if($data['document_imagewidth']>$data['document_imageheight'])
+				{
+					$borderRadius = $data['document_imagewidth']/2;
+				}
+				else
+				{
+					$borderRadius = $data['document_imageheight']/2;
+				}
+				echo '<div class="imageAuto" style="border-radius:44px !important; width:88px !important; height:88px !important;border:0px none !important;"><img src= "data:'.$data['document_mimetype'].';base64,'.base64_encode($data['document_filecontent']).'" width="88" /></div>';
+			}
+			else
+			{
+			?>
+				<div class="KKI1PHWhite"></div>
+			<?php 
+			}
+		?>
+		<?php 
+		}
+		else
+		{
+		?>
+			<div class="KKI1PHWhite"></div>
+		<?php 
+		}?>
+	
+	
+    <div id="UNAMETEXTW">
+        <a href="<?php echo $this->getUrl('user/info/index/id/'.$session->userID);?>" title="Payam Afshar"><?php echo $format->FormatName($session->userFname,$session->userMname,$session->userLname);?></a>
+    </div>
+	<?php 
+		$createUrl = $session->moduleName.'/'.$session->controllerName.'/'.$session->actionName;
+	?>
+    <div id="UDEPARTMENTTEXTW">
+		<?php echo $this->translate('From Department');?>
+		<?php if(in_array($session->userRole,array('A','S','D'))):?>
+		<div class="tdbgvaktraportFL width50 floatright clearboth" style="margin-right:10px;">
+		<form name="frmDeptChange" id="frmDeptChange" method="post" action="<?php echo $this->getUrl($createUrl);?>">
+		<select name="left_department" id="left_department" class="padding5 onSelectAction" data-form="frmDeptChange">
+		<?php 
+		 echo '<option value="'.$this->getUrl($createUrl.'/sessionDeptId/all').'" '.(($session->userDeptId=='all')?' selected="selected" ':'').'>'.$this->translate('All Department').'</option>';
+		$departmentModel = KD::getModel('department/department');
+		$departments = $departmentModel->loadList('active','all');
+		foreach($departments as $department)
+		{
+		  echo '<option value="'.$this->getUrl($createUrl.'/sessionDeptId/'.$department['dept_id']).'" '.(($session->userDeptId==$department['dept_id'])?' selected="selected" ':'').'>'.$department['dept_name'].'</option>';
+		}
+		?>
+		</select>
+		</form>
+		</div>
+		<?php else:?>
+		<div class="width50 floatright clearboth" style="margin-right:10px;">
+		<?php 
+			echo KD::getModel('department/department')->getDepartment($session->userDeptId,'name');
+		?>
+		</div>
+		<?php endif;?>
+    </div>
+</div>

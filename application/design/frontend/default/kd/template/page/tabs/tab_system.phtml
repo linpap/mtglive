@@ -1,0 +1,17 @@
+<?php 
+#CODE FOR DEPT RESTRICTION
+$session = new Zend_Session_Namespace('Acl');
+#CODE FOR DEPT RESTRICTION
+?>
+<ul id="tab">
+	<li class="INACTIVTAB" <?php echo ($this->defaultTab!='' && $this->defaultTab=='1')?'id="current"':'';?>><a href="#" name="tab1"><div class="ACTIVETLZI TLZI"><?php echo $this->translate('Create %s',$this->translate('Security Report'));?></div></a></li>
+	<li class="INACTIVTAB" <?php echo ($this->defaultTab=='2')?'id="current"':'';?>><a href="#" name="tab2"><div class="ACTIVETLZI TLZI"><?php echo $this->translate('Create %s',$this->translate('Client'));?></div></a></li>
+	<li class="INACTIVTAB" <?php echo ($this->defaultTab=='3')?'id="current"':'';?>><a href="#" name="tab3"><div class="ACTIVETLZI TLZI"><?php echo $this->translate('Create %s',$this->translate('User'));?></div></a></li>
+	<?php /* #CODE FOR DEPT RESTRICTION */?>
+	<?php if(in_array($session->userRole,array('A','S','D'))):?>
+		<li class="INACTIVTAB" <?php echo ($this->defaultTab=='4')?'id="current"':'';?>><a href="#" name="tab4"><div class="ACTIVETLZI TLZI"><?php echo $this->translate('Create %s',$this->translate('Department'));?></div></a></li>
+		<li class="INACTIVTAB" <?php echo ($this->defaultTab=='5')?'id="current"':'';?>><a href="#" name="tab5"><div class="ACTIVETLZI TLZI"><?php echo $this->translate('Team');?></div></a></li>
+		<li class="INACTIVTAB" <?php echo ($this->defaultTab=='6')?'id="current"':'';?>><a href="#" name="tab6"><div class="ACTIVETLZI TLZI"><?php echo $this->translate('Config');?></div></a></li>
+	<?php endif;?>
+	<?php /* #CODE FOR DEPT RESTRICTION */?>
+</ul>

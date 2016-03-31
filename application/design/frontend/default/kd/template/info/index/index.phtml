@@ -1,0 +1,8 @@
+<div class="tablebg">
+  <div style="display: block; padding:0 10px" id="tab1">
+    <?php $infoAllCollection = $this->infoAllCollection;echo $this->partial('index/tabs/infoAll.phtml',array('infoAllCollection'=>$this->infoAllCollection))?>	
+  </div>
+  <div style="display: block; padding: 0px 10px;" id="tab2">
+	 <?php $infoDeptCollection = $this->infoDeptCollection;echo $this->partial('index/tabs/infoDept.phtml',array('infoDeptCollection'=>$this->infoDeptCollection))?>
+  </div>
+</div>

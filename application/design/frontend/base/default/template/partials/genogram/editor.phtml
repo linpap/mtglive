@@ -1,0 +1,17 @@
+<div id="sample">
+
+    <div style="width:100%; white-space:nowrap;">
+        <?php echo $this->partial('partials/genogram/form.phtml', array(
+                'clientID' => $this->clientID,
+                'initString' => $this->initString
+            ));
+        ?>
+        <div id="genogram-editor">
+            <div id="genogram-canvas">
+                <?php echo $this->partial('partials/genogram/' . $this->editor . '.phtml'); ?>
+                
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clearBoth"></div>

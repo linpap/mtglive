@@ -1,0 +1,32 @@
+<?php $format=KD::getModel('core/format');?>
+<div>
+<div class="PSUBTCWRAPPER">
+	<div class="PSUBTCLEFT">
+    	<?php echo $this->translate('%s %s',$this->translate('Completed'),$this->translate('Goal'));?>
+    </div>
+</div>
+<div class="CLEARBBORDER"></div>
+<div class="KKI2C">
+<table width="100%" border="0" cellspacing="4" cellpadding="0">
+      <tr class="CURNONPOINTER">
+        <th class="TSLRTDCENTER" width="65%"><?php echo $this->translate('Goal');?></th>
+		<th class="TSLRTDCENTER" width="5%"><?php echo $this->translate('Order');?></th>
+		<th class="TSLRTDCENTER" width="15%"><?php echo $this->translate('%s Date',$this->translate('From'));?></th>
+        <th class="TSLRTDCENTER" width="15%"><?php echo $this->translate('%s Date',$this->translate('To'));?></th>		
+      </tr>
+	  <?php  if(count($this->maalCollection)>0):
+		foreach($this->maalCollection as $maal):  ?>
+		<?php $id = $maal['maal_id']; ?>
+		  <tr>
+			<td><span class="tdbg"><?php echo $maal['maal_desc']; ?></span></td>
+			<td class="bgwhite"><span class="tdbg"><?php echo $maal['maal_order']; ?></span></td>
+			<td class="bgwhite"><span class="tdbg"><?php echo $format->FormatDate($maal['maal_from_date']); ?></span></td>
+			<td class="bgwhite"><span class="tdbg"><?php echo $format->FormatDate($maal['maal_to_date']); ?></span></td>
+		  </tr>
+		
+		<?php endforeach; 
+		//echo $this->paginationControl($this->maalCollection, 'Sliding', 'control.phtml', array('page'=>'pmc','tt'=>'62'));
+	  endif;?>
+</table>
+</div>
+</div>

@@ -1,0 +1,38 @@
+<!--
+See http://developer.yahoo.com/ypatterns/pattern.php?pattern=searchpagination
+-->
+<?php $pageLabel = ''; if(isset($this->page) && $this->page!=''): $pageLabel = $this->page;endif;?>
+<?php $tabs = '1'; if(isset($this->tt) && $this->tt!=''): $tabs = $this->tt;endif;?>
+<?php $url_array = array();$url_array['tt'] = $tabs;?>
+<?php if ($this->pageCount): ?>
+<div class="paginationControl">
+<!-- Previous page link -->
+<?php if (isset($this->previous)): $url_array[$pageLabel] = $this->previous;?>
+  <a href="<?php echo $this->url(array($page => $this->previous)); ?>">
+    &lt; Forrige side
+  </a> |
+<?php else: ?>
+  <span class="disabled">&lt; Forrige side</span> |
+<?php endif; ?>
+
+<!-- Numbered page links -->
+<?php foreach ($this->pagesInRange as $page): ?>
+  <?php if ($page != $this->current): $url_array[$pageLabel] = $this->page;?>
+    <a href="<?php echo $this->url($url_array); ?>">
+        <?php echo $page; ?>
+    </a> |
+  <?php else: ?>
+    <?php echo $page; ?> |
+  <?php endif; ?>
+<?php endforeach; ?>
+
+<!-- Next page link -->
+<?php if (isset($this->next)): $url_array[$pageLabel] = $this->next;?>
+  <a href="<?php echo $this->url($url_array); ?>">
+    Neste side &gt;
+  </a>
+<?php else: ?>
+  <span class="disabled">Neste side &gt;</span>
+<?php endif; ?>
+</div>
+<?php endif; ?>

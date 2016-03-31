@@ -1,0 +1,55 @@
+<form name="departmentList" id="departmentList" action="" method="post">
+
+
+<div>
+<table width="100%" border="0" cellspacing="4" cellpadding="0">
+  <tr class="CURNONPOINTER">
+	<th class="TSLRTDNUMBER">
+	<span class="tdbg2">
+		<input type="checkbox" name="checkbox_all" id="checkbox_all" class="css-checkbox" data-form="departmentList"/>
+		<label for="checkbox_all" class="css-label"></label>
+	</span>
+	</th>
+	<th class="TSLRTDCENTER"><?php echo $this->translate('ID');?></th>	
+	<th class="TSLRTDCENTER"><?php echo $this->translate('Name');?></th>
+	<th class="TSLRTDCENTER"><?php echo $this->translate('Code');?></th>
+	<th class="TSLRTDCENTER"><?php echo $this->translate('State');?></th>
+	<th class="TSLRTDCENTER"><?php echo $this->translate('City');?></th>
+  </tr>
+<?php 
+if(count($this->departmentCollection)>0):
+foreach($this->departmentCollection as $dept): ?>
+<?php $id = $dept['dept_id']; ?>
+  <tr>
+	<td class="TSLRTDNUMBER">
+		<span class="tdbg" style="width: 20px;">
+		<input type="checkbox" name="<?php echo 'checkbox_'.$id;?>" id="<?php echo 'checkbox_'.$id;?>" class="css-checkbox" />
+		<label for="<?php echo 'checkbox_'.$id;?>" class="css-label"></label>
+		</span>
+	</td>
+	<td><span class="tdbg"><?php echo $dept['dept_id'] ?></span></td>
+	<td><span class="tdbg"><a href="<?php echo $this->getUrl('department/info/index/id/'.$id,null,false,false);?>"><?php echo $dept['dept_name'] ?></a></span></td>
+	<td><span class="tdbg"><?php echo $dept['dept_code'] ?></span></td>
+	<td><span class="tdbg"><?php echo $dept['dept_state'] ?></span></td>
+	<td><span class="tdbg"><?php echo $dept['dept_city'] ?></span></td>
+  </tr>
+
+<?php endforeach; 
+endif;?>
+<?php echo $this->paginationControl($this->departmentCollection, 'Sliding', 'control.phtml',array('page'=>'pageD')); ?>
+</table>
+</div>
+<?php /*?><div class="listdroplist">
+	<div class="PSUBTCLEFT"><?php echo $this->translate('Select %s',$this->translate('Type of Action'));?></div>
+	<div class="KITINRDLISTW">
+		<span class="KITINRDLISTWSPAN">
+			<select name="selAction" class="onSelectAction" data-form="departmentList">
+				<option><?php echo $this->translate('Select %s %s',$this->translate('Type of Action'),$this->translate('Here!'));?></option>
+				<option value="<?php echo $this->getUrl('department/index/archive');?>"><?php echo $this->translate('Archive');?></option>
+				<option value="<?php echo $this->getUrl('department/index/delete');?>"><?php echo $this->translate('Delete');?></option>
+			</select> 
+		</span>  	
+	</div>
+</div>
+<?php */?>
+</form>

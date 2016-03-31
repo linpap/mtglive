@@ -1,0 +1,43 @@
+@media print {
+
+    th, td {
+        font-family: Verdana, Arial, Helvetica, sans-serif;
+        font-size: 18px;
+        color: #000000;
+    }
+    tr {
+        border: 1px solid gray;
+    }
+    td {
+        width: 200px;
+        padding: 3px;
+    }
+    th {
+        background-color: #D2E0E8;
+        color: #003366
+    }
+    table {
+        border: 1pt solid gray;
+        text-align: center;
+    }
+	
+	
+	
+	
+	html, body {	color:#0c2229;	font-family:robotoregular;	margin:0;	padding:0;		font-size: 14px !important;	height:100% !important; overflow:visible !important;}
+#CONTENT {font-size: 14px;    float: left;    height: 100%;    width: 100%; padding: 0 !important; border:0px !important; margin: 0px !important;}
+#content { font-size: 14px;   float: left;    height: 100%;    width: 100%; padding: 0 !important; border:0px !important; margin: 0px !important; overflow: hidden !important;}
+.CFULWRAPPER {    clear: both; margin: 0px !important;}/* LEFT SIDE CLASSES */
+.LMODULEW {    border-bottom: 1px solid #1a3d47;    color: #ffffff;    margin: auto 0;    padding: 34px 0;    width: 100%;	overflow:visible;}
+.LCENTERW {	margin:0 auto;	padding: 0 25px;}/* LEFT SIDE USER LOGIN INFO */
+#UTOPTEXTW {	font-size:13px;	text-align:center;}
+#UIMGW {    margin: 19px auto 0;    width: 88px;}
+#UNAMETEXTW {color: #048def;font-size: 18px;font-weight: bold;margin-bottom: 3px;margin-top: 10px;text-align: center;}
+#UNAMETEXTW a {    color: #048def;    font-size: 18px;    font-weight: bold;    margin-top: 10px;    text-align: center;	text-decoration:none;}
+
+#UDEPARTMENTTEXTW {
+  font-size: 12px;
+  margin: 0 auto;
+  width: 67%;
+}
+}

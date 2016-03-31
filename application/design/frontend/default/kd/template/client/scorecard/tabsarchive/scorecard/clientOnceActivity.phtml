@@ -1,0 +1,19 @@
+<?php $format = KD::getModel('core/format');?>
+<div class="VVGBG VV2IN1C2">
+<div class="printvisibeltitel">
+<div class="PSUBTCLEFTH26">Aktiviteter som foregår sjeldnere enn en gang i uken</div>
+
+</div>
+<table width="100%" border="0" id="clientActivityTbl">
+  <tr>
+    <th width="50%"><?php echo $this->translate('Description of activities');?></th>
+    <th width="50%"><?php echo $this->translate('When / how often');?></th>
+  </tr>
+  <?php foreach($this->maalPlanActivity as $activity):?>
+  <tr>
+    <td class="nonecls1"><span class="tdbg1c"><?php echo $activity['maalplan_other_activityDesc1'];?></span></td>
+    <td class="nonecls1"><span class="tdbg1c"><?php echo $activity['maalplan_other_activityDesc2'];?></span></td>
+  </tr>
+  <?php endforeach;?>
+</table>
+</div>

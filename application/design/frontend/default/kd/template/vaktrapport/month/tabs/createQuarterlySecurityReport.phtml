@@ -1,0 +1,50 @@
+<div class="PSUBTCWRAPPER">
+	<div class="PSUBTCLEFT">
+    <?php echo $this->translate('Quarterly Summary');?>
+    </div>
+</div>
+<div class="CLEARBBORDER"></div>
+<?php  
+	$dateJoin = new DateTime($this->clientInfo['patient_date_of_joining']);
+	$startYear = $dateJoin->format('Y');
+	$tilDate = new DateTime();
+	$endYear = $tilDate->format('Y');
+?>
+<form name="frmSearchMonthVaktrapport" id="frmSearchMonthVaktrapport" method="post" action="<?php echo $this->getUrl("vaktrapport/month/searchk/id/".$this->clientInfo['patient_id']);?>">
+<input type="hidden" name="clientId" value="<?php echo $this->clientInfo['patient_id'];?>" />
+<input type="hidden" name="reportType" value="kvartal" />
+
+<div class="PSUBTCWRAPPER">
+	<div class="VVGBG VV2IN1C2 floatleft">
+	  <div class="width20 floatleft" style="line-height: 40px;">
+		<div class="floatleft"><?php echo $this->translate('Year');?></div>
+		<span class="tdbg888p floatleft marginleft20 width60" style="margin-top:5px;">
+			<select name="year" id="year">
+				<?php for($i=$startYear;$i<=$endYear;$i++)
+				{
+					?>
+					<option value="<?php echo $i;?>" <?php echo (isset($this->vaktrapInfo['vaktrap_year']) && $this->vaktrapInfo['vaktrap_year']==$i)?'selected="selected"':'';?>><?php echo $i;?></option>
+				<?php
+				}?>
+			</select>
+		</span>
+	  </div>
+	  <div class="width20 floatleft marginleft20" style="line-height: 40px;">
+		<div class="floatleft"><?php echo $this->translate('Period');?></div>
+		<span class="tdbg888p floatleft width50 marginleft20" style="margin-top:5px;">
+			<select name="period" id="period">
+				<?php for($i=1;$i<=4;$i++)
+				{
+					?>
+					<option value="<?php echo $i;?>" <?php echo (isset($this->vaktrapInfo['vaktrap_period']) && $this->vaktrapInfo['vaktrap_period']==$i)?'selected="selected"':'';?>><?php echo $this->translate('Quarter').' '.$i;?></option>
+				<?php
+				}?>
+			</select>
+		</span>
+	  </div>
+	  <div class="width20 floatleft" style="margin:0px">
+		<div class="KKI1C1"><div class="OPPRETTB floatleft marginleft20" style="margin-top:0px"><input type="submit" name="show_report" id="show_report" class="OPPRETTBA" value="<?php echo $this->translate('Show');?>"></div></div>
+	  </div>
+	</div>
+</div>
+</form>

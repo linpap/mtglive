@@ -1,0 +1,317 @@
+<?php $format = KD::getModel('core/format');?>
+<form name="frmEditClientVaktrapport" id="frmEditClientVaktrapport" method="post" action="<?php echo $this->getUrl('client/scorecard/save/pdid/'.$this->maalplanInfo['maalplan_patientID'].'/id/'.$this->maalplanInfo['maalplan_id']);?>">
+<input type="hidden" name="maalplan_id" value="<?php echo $this->maalplanInfo['maalplan_id'];?>" />
+<input type="hidden" name="maalplan_patientID" value="<?php echo $this->maalplanInfo['maalplan_patientID'];?>" />
+<div class="PSUBTCLEFTH2"><?php echo $this->translate('Scorecard Plan');?></div>
+<div class="VVGBG">
+<table width="100%" border="0" cellspacing="4" cellpadding="0">
+  <tbody>
+    <tr>
+      <th class="noborder"><?php echo $this->translate('%s Date',$this->translate('From'));?></th>
+      <th class="noborder"><?php echo $this->translate('%s Date',$this->translate('To'));?></th>
+    </tr>
+    <tr>
+      <td><span class="tdbg1c"><input type="text" data-validation="required" class="disabled" name="maalplan[maalplan_from_date]" id="maalplan_from_date" readonly value="<?php echo $format->FormatDate($this->maalplanInfo['maalplan_from_date']); ?>" /></span></td>
+      <td><span class="tdbg1c"><input type="text" data-validation="required" class="disabled" name="maalplan[maalplan_to_date]" id="maalplan_to_date" readonly value="<?php echo $format->FormatDate($this->maalplanInfo['maalplan_to_date']);?>" /></span></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="CLEARBBORDER2"></div>
+	<div class="VVGBG">
+     	<table width="100%" border="0" cellspacing="4" cellpadding="0">
+  <tbody>
+    <tr>
+      <th scope="col" width="50%"><?php echo $this->translate('Checklist');?></th>
+      <th scope="col" width="25%"><?php echo $this->translate('%s Date',$this->translate('From'));?></th>
+      <th scope="col" width="25%"><?php echo $this->translate('%s Date',$this->translate('To'));?></th>
+    </tr>
+    <tr>
+      <td class="noborder"><?php echo $this->translate('Valid %s',$this->translate('Measurement'));?></td>
+      <td class="nonecls1"><span class="tdbg"><input type="text" class="datepickerImage disabled width70 validation" name="maalplan[maalplan_tiltak_fromDate]" id="maalplan_tiltak_fromDate" readonly value="<?php echo isset($this->maalplanInfo['maalplan_tiltak_fromDate'])?$format->FormatDate($this->maalplanInfo['maalplan_tiltak_fromDate']):''; ?>"></span></td>
+      <td class="nonecls1"><span class="tdbg"><input type="text" class="datepickerImage disabled width70" name="maalplan[maalplan_tiltak_toDate]" id="maalplan_tiltak_toDate" readonly value="<?php echo isset($this->maalplanInfo['maalplan_tiltak_toDate'])?$format->FormatDate($this->maalplanInfo['maalplan_tiltak_toDate']):''; ?>"></span></td>
+    </tr>
+    <tr>
+      <td class="noborder"><?php echo $this->translate('Valid %s',$this->translate('Scorecard Plan'));?></td>
+      <td class="nonecls1"><span class="tdbg"><input type="text" class="datepickerImage disabled width70 validation" name="maalplan[maalplan_maalsty_fromDate]" id="maalplan_maalsty_fromDate" readonly value="<?php echo isset($this->maalplanInfo['maalplan_maalsty_fromDate'])?$format->FormatDate($this->maalplanInfo['maalplan_maalsty_fromDate']):''; ?>"></span></td>
+      <td class="nonecls1"><span class="tdbg"><input type="text" class="datepickerImage disabled width70" name="maalplan[maalplan_maalsty_toDate]" id="maalplan_maalsty_toDate" readonly  value="<?php echo isset($this->maalplanInfo['maalplan_maalsty_toDate'])?$format->FormatDate($this->maalplanInfo['maalplan_maalsty_toDate']):''; ?>"></span></td>
+    </tr>
+
+    
+  </tbody>
+</table>
+<table width="100%" border="0" cellspacing="4" cellpadding="0">
+  <tbody>
+    <tr>
+      <td class="noborder">
+      	<?php echo $this->translate('Coercion Report undergone with departmental and youth, and then sent (first overlapping after the event)');?>
+      </td>
+      <td width="50%" class="bgwhite"><span class="tdbg45"><?php echo $this->maalplanForce;?></span></td>
+    </tr>
+    
+  </tbody>
+</table>
+</div>
+<div class="CLEARBBORDER2"></div>
+	<div class="KKI2C">
+        <table width="100%" border="0" cellspacing="4" cellpadding="0">
+            <tr>
+                <th class="noborder">Årsak til plassering - Beskriv</th>
+            </tr>
+            <tr>
+                <td class="nonecls1"><span class="tdbg1c">
+                        <textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden;width: 100%; border: none; height:auto;"  id="patient_location" name="patient[patient_location]" data-validation="required" ><?php echo $this->maalplanInfo['patient_location'];?></textarea>
+                    </span>
+                </td>
+            </tr>
+		</table> 
+    </div>
+    <div class="CLEARBBORDER2"></div>
+    <div class="KKI2C">
+        <table width="100%" border="0" cellspacing="4" cellpadding="0">
+            <tr>
+                <th class="noborder">Mål fra tiltaksplan - Beskriv</th>
+            </tr>
+            <tr>
+                <td class="nonecls1"><span class="tdbg1c">
+                        <textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden;width: 100%; border: none; height:auto;" id="patient_actionplan" name="patient[patient_actionplan]" data-validation="required" ><?php echo $this->maalplanInfo['patient_actionplan'];?></textarea>
+                    </span>
+                </td>
+            </tr>
+		</table> 
+    </div>
+<div class="CLEARBBORDER2"></div>
+	<div class="VVGBG">
+     	<table width="100%" border="0" cellspacing="4" cellpadding="0">
+  <tbody>
+    <tr>
+      <th scope="col" width="50%"><?php echo $this->translate('%s %s',$this->translate('Fullfil'),$this->translate('Goal'));?></th>
+      <th scope="col" width="25%"><?php echo $this->translate('%s Date',$this->translate('From'));?></th>
+      <th scope="col" width="25%"><?php echo $this->translate('%s Date',$this->translate('To'));?></th>
+    </tr>
+	<?php foreach($this->maalplanMaalAchiveInfo as $maalplanMaalAchive):?>
+	<tr>
+      <td class="noborder"><?php echo $maalplanMaalAchive['maal_desc'];?></td>
+      <td class="nonecls1"><span class="tdbg45"><?php echo $format->FormatDate($maalplanMaalAchive['maal_from_date']);?></span></td>
+      <td class="nonecls1"><span class="tdbg45"><?php echo $format->FormatDate($maalplanMaalAchive['maal_to_date']);?></span></td>
+    </tr>
+  <?php endforeach;?>
+    
+  </tbody>
+</table>
+</div>
+<div class="CLEARBBORDER2"></div>
+
+
+
+<div class="VVGBG VV2IN1C2">
+<table width="100%" border="0">
+  <tr>
+    <th width=""></th>
+    <th width="50%"><?php echo $this->translate('%s %s',$this->translate('Active'),$this->translate('Goal'));?></th>
+    <th width="10%" class="TABLEMARGINL1"><?php echo $this->translate('Completed');?></th>
+    <th width="10%" class="TABLEMARGINL"><?php echo $this->translate('Partial Complete');?></th>
+    <th width="10%" class="TABLEMARGINL"><?php echo $this->translate('Not Complete');?></th>
+    <th width="10%" class="TABLEMARGINL"><?php echo $this->translate('%s Date',$this->translate('From'));?></th>
+    <th width="10%" class="TABLEMARGINL"><?php echo $this->translate('%s Date',$this->translate('To'));?></th>
+  </tr>
+  <?php $maalplanCnt = 1;foreach($this->maalplanMaalInfo as $maalplanMaal):?>
+  <?php if(isset($maalplanMaal['maalplan_maal_id']) && $maalplanMaal['maalplan_maal_id']>0):?>
+  <tr>
+    <td class="TABLE10px"><span class="tdbg15"><?php echo $maalplanCnt;?></span></td>
+    <td><span class="tdbg"><input type="text" name="maalplanmaal[<?php echo $maalplanMaal['maalplan_maal_id'];?>][maalplan_maaldesc]" class="validation" readonly id="maalplan_maaldesc<?php echo $maalplanCnt;?>" value="<?php echo $maalplanMaal['maal_desc'];?>" /></span></td>
+    <td><span class="tdbg VVTAC"><div><input type="radio" name="maalplanmaal[<?php echo $maalplanMaal['maalplan_maal_id'];?>][maalplan_maalResult]" id="maalplan1_<?php echo $maalplanMaal['maalplan_maal_id'];?>" value="2" <?php echo (isset($maalplanMaal['maalplan_maalResult']) && $maalplanMaal['maalplan_maalResult']==2)?'checked="checked"':'';?> /><label for="maalplan1_<?php echo $maalplanMaal['maalplan_maal_id'];?>"><span></span></label></div></span></td>
+    <td><span class="tdbg VVTAC"><div><input type="radio" name="maalplanmaal[<?php echo $maalplanMaal['maalplan_maal_id'];?>][maalplan_maalResult]" id="maalplan2_<?php echo $maalplanMaal['maalplan_maal_id'];?>" value="1" <?php echo (isset($maalplanMaal['maalplan_maalResult']) && $maalplanMaal['maalplan_maalResult']==1)?'checked="checked"':'';?> /><label for="maalplan2_<?php echo $maalplanMaal['maalplan_maal_id'];?>"><span></span></label></div></span></td>
+    <td><span class="tdbg VVTAC"><div><input type="radio" name="maalplanmaal[<?php echo $maalplanMaal['maalplan_maal_id'];?>][maalplan_maalResult]" id="maalplan3_<?php echo $maalplanMaal['maalplan_maal_id'];?>" value="0" <?php echo (isset($maalplanMaal['maalplan_maalResult']) && $maalplanMaal['maalplan_maalResult']==0)?'checked="checked"':'';?> /><label for="maalplan3_<?php echo $maalplanMaal['maalplan_maal_id'];?>"><span></span></label></div></span></td>
+    <td><span class="tdbg"><?php echo $format->FormatDate($maalplanMaal['maal_from_date']);?></span></td>
+    <td><span class="tdbg"><?php echo $format->FormatDate($maalplanMaal['maal_to_date']);?></span></td>
+  </tr>
+  <?php else:?>
+  <tr>
+    <td class="TABLE10px"><span class="tdbg15"><?php echo $maalplanCnt;?></span></td>
+    <td><span class="tdbg"><input type="text" name="maal[<?php echo $maalplanMaal['maal_id'];?>][maalplan_maaldesc]" class="validation" readonly id="maalplan_maaldesc<?php echo $maalplanCnt;?>" value="<?php echo $maalplanMaal['maal_desc'];?>" /></span></td>
+    <td><span class="tdbg VVTAC"><div><input type="radio" name="maal[<?php echo $maalplanMaal['maal_id'];?>][maalplan_maalResult]" id="maal1_<?php echo $maalplanMaal['maal_id'];?>" value="2" <?php echo (isset($maalplanMaal['maalplan_maalResult']) && $maalplanMaal['maalplan_maalResult']==2)?'checked="checked"':'';?> /><label for="maal1_<?php echo $maalplanMaal['maal_id'];?>"><span></span></label></div></span></td>
+    <td><span class="tdbg VVTAC"><div><input type="radio" name="maal[<?php echo $maalplanMaal['maal_id'];?>][maalplan_maalResult]" id="maal2_<?php echo $maalplanMaal['maal_id'];?>" value="1" <?php echo (isset($maalplanMaal['maalplan_maalResult']) && $maalplanMaal['maalplan_maalResult']==1)?'checked="checked"':'';?> /><label for="maal2_<?php echo $maalplanMaal['maal_id'];?>"><span></span></label></div></span></td>
+    <td><span class="tdbg VVTAC"><div><input type="radio" name="maal[<?php echo $maalplanMaal['maal_id'];?>][maalplan_maalResult]" id="maal3_<?php echo $maalplanMaal['maal_id'];?>" value="0" <?php echo (isset($maalplanMaal['maalplan_maalResult']) && $maalplanMaal['maalplan_maalResult']==0)?'checked="checked"':'';?> /><label for="maal3_<?php echo $maalplanMaal['maal_id'];?>"><span></span></label></div></span></td>
+    <td><span class="tdbg"><?php echo $format->FormatDate($maalplanMaal['maal_from_date']);?></span></td>
+    <td><span class="tdbg"><?php echo $format->FormatDate($maalplanMaal['maal_to_date']);?></span></td>
+  </tr>
+  <?php endif; ?>
+  <?php $maalplanCnt++; endforeach;?>
+</table>
+</div>
+<div class="CLEARBBORDER2"></div>
+    <div class="KKI2C">
+        <table width="100%" border="0" cellspacing="4" cellpadding="0">
+            <tr>
+                <th class="noborder"><?php echo $this->translate('Resources');?> - hentes fra kartleggingsmal-Still Remain</th>
+            </tr>
+            <tr>
+                <td class="nonecls1"><span class="tdbg1c">
+                        <textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden;width: 100%; border: none; height:auto;" id="patient_resource" name="patient[patient_resource]" data-validation="required" ><?php echo $this->maalplanInfo['patient_resource'];?></textarea>
+                    </span>
+                </td>
+            </tr>
+		</table> 
+    </div>
+<div class="CLEARBBORDER2"></div>
+
+<?php foreach($this->maalplanTiltakInfo as $maalID=>$maalplanTiltak):?>
+<div class="KKI2C">
+	<div class="PSUBTCWRAPPER">
+		<div class="PSUBTCLEFT2">
+		<strong><?php echo $this->translate('Goal');?>: <?php echo $maalplanTiltak['maal_desc'];?></strong>
+		</div>
+	</div>
+
+	<div class="KKI2C">
+		<table width="100%" border="0" cellspacing="4" cellpadding="0">
+			<tr>
+				<td class="noborder">
+					<div class="PSUBTCWRAPPER">
+						<div class="PSUBTCLEFT2">
+						<strong>Status ved oppstart av perioden - Evaluering fra forige kvartal -Still Remain</strong>
+						</div>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td class="nonecls1"><span class="tdbg1c">
+					<?php if(isset($maalplanTiltak['maalplan_maal_id']) && $maalplanTiltak['maalplan_maal_id']>0):?>
+					<textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden; width: 100%; border: none; height:auto;" name="maalplanmaal[<?php echo $maalplanTiltak['maalplan_maal_id'];?>][maalplan_statusdesc]" id="maalplan_statusdesc_maalplan<?php echo $maalplanTiltak['maalplan_maal_id'];?>" class="validation"><?php echo $maalplanTiltak['maalplan_statusdesc'];?></textarea>
+					<input type="hidden" name="maalplanmaal[<?php echo $maalplanTiltak['maalplan_maal_id'];?>][maal_id]" class="validation" value="<?php echo $maalID;?>" readonly="" />
+					<?php else:?>
+					<textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden; width: 100%; border: none; height:auto;"  name="maal[<?php echo $maalID;?>][maalplan_statusdesc]"  id="maalplan_statusdesc_maal<?php echo $maalID;?>" class="validation"><?php echo $maalplanTiltak['maalplan_statusdesc'];?></textarea>
+					<?php endif;?>
+					</span>
+				</td>
+			</tr>
+		</table> 
+	</div>
+
+
+	<div class="CLEARBBORDER2"></div>
+	<div class="KKI2C">
+		<div class="PSUBTCWRAPPER">
+			<div class="PSUBTCLEFT2">
+				<strong><?php echo $this->translate('Ongoing Measure');?></strong>
+			</div>
+		</div>
+		<?php foreach($maalplanTiltak['data'] as $maalplanTiltakData):?>
+		<div class="KKI2C">
+			<table width="100%" border="0" cellspacing="4" cellpadding="0">
+				<tr>
+					<th class="noborder"><?php echo $maalplanTiltakData['tilgov_owner'];?> - <?php echo $maalplanTiltakData['tilgov_desc'];?></th>
+				</tr>
+				<tr>
+					<td class="nonecls1"><span class="tdbg1c">
+						<?php if(isset($maalplanTiltakData['maalplan_tiltak_id']) && $maalplanTiltakData['maalplan_tiltak_id']>0):?>
+						<textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden; width: 100%; border: none; height:auto;" name="maalplantiltak[<?php echo $maalplanTiltakData['maalplan_tiltak_id'];?>][maalplan_tiltakDesc]" id="maalplan_tiltakDesc_maalplan<?php echo $maalplanTiltakData['maalplan_tiltak_id'];?>" class="validation"><?php echo $maalplanTiltakData['maalplan_tiltakDesc'];?></textarea>
+						<input type="hidden" name="maalplanmaal[<?php echo $maalplanTiltak['maalplan_maal_id'];?>][tiltak_id]" value="<?php echo $maalplanTiltakData['maalplan_tiltakID'];?>" readonly="" class="validation"/>
+						<?php else:?>
+						<textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden; width: 100%; border: none; height:auto;"  name="tiltak[<?php echo $maalplanTiltakData['tilgov_id'];?>][maalplan_tiltakDesc]"  id="maalplan_tiltakDesc_tiltak<?php echo $maalplanTiltakData['tilgov_id'];?>" class="validation"><?php echo $maalplanTiltakData['maalplan_tiltakDesc'];?></textarea>
+						<?php endif;?>
+							
+						</span>
+					</td>
+				</tr>
+			</table> 
+		</div>
+		<?php endforeach;?>
+
+	</div>
+
+	<div class="CLEARBBORDER2"></div>
+	<div class="KKI2C">
+        <table width="100%" border="0" cellspacing="4" cellpadding="0">
+            <tr>
+                <td class="noborder">
+                	<div class="PSUBTCWRAPPER">
+						<div class="PSUBTCLEFT2">
+							<strong><?php echo $this->translate('Overall evaluation of objectives and measures');?></strong>
+						</div>
+					</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="nonecls1"><span class="tdbg1c">
+					<?php if(isset($maalplanTiltak['maalplan_maal_id']) && $maalplanTiltak['maalplan_maal_id']>0):?>
+					<textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden; width: 100%; border: none; height:auto;" name="maalplanmaal[<?php echo $maalplanTiltak['maalplan_maal_id'];?>][maalplan_evaluering]" id="maalplan_evaluering_maalplan<?php echo $maalplanTiltak['maalplan_maal_id'];?>" class="validation"><?php echo $maalplanTiltak['maalplan_evaluering'];?></textarea>
+					<?php else:?>
+					<textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden; width: 100%; border: none; height:auto;"  name="maal[<?php echo $maalID;?>][maalplan_evaluering]"  id="maalplan_evaluering_maal<?php echo $maalID;?>" class="validation"><?php echo $maalplanTiltak['maalplan_evaluering'];?></textarea>
+					<?php endif;?>	
+                        
+                    </span>
+                </td>
+            </tr>
+		</table> 
+    </div>
+</div>
+<div class="CLEARBBORDER2"></div>
+<?php endforeach;?>
+
+	<div class="KKI2C">
+		<div class="PSUBTCWRAPPER">
+			<div class="PSUBTCLEFT2">
+			<strong><?php echo $this->translate('Advances in treatment and challenges ahead');?></strong>
+			</div>
+		</div>
+        <table width="100%" border="0" cellspacing="4" cellpadding="0">
+            <tr>
+                <td class="nonecls1"><span class="tdbg1c">
+                        <textarea onkeyup="textAreaAdjust(this)" name="maalplan[maalplan_advance]" id="maalplan_advance" style="overflow:hidden; width: 100%; border: none; height:auto;" class="validation"><?php echo isset($this->maalplanInfo['maalplan_advance'])?$this->maalplanInfo['maalplan_advance']:''; ?></textarea>
+                    </span>
+                </td>
+            </tr>
+		</table> 
+    </div>
+    
+	<div class="PSUBTCLEFTH2"><?php echo $this->translate('Attachment to scorecard plan');?></div>
+
+	<div class="KKI2C">
+	<div id="BORDERTABS1">
+     	<ul id="tabs3">
+        	<li class="INACTIVTAB" id="current3"><a href="#" name="tab31"><div class="ACTIVETLZI TLZI"><?php echo $this->translate('Activities that only <br /> takes certain weekdays');?></div></a></li>
+            <li class="INACTIVTAB"><a href="#" name="tab32"><div class="ACTIVETLZI TLZI"><?php echo $this->translate('Activities that take place <br /> less than once a week');?></div></a></li>
+            <li class="INACTIVTAB"><a href="#" name="tab33"><div class="ACTIVETLZI TLZI"><?php echo $this->translate('Meetings conducted <br>in the period');?></div></a></li>
+		</ul>
+		<div id="content3">
+			<div class="tablebg">
+				<div style="display: block; padding:0 10px" id="tab31">
+                	<?php echo $this->partial('scorecard/tabs/scorecard/clientCertainActivity.phtml',array('maalPlanCertain'=>$this->maalPlanCertain));?>
+                </div>
+                <div style="display: block; padding:0 10px" id="tab32">
+                	<?php echo $this->partial('scorecard/tabs/scorecard/clientOnceActivity.phtml',array('maalPlanActivity'=>$this->maalPlanActivity));?>
+				</div>
+                <div style="display: block; padding:0 10px" id="tab33">
+                	<?php echo $this->partial('scorecard/tabs/scorecard/clientMeeting.phtml',array('maalPlanMeeting'=>$this->maalPlanMeeting));?>
+				</div>
+			</div>
+		</div>
+		<div class="bot_shadow"><img src="<?php echo $this->getMediaUrl('timg/bot-shadow.png');?>" width="834" height="21"></div>
+	</div>    
+    </div>
+
+
+<?php /*?><div class="CANCELB"><a class="OPPRETTBA" href="#"><?php echo $this->translate('Save');?></a></div>
+<div class="LAASARKIVERB"><a class="LAASARKIVERBA" href="#"><?php echo $this->translate('Lock and Archives');?></a></div><?php */?>
+<div class="OPPRETTB floatleft marginleft20"><input type="submit" name="save_maalplan" id="save_maalplan" class="OPPRETTBA" value="<?php echo $this->translate('Save');?>"></div>
+<div class="OPPRETTB floatleft marginleft20"><input type="submit" name="lock_maalplan" id="lock_maalplan" class="OPPRETTBA LAASARKIVERBA" value="<?php echo $this->translate('Lock and Archives');?>"></div>
+</form>
+<script language="javascript" type="text/javascript">
+  $("#lock_maalplan").unbind().click(function(){
+
+		$('.validation').each(function () {
+			if($(this).is(':radio'))
+			{
+				$(this).attr( "data-validation", 'radio' );
+				//$(this).data('validation','radio');
+			}
+			else
+			{
+				$(this).attr( "data-validation", 'required' );
+				//$(this).data('validation','required');
+			}
+		}); 
+});
+</script>

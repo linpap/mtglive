@@ -1,0 +1,66 @@
+<?php  if(count($this->observationCollection)>0):?>
+  <?php foreach($this->observationCollection as $observation):  ?>
+	<?php $id = $observation['observation_id'];
+		  $obType = $observation['observation_type']; 
+		  if(isset($obType) && $obType=='M'):$obRel = $observation['relation1'];elseif(isset($obType) && $obType=='T'):$obRel = $observation['relation2'];else:$obRel = '';endif;
+	?>
+	  <tr id="observation-<?php echo $id;?>">
+		<td class="TSLRTDNUMBER bgwhite">
+			<span class="tdbg" style="width: 20px;">
+			<input type="checkbox" name="<?php echo 'checkbox_'.$id;?>" id="<?php echo 'checkbox_'.$id;?>" class="css-checkbox"/>
+			<label for="<?php echo 'checkbox_'.$id;?>" class="css-label"></label>
+			</span>
+		</td>
+		<td><span class="tdbg cursormove"><?php echo $obType; ?></span></td>
+		<td><span class="tdbg cursormove"><?php echo $obRel; ?></span></td>
+		<td><span class="tdbg cursormove"><?php echo $observation['observation_desc']; ?></span></td>
+		<td><span class="tdbg dialog-ajax1" data-url="<?php echo $this->getUrl('client/mto/editobservation/po/'.$this->page.'/id/'.$id);?>" data-title="<?php echo $observation['observation_desc']; ?>">Edit</span></td>
+	  </tr>
+	<?php endforeach;?>
+  <?php endif;?>
+<script language="javascript" type="text/javascript">
+// Code For Get Dialog on click of class dialog-ajax
+$(document).ready(function(){
+
+	$('.dialog-ajax1').unbind("click").click(function(){   
+		var tag = $("<div></div>"); //This tag will the hold the dialog content.
+		var url = $(this).data('url');
+		var title = $(this).data('title');
+		$.ajax({
+		  url: $(this).data('url'),
+		  type: 'GET',
+		  //beforeSend: options.beforeSend,
+		  beforeSend: function() {$("#loading-image").show();},
+		  error: function() { alert('Could not load form') },
+		  success: function(data, textStatus, jqXHR) {
+			if(typeof data == "object" && data.html) { //response is assumed to be JSON
+			  tag.html(data.html).dialog({modal:true, title: title}).dialog('open');
+			} else { //response is assumed to be HTML
+			  tag.html(data).dialog({modal: true, title: title, height: 200, width:800, hide: "scale", show : "scale",
+					open: function (event, ui) {
+						
+						$.validate({
+							form : '#frmClientEditObservation', 
+							validateOnBlur : false,
+							borderColorOnError : '#C90312',
+							addValidClassOnAll : true,
+							showHelpOnFocus : false,
+							addSuggestions : false,
+							errorMessagePosition : 'top',
+							scrollToTopOnError : true
+						});
+						$("#loading-image").hide();
+					},
+					close: function (event, ui) {
+						$('input.DyndatepickerImage1').datepicker("destroy");
+						$(this).dialog("destroy");
+						$(this).remove();
+					}
+				}).dialog('open');
+				
+			}
+		  }
+		});
+	  });
+});
+</script>

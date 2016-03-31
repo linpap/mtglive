@@ -1,0 +1,82 @@
+<?php $format = KD::getModel('core/format');?>
+<div class="PSUBTCWRAPPER">
+	<div class="PSUBTCLEFT">
+    	<?php echo $this->translate('Quarterly Report');?>
+    </div>
+</div>
+<div class="CLEARBBORDER"></div>
+<div class="VVGBG VV2IN1C2 KRV">
+<table width="100%" border="0" cellspacing="4" cellpadding="0">
+    <tr class="CURNONPOINTER">
+        <th class="TSLRTDCENTER"><?php echo $this->translate('Report');?></th>
+        <th class="TSLRTDCENTER"><?php echo $this->translate('Department');?></th>
+        <th class="TSLRTDCENTER"><?php echo $this->translate('Date %s',$this->translate('Start'));?></th>
+        <th class="TSLRTDCENTER"><?php echo $this->translate('Date %s',$this->translate('End'));?></th>
+    </tr>
+	<?php
+    $reportIndex = 0;
+
+    if ($this->quartalMaalPlanCollection instanceof Zend_Paginator) {
+        $reportIndex = $this->quartalMaalPlanCollection->getTotalItemCount() + 1;
+    } else {
+        $reportIndex = count($this->quartalMaalPlanCollection) + 1;
+    }
+
+    $page = $this->page > 0 ? $this->page -1 : 0;
+    $currentIndex = ($page * $this->pageSize);
+    $reportIndex = ($currentIndex >= $reportIndex || $currentIndex <= 0) ? $reportIndex : $reportIndex - $currentIndex;
+
+    foreach($this->quartalMaalPlanCollection as $maalPlan):
+	    $reportIndex += 1;
+    ?>
+
+	<tr>
+        <td>
+		<?php if($maalPlan['maalplan_status']=='yes'): 
+			  	$maalPlanUrl = $this->getUrl('client/scorecard/index/id/'.$this->clientID);
+			  else:
+			  	$maalPlanUrl = $this->getUrl('client/scorecard/archive/id/'.$this->clientID.'/mid/'.$maalPlan['maalplan_id']);
+			  endif;?>
+			<a href="<?php echo $maalPlanUrl;?>"><?php echo $this->translate('No.');?>: <?php echo $reportIndex;?></span></a></td>
+        <td><span class="tdbg"><?php echo KD::getModel('department/department')->getDepartment($maalPlan['maalplan_deptID']);?></span></td>
+        <td><span class="tdbg"><?php echo $format->FormatDate($maalPlan['maalplan_from_date']);?></span></td>
+        <td><span class="tdbg"><?php echo $format->FormatDate($maalPlan['maalplan_to_date']);?></span></td>
+    </tr>
+	<?php endforeach;?>
+   
+</table>
+	<?php if(!($this->pageSize==1000)){echo $this->paginationControl($this->quartalMaalPlanCollection, 'Sliding', 'control.phtml', array('page'=>'pageV','tt'=>'22'));} ?>
+<div class="KRV1C2">
+      <div class="KRV1C2_1">
+        	<div class="KRV1C2_11"><?php echo $this->translate('Sort');?>:</div>
+        	<div class="KRV1C2_12">
+                <span class="tdbgkinfo padding5">
+                <select class="onSelectAction" name="selPeriod" data-form="frmClientMonthVaktrapList">
+                    <option value="<?php echo $this->getUrl('client/report/index/id/'.$this->clientID.'/period/M1/tt/22');?>" <?php echo ($this->periodVaktrap=='M1')?'selected="selected"':'';?>>1 <?php echo $this->translate('Month');?></option>
+                    <option value="<?php echo $this->getUrl('client/report/index/id/'.$this->clientID.'/period/M2/tt/22');?>" <?php echo ($this->periodVaktrap=='M2')?'selected="selected"':'';?>>2 <?php echo $this->translate('Month');?></option>
+                    <option value="<?php echo $this->getUrl('client/report/index/id/'.$this->clientID.'/period/M3/tt/22');?>" <?php echo ($this->periodVaktrap=='M3')?'selected="selected"':'';?>>3 <?php echo $this->translate('Month');?></option>
+                    <option value="<?php echo $this->getUrl('client/report/index/id/'.$this->clientID.'/period/M6/tt/22');?>" <?php echo ($this->periodVaktrap=='M6')?'selected="selected"':'';?>>6 <?php echo $this->translate('Month');?></option>
+                    <option value="<?php echo $this->getUrl('client/report/index/id/'.$this->clientID.'/period/Y1/tt/22');?>" <?php echo ($this->periodVaktrap=='Y1')?'selected="selected"':'';?>>1 <?php echo $this->translate('Year');?></option>
+                    <option value="<?php echo $this->getUrl('client/report/index/id/'.$this->clientID.'/period/Y2/tt/22');?>" <?php echo ($this->periodVaktrap=='Y2')?'selected="selected"':'';?>>2 <?php echo $this->translate('Year');?></option>
+					<option value="<?php echo $this->getUrl('client/report/index/id/'.$this->clientID.'/period/A/tt/22');?>" <?php echo ($this->periodVaktrap=='A')?'selected="selected"':'';?>><?php echo $this->translate('All');?></option>
+                </select> 
+                </span>
+            </div>
+    	</div>
+    	<div class="KRV1C2_1">
+        	<div class="KRV1C2_11"><?php echo $this->translate('View');?>:</div>
+        	<div class="KRV1C2_12">
+                <span class="tdbgkinfo padding5">
+                <select class="onSelectAction" name="selPageSize" data-form="frmClientMonthVaktrapList">
+                    <option value="<?php echo $this->getUrl('client/report/index/id/'.$this->clientID.'/pgs/5/tt/24');?>" <?php echo ($this->pageSize==5)?'selected="selected"':'';?>>5</option>
+					<option value="<?php echo $this->getUrl('client/report/index/id/'.$this->clientID.'/pgs/10/tt/24');?>" <?php echo ($this->pageSize==10)?'selected="selected"':'';?>>10</option>
+                    <option value="<?php echo $this->getUrl('client/report/index/id/'.$this->clientID.'/pgs/25/tt/24');?>" <?php echo ($this->pageSize==25)?'selected="selected"':'';?>>25</option>
+                    <option value="<?php echo $this->getUrl('client/report/index/id/'.$this->clientID.'/pgs/50/tt/24');?>" <?php echo ($this->pageSize==50)?'selected="selected"':'';?>>50</option>
+                    <option value="<?php echo $this->getUrl('client/report/index/id/'.$this->clientID.'/pgs/100/tt/24');?>" <?php echo ($this->pageSize==100)?'selected="selected"':'';?>>100</option>
+                    <option value="<?php echo $this->getUrl('client/report/index/id/'.$this->clientID.'/pgs/1000/tt/24');?>" <?php echo ($this->pageSize==1000)?'selected="selected"':'';?>><?php echo $this->translate('All');?></option>
+                </select> 
+                </span>
+            </div>
+    	</div>
+    </div>
+</div>

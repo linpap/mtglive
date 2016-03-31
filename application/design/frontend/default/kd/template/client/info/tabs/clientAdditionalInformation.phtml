@@ -1,0 +1,68 @@
+<div class="PSUBTCWRAPPER clearboth">
+	<div class="PSUBTCLEFTH2"><?php echo $this->translate('Additional Information');?></div>
+    <div class="KITITWRAPPER">
+    	<?php echo $this->translate('%s Type',$this->translate('Additional Information'));?>:
+        <div class="KITINRDLISTW width70">
+        	<span class="KITINRDLISTWSPAN">
+            	<select class="get-ajax" data-action="<?php echo $this->getUrl('client/additional/');?>" data-load="<div class='ajax-loading'><div>" data-text="AJAX IS WORKING" data-target="additionalInfo">
+                
+                
+                
+                
+                	<option value="/placement/isAjax/1/id/<?php echo $this->clientID;?>" selected="selected" <?php //echo ($this->selected=='p')?'selected="selected"':'';?>><?php echo $this->translate('%s Reason',$this->translate('Placement'));?></option>
+					<option value="/decision/isAjax/1/id/<?php echo $this->clientID;?>" <?php //echo ($this->selected=='e')?'selected="selected"':'';?>><?php echo $this->translate('Decision');?></option>
+                    <option value="/detail/isAjax/1/id/<?php echo $this->clientID;?>" <?php //echo ($this->selected=='d')?'selected="selected"':'';?>><?php echo $this->translate('Client Information');?></option>
+                    <option value="/addresses/isAjax/1/id/<?php echo $this->clientID;?>" <?php //echo ($this->selected=='a')?'selected="selected"':'';?>><?php echo $this->translate('Address List');?></option>
+                    <option value="/network/isAjax/1/id/<?php echo $this->clientID;?>" <?php //echo ($this->selected=='n')?'selected="selected"':'';?>><?php echo $this->translate('Network');?></option>
+                    <option value="/measurement/isAjax/1/id/<?php echo $this->clientID;?>" <?php //echo ($this->selected=='m')?'selected="selected"':'';?>><?php echo $this->translate('Measurement');?></option>
+                    <option value="/refreat/isAjax/1/id/<?php echo $this->clientID;?>" <?php //echo ($this->selected=='r')?'selected="selected"':'';?>><?php echo $this->translate('Referat');?></option>
+                    <option value="/history/isAjax/1/id/<?php echo $this->clientID;?>" <?php //echo ($this->selected=='h')?'selected="selected"':'';?>><?php echo $this->translate('History');?></option>
+                    <option value="/investigation/isAjax/1/id/<?php echo $this->clientID;?>" <?php //echo ($this->selected=='i')?'selected="selected"':'';?>><?php echo $this->translate('Investigation');?></option>
+                    <option value="/force/isAjax/1/id/<?php echo $this->clientID;?>" <?php //echo ($this->selected=='f')?'selected="selected"':'';?>><?php echo $this->translate('Forced Protocol');?></option>
+                    <option value="/logg/isAjax/1/id/<?php echo $this->clientID;?>" <?php //echo ($this->selected=='l')?'selected="selected"':'';?>><?php echo $this->translate('Log');?></option>
+                    <option value="/avvik/isAjax/1/id/<?php echo $this->clientID;?>" <?php //echo ($this->selected=='l')?'selected="selected"':'';?>><?php echo $this->translate('Avvik');?></option>
+                    <option value="/others/isAjax/1/id/<?php echo $this->clientID;?>" <?php //echo ($this->selected=='o')?'selected="selected"':'';?>><?php echo $this->translate('Other');?></option>
+				</select> 
+				
+			</span>  	
+		</div>
+	</div>
+	<div class="CLEARBBORDER4"></div>
+	<!-- OPPTION 1 -->  
+	<div class="KKI2C width98" style="margin:0px;">
+
+		<div id="additionalInfo">
+		<form name="frmClientAddPlacement" id="frmClientAddPlacement" method="post" action="<?php echo $this->getUrl("client/additional/placementpost/id/".$this->clientID);?>">
+		<input type="hidden" name="patient_id" id="patient_id" value="<?php echo $this->clientID;?>" />
+		  <div id="placement">
+              <?php echo $this->partial('partials/texteditor.phtml', [
+                  'key' => 'patient_location',
+                  'name' => 'placement[patient_location]',
+                  'content' => $this->clientInfo['patient_location'],
+                  'required' => 'data-validation="required"'
+              ]); ?>
+              <?php /**
+		    <div class="editor_button">
+				<input onClick="createEditor('patient_location');" type="button" value="Vis editor">
+				<input onClick="removeEditor('patient_location');" type="button" value="Skjul editor">
+			</div>
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td class="nonecls"><span class="tdbg1c"  style="padding:0px !important;">
+							<div id="contents_patient_location" class="padding5h">
+							<textarea onkeyup="textAreaAdjust(this)" name="placement[patient_location]" class="validation ckeditorClass minheight20" data-name="patient_location" data-instance="" id="editor_patient_location" data-validation="required" style="overflow:hidden;width: 100%; border: none;min-height:100px; height:auto;"><?php echo $this->clientInfo['patient_location'];?></textarea>
+							</div>
+						</span>
+					</td>
+				</tr>
+			</table> **/ ?>
+		  </div>
+		  <div class="mtodroplist2">
+			<div class="OPPRETTB"><input type="submit" class="OPPRETTBA ckeditorClassSubmit" data-form="frmClientAddPlacement" value="<?php echo $this->translate('Save');?>"/></div>
+		  </div>
+		</form>
+		</div>  
+		
+    </div>
+	 
+</div>

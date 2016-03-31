@@ -1,0 +1,9 @@
+<div class="tablebg">
+   <div style="display: block; padding: 0px 10px;" id="tab1">
+    <?php if($this->forceInfo['force_continue']=='yes' && $this->forceInfo['force_status']=='no'):?>
+    	<?php echo $this->partial('force/tabs/vakForce.phtml',array('forceInfo'=>$this->forceInfo));?>               
+	<?php else:?>
+		<?php echo $this->partial('force/tabsArchive/vakArchiveForce.phtml',array('forceInfo'=>$this->forceInfo));?>
+	<?php endif;?>
+   </div>
+</div>

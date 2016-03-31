@@ -1,0 +1,15 @@
+<?php if(isset($this->userCollection['user_email']) && $this->userCollection['user_email']!=''):?>
+<td width="4" class="bordernone nonecls"></td>
+<td style="width:33%" class="nonecls"><span class="tdbg width97"><span><?php echo $this->userCollection['user_phone'];?></span></span></td>
+<td width="4" class="bordernone nonecls"></td>
+<td style="width:33%" class="nonecls"><span class="tdbg width97"><span><?php echo $this->userCollection['user_mobile'];?></span></span></td>
+<td width="4" class="bordernone nonecls"></td>
+<td style="width:33%" class="nonecls"><span class="tdbg width97"><span><?php echo $this->userCollection['user_email'];?></span></span></td>
+<?php else:?>
+<td width="4" class="bordernone nonecls"></td>
+<td style="width:33%" class="nonecls"><span class="tdbg width97"><span></span></span></td>
+<td width="4" class="bordernone nonecls"></td>
+<td style="width:33%" class="nonecls"><span class="tdbg width97"><span></span></span></td>
+<td width="4" class="bordernone nonecls"></td>
+<td style="width:33%" class="nonecls"><span class="tdbg width97"><span></span></span></td>
+<?php endif;?>

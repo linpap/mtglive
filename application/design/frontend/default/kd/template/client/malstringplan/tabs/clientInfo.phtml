@@ -1,0 +1,151 @@
+<?php $format = KD::getModel('core/format');?>
+<?php $deptList = KD::getModel('department/department')->loadList();?>
+<?php $primaryUser = $this->clientInfo['patient_primary_userID'];
+$patientDept = $this->clientInfo['patient_deptID'];
+$userList = array();$userId = '';$userPhone = '';$userMobile = '';$userEmail = '';
+$userModel = KD::getModel('user/user');
+$userList = $userModel->loadUserByDept($patientDept);
+$format = KD::getModel('core/format');
+if(isset($primaryUser) && $primaryUser>0):
+	$userData = $userModel->load($primaryUser);
+	$userId = $userData['user_id'];
+	$userPhone = $userData['user_phone'];
+	$userMobile = $userData['user_mobile'];
+	$userEmail = $userData['user_email'];
+endif;
+
+?>
+<form name="frmUpdateClient" id="frmUpdateClient" method="post" action="<?php echo $this->getUrl("client/info/index");?>">
+<div class="CLEARBBORDER"></div>
+<div class="KKI1">
+	<div class="KKI1PIC">
+		<div class="KKI1PICBG">
+			<div class="KKI1PH"></div>
+		</div>
+	</div>
+	<div class="KKI1WRAPPER">
+	<input type="hidden" name="patient_id" id="patient_id" value="<?php echo $this->clientInfo['patient_id'] ?>">	
+	<input type="hidden" name="patient_code" id="patient_code" value="<?php echo $this->clientInfo['patient_code'] ?>" >
+	<div class="KKI1C">
+		<div class="KKI1C1">
+			<?php echo $this->translate('First Name');?>
+		</div>
+		<span class="tdbg888p"><input type="text" name="patient_fname" id="patient_fname" value="<?php echo $this->clientInfo['patient_fname'] ?>" data-validation="required" maxlength="64"></span>		
+	</div>
+	<div class="KKI1C">
+		<div class="KKI1C1">
+			<?php echo $this->translate('Middle Name');?>
+		</div>
+		<span class="tdbg888p"><input type="text" name="patient_mname" id="patient_mname" value="<?php echo $this->clientInfo['patient_mname'] ?>"  data-validation="required" maxlength="64"></span>		
+	</div>
+	<div class="KKI1C">
+		<div class="KKI1C1">
+			<?php echo $this->translate('Last Name');?>
+		</div>
+		<span class="tdbg888p"><input type="text" name="patient_lname" id="patient_lname" value="<?php echo $this->clientInfo['patient_lname'] ?>"  data-validation="required" maxlength="64"></span>		
+	</div>
+	<div class="KKI1C">
+		<div class="KKI1C1">
+			<?php echo $this->translate('Person Nr.');?>
+		</div>
+		<span class="tdbg888p"><input type="text" name="patient_person_no" id="patient_person_no" value="<?php echo $this->clientInfo['patient_person_no'] ?>"  data-validation="required" maxlength="64"></span>		
+	</div>
+	<div class="KKI1C">
+		<div class="KKI1C1">
+			<?php echo $this->translate('BIRK Nr.');?>
+		</div>
+		<span class="tdbg888p"><input type="text" name="patient_birk_no" id="patient_birk_no" value="<?php echo $this->clientInfo['patient_birk_no'] ?>"  data-validation="required" maxlength="64"></span>
+	</div>
+	<div class="KKI1C">
+		<div class="KKI1C1">
+			<?php echo $this->translate('Phone');?>
+		</div>
+		<span class="tdbg888p"><input type="text" name="patient_phone" id="patient_phone" value="<?php echo $this->clientInfo['patient_phone'] ?>"  data-validation="required" maxlength="64"></span>
+		
+	</div>
+	<div class="KKI1C">
+		<div class="KKI1C1">
+			<?php echo $this->translate('Mobile');?>
+		</div>
+		<span class="tdbg888p"><input type="text" name="patient_mobile1" id="patient_mobile1" value="<?php echo $this->clientInfo['patient_mobile1'] ?>" data-validation="required" maxlength="64"></span>
+	</div>
+	<div class="KKI1C">
+		<div class="KKI1C1">
+			<?php echo $this->translate('Email');?>
+		</div>
+		<span class="tdbg888p">
+		<input type="text" name="patient_email1" id="patient_email1" value="<?php echo $this->clientInfo['patient_email1'] ?>" data-validation="email" maxlength="64"></span>
+	</div>
+	<div class="KKI1C">
+        	<div class="KKI1C1">
+                <?php echo $this->translate('Department');?>
+        	</div>
+            <span class="tdbg888p">
+            <select name="patient_deptID" id="patient_deptID" class="get-ajax" data-target="patient_primary_userID" data-action="<?php echo $this->getUrl('user/index/getlist/default/'.$this->translate('Please Select').'/key/');?>" data-text='<option value=""><?php echo $this->translate('Please Select');?></option>' data-load='<option value=""><?php echo $this->translate('Loading');?></option>'  data-validation="required" >
+				<option value="">Velg her</option>
+				<?php foreach($deptList as $key=>$department):?>
+				<option value="<?php echo $department['dept_id'];?>" <?php echo ($patientDept==$department['dept_id'])?'selected="selected"':'';?>><?php echo $department['dept_name'];?></option>
+				<?php endforeach;?>
+            </select> 
+            </span>
+        </div>
+</div>
+</div>
+<div class="CLEARBBORDER2"></div>
+<div class="VVGBG VV2IN1C2">
+<table width="100%" border="0" cellspacing="4" cellpadding="0">
+  <tr>
+	<th width="25%" class="noborder"><?php echo $this->translate('Legal');?></th>
+	<th width="25%" class="noborder"><?php echo $this->translate('%s Date',$this->translate('In'));?></th>
+	<th width="25%" class="noborder"><?php echo $this->translate('%s Date',$this->translate('Decision'));?></th>
+	<th width="25%" class="noborder"><?php echo $this->translate('Action Plan %s',$this->translate('Dated'));?></th>
+  </tr>
+  <tr>
+	<td class="nonecls"><span class="tdbg width95"><input type="text" class="width90" name="patient_legal" id="patient_legal" data-validation="required" value="<?php echo $this->clientInfo['patient_legal'];?>" ></span></td>
+	<td class="nonecls"><span class="tdbg width95"><input type="text" readonly class="width80 disabled floatleft" value="<?php echo $format->FormatDate($this->clientInfo['patient_date_of_joining']);?>"></span></td>
+	<td class="nonecls"><span class="tdbg width95"><input type="text" class="datepickerImage width80 floatleft" data-validation="required" name="patient_date_of_vedtak_plan" readonly value="<?php echo $format->FormatDate($this->clientInfo['patient_date_of_vedtak_plan']);?>"></span></td>
+	<td class="nonecls"><span class="tdbg width95"><input type="text" class="datepickerImage width80 floatleft" data-validation="required" name="patient_date_of_tiltak_plan" readonly value="<?php echo $format->FormatDate($this->clientInfo['patient_date_of_tiltak_plan']);?>"></span></td>
+  </tr>
+</table>
+</div>
+<div class="CLEARBBORDER2"></div>
+<div class="VVGBG VV2IN1C2">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+	<th width="25%" class="noborder"><?php echo $this->translate('%s User',$this->translate('Primary'));?></th>
+	<th width="25%" class="noborder"><?php echo $this->translate('Phone');?></th>
+	<th width="25%" class="noborder"><?php echo $this->translate('Mobile');?></th>
+	<th width="25%" class="noborder"><?php echo $this->translate('Email');?></th>
+  </tr>
+  <?php $dataText = '<td width="4" class="bordernone nonecls"></td><td style="width:33%" class="nonecls"><span class="tdbg width97"><span></span></span></td><td width="4" class="bordernone nonecls"></td><td style="width:33%" class="nonecls"><span class="tdbg width97"><span></span></span></td><td width="4" class="bordernone nonecls"></td><td style="width:33%" class="nonecls"><span class="tdbg width97"><span></span></span></td>';
+  		$dataLoad = '<td width="4" class="bordernone nonecls"></td><td style="width:33%" class="nonecls"><span class="tdbg width97"><span>'.$this->translate('Loading').'</span></span></td><td width="4" class="bordernone nonecls"></td><td style="width:33%" class="nonecls"><span class="tdbg width97"><span>'.$this->translate('Loading').'</span></span></td><td width="4" class="bordernone nonecls"></td><td style="width:33%" class="nonecls"><span class="tdbg width97"><span>'.$this->translate('Loading').'</span></span></td>';?>
+  <tr>
+	<td class="nonecls"><span class="tdbg width97">
+		<select name="patient_primary_userID" id="patient_primary_userID" data-validation="required" class="width97 get-ajax" data-target="userInfo" data-action="<?php echo $this->getUrl('user/index/getuser/key/');?>" data-text='<?php echo $dataText;?>' data-load='<?php echo $dataLoad;?>'>
+			<option value="">Velg her</option>
+			<?php foreach($userList as $key=>$user):?>
+			<option value="<?php echo $user['user_id'];?>" <?php echo ($user['user_id']==$primaryUser)?'selected="selected"':'';?>><?php echo $format->FormatName($user['user_fname'],$user['user_mname'],$user['user_lname']);?></option>
+			<?php endforeach;?>
+		</select>
+	</span></td>
+	<td colspan="3" style="border:0px none;" class="nonecls">
+	  <table cellpadding="0" cellspacing="0" border="0" width="100%">
+		<tr id="userInfo">
+		  <td width="4" class="bordernone nonecls"></td>
+		  <td width="33%" class="nonecls"><span class="tdbg width97"><span><?php echo $userPhone;?></span></span></td>
+		  <td width="4" class="bordernone nonecls"></td>
+		  <td width="33%" class="nonecls"><span class="tdbg width97"><span><?php echo $userMobile;?></span></span></td>
+		  <td width="4" class="bordernone nonecls"></td>
+		  <td width="33%" class="nonecls"><span class="tdbg width97"><span><?php echo $userEmail;?></span></span></td>
+		</tr>
+	  </table>
+	</td>
+  </tr>
+</table>
+</div>
+
+<div class="CLEARBBORDER2"></div>
+<?php echo $this->partial('info/tabs/clientAdditionalInformation.phtml');?>
+<div class="CANCELB"><input type="submit" class="OPPRETTBA" value="<?php echo $this->translate('Cancel');?>"></div>
+<div class="OPPRETTB"><input type="submit" class="OPPRETTBA" value="<?php echo $this->translate('Create');?>"></div>
+</form>

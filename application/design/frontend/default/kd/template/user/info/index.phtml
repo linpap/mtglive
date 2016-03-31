@@ -1,0 +1,35 @@
+<?php
+$user_id=$this->userCollection['user_id'];
+$session = new Zend_Session_Namespace('Acl');
+$session_details=$session->getIterator();
+
+
+$btnFlag=false;
+
+if(isset($session->userRole) && in_array($session->userRole,array('A','S')) || $user_id==$session_details['userID'])
+{
+  $btnFlag=true;
+}
+?>
+
+<div class="tablebg">
+  <div style="display: block; padding:0 10px" id="tab1">
+  
+	<?php //echo $this->partial('info/tabs/userInfo.phtml');?>
+	<?php $userCollection = $this->userCollection;echo $this->partial('info/tabs/userInfo.phtml',array('userCollection'=>$this->userCollection))?>
+  </div>
+  <div style="display: block; padding: 0px 10px;" id="tab2">
+	<?php $userCollection = $this->userCollection;echo $this->partial('info/tabs/userExpertise.phtml',array('userCollection'=>$this->userCollection));?>
+  </div>
+  <div style="display: block; padding: 0px 10px;" id="tab3">
+	<?php $userCollection = $this->userCollection;echo $this->partial('info/tabs/userEducation.phtml',array('userCollection'=>$this->userCollection));?>
+  </div>
+  <div style="display: block; padding: 0px 10px;" id="tab4">
+	<?php $userCollection = $this->userCollection;echo $this->partial('info/tabs/userRelatives.phtml',array('userCollection'=>$this->userCollection));?>
+  </div>
+  <?php if($btnFlag):?>
+  <div style="display: block; padding: 0px 10px;" id="tab5">
+	<?php $userCollection = $this->userCollection;echo $this->partial('info/tabs/userDocuments.phtml',array('userCollection'=>$this->userCollection));?>
+  </div>
+  <?php endif;?>
+</div>

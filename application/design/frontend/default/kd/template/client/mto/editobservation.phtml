@@ -1,0 +1,39 @@
+<?php $format = KD::getModel('core/format');
+$observationId = $this->observationID;
+if(isset($observationId) && $observationId>0 && isset($this->observationCollection)):?>
+<form name="frmClientEditObservation" id="frmClientEditObservation" method="post" action="<?php echo $this->getUrl("client/mto/editobservationpost/po/".$this->page."/id/".$observationId.'/pid/'.$this->observationCollection['observation_patientID']);?>">
+<table width="100%" border="0" cellspacing="4" cellpadding="0" id="clientMaalTbl">
+      <tr class="CURNONPOINTER">
+	  	<th class="TSLRTDCENTER" width="20%"><?php echo $this->translate('Observations Type');?></th>
+		<th class="TSLRTDCENTER" width="20%"><?php echo $this->translate('Dependent');?></th>
+		<th class="TSLRTDCENTER" width="60%"><?php echo $this->translate('Active %s',$this->translate('Observation'));?></th>
+      </tr>
+	  <tr>
+	  	<td class="nonecls"><span class="tdbg tdbg97"><select class="get-ajax2" name="observation_type" disabled="disabled" id="observation_type" style="width: 99% !important;" data-validation="required"><option value="I" <?php echo ($this->type=='I')?'selected="selected"':'';?>><?php echo $this->translate('Independant');?></option><option value="M" <?php echo ($this->type=='M')?'selected="selected"':'';?>><?php echo $this->translate('Goal');?></option><option value="T" <?php echo ($this->type=='T')?'selected="selected"':'';?>><?php echo $this->translate('Government Measure');?></option></select></span></td>
+		<td class="nonecls"><span class="tdbg tdbg97" id="dataList">
+		<?php if($this->type=='M'):?>
+			<select name="observation_relationID" id="observation_relationID" class="width97" disabled="disabled" style="width: 99% !important;" readonly data-validation="required">
+				<option value=""><?php echo $this->translate('Select %s %s',$this->translate('Goal'),$this->translate('Here!'));?></option>
+					<?php foreach($this->collection as $data):  ?>
+					<option value="<?php echo $data['maal_id'];?>" <?php echo ($this->defualtRelID==$data['maal_id'])?'selected="selected"':'';?>><?php echo $data['maal_desc'];?></option>
+					<?php endforeach;?>
+				</select>
+		<?php elseif($this->type=='T'):?>	
+				<select name="observation_relationID" id="observation_relationID" class="width97" disabled="disabled" data-validation="required">
+					<option value=""><?php echo $this->translate('Select %s %s',$this->translate('Measure'),$this->translate('Here!'));?></option>
+					<?php foreach($this->collection as $data):  ?>
+					<option value="<?php echo $data['tilgov_id'];?>" <?php echo ($this->defualtRelID==$data['tilgov_id'])?'selected="selected"':'';?>><?php echo $data['tilgov_desc'];?></option>
+					<?php endforeach;?>
+				</select>	
+		<?php else:?>	
+				<input type="text" readonly="" class="disable width90" name="observation_relationID"/>
+		<?php endif;?>
+		</span></td>
+		<td class="nonecls"><span class="tdbg"><input type="text" name="observation_desc" id="observation_desc" value="<?php echo $this->observationCollection['observation_desc'];?>" data-validation="required" /></span></td>
+	</tr>
+</table>
+<div class="mtodroplist2">
+	<div class="OPPRETTB"><input type="submit" class="OPPRETTBA" value="<?php echo $this->translate('Save');?>"/></div>
+</div>
+</form>
+<?php endif;?>

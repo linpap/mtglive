@@ -1,0 +1,104 @@
+<table cellspacing=0 cellpadding="0" border="0px" style=""   width="100%">
+  <tr>
+	<td style="padding:0px">
+		<table cellspacing=0 cellpadding="5" border="0px" style="border-collapse:collapse; margin-left:0pt" width="100%" class="bordercolor">
+			<thead>
+				<tr>
+					<th style="width: 100%;" colspan="4"><h2>5 Institusjonens vurdering av tvangsbruken<!--The institution&#39;s assessment of the use of force--></h2></th>
+				</tr>
+			</thead>
+			<tbody>
+			  <tr>
+				<td align="left" colspan="4">Her skal leder /fungerende leder vurdere hvordan tvangsbruken er /vil bli fulgt opp i etterkant.<!--You should head / acting head assess how use of force is / will be followed up afterwards.--></td>
+			  </tr>
+			  <tr>
+				<td align="left" colspan="4">Hvilke faglige og etiske refleksjoner og vurderinger er gjort i etterkant av tvangsbruken ?<!--What professional and ethical reflections and evaluations are done after the use of force?--></td>
+			  </tr>
+			  <tr>
+				<td align="left" width="100%" colspan="4" class="nonecls1">
+					<span class="tdbg1"><textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden;width: 100%; border: none; height:auto;" data-validation="required" id="force_txta5_reflection" name="force[force_txta5_reflection]"><?php echo (isset($this->forceInfo['force_txta5_reflection']) && $this->forceInfo['force_txta5_reflection']!='')?$this->forceInfo['force_txta5_reflection']:'';?></textarea></span>
+				</td>
+			  </tr>
+			  <tr>
+				<td align="left" colspan="4">Hvilke tiltak er iverksatt eller vil bli iverksatt for &aring; unng&aring; &aring; komme i lignende situasjoner:<!--What measures have been implemented or will be implemented to avoid getting into similar situations:--></td>
+			  </tr>
+			  <tr>
+				<td align="left" width="100%" colspan="4" class="nonecls1">
+					<span class="tdbg1"><textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden;width: 100%; border: none; height:auto;" data-validation="required" id="force_txta5_measure" name="force[force_txta5_measure]"><?php echo (isset($this->forceInfo['force_txta5_measure']) && $this->forceInfo['force_txta5_measure']!='')?$this->forceInfo['force_txta5_measure']:'';?></textarea></span>
+				</td>
+			  </tr>
+			  <tr>
+				<td align="left" colspan="4">Har institusjonens retningslinjer/interne prosedyrer blitt fulgt i forbindelse med hendelsen/tvangsbruken, jf. forskrift om kvalitet og internkontroll i barneverninstitusjoner &sect; 12?<!--Have institutional policy / internal procedures followed in connection with the incident / use of force, the Regulations on quality and internal control in child welfare institutions &sect; 12?--></td>
+			  </tr>
+			  <tr>
+				<td align="left" width="25%" colspan="4">
+					<?php echo $this->translate('Yes');?>:<input type="radio" name="force[force_rad5_institute]" id="force_rad5_institute_y" value="yes" onchange="changeAreaClass(this.value,'yes','rem','#force_txta5_institute_res','');" <?php echo (isset($this->forceInfo['force_rad5_institute']) && $this->forceInfo['force_rad5_institute']=='yes')?'checked="checked"':'';?>/><label for="force_rad5_institute_y"><span></span></label>
+					<?php echo $this->translate('no');?>:<input type="radio" name="force[force_rad5_institute]" id="force_rad5_institute_n" value="no" onchange="changeAreaClass(this.value,'no','add','#force_txta5_institute_res','');" <?php echo (isset($this->forceInfo['force_rad5_institute']) && $this->forceInfo['force_rad5_institute']=='no')?'checked="checked"':'';?>/><label for="force_rad5_institute_n"><span></span></label>
+				</td>
+			  </tr>
+			  <tr>
+				<td align="left" width="100%" colspan="4"  class="nonecls1">
+					Hvis nei, begrunn hvorfor:<!--If no, give reasons why:--><span class="tdbg1"><textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden;width: 100%; border: none; height:auto;" id="force_txta5_institute_res" name="force[force_txta5_institute_res]"><?php echo (isset($this->forceInfo['force_txta5_institute_res']) && $this->forceInfo['force_txta5_institute_res']!='')?$this->forceInfo['force_txta5_institute_res']:'';?></textarea></span>
+				</td>
+			  </tr>
+			  <tr>
+				<td align="left" colspan="4">P&aring; hvilken m&aring;te er tvangsbruken bearbeidet med beboeren i etterkant?<!--How is the use of force worked with the resident afterwards?--></td>
+			  </tr>
+			  <tr>
+				<td align="left" width="100%" colspan="4" class="nonecls1">
+					<span class="tdbg1"><textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden;width: 100%; border: none; height:auto;" data-validation="required" id="force_txta5_process"  name="force[force_txta5_process]"><?php echo (isset($this->forceInfo['force_txta5_process']) && $this->forceInfo['force_txta5_process']!='')?$this->forceInfo['force_txta5_process']:'';?></textarea></span>
+				</td>
+			  </tr>
+			  <tr>
+				<td align="left" colspan="4">P&aring; hvilken m&aring;te er tvangsbruken evaluert med personalet i etterkant?<!--How is the use of coercion evaluated with the staff afterwards?--></td>
+			  </tr>
+			  <tr>
+				<td align="left" width="100%" colspan="4" class="nonecls1">
+					<span class="tdbg1"><textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden;width: 100%; border: none; height:auto;" data-validation="required" id="force_txta5_evaluate"  name="force[force_txta5_evaluate]"><?php echo (isset($this->forceInfo['force_txta5_evaluate']) && $this->forceInfo['force_txta5_evaluate']!='')?$this->forceInfo['force_txta5_evaluate']:'';?></textarea></span>
+				</td>
+			  </tr>
+			  <tr>
+				<td align="left" colspan="4">Er institusjonens vurdering av tvangsbruken forelagt beboeren?<!--Is the institution&#39;s assessment of the use of force presented to the resident?--></td>
+			  </tr>
+			  <tr>
+				<td align="left" width="25%">
+					<?php echo $this->translate('Yes');?>:<input type="radio" name="force[force_rad5_submit]" id="force_rad5_submit_y" value="yes" onchange="changeAreaClass(this.value,'yes','add','#force_txta5_submit_yes',''); changeAreaClass(this.value,'yes','rem','#force_txta5_submit_no','');" <?php echo (isset($this->forceInfo['force_rad5_submit']) && $this->forceInfo['force_rad5_submit']=='yes')?'checked="checked"':'';?>/><label for="force_rad5_submit_y"><span></span></label>
+					<?php echo $this->translate('No');?>:<input type="radio" name="force[force_rad5_submit]" id="force_rad5_submit_n" value="no" onchange="changeAreaClass(this.value,'no','rem','#force_txta5_submit_yes',''); changeAreaClass(this.value,'no','add','#force_txta5_submit_no','');" <?php echo (isset($this->forceInfo['force_rad5_submit']) && $this->forceInfo['force_rad5_submit']=='no')?'checked="checked"':'';?>/><label for="force_rad5_submit_n"><span></span></label></td>
+				<td align="left" colspan="2"></td>
+			  </tr>
+			  <tr>
+				<td colspan="4">
+				Hvis ja; har beboer gitt noen kommentar til vurderingen? Beskriv:<!--If so; &#39;ve occupant leave a comment for review? Describe:-->
+				</td>
+			  </tr>
+			  <tr>
+				<td align="left" width="100%" colspan="4" class="nonecls1">
+					<span class="tdbg1"><textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden;width: 100%; border: none; height:auto;" id="force_txta5_submit_yes" name="force[force_txta5_submit_yes]"><?php echo (isset($this->forceInfo['force_txta5_submit_yes']) && $this->forceInfo['force_txta5_submit_yes']!='')?$this->forceInfo['force_txta5_submit_yes']:'';?></textarea></span>
+				</td>
+			  </tr>
+			  <tr>
+				<td colspan="4">
+				Hvis nei, begrunn hvorfor:<!--If no, give reasons why:-->
+				</td>
+			  </tr>
+			  <tr>
+				<td align="left" width="100%" colspan="4" class="nonecls1">
+					<span class="tdbg1"><textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden;width: 100%; border: none; height:auto;" id="force_txta5_submit_no" name="force[force_txta5_submit_no]"><?php echo (isset($this->forceInfo['force_txta5_submit_no']) && $this->forceInfo['force_txta5_submit_no']!='')?trim($this->forceInfo['force_txta5_submit_no']):'';?></textarea></span>
+				</td>
+			  </tr>
+			  
+			  <tr>
+				<td colspan="4">
+				Beskriv eventuelt andre forhold, som institusjonen mener ikke er blitt tilstrekkelig belyst:<!--Describe any other conditions which the institution believes have not been adequately considered:-->
+				</td>
+			  </tr>
+			  <tr>
+				<td align="left" width="100%" colspan="4" class="nonecls1">
+					<span class="tdbg1"><textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden;width: 100%; border: none; height:auto;" data-validation="required" id="force_txta5_desc" name="force[force_txta5_desc]"><?php echo (isset($this->forceInfo['force_txta5_desc']) && $this->forceInfo['force_txta5_desc']!='')?trim($this->forceInfo['force_txta5_desc']):'';?></textarea></span>
+				</td>
+			  </tr>
+			</tbody>
+		</table>
+	</td>
+  </tr>
+</table>

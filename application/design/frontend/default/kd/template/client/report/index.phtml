@@ -1,0 +1,33 @@
+<div class="tablebg">
+  <div style="display: block; padding:0 10px" id="tab1">
+	<?php //$clientInfoArray = $this->clientInfo;echo $this->partial('info/tabs/clientInfo.phtml',array('clientInfo'=>$clientInfoArray));?>
+  </div>
+  <div style="display: block; padding: 0px 10px;" id="tab2">
+	<?php echo $this->partial('report/tabs/clientReport.phtml',array(
+        'vaktrapportCollection' => $this->vaktrapportCollection,
+        'clientID' => $this->clientID,
+        'pageSize' => $this->pageSize,
+        'page' => $this->page,
+        'reportStartId' => $this->reportStartId,
+        'periodVaktrap' => $this->periodVaktrap,
+        'vaktrapportMonthCollection' => $this->vaktrapportMonthCollection,
+        'vaktrapportQuartalCollection' => $this->vaktrapportQuartalCollection,
+        'quartalMaalPlanCollection' => $this->quartalMaalPlanCollection
+    ));?>
+  </div>
+  <div style="display: block; padding:0 10px" id="tab3">
+    <?php //echo $this->partial('info/tabs/clientScoreCard.phtml');?>
+  </div>
+  <div style="display: block; padding:0 10px" id="tab4">
+    <?php //echo $this->partial('info/tabs/clientMapping.phtml');?>
+  </div>
+  <div style="display: block; padding:0 10px" id="tab5">
+    <?php //echo $this->partial('info/tabs/clientStatistic.phtml');?>
+  </div>
+  <div style="display: block; padding:0 10px" id="tab6">
+    <?php //echo $this->partial('info/tabs/clientMTO.phtml');?>
+  </div>
+  <div style="display: block; padding:0 10px" id="tab7">
+    <?php //echo $this->partial('info/tabs/clientHMS.phtml');?>
+  </div>
+</div>

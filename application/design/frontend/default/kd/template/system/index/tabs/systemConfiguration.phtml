@@ -1,0 +1,103 @@
+<?php 	foreach($this->systemCollection as $key=>$valueArray):
+			switch($valueArray['system_key'])
+			{
+				case 'date_format':
+					$date_format = $valueArray['system_value'];
+				break;
+				case 'name_format':
+					$name_format = $valueArray['system_value'];
+				break;
+				case 'page_size':
+					$page_size = $valueArray['system_value'];
+				break;
+				case 'email':
+					$email = $valueArray['system_value'];
+				break;
+				case 'identity':
+					$identity = $valueArray['system_value'];
+				break;
+			}
+		endforeach;
+?> 
+<form name="frmSystemConfig" id="frmSystemConfig" method="post" action="<?php echo $this->getUrl("system/index/index");?>">
+<div class="PSUBTCWRAPPER">
+	<div class="PSUBTCLEFT">
+    	<?php echo $this->translate('System Configuration');?>
+    </div>
+</div>
+<div class="CLEARBBORDER"></div>
+ <div class="KKI1">
+    <div class="KKI1WRAPPER">
+		
+        <div class="KKI1C">
+        	<div class="KKI1C1">
+                <?php echo $this->translate('Name Format');?>
+        	</div>
+		<span class="tdbg888p">
+			<select name="config[name_format]" id="name_format">
+				<option value="F L" <?php echo ($name_format=='F L')?'selected="selected"':'';?>>Fornavn Etternavn</option>
+				<option value="F M L" <?php echo ($name_format=='F M L')?'selected="selected"':'';?>>Fornavn Mellomnavn Etternavn</option>
+				<option value="L F" <?php echo ($name_format=='L F')?'selected="selected"':'';?>>Etternavn Fornavn</option>
+            </select> 
+		</span>
+        </div>
+        <div class="KKI1C">
+        	<div class="KKI1C1">
+                <?php echo $this->translate('Date Format');?>
+        	</div>
+		<span class="tdbg888p">
+			<select name="config[date_format]" id="date_format">
+				<option value="dd/mm-yy" <?php echo ($date_format=='dd/mm-yy')?'selected="selected"':'';?>>21/10-2015</option>
+				<option value="dd-mm-yy" <?php echo ($date_format=='dd-mm-yy')?'selected="selected"':'';?>>21-10-2015</option>
+				<option value="mm-dd-yy" <?php echo ($date_format=='mm-dd-yy')?'selected="selected"':'';?>>10-21-2015</option>
+				<option value="yyyy-mm-dd" <?php echo ($date_format=='yyyy-mm-dd')?'selected="selected"':'';?>>2015-10-21</option>
+            </select>
+		</span>
+        </div>
+        <div class="KKI1C">
+        	<div class="KKI1C1">
+                <?php echo $this->translate('Page Size');?>
+        	</div>
+		<span class="tdbg888p">
+			<select name="config[page_size]" id="page_size">
+				<option value="5" <?php echo ($page_size=='5')?'selected="selected"':'';?>>5</option>
+				<option value="10" <?php echo ($page_size=='10')?'selected="selected"':'';?>>10</option>
+				<option value="20" <?php echo ($page_size=='20')?'selected="selected"':'';?>>20</option>
+				<option value="50" <?php echo ($page_size=='50')?'selected="selected"':'';?>>50</option>
+				<option value="100" <?php echo ($page_size=='100')?'selected="selected"':'';?>>100</option>
+				<option value="200" <?php echo ($page_size=='200')?'selected="selected"':'';?>>200</option>
+            </select>
+		</span>
+        </div>
+		
+		<div class="KKI1C">
+        	<div class="KKI1C1">
+                <?php echo $this->translate('Email');?>
+        	</div>
+		<span class="tdbg888p">
+			<input type="text" name="config[email]" id="email" value="<?php echo $email;?>"  data-validation="email" />
+		</span>
+        </div>
+		
+		<div class="KKI1C">
+        	<div class="KKI1C1">
+                <?php echo $this->translate('Email Identity');?>
+        	</div>
+		<span class="tdbg888p">
+			<input type="text" name="config[identity]" id="identity" value="<?php echo $identity;?>"  data-validation="required" />
+		</span>
+        </div>
+        
+    </div>
+</div>
+    
+    <div class="CLEARBBORDER2"></div>
+
+    
+    
+    
+    <div class="CANCELB"><a class="CANCELBA" href="#"><?php echo $this->translate('Cancel');?></a></div>
+	<?php /*?><div class="CANCELB"><input type="reset" class="CANCELBA" value="<?php echo $this->translate('Cancel');?>"></div><?php */?>
+	<div class="OPPRETTB"><input type="submit" name="set_config" class="OPPRETTBA" value="<?php echo $this->translate('Save');?>"></div>	
+	<?php /*?><div class="OPPRETTB"><a class="OPPRETTBA" href="#"><?php echo $this->translate('Create');?></a></div><?php */?>
+</form>	

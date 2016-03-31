@@ -1,0 +1,97 @@
+<table cellspacing=0 cellpadding="0" border="0px"  width="100%">
+  <tr>
+	<td style="padding:0px;">
+		<table cellspacing=0 cellpadding="5" border="0px" class="bordercolor" style="border-collapse:collapse; margin-left:0pt" width="100%">
+			<tr>
+				<th style="width: 100%;" colspan="3"><h2>2.3 &sect; 16 Ransaking av rom og eiendeler <!--&sect; 16 searches of rooms and property--></h2></th>
+			</tr>
+			<tr>
+				<td colspan="3">Hver hjemmel st&aring;r p&aring; egen siden, da det kun er den dokumentasjonen som er utfylt, som skal oversendes Fylkesmannen uten ugrunnet opphold.<!--Each authority is on their side, since only the documentation is completed, which shall be submitted to the County without undue delay.--></td></tr>
+			
+			<tr>
+				<td class="title1" colspan="2">Redegj&oslash;r for hvilke fremgangsm&aring;ter som ble pr&oslash;vd f&oslash;r beslutning om &aring; foreta ransaking , jf &sect; 12<!--Describe the procedures that were tried before the decision to conduct searches, see &sect; 12--></td>
+				<td align="left" width="40%" class="value1 nonecls1"><span class="tdbg1"><?php echo (isset($this->forceInfo['force_txta23_method']) && $this->forceInfo['force_txta23_method']!='')?$this->forceInfo['force_txta23_method']:'';?></span></td>
+			</tr>
+			<tr>
+
+				<td class="title1" colspan="2">Hvem besluttet ransakingen:<!--Who decided the search:--></td>
+				<td class="value1 nonecls1">
+					<span class="tdbg1"><select class="width98 validation" name="force214[force_sel23_search]" id="force_sel23_search" onchange="changeAreaClass(this.value,'','rem','#force_txt23_search_name','leader');" readonly="readonly" disabled="disabled">
+						<option value="" <?php echo (!isset($this->forceInfo['force_sel23_search']) || $this->forceInfo['force_sel23_search']=='')?'selected="selected"':'';?>>Velg <!-- Select--></option>
+						<option value="conductor"  <?php echo (isset($this->forceInfo['force_sel23_search']) && $this->forceInfo['force_sel23_search']=='conductor')?'selected="selected"':'';?>>Leder<!-- Director --></option>
+						<option value="leader" <?php echo (isset($this->forceInfo['force_sel23_search']) && $this->forceInfo['force_sel23_search']=='leader')?'selected="selected"':'';?>> Fullmakt fra leder<!--Proxy Manager --></option>
+					</select></span>
+				</td>
+			 </tr>
+			 <tr>
+			   <td class="title1"  colspan="2">Hvis fullmakt fra leder:<!--If authorization from the manager:--></td>
+			   <td class="value1 nonecls1"><span class="padding5">Navn:</span><!--Name:--><span class="tdbg1"><input type="text"  id="force_txt23_search_name"  name="force214[force_txt23_search_name]" value="<?php echo (isset($this->forceInfo['force_txt23_search_name']) && $this->forceInfo['force_txt23_search_name']!='')?$this->forceInfo['force_txt23_search_name']:'';?>" /></span></td>
+			</tr>
+			<tr>
+			<td class="title1" colspan="2">Skjedd ved inntaket eller under opphol det:<!--Happened at intake or during the sta:--><br />
+			</td>
+			<td align="left" class="value1 nonecls1">
+			  <span class="tdbg1"><select class="validation width98" name="force214[force_sel23_happen]" id="force_sel23_happen" readonly="readonly" disabled="disabled">
+				<option value="" <?php echo (!isset($this->forceInfo['force_sel23_happen']) || $this->forceInfo['force_sel23_happen']=='')?'selected="selected"':'';?>>Velg<!--Select--> </option>
+				<option value="admission" <?php echo (isset($this->forceInfo['force_sel23_happen']) && $this->forceInfo['force_sel23_happen']=='admission')?'selected="selected"':'';?>> Ved inntak<!-- Upon admission --></option>
+				<option value="stay" <?php echo (isset($this->forceInfo['force_sel23_happen']) && $this->forceInfo['force_sel23_happen']=='stay')?'selected="selected"':'';?>> Under oppholdet<!--During their stay --></option>
+			  </select></span>
+			</td>
+			</tr>
+			<tr>
+				<td class="title1" style="width:40%">Mistanke om besittelse av:<!--Suspicion of possession of:--></td>
+				<td class="value1 nonecls1" colspan="2"></td>
+			</tr>
+			<tr>
+				<td class="title1"><label for="force_chk23_sus_stolen">Tyvgods<!--Stolen goods--></label></td>
+				<td class="value1" colspan="2"><span class="nonecls1"><span class="tdbg"><input type="checkbox" class="css-checkbox" name="force214[force_chk23_sus_stolen]" id="force_chk23_sus_stolen" value="1" <?php echo (isset($this->forceInfo['force_chk23_sus_stolen']) && $this->forceInfo['force_chk23_sus_stolen']=='1')?'checked="checked"':'';?>   readonly="readonly" disabled="disabled"/><label for="force_chk23_sus_stolen" class="css-label"></label></span></span></td>
+			</tr>
+			<tr>
+				<td class="title1"><label for="force_chk23_sus_danger">Farlige gjenstander<!--Dangerous objects--></label></td>
+				<td class="value1" colspan="2"><span class="nonecls1"><span class="tdbg"><input type="checkbox" class="css-checkbox" name="force214[force_chk23_sus_danger]" id="force_chk23_sus_danger" value="1" <?php echo (isset($this->forceInfo['force_chk23_sus_danger']) && $this->forceInfo['force_chk23_sus_danger']=='1')?'checked="checked"':'';?>  readonly="readonly" disabled="disabled"/><label for="force_chk23_sus_danger" class="css-label"></label></span></span></td>
+			</tr>
+			<tr>
+				<td class="title1"><label for="force_chk23_sus_alcohol">Rusmid ler<!--Substance laughs--></label></td>
+				<td class="value1" colspan="2"><span class="nonecls1"><span class="tdbg"><input type="checkbox" class="css-checkbox" name="force214[force_chk23_sus_alcohol]" id="force_chk23_sus_alcohol" value="1" <?php echo (isset($this->forceInfo['force_chk23_sus_alcohol']) && $this->forceInfo['force_chk23_sus_alcohol']=='1')?'checked="checked"':'';?>  readonly="readonly" disabled="disabled"/><label for="force_chk23_sus_alcohol" class="css-label"></label></span></span></td>
+			</tr>
+			<tr>
+				<td class="title1"><label for="force_chk23_sus_other">Andre skadelige medikamenter<!--Other adverse drug--></label></td>
+				<td class="value1" colspan="2"><span class="nonecls1"><span class="tdbg"><input type="checkbox" class="css-checkbox" name="force214[force_chk23_sus_other]" id="force_chk23_sus_other" value="1" <?php echo (isset($this->forceInfo['force_chk23_sus_other']) && $this->forceInfo['force_chk23_sus_other']=='1')?'checked="checked"':'';?>  readonly="readonly" disabled="disabled"/><label for="force_chk23_sus_other" class="css-label"></label></span></span></td>
+			</tr>
+			<tr>
+				<td class="title1"><label for="force_chk23_sus_parapher">Brukerutstyr<!--Paraphernalia--></label></td>
+				<td class="value1" colspan="2"><span class="nonecls1"><span class="tdbg"><input type="checkbox" class="css-checkbox" name="force214[force_chk23_sus_parapher]" id="force_chk23_sus_parapher" value="1" <?php echo (isset($this->forceInfo['force_chk23_sus_parapher']) && $this->forceInfo['force_chk23_sus_parapher']=='1')?'checked="checked"':'';?>  readonly="readonly" disabled="disabled"/><label for="force_chk23_sus_parapher" class="css-label"></label></span></span></td>
+			</tr>
+			<tr>
+				<td class="title1" colspan="2">Beskriv n&aelig;rmere:<!--Describe in more detail:--></td>
+				<td class="value1 nonecls1"><span class="tdbg1"><?php echo (isset($this->forceInfo['force_txta23_closer']) && $this->forceInfo['force_txta23_closer']!='')?$this->forceInfo['force_txta23_closer']:'';?></span></td>
+			</tr>
+			<tr>
+				<td class="title1" colspan="2">Redegj&oslash;r for de individuelle og konkrete forholdene som ga mistanke om besittelse av tyvgods, farlige gjenstander, rusmidler, andre skadelige medikamenter eller brukerutstyr:<!--Describe the individual and specific circumstances which gave suspicion of possession of stolen goods, dangerous items, drugs, other harmful drugs or paraphernalia:--></td>
+				<td align="left" class="value1 nonecls1"><span class="tdbg1"><?php echo (isset($this->forceInfo['force_txta23_individual']) && $this->forceInfo['force_txta23_individual']!='')?$this->forceInfo['force_txta23_individual']:'';?></td>
+			</tr>
+			<tr>
+				<td class="title1" colspan="2">Beskriv hvordan ransakingen ble gjennomf&oslash;rt:<!--Describe how the search was conducted:--></td>
+				<td align="left" class="value1 nonecls1">
+				  <span class="tdbg1"><?php echo (isset($this->forceInfo['force_txta23_how_search']) && $this->forceInfo['force_txta23_how_search']!='')?$this->forceInfo['force_txta23_how_search']:'';?></span>
+			</td>
+			</tr>
+			<tr>
+				<td class="title1" colspan="2">Var beboeren til stede under ransakingen?<!--Was the resident present during the search?--></td>
+				<td class="value1 nonecls1">
+				  <span class="tdbg1"><select class="validation width98" name="force214[force_sel23_resident]" id="force_sel23_resident" onchange="changeAreaClass(this.value,'','rem','#force_txta23_resident_res','Nei');" readonly="readonly" disabled="disabled">
+					<option value="" <?php echo (!isset($this->forceInfo['force_sel23_resident']) || $this->forceInfo['force_sel23_resident']=='')?'selected="selected"':'';?>>Velg<!--Select--></option>
+					<option value="yes" <?php echo (isset($this->forceInfo['force_sel23_resident']) && $this->forceInfo['force_sel23_resident']=='yes')?'selected="selected"':'';?>>  Ja<!--Yes--></option>
+					<option value="no" <?php echo (isset($this->forceInfo['force_sel23_resident']) && $this->forceInfo['force_sel23_resident']=='no')?'selected="selected"':'';?>>  Nei<!--No--></option>
+				  </select></span>
+			</td>
+		  	</tr>
+		  	<tr>
+				<td class="title1" colspan="2">Hvis nei, redegj&oslash;r for hvorfor beboeren ikke var til stede:<!--If no, explain why the resident was not to present:--></td>
+				<td class="value1 nonecls1"><span class="tdbg1"><?php echo (isset($this->forceInfo['force_txta23_resident_res']) && $this->forceInfo['force_txta23_resident_res']!='')?$this->forceInfo['force_txta23_resident_res']:'';?></span></td>
+			</tr>
+			</tbody>
+		</table>
+	</td>
+  </tr>
+</table>

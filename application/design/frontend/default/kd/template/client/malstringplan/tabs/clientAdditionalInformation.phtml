@@ -1,0 +1,55 @@
+<div class="PSUBTCWRAPPER">
+	<div class="PSUBTCLEFTH2"><?php echo $this->translate('Additional Information');?></div>
+    <div class="KITITWRAPPER">
+    	<div class="PSUBTCLEFT"><?php echo $this->translate('%s Type',$this->translate('Additional Information'));?>:</div>
+        <div class="KITINRDLISTW">
+        	<span class="KITINRDLISTWSPAN">
+            	<select>
+                	<option value="0"><?php echo $this->translate('Decision');?></option>
+                    <option value="1"><?php echo $this->translate('%s Reason',$this->translate('Placement'));?></option>
+                    <option value="2"><?php echo $this->translate('Client Information');?></option>
+                    <option value="3"><?php echo $this->translate('Address List');?></option>
+                    <option value="4"><?php echo $this->translate('Network');?></option>
+                    <option value="5"><?php echo $this->translate('Measurement');?></option>
+                    <option value="7"><?php echo $this->translate('Referat');?></option>
+                    <option value="8"><?php echo $this->translate('History');?></option>
+                    <option value="9"><?php echo $this->translate('Investigation');?></option>
+                    <option value="10"><?php echo $this->translate('Forced Protocol');?></option>
+                    <option value="11"><?php echo $this->translate('Avvik');?></option>
+                    <option value="12"><?php echo $this->translate('Log');?></option>
+                    <option value="13"><?php echo $this->translate('Other');?></option>
+				</select> 
+			</span>  	
+		</div>
+	</div>
+	<div class="CLEARBBORDER4"></div>
+	<!-- OPPTION 1 -->  
+	<div class="KKI2C">
+
+	<div id="BORDERTABS1TI">
+     	<ul id="tabs1">
+        	<li class="INACTIVTAB" id="current1"><a href="#" name="tab11"><div class="ACTIVETLZI TLZI"><?php echo $this->translate('Child Welfare');?></div></a></li>
+            <li class="INACTIVTAB"><a href="#" name="tab12"><div class="ACTIVETLZI TLZI"><?php echo $this->translate('PPT');?></div></a></li>
+            <li class="INACTIVTAB"><a href="#" name="tab13"><div class="ACTIVETLZI TLZI"><?php echo $this->translate('School');?></div></a></li>
+            <li class="INACTIVTAB"><a href="#" name="tab14"><div class="ACTIVETLZI TLZI"><?php echo $this->translate('Other');?></div></a></li>
+		</ul>
+		<div id="content1">
+			<div class="tablebg">
+				<div style="display: block; padding:0 10px" id="tab11">
+                	<?php echo $this->translate('Client Info');?>
+                </div>
+                <div style="display: block; padding:0 10px" id="tab12">
+                	<?php echo $this->translate('Reports');?>
+				</div>
+                <div style="display: block; padding:0 10px" id="tab13">
+                	<?php echo $this->translate('Scorecard Plan');?>
+				</div>
+				<div style="display: block; padding:0 10px" id="tab14">
+                	<?php echo $this->translate('Mapping');?>
+				</div>
+			</div>
+		</div>
+		<div class="bot_shadow"><img src="<?php echo $this->getMediaUrl('timg/bot-shadow.png');?>" width="834" height="21"></div>
+	</div>    
+    </div>
+</div>

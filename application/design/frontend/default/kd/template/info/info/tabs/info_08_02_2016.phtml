@@ -1,0 +1,98 @@
+<?php 	
+		$session = new Zend_Session_Namespace('Acl');
+		$formatModel = KD::getModel('core/format');
+		if(in_array($session->userRole,array('A','S','D')))
+		{
+			$deptList = KD::getModel('department/department')->loadList('active','all');
+		}
+		else
+		{
+			$deptList = KD::getModel('department/department')->loadList();
+		}
+?>
+			
+<div class="KKI1">
+	
+<?php if($this->infoCollection['info_id']>0):?>
+<?php else:?>
+	<form name="frmInfoAdd" id="frmInfoAdd" method="post" action="<?php echo $this->getUrl("info/info/add/id/".$this->infoCollection['info_id']."/type/".$this->infoCollection['info_type']);?>">	
+	<input type="hidden" name="info_id" id="info_id" value="<?php echo $this->infoCollection['info_id'] ?>">	
+	<input type="hidden" name="info_type" id="info_type" value="<?php echo $this->infoCollection['info_type'] ?>" />	
+<?php endif;?>	
+
+<div class="KKI1WRAPPER">
+	<div class="KKI1C">
+		<div class="KKI1C1">
+			<?php echo $this->translate('Info Title');?>
+		</div>
+		<span class="tdbg888p">
+		<?php if($this->infoCollection['info_id']>0):?>
+			<?php echo $this->infoCollection['info_title'] ?>
+		<?php else:?>
+			<input type="text" name="info_title" id="info_title"  value="<?php echo $this->infoCollection['info_title'] ?>" maxlength="255" data-validation="" data-validation-length="max255">
+		<?php endif;?>
+		</span>
+
+	</div>
+	
+	<div class="KKI1C">
+		<div class="KKI1C1">
+			<?php echo $this->translate('Info Department');?>
+		</div>
+		<span class="tdbg888p">
+			<?php if($this->infoCollection['info_id']>0):?>
+				<?php $disabled = 'disabled';?>
+			<?php else:?>
+				<?php $disabled = '';?>
+			<?php endif;?>
+		<?php 
+			if(in_array($session->userRole,array('A','S','D')))
+			{
+				echo '<select name="info_deptIDs[]" id="info_deptIDs" data-error-message="Avdelinger er obligatorisk" multiple="multiple" data-validation="required" '.$disabled.'>';
+			}
+			else
+			{
+				echo '<select name="info_deptIDs" id="info_deptIDs" data-error-message="Beskrivelse er obligatorisk" data-validation="required" '.$disabled.'>';
+			}
+			$data = explode(',',$this->infoCollection['info_deptIDs']);
+		?>
+				<?php foreach($deptList as $key=>$department):?>
+				<option value="<?php echo $department['dept_id'];?>" <?php echo (in_array($department['dept_id'],$data))?'selected="selected"':'';?>><?php echo $department['dept_name'];?></option>
+				<?php endforeach;?>
+            </select> 
+        </span>
+	</div>
+
+	<div class="KKI1C">
+		<div class="KKI1C1">
+			<?php echo $this->translate('Info Description');?>
+		</div>
+		<span class="tdbg888p">
+			<?php if($this->infoCollection['info_id']>0):?>
+				<?php echo $this->infoCollection['info_desc'];?>
+			<?php else:?>
+<!--				--><?php //echo $this->partial('partials/texteditor.phtml', [
+//
+//					'key' => 'govExplainID' . $this->infoCollection['info_id'],
+//					'name' => 'info_desc',
+//					'id'=>'info_desc',
+//					'content' => isset($this->infoCollection['info_desc']) ?$this->infoCollection['info_desc'] : '',
+//					'required' => 'required',
+//					'error_message' => 'Beskrivelse er obligatorisk'
+//				]); ?>
+				<textarea onkeyup="textAreaAdjust(this)" name="info_desc" data-validation=""  id="info_desc" style="overflow:hidden;width: 100%; border: none; height:auto;"><?php echo $this->infoCollection['info_desc'];?></textarea>
+			<?php endif;?>
+		</span>
+	</div>
+	<?php if($this->infoCollection['info_id']>0):?>
+	<?php else:?>
+		<div class="OPPRETTB"><input type="submit" class="OPPRETTBA" value="<?php echo $this->translate('Create');?>"></div>
+	<?php endif;?>
+	
+</div>
+<?php if($this->infoCollection['info_id']>0):?>
+<?php else:?>
+	</form>	
+<?php endif;?>
+</div>
+

@@ -1,0 +1,6 @@
+<?php
+    $this->error_message = isset($this->error_message) ? $this->error_message : '';
+?>
+<input type="hidden" name="<?php echo $this->name; ?>"  class="redioncheck" data-validation="<?php echo $this->required; ?>" data-name="<?php echo $this->key; ?>" id="<?php echo $this->key; ?>" <?php echo ($this->error_message !== '') ? 'data-error-message="' . $this->error_message . '"' : ''; ?> />
+
+

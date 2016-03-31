@@ -1,0 +1,50 @@
+<form name="frmClientAddPlacement" id="frmClientAddPlacement" method="post" action="<?php echo $this->getUrl("client/additional/placementpost/id/".$this->clientID);?>">
+<input type="hidden" name="patient_id" id="patient_id" value="<?php echo $this->clientID;?>" />
+<div id="placement">
+    <table width="100%" cellspacing="4" cellpadding="0" border="0">
+        <tr>
+        	<td class="nonecls bordernone"><span class="tdbg1c bordernone" style="padding:0px !important;">
+					<?php echo $this->partial('partials/texteditor.phtml', [
+                        'key' => 'patient_location',
+                        'name' => 'placement[patient_location]',
+                        'content' => $this->clientInfo['patient_location'],
+                        'required' => 'data-validation="required"'
+                    ]); ?>
+<?php /**
+                    <div class="editor_button">
+					<input onClick="createEditor('patient_location');" type="button" value="Vis editor">
+					<input onClick="removeEditor('patient_location');" type="button" value="Skjul editor">
+				</div>
+				<table width="100%" border="0" cellspacing="0" cellpadding="0">
+					<tr>
+						<td class="nonecls"><span class="tdbg1c" style="padding:0px !important;">
+								<div id="contents_patient_location"  class="padding5h">
+								<textarea onkeyup="textAreaAdjust(this)" name="placement[patient_location]" class="validation ckeditorClass minheight20" data-name="patient_location" data-instance="" id="editor_patient_location" style="overflow:hidden;width: 100%; border: none;min-height:100px; height:auto;" data-validation="required"><?php echo $this->clientInfo['patient_location'];?></textarea>
+								</div>
+							</span>
+						</td>
+					</tr>
+				</table>
+ **/ ?>
+			</span>
+			</td>
+		</tr>
+	</table>
+</div>
+<div class="mtodroplist2">
+	<div class="OPPRETTB"><input type="submit" class="OPPRETTBA ckeditorClassSubmit" data-form="frmClientAddPlacement" value="<?php echo $this->translate('Save');?>"/></div>
+</div>
+</form>
+<script type="text/javascript" language="javascript"> $.validate({
+  form : '#frmClientAddPlacement', 
+  validateOnBlur : false,
+  borderColorOnError : '#C90312',
+  addValidClassOnAll : true,
+  showHelpOnFocus : false,
+  addSuggestions : false,
+  errorMessagePosition : 'top',
+  scrollToTopOnError : true,
+  ignore: '.ignore'
+});
+</script>
+<script src="<?php echo $this->getMediaUrl('ckeditor/custom.js','js');?>"></script>

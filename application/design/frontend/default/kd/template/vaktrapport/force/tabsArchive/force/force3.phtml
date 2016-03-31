@@ -1,0 +1,70 @@
+<table cellspacing=0 cellpadding="0" border="0px" style=""  width="100%">
+ <tr> 
+   <td style="padding:0px">
+   <table cellspacing=0 cellpadding="5" border="0px" style="border-collapse:collapse; margin-left:0pt" width="100%" class="bordercolor">
+	<thead>
+		<tr>
+			<th style="width: 100%;"><h2>3 Beboer ens oppfatning av tvangsbruken<!--Beboer one&#39;s perception of the use of force--></h2></th>
+		</tr>
+	</thead>
+	<tbody>
+	  <tr>
+		<td align="left">Er du enig i beskrivelsen som er gitt?<!--Do you agree with the description given?--></td>
+	  </tr>
+	  <tr>
+		<td align="left" >
+			<?php echo $this->translate('Yes');?>:<!--Yes:--><input type="radio" name="force[force_rad3_agree]" value="yes" id="force_rad3_agree_y" <?php echo ((isset($this->forceInfo['force_rad3_agree']) && $this->forceInfo['force_rad3_agree']=='yes'))?'checked="checked"':'';?> readonly="readonly" disabled="disabled"/><label for="force_rad3_agree_y"><span></span></label>
+			<?php echo $this->translate('No');?>:<!--Yes:--><input type="radio" name="force[force_rad3_agree]" value="no" id="force_rad3_agree_n" <?php echo (isset($this->forceInfo['force_rad3_agree']) && $this->forceInfo['force_rad3_agree']=='no')?'checked="checked"':'';?> readonly="readonly" disabled="disabled"/><label for="force_rad3_agree_n"><span></span></label>
+	  </tr>
+	  <tr>
+		<td align="left">Hvis du &oslash;nsker &aring; si noe om tvangsbruken kan du skrive inn det her:<!--If you want to say something about the use of force, you can enter it here:--></td>
+	  </tr>
+	  <tr>
+		<td align="left" width="100%" class="nonecls1">
+			<span class="tdbg1"><?php echo (isset($this->forceInfo['force_txta3_desc']) && $this->forceInfo['force_txta3_desc']!='')?$this->forceInfo['force_txta3_desc']:'';?></span>
+		</td>
+	  </tr>
+	  <tr>
+		<td align="left" >&Oslash;nsker du &aring; klage til Fylkesmannen over tvangsbruken?<!--If you wish to complain to the County of use of force?--></td>
+	  </tr>
+	  <tr>
+		<td align="left">
+			<?php echo $this->translate('Yes');?>:<input type="radio" name="force[force_rad3_complain]" id="force_rad3_complain_y" value="yes" <?php echo ((isset($this->forceInfo['force_rad3_complain']) && $this->forceInfo['force_rad3_complain']=='yes'))?'checked="checked"':'';?> readonly="readonly" disabled="disabled"/><label for="force_rad3_complain_y"><span></span></label>
+			<?php echo $this->translate('no');?>:<input type="radio" name="force[force_rad3_complain]" id="force_rad3_complain_n" value="no" <?php echo (isset($this->forceInfo['force_rad3_complain']) && $this->forceInfo['force_rad3_complain']=='no')?'checked="checked"':'';?> readonly="readonly" disabled="disabled"/><label for="force_rad3_complain_n"><span></span></label>
+		</td>
+	  </tr>
+	  <tr>
+	    <td>
+		<ul type="circle">
+		<li>Du kan skrive klagen din under, eller bruke eget ark.<!--You can write your complaint below, or use a separate sheet.--></li>
+		<li>Hvis du trenger hjelp til &aring; skrive klagen, skal ansatte p&aring; institusjonen hjelpe deg.<!--If you need help writing your complaint, the staff of the institution to help you.--></li>
+		<li>Institusjonen vil sende klagen din til Fylkesmannen. Fylkesmannen skal vurdere om den tvangen som er benyttet er lovlig.<!--The institution will send your complaint to the County. The County shall consider whether the force used is lawful.--></li>
+		<li>Hvis du vil klage selv, kan du f&aring; post-adressen, e-postadressen eller telefonnummeret til Fylkesmannen av ansatte p&aring; institusjonen.<!--If you wish to complain though, you can mail address, email address or telephone number of the County of staff of the institution.--></li>
+		</ul>
+	  </td>
+	 </tr>
+	 <tr>
+	  <td>
+		<ul type="circle">
+		<li>Du kan skrive klagen din under, eller bruke eget ark.<!--You can write your complaint below, or use a separate sheet.--></li>
+		<li>Hvis du trenger hjelp til &aring; skrive klagen, skal ansatte p&aring; institusjonen hjelpe deg.<!--If you need help writing your complaint, the staff of the institution to help you.--></li>
+		<li>Institusjonen vil sende klagen din til Fylkesmannen. Fylkesmannen skal vurdere om den tvangen som er benyttet er lovlig.<!--The institution will send your complaint to the County. The County shall consider whether the force used is lawful.--></li>
+		<li>Hvis du vil klage selv, kan du f&aring; post-adressen, e-postadressen eller telefonnummeret til Fylkesmannen av ansatte p&aring; institusjonen.<!--If you wish to complain though, you can mail address, email address or telephone number of the County of staff of the institution.--></li>
+		</ul>
+	  </td>
+	 </tr>
+	 <tr>
+		<td align="left">Hva klager du p&aring;?<!--What are you complaining about?--></td>
+	 </tr>
+	 <tr>
+		<td align="left" width="100%" colspan="2" class="nonecls1">
+			<span class="tdbg1">
+				<?php echo (isset($this->forceInfo['force_txt3_complain']) && $this->forceInfo['force_txt3_complain']!='')?$this->forceInfo['force_txt3_complain']:'';?>
+			</span>
+		</td>
+	  </tr>
+	</tbody>
+  </table>
+  </td>
+ </tr>
+</table>

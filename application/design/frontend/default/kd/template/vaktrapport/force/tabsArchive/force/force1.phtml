@@ -1,0 +1,131 @@
+<?php $format = KD::getModel('core/format');?>
+<table cellspacing=0 cellpadding="0" border="0px" width="100%">
+  <tr>
+	<td style="padding:0px;">
+	<table cellspacing=0 cellpadding="5" border="0px" class="bordercolor" style="border-collapse:collapse; margin-left:0pt" width="100%">
+		<tr>
+			<th style="width: 100%;" colspan="4"><h2>1.Formalia</h2></th>
+		</tr>
+
+		<tr>
+		  <td width="20%">Beboers navn:<!--Resident&#39;s name:--></td>
+		  <td colspan="2"><span class="tdbg"><?php echo KD::getModel('client/client')->getClient($this->forceInfo['patientId']); ?></span></td>
+		  <td width="30%" rowspan="3">
+		  <span class="tdbg71 VVTAC"><input type="radio" data-validation="radio" readonly="readonly" disabled="disabled" name="force[force_chk1_sex]" id="force_chk1_sex_b" value="gutt" <?php echo ((isset($this->forceInfo['force_chk1_sex']) && $this->forceInfo['force_chk1_sex']=='gutt') || !isset($this->forceInfo['force_chk1_sex']))?'checked="checked"':'';?>  /><label for="force_chk1_sex_b"><span></span></label></span>Gutt<!--Boy-->
+		  <br/>
+		  <span class="tdbg71 VVTAC"><input type="radio" data-validation="radio" readonly="readonly" disabled="disabled" name="force[force_chk1_sex]" id="force_chk1_sex_g" <?php echo (isset($this->forceInfo['force_chk1_sex']) && $this->forceInfo['force_chk1_sex']=='jente')?'checked="checked"':'';?> value="jente" /><label for="force_chk1_sex_g"><span></span></label></span>Jente<!--Girl--></td>
+		</tr>
+		<tr><td>F&oslash;dselsdato:<!--Date of Birth:--></td><td colspan="2"><span class="tdbg"><?php echo KD::getModel('client/client')->getClient($this->forceInfo['patientId'],'patient_person_no'); ?></span></td></tr>
+		<tr><td>BIRK-nummer:<!--ODA numbers:--></td><td colspan="2"><span class="tdbg"><?php echo KD::getModel('client/client')->getClient($this->forceInfo['patientId']); ?></span></td></tr>
+	
+		<tr>
+		  <td rowspan="2">Plassering jf. barnevernloven <!-- Location of. Child Welfare Act--></td>
+		  <td width="24%" rowspan="2" class="nonecls1">
+		  	<span class="tdbg1">
+			  <select name="force[force_sel1_location]" id="force_sel1_location" readonly="readonly" disabled="disabled" data-required data-validation="required" class="width98">
+				<option value="" > Select </option>
+				<option value="1" <?php echo (isset($this->forceInfo['force_sel1_location']) && $this->forceInfo['force_sel1_location']=='1')?'selected="selected"':'';?>> &sect; 03.01 </option>
+				<option value="2" <?php echo (isset($this->forceInfo['force_sel1_location']) && $this->forceInfo['force_sel1_location']=='2')?'selected="selected"':'';?>> &sect; 4-4, 5th paragraph </option>
+				<option value="3" <?php echo (isset($this->forceInfo['force_sel1_location']) && $this->forceInfo['force_sel1_location']=='3')?'selected="selected"':'';?>> &sect; 04.06, paragraph 1 </option>
+				<option value="4" <?php echo (isset($this->forceInfo['force_sel1_location']) && $this->forceInfo['force_sel1_location']=='4')?'selected="selected"':'';?>> &sect; 04.06, paragraph 2 </option>
+				<option value="5" <?php echo (isset($this->forceInfo['force_sel1_location']) && $this->forceInfo['force_sel1_location']=='5')?'selected="selected"':'';?>> &sect; 04.12 </option>
+				<option value="6" <?php echo (isset($this->forceInfo['force_sel1_location']) && $this->forceInfo['force_sel1_location']=='6')?'selected="selected"':'';?>> &sect; 4-24 </option>
+				<option value="7" <?php echo (isset($this->forceInfo['force_sel1_location']) && $this->forceInfo['force_sel1_location']=='7')?'selected="selected"':'';?>> &sect; 4-25 </option>
+				<option value="8" <?php echo (isset($this->forceInfo['force_sel1_location']) && $this->forceInfo['force_sel1_location']=='8')?'selected="selected"':'';?>> &sect; 4-26 </option>
+				<option value="9" <?php echo (isset($this->forceInfo['force_sel1_location']) && $this->forceInfo['force_sel1_location']=='9')?'selected="selected"':'';?>> &sect; 4-29, first paragraph </option>
+				<option value="10" <?php echo (isset($this->forceInfo['force_sel1_location']) && $this->forceInfo['force_sel1_location']=='10')?'selected="selected"':'';?>> &sect; 4-29, fourth paragraph </option>
+				<option value="11" <?php echo (isset($this->forceInfo['force_sel1_location']) && $this->forceInfo['force_sel1_location']=='11')?'selected="selected"':'';?>> &sect; 5A-1 </option>
+			  </select>
+			</span>
+		  </td>
+		 <td width="20%" colspan="2" class="nonecls1 padding5h">Ansvarlig barneverntjeneste:<!-- Responsible child welfare: -->
+		 	<span class="tdbg1"><?php echo (isset($this->forceInfo['force_txta1_resposible']) && $this->forceInfo['force_txta1_resposible']!='')?$this->forceInfo['force_txta1_resposible']:''; ?></span>
+		 </td>
+		</tr>
+		<tr>
+			<td colspan="2" class="nonecls1 padding5h"> Adresse , postnummer og -sted :<!-- Address, zip code and city: -->
+			<span class="tdbg1"><?php echo (isset($this->forceInfo['force_txta1_address']) && $this->forceInfo['force_txta1_address']!='')?$this->forceInfo['force_txta1_address']:''; ?></span></td>
+		</tr>
+		<tr>
+			<td colspan="4">S&aelig;rlige opplysninger om barnet som Fylkesmannen b&oslash;r vite om :<!--Specific information about the child that the County should know about:--></td>
+		</tr>
+		<tr>
+			<td colspan="4" class="nonecls1"><span class="tdbg1"><?php echo (isset($this->forceInfo['force_txta1_specification']) && $this->forceInfo['force_txta1_specification']!='')?$this->forceInfo['force_txta1_specification']:''; ?></span></td>
+		</tr>
+		<tr>
+		  <td>Namn p&aring; institusjon og avdeling :<!--Name of Institution and Department:--></td>
+		  <td colspan="3" class="nonecls1"><span class="tdbg1"><?php echo (isset($this->forceInfo['force_txt1_institue']) && $this->forceInfo['force_txt1_institue']!='')?$this->forceInfo['force_txt1_institue']:''; ?></span></td>
+		</tr>
+		<tr>
+		  <td>Organisasjonsnr:<!--Organisation:--></td>
+		  <td colspan="3" class="nonecls1"><span class="tdbg1"><?php echo (isset($this->forceInfo['force_txt1_reg']) && $this->forceInfo['force_txt1_reg']!='')?$this->forceInfo['force_txt1_reg']:''; ?></span></td>
+		</tr>
+		<tr>
+		  <td colspan="2">Institusjonens leder / fungerende leder<!--Institution Manager / Acting Head--></td>
+		  <td colspan="2">Hvem utf&oslash;rte tvangsbruken:<!--Who performed the use of force:--></td>
+		</tr>
+		<tr>
+		  <td rowspan="3">Navn:<!-- Name:--></td>
+		  <td rowspan="3" class="nonecls1"><span class="tdbg1"><?php echo (isset($this->forceInfo['force_txta1_director']) && $this->forceInfo['force_txta1_director']!='')?$this->forceInfo['force_txta1_director']:''; ?></span></td>
+		  <td>Navn og stilling:<!-- Name and position:--></td>
+		  <td class="nonecls1"><span class="tdbg1"><?php echo (isset($this->forceInfo['force_txta1_perform']) && $this->forceInfo['force_txta1_perform']!='')?$this->forceInfo['force_txta1_perform']:''; ?></span></td>
+		</tr>
+		<tr>
+		  <td colspan="2">Hvilke andre ansatte var til stede under tvangsbruken:<!--What other employees were present during the use of force:--></td>
+		</tr>
+		<tr>
+		  <td>Navn og stilling:<!-- Name and position:--></td>
+		  <td class="nonecls1"><span class="tdbg1"><?php echo (isset($this->forceInfo['force_txta1_other']) && $this->forceInfo['force_txta1_other']!='')?$this->forceInfo['force_txta1_other']:''; ?></span></td>
+		</tr>
+		<tr>
+		  <td colspan="2">Dato for tvangsbruken:<!--Date of forced use:--></td>
+		  <td>Klokkeslett for hendelsens start:<!--Time of beginning of the event:--></td>
+		  <td>Klokkeslett for hendelsens slutt:<!--Time of end of event:--></td>
+		</tr>
+		<tr>
+		  <td colspan="2" class="nonecls1"><span class="tdbg1"><?php echo (isset($this->forceInfo['force_txt1_date_use']) && $this->forceInfo['force_txt1_date_use']!='')?$format->FormatDate($this->forceInfo['force_txt1_date_use']):date('d/m-Y'); ?></span></td>
+		  <td class="nonecls1"><span class="tdbg1"><?php echo (isset($this->forceInfo['force_txt1_time_use']) && $this->forceInfo['force_txt1_time_use']!='')?$this->forceInfo['force_txt1_time_use']:''; ?></span></td>
+		  <td class="nonecls1"><span class="tdbg1"><?php echo (isset($this->forceInfo['force_txta1_time_end']) && $this->forceInfo['force_txta1_time_end']!='')?$this->forceInfo['force_txta1_time_end']:''; ?></span></td>
+		</tr>
+		<tr>
+		  <td colspan="3">Er tvangsprotokollen gjennomg&aring;tt med beboeren:<!-- Is forced protocol was reviewed with the resident:--></td>
+		  <td>
+		  	<?php echo $this->translate('Yes');?>:<!--Yes:--><input type="radio" readonly="readonly" disabled="disabled" onchange="changeAreaClass(this.value,'yes','rem','#force_txta1_undergone_res','');" name="force[force_rad1_undergone]" id="force_rad1_undergone_y" value="yes"  <?php echo (isset($this->forceInfo['force_rad1_undergone']) && $this->forceInfo['force_rad1_undergone']=='yes' || !isset($this->forceInfo['force_rad1_undergone']))?'checked="checked"':'';?> /><label for="force_rad1_undergone_y"><span></span></label>
+			<?php echo $this->translate('No');?>:<!--No:--><input type="radio" readonly="readonly" disabled="disabled" onchange="changeAreaClass(this.value,'no','add','#force_txta1_undergone_res','');" name="force[force_rad1_undergone]" id="force_rad1_undergone_n" <?php echo ((isset($this->forceInfo['force_rad1_undergone']) && $this->forceInfo['force_rad1_undergone']=='no') || !isset($this->forceInfo['force_rad1_undergone']))?'checked="checked"':'';?> value="no"  /><label for="force_rad1_undergone_n"><span></span></label>
+		  </td>
+		</tr>
+		<tr>
+		  <td class="nonecls1" colspan="4"><span class="padding5">Hvis nei, forklar kort om &aring;rsaken (alder, flyttet eller annet):</span><!-- If no, explain briefly about the reason (age, moved or otherwise):-->
+		  <span class="tdbg1"><?php echo (isset($this->forceInfo['force_txta1_undergone_res']) && $this->forceInfo['force_txta1_undergone_res']!='')?$this->forceInfo['force_txta1_undergone_res']:''; ?></span></td>
+		</tr>
+		<tr>
+		  <td colspan="3">Er beboer informert om at tvangsbruken kan p&aring;klages, jf. &sect; 27?<!-- Are residents informed that the use of force may be appealed, see &sect; 27?--></td>
+		  <td>
+		  	<?php echo $this->translate('Yes');?>:<!--Yes:--><input type="radio" readonly="readonly" disabled="disabled" onchange="changeAreaClass(this.value,'yes','rem','#force_txta1_inmate_res','');" name="force[force_rad1_inmate]" id="force_rad1_inmate_y" value="yes" <?php echo ((isset($this->forceInfo['force_rad1_inmate']) && $this->forceInfo['force_rad1_inmate']=='yes'))?'checked="checked"':'';?> /><label for="force_rad1_inmate_y"><span></span></label>
+			<?php echo $this->translate('No');?>:<!--No:--><input type="radio" readonly="readonly" disabled="disabled" onchange="changeAreaClass(this.value,'no','add','#force_txta1_inmate_res','');" name="force[force_rad1_inmate]" id="force_rad1_inmate_n" <?php echo ((isset($this->forceInfo['force_rad1_inmate']) && $this->forceInfo['force_rad1_inmate']=='no') || !isset($this->forceInfo['force_rad1_inmate']))?'checked="checked"':'';?> value="no"/><label for="force_rad1_inmate_n"><span></span></label>
+		  </td>
+		</tr>
+		<tr>
+		  <td colspan="4" class="nonecls1"><span class="padding5">Hvis nei, begrunn hvorfor:</span><!-- If no, give reasons why:--><br>
+		  <span class="tdbg1"><?php echo (isset($this->forceInfo['force_txta1_inmate_res']) && $this->forceInfo['force_txta1_inmate_res']!='')?$this->forceInfo['force_txta1_inmate_res']:''; ?></span>
+</td>
+		  
+		</tr>
+		<tr>
+		  <td colspan="3">&Oslash;nsker beboer &aring; p&aring;klage tvangsbruken?<!-- wants residents to appeal the use of force?--></td>
+		  <td>
+		    <?php echo $this->translate('Yes');?>:<!--Yes:--><input type="radio" readonly="readonly" disabled="disabled" name="force[force_rad1_want]" value="yes" id="force_rad1_want_y" <?php echo (isset($this->forceInfo['force_rad1_want']) && $this->forceInfo['force_rad1_want']=='yes' || !isset($this->forceInfo['force_rad1_want']))?'checked="checked"':'';?> /><label for="force_rad1_want_y"><span></span></label>
+			<?php echo $this->translate('No');?>:<!--No:--><input type="radio" readonly="readonly" disabled="disabled" name="force[force_rad1_want]" value="no" id="force_rad1_want_n" <?php echo ((isset($this->forceInfo['force_rad1_want']) && $this->forceInfo['force_rad1_want']=='no'))?'checked="checked"':'';?>/><label for="force_rad1_want_n"><span></span></label>
+		  </td>
+		</tr>
+		<tr>
+		  <td colspan="3">Hvis ja: Ligger klage fra beboer ved lagt?<!-- If yes: Located complaint from a resident at added?--></td>
+		  <td>
+		    <?php echo $this->translate('Yes');?>:<!--Yes:--><input type="radio" readonly="readonly" disabled="disabled" name="force[force_rad1_want_res]" value="yes" id="force_rad1_want_res_y" <?php echo (isset($this->forceInfo['force_rad1_want_res']) && $this->forceInfo['force_rad1_want_res']=='yes' || !isset($this->forceInfo['force_rad1_want_res']))?'checked="checked"':'';?> /><label for="force_rad1_want_res_y"><span></span></label>
+			<?php echo $this->translate('No');?>:<!--No:--><input type="radio" readonly="readonly" disabled="disabled" name="force[force_rad1_want_res_n]" value="no" id="force_rad1_want_res_n" <?php echo ((isset($this->forceInfo['force_rad1_want_res']) && $this->forceInfo['force_rad1_want_res']=='no'))?'checked="checked"':'';?>/><label for="force_rad1_want_y"><span></span></label>
+		  </td>
+		</tr> 
+	</table>
+	</td>
+  </tr>
+</table>

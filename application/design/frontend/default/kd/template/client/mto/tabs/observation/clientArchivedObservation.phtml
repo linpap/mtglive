@@ -1,0 +1,51 @@
+<?php $format=KD::getModel('core/format');?>
+<div>
+<form name="frmClientArchiveObservation" id="frmClientArchiveObservation" method="post" action="">
+<div class="PSUBTCWRAPPER">
+	<div class="PSUBTCLEFT">
+    	<?php echo $this->translate('Archived %s',$this->translate('Observations'));?>
+    </div>
+</div>
+<div class="CLEARBBORDER"></div>
+<div class="KKI2C">
+<table width="100%" border="0" cellspacing="4" cellpadding="0">
+      <tr class="CURNONPOINTER">
+        <th class="TSLRTDNUMBER">
+        <span class="tdbg2">
+        	<input type="checkbox" name="checkbox_all1" id="checkbox_all1" class="css-checkbox"  data-form="frmClientArchiveObservation"/>
+            <label for="checkbox_all1" class="css-label"></label>
+        </span>
+		<input type="hidden" name="patient_id" id="patient_id" value="<?php echo $this->clientID;?>"/>
+        </th>
+        <th class="TSLRTDCENTER" width="100%"><?php echo $this->translate('Observations');?></th>
+      </tr>
+<?php  if(count($this->observationArchiveCollection)>0):
+foreach($this->observationArchiveCollection as $observation):  ?>
+<?php $id = $observation['observation_id']; ?>
+  <tr>
+	<td class="TSLRTDNUMBER bgwhite">
+		<span class="tdbg" style="width: 20px;">
+		<input type="checkbox" name="<?php echo 'checkbox_'.$id;?>" id="<?php echo 'checkbox_'.$id;?>" class="css-checkbox"/>
+		<label for="<?php echo 'checkbox_'.$id;?>" class="css-label"></label>
+		</span>
+	</td>
+	<td><span class="tdbg"><a href="<?php echo $this->getUrl('client/info/index/id/'.$id,null,false,false);?>"><?php echo $observation['observation_desc']; ?></a></span></td>
+  </tr>
+
+<?php endforeach; 
+//echo $this->paginationControl($this->observationArchiveCollection, 'Sliding', 'control.phtml', array('page'=>'poa','tt'=>'62','t'=>'6'));
+endif;?>
+</table>
+</div>
+<div class="mtodroplist1">
+<div class="mtodroplist11">
+    <span class="KITINRDLISTWSPAN">
+    	<select name="selAction" class="onSelectAction" data-form="frmClientArchiveObservation">
+        	<option value="" style=" font-weight:bold;"><?php echo $this->translate('Select %s %s',$this->translate('Type of Action'),$this->translate('Here!'));?></option>
+            <option value="<?php echo $this->getUrl('client/mto/restoreobservation');?>"><?php echo $this->translate('%s %s',$this->translate('Restore'),$this->translate('Observations'));?></option>
+        </select> 
+    </span>  	
+</div>
+</div>
+</form>
+</div>

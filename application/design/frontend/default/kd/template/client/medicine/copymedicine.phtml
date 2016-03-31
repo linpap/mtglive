@@ -1,0 +1,25 @@
+<div id="copyMedicinePlan">
+<form id="frmCopyMedicinePlan" name="frmCopyMedicinePlan" action="<?php echo $this->getUrl("client/medicine/copymedicinepost/id/".$this->clientID."/mdid/".$this->medicineID);?>" method="post" enctype="multipart/form-data">
+<input type="hidden" id="medicine_patientID" name="medicine_patientID" value="<?php echo $this->clientID;?>" />
+<input type="hidden" id="medicineID" name="medicineID" value="<?php echo (isset($this->medicineID) && $this->medicineID>0)?$this->medicineID:0;?>" />
+<div style="height:100px;">
+    <p>Velg antall uker fremover du ønsker og kopiere medisinering planen til.</p>
+        <label for="noofweek">Kopier til neste? uker</label> 
+		<span class="border padding5"><select name="noofweek" id="noofweek" class="width20">
+		  <option value="1">1</option>
+		  <option value="2">2</option>
+		  <option value="3">3</option>
+		  <option value="4">4</option>
+		  <option value="5">5</option>
+		  <option value="6">6</option>
+		  <option value="7">7</option>
+		  <option value="8">8</option>
+		  <option value="9">9</option>
+		  <option value="10">10</option>
+		</select></span>
+	<div class="mtodroplist2">
+		<div class="OPPRETTB"><input type="submit" class="OPPRETTBA" value="<?php echo $this->translate('Save');?>"/></div>
+	</div>
+</div>
+</form>
+</div>

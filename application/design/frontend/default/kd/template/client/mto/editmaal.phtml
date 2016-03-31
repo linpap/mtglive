@@ -1,0 +1,22 @@
+<?php $format = KD::getModel('core/format');
+$maalId = $this->maalID;
+if(isset($maalId) && $maalId>0 && isset($this->maalCollection)):?>
+<form name="frmClientEditMaal" id="frmClientEditMaal" method="post" action="<?php echo $this->getUrl("client/mto/editmaalpost/id/".$maalId.'/pid/'.$this->maalCollection['maal_patientID']);?>">
+<table width="100%" border="0" cellspacing="4" cellpadding="0" id="clientEditMaalTbl">
+      <tr class="CURNONPOINTER">
+		<th class="TSLRTDCENTER" width="55%"><?php echo $this->translate('Active %s',$this->translate('Goal'));?></th>
+		<th class="TSLRTDCENTER" width="5%"><?php echo $this->translate('Order');?></th>
+		<th class="TSLRTDCENTER" width="20%"><?php echo $this->translate('%s Date',$this->translate('From'));?></th>
+        <th class="TSLRTDCENTER" width="20%"><?php echo $this->translate('%s Date',$this->translate('To'));?></th>
+      </tr>
+	  <tr>
+	  	<td class="nonecls"><span class="tdbg"><input type="text" name="maal_desc" value="<?php echo $this->maalCollection['maal_desc'];?>" id="maal_desc" data-validation="required" /></span></td>
+		<td class="nonecls"><span class="tdbg"><input type="text" name="maal_order" class="width70" value="<?php echo $this->maalCollection['maal_order'];?>" id="maal_order" data-validation="required" /></span></td>
+		<td class="nonecls"><span class="tdbg"><input type="text" name="maal_from_date" value="<?php echo $format->FormatDate($this->maalCollection['maal_from_date']);?>" data-validation="required" readonly  id="maal_from_date" class="DyndatepickerImage1 width70"/></span></td>
+		<td class="nonecls"><span class="tdbg"><input type="text" name="maal_to_date" style=" <?php echo $format->getColorStyle($this->maalCollection['maal_to_date']);?>" value="<?php echo $format->FormatDate($this->maalCollection['maal_to_date']);?>" id="maal_to_date" class="DyndatepickerImage1 width70" readonly data-validation="required" /></span></td></tr>
+</table>
+<div class="mtodroplist2">
+	<div class="OPPRETTB"><input type="submit" class="OPPRETTBA" value="<?php echo $this->translate('Save');?>"/></div>
+</div>
+</form>
+<?php endif;?>

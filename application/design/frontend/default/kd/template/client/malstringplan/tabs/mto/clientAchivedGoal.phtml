@@ -1,0 +1,82 @@
+<div class="PSUBTCWRAPPER">
+	<div class="PSUBTCLEFT">
+    	<?php echo $this->translate('Archived %s',$this->translate('Goal'));?>
+    </div>
+</div>
+<div class="CLEARBBORDER"></div>
+<div class="KKI2C">
+<table width="100%" border="0" cellspacing="4" cellpadding="0">
+      <tr class="CURNONPOINTER">
+        <th class="TSLRTDNUMBER">
+        <span class="tdbg2">
+        	<input type="checkbox" name="checkboxG0" id="checkboxG0" class="css-checkbox" />
+            <label for="checkboxG0" class="css-label"></label>
+        </span>
+        </th>
+        <th class="TSLRTDCENTER"><?php echo $this->translate('Goal');?></th>
+		<th class="TSLRTDCENTER"><?php echo $this->translate('%s Date',$this->translate('From'));?></th>
+        <th class="TSLRTDCENTER"><?php echo $this->translate('%s Date',$this->translate('To'));?></th>
+      </tr>
+      <tr>
+        <td class="TSLRTDNUMBER bgwhite">
+        	<span class="tdbg" style="width: 20px;">
+                <input type="checkbox" name="checkboxG1" id="checkboxG1" class="css-checkbox" />
+                <label for="checkboxG1" class="css-label"></label>
+       		</span>
+        </td>
+        <td><span class="tdbg">Vedkommende utsetter seg ikke for alvorlige selvdestrukte handlinger</span></td>
+        <td class="bgwhite"><span class="tdbg">01/09-2014</span></td>
+        <td class="bgwhite"><span class="tdbg">14/12-2014</span></td>
+      </tr>
+      <tr>
+        <td class="TSLRTDNUMBER bgwhite">
+        	<span class="tdbg" style="width: 20px;">
+                <input type="checkbox" name="checkboxG1" id="checkboxG1" class="css-checkbox" />
+                <label for="checkboxG1" class="css-label"></label>
+       		</span>
+        </td>
+        <td><span class="tdbg">Vedkommende mottar behandling for spiseforstyrrelsen ved Capio</span></td>
+        <td class="bgwhite"><span class="tdbg">01/09-2014</span></td>
+        <td class="bgwhite"><span class="tdbg">14/12-2014</span></td>
+      </tr>
+      <tr>
+        <td class="TSLRTDNUMBER">
+        	<span class="tdbg" style="width: 20px;">
+                <input type="checkbox" name="checkboxG1" id="checkboxG1" class="css-checkbox" />
+                <label for="checkboxG1" class="css-label"></label>
+       		</span>
+        </td>
+        <td><span class="tdbg">TABLESPACETedkommende følger oppsatt skoleplan</span></td>
+        <td><span class="tdbg">01/09-2014</span></td>
+        <td><span class="tdbg">14/12-2014</span></td>
+      </tr>
+      <tr>
+        <td class="TSLRTDNUMBER">
+        	<span class="tdbg" style="width: 20px;">
+                <input type="checkbox" name="checkboxG1" id="checkboxG1" class="css-checkbox" />
+                <label for="checkboxG1" class="css-label"></label>
+       		</span>
+        </td>
+        <td><span class="tdbg">Opsatt ukeplan og ingåtte avtaler følges</span></td>
+        <td><span class="tdbg">01/09-2014</span></td>
+        <td><span class="tdbg">14/12-2014</span></td>
+      </tr>
+</table>
+</div>
+<div class="mtodroplist1">
+<div class="mtodroplist11">
+    <span class="KITINRDLISTWSPAN">
+    	<select>
+        	<option value="" style=" font-weight:bold;"><?php echo $this->translate('Select %s %s',$this->translate('Type of Action'),$this->translate('Here!'));?></option>
+            <option value="0"><?php echo $this->translate('Change');?></option>
+            <option value="1"><?php echo $this->translate('%s %s',$this->translate('Archive'),$this->translate('Goal'));?></option>
+            <option value="2"><?php echo $this->translate('Delete %s(s)',$this->translate('Goal'));?></option>
+        </select> 
+    </span>  	
+</div>
+</div>
+
+<div class="mtodroplist2">
+<div class="CANCELB"><a class="leggtilrada" href="#"><?php echo $this->translate('Add %s(s)',$this->translate('Row'));?></a></div>
+<div class="leggtilrad"><a class="LAGREBA2" href="#"><?php echo $this->translate('Create');?></a></div>
+</div>

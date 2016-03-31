@@ -1,0 +1,460 @@
+<?php $format = KD::getModel('core/format');?>
+<link rel="stylesheet" type="text/css" href="<?php echo $this->getMediaUrl('calendar/dzstooltip/dzstooltip.css','css');?>"/>
+<link rel='stylesheet' type="text/css" href="<?php echo $this->getMediaUrl('calendar/dzscalendar/dzscalendar.css','css');?>"/>
+<link href="<?php echo $this->getMediaUrl('styles.css','css');?>" type="text/css" rel="stylesheet" media="screen">
+<link href="<?php echo $this->getMediaUrl('stylesPrint.css','css');?>" type="text/css" rel="stylesheet" media="print">
+<link href="<?php echo $this->getMediaUrl('tcss.css','css');?>" rel="stylesheet" type="text/css">
+<link href="<?php echo $this->getMediaUrl('fullcalendar.css','css');?>" rel="stylesheet">
+<link href="<?php echo $this->getMediaUrl('jquery-ui.css','css');?>" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="<?php echo $this->getMediaUrl('jquery.timepicker.css','css');?>" />
+<link rel="stylesheet" type="text/css" href="<?php echo $this->getMediaUrl('mtg/jquery-ui-overrides.css','css');?>" />
+<link rel="stylesheet" type="text/css" href="<?php echo $this->getMediaUrl('mtg/utils.css','css');?>" />
+<!--[if IE 10]>
+<link rel="stylesheet" href="css/ie.css" />
+<![endif]-->
+<script src="<?php echo $this->getMediaUrl('ckeditor/ckeditor.js','js');?>"></script>
+<?php /**
+<script src="<?php echo $this->getMediaUrl('jquery.min.js','js');?>"></script>
+<script src="<?php echo $this->getMediaUrl('fullcalendar.min.js','js');?>"></script>
+<script src="<?php echo $this->getMediaUrl('jquery-ui-1.10.3.min.js','js');?>"></script>
+<script src="<?php echo $this->getMediaUrl('jquery.cookies.js','js');?>"></script>
+<script src="<?php echo $this->getMediaUrl('toggles.min.js','js');?>"></script>
+<script src="<?php echo $this->getMediaUrl('jquery.sparkline.min.js','js');?>"></script>
+<script src="<?php echo $this->getMediaUrl('bootstrap.min.js','js');?>"></script>
+<!--<script src="js/jquery-1.10.2.min.js"></script>-->
+<script src="<?php echo $this->getMediaUrl('jquery-migrate-1.2.1.min.js','js');?>"></script>
+<script src="<?php echo $this->getMediaUrl('custom.js','js');?>"></script>
+<!-- time Picker -->
+<script type="text/javascript" src="<?php echo $this->getMediaUrl('jquery.timepicker.js','js');?>"></script>
+<script src="<?php echo $this->getMediaUrl('jquery.form-validator.js','js');?>"></script>
+
+
+<script src="<?php echo $this->getMediaUrl('ckeditor/custom.js','js');?>"></script>
+<script src="<?php echo $this->getMediaUrl('jquery.printElement.js','js');?>"></script>
+**/ ?>
+<?php $format = KD::getModel('core/format');?>
+<script type="text/javascript">
+    var mtg_config = {
+        System : {
+            baseUrl : "<?php echo APPLICATION_URL; ?>"
+        },
+        Datepicker: {
+            showWeek: true,
+            weekHeader: 'U',
+            showOn: "button",
+            dateFormat: '<?php echo $format->getDateFormatJS();?>',
+            buttonImage: "<?php echo $this->getMediaUrl('timg/calendar_event_box_ico.png');?>",
+            buttonImageOnly: true,
+            showOtherMonths: true,
+            selectOtherMonths: true,
+            changeMonth: true,
+            changeYear: true,
+            altFormat: "yy-mm-dd",
+            altField: '#date-alt-field'
+        },
+        Timepicker : {
+            scrollDefault: 'now',
+            timeFormat: 'H:i',
+            step: 15
+        },
+        CkEditor : {
+            autoGrow_onStartup: true,
+            defaultLanguage: "no"
+        }
+    };
+</script>
+
+<script src="<?php echo APPLICATION_URL; ?>/javascript.php?libraries" type="text/javascript"></script>
+
+<script>
+function textAreaAdjust(o) {
+    o.style.height = "1px";
+    o.style.height = (25+o.scrollHeight)+"px";
+}
+
+function getDateObject (dateFormat, dateString) {
+      //do something
+	  switch(dateFormat)
+	  {
+	  	case 'dd-mm-yy':
+			var result = /^(\d{2})-(\d{2})-(\d{4})$/.exec(dateString);
+			if (result) {
+				from = new Date(
+					parseInt(result[3], 10), 
+					parseInt(result[2], 10) - 1, 
+					parseInt(result[1], 10)
+				);
+			}
+		break;
+		case 'dd/mm-yy':
+			var result = /^(\d{2})\/(\d{2})-(\d{4})$/.exec(dateString);
+			if (result) {
+				from = new Date(
+					parseInt(result[3], 10), 
+					parseInt(result[2], 10) - 1, 
+					parseInt(result[1], 10)
+				);
+			}
+		break;
+		case 'mm-dd-yy':
+			var result = /^(\d{2})-(\d{2})-(\d{4})$/.exec(dateString);
+			if (result) {
+				from = new Date(
+					parseInt(result[3], 10), 
+					parseInt(result[1], 10) - 1, 
+					parseInt(result[2], 10)
+				);
+			}
+		break;
+	  }
+	  return from;
+  }
+$(document).ready(function(){
+    $('.ckeditorClassSubmit').on('submit', function(e, options) {
+   		
+		 options = options || {};
+		// Prevent the form being submitted just yet
+		e.preventDefault();
+	
+		var $editors = $("textarea.ckeditorClass");
+		
+		if ($editors.length) {
+			$editors.each(function() {
+				/*var instanceName =  $(this).attr("data-name");
+				var instance = CKEDITOR.instances[instanceName];
+				if (instance) 
+				{ 
+					$('#editorcontents_'+instanceName).css('display','block');
+					$('#editorcontents_'+instanceName).val($(this).val(instance.getData())); 
+					$('#contents_'+name).css('display','block');
+				}**/
+				var name = $(this).attr('data-name');
+				if(name != null && name !== undefined && name!='')
+				{
+					var editorExtra = $(this).attr('data-instance');
+					if (editorExtra!= null && editorExtra!== undefined && editorExtra!='') 
+					{
+						$('#editorcontents_'+name).val($(this).val(editorExtra.getData())); 
+						CKEDITOR.remove(editorExtra);
+						$('#editor_'+name).html('');
+						$('#contents_'+name).css('display','block');
+						$('#editorcontents_'+name).css('display','block');
+						$(this).attr('data-instance','');
+					}
+				}
+				else if(name!='')
+				{
+					$(this).attr('data-instance','');
+				}
+			});
+		}
+		 //$(e.currentTarget).trigger('submit');
+	});
+
+  $('.get-ajax').change(function(e) {
+  	
+	var target_id = $(this).data('target');
+	if (target_id == "") {alert('Target Id Not Set');return false;}
+	var target_action = $(this).data('action');
+	if (target_action == "") {alert('Target Action Not Set');return false;}
+	var initial_target_html = $(this).data('text');
+	if (initial_target_html == "") {alert('Target Text Not Set');return false;}
+	var load_target_html = $(this).data('load');
+	if (load_target_html == "") {alert('Target Load Not Set');return false;}
+	
+	$('#'+target_id).html(initial_target_html); //Give the target select the prompt option
+    //Grab the chosen value on first select list change
+    var selectvalue = $(this).val();
+
+    //Display 'loading' status in the target select list
+    $('#'+target_id).html(load_target_html);
+
+    if (selectvalue == "") {
+        //Display initial prompt in target select if blank value selected
+       $('#'+target_id).html(initial_target_html);
+    } else {
+      //Make AJAX request, using the selected value as the GET
+      $.ajax({url: target_action+selectvalue,
+             success: function(output) {
+                //alert(output);
+                $('#'+target_id).html(output);
+            },
+          error: function (xhr, ajaxOptions, thrownError) {
+            alert(xhr.status + " "+ thrownError);
+          }});
+        }
+    });
+	/*var modaldia;
+
+    $(document).ready(function () {
+         modaldia = $("<div></div>");
+        
+      $(".dialog-ajax").click(function () {
+            modaldia.dialog({
+                autoOpen: false,
+                width: 750,
+                modal: true
+               
+            });
+            modaldia.dialog('open');
+			var url = $(this).data('url');
+			var title = $(this).data('title');
+            modaldia.load(url, function () {
+               //tryed loading date picker here 
+                var startDate = $(".DyndatepickerImage1");
+                startDate.unbind();
+                startDate.datepicker({showWeek: true, weekHeader: 'U',showOn: "button",buttonImage: "<?php echo $this->getMediaUrl('timg/calendar_event_box_ico.png');?>", buttonImageOnly: true});
+				//$(".datepicker").datepicker();
+				//$(".DyndatepickerImage1").datepicker({showWeek: true, weekHeader: 'U',showOn: "button",buttonImage: "<?php echo $this->getMediaUrl('timg/calendar_event_box_ico.png');?>", buttonImageOnly: true});
+            });
+
+        });
+
+    });*/
+	$('.dialog-ajax').unbind("click").click(function(){   
+		var tag = $("<div></div>"); //This tag will the hold the dialog content.
+		var url = $(this).data('url');
+		var title = $(this).data('title');
+		//alert(url);
+		//alert(title);
+		$.ajax({
+		  url: $(this).data('url'),
+		  type: 'GET',
+		  beforeSend: function(){$("#loading-image").show();},
+		  error: function() { alert('Could not load form'); },
+		  success: function(data, textStatus, jqXHR) {
+			if(typeof data == "object" && data.html) { //response is assumed to be JSON
+			  tag.html(data.html).dialog({modal:true, title: title}).dialog('open');
+			} else { //response is assumed to be HTML
+			  tag.html(data).dialog({modal: true, title: title, height: 200, width:800, hide: "scale", show : "scale",/*buttons: {
+                    "Save": function () {
+                        // Manually submit the form                       
+                        var form = $('form', this);
+                        $(form).submit();
+                    },
+                    "Cancel": function () { $(this).dialog('close'); }
+                },*/open: function (event, ui) {
+                    if ($('input.DyndatepickerImage1').length > 0) {
+						var startDate = $(".DyndatepickerImage1");
+                		startDate.unbind();
+                        startDate.datepicker(Mtg.Config.Datepicker);
+						
+                    }
+					$("#loading-image").hide();
+                },close: function (event, ui) {
+                    $('input.DyndatepickerImage1').datepicker("destroy");
+                    $(this).dialog("destroy");
+                    $(this).remove();
+                }}).dialog('open');
+				
+			}
+			//$.isFunction(true) && (true)(data, textStatus, jqXHR);
+		  }
+		});
+	  });
+	// Date Picker General Without Any Restriction
+	$(".datepicker").datepicker();
+	// Date Picker General Without Any Restriction
+	$(".datepickerImage").datepicker(Mtg.Config.Datepicker);
+	// Date Picker Min Date as Today
+	$(".datepickerMinDate").datepicker(Mtg.Config.Datepicker);
+	$(".datepickerMinDate").each(function( index ) {
+		var mindate = $(this).attr("data-mindate");
+		$(this).datepicker("option", "minDate", mindate);
+	});
+	$(".DyndatepickerImage").datepicker(Mtg.Config.Datepicker);
+	$('.timepicker').timepicker(Mtg.Config.Timepicker);
+	//Set a starting time and see duration from that starting time. You can optionally set an maxTime as well.
+	//$('#durationExample').timepicker({'minTime': '2:00pm','maxTime': '11:30pm','showDuration': true});
+	
+	//Prevent selection of certain time values.
+	//$('#disableTimeRangesExample').timepicker({'disableTimeRanges': [['1am', '2am'],['3am', '4:01am']]});
+	
+	// Date Picker With weekdays
+	$(".datepickerto").datepicker(Mtg.Config.Datepicker);
+
+	$(".datepickerfrom").datepicker({weekHeader: 'U', dateFormat:'<?php echo $format->getDateFormatJS();?>',showOtherMonths: true,selectOtherMonths: true,showOn: "button",buttonImage: "<?php echo $this->getMediaUrl('timg/calendar_event_box_ico.png');?>", buttonImageOnly: true,changeMonth: true,changeYear: true,
+			onClose: function(date) {
+				if($(this).attr('data-toValidateId'))
+				{
+					var targetId = '#'+$(this).attr('data-toValidateId');
+					var dateFormat = $(this).datepicker("option","dateFormat");
+					if($(this).attr('data-toValidateInterval'))
+					{
+						var interval = $(this).attr('data-toValidateInterval');
+						var date = getDateObject(dateFormat,$(this).val());
+						var dateObject = new Date(date);
+						var array = interval.split(',');
+						var tmp = '';
+						var i;
+						for(i=0;i<array.length;i++)
+						{
+							tmp = array[i];
+							switch(tmp.substring(0,1))
+							{
+								case 'Y':
+									var year = tmp.substring(1);
+									//alert(year+'year'+dateObject.getYear()+'test'+parseInt(year));
+									dateObject.setYear(dateObject.getYear()+parseInt(year)+1900);
+								break;
+								case 'M':
+									var month = tmp.substring(1);
+									//alert(month+'month');
+									dateObject.setMonth(dateObject.getMonth()+parseInt(month));
+								break;
+								case 'D':
+									var day = tmp.substring(1);
+									//alert(day+'day'+dateObject.getDate());
+									dateObject.setDate(dateObject.getDate()+parseInt(day));
+								break;
+								default:
+									var day = tmp.substring(0);
+									//alert(day+'default');
+									dateObject.setDate(dateObject.getDate()+parseInt(day));
+								break;
+							}
+						}
+						$(targetId).datepicker("option","maxDate",dateObject);
+					}
+					$(targetId).datepicker("option","minDate",date);
+				}
+				else
+				{
+					alert('Please set Validatin Target ID');
+				}
+			}
+		});
+		
+	$(".datepickerfrom").each(function( index ) {
+		$(this).datepicker("option", "minDate", $(this).val());
+		//alert($(this).datepicker("option","dateFormat"));
+	});
+	$(".datepickerto").each(function( index ) {
+		if($(this).attr('data-mindate'))
+		{
+			var mindate = $(this).attr("data-mindate");
+			$(this).datepicker("option", "minDate", mindate);
+		}
+		if($(this).attr('data-maxdate'))
+		{
+			var maxdate = $(this).attr("data-maxdate");
+			$(this).datepicker("option", "maxDate", maxdate);
+		}
+	});
+	
+	/*var strDate = '';
+	for(var i=2000;i<3000;i++)
+	{
+		strDate +=',"1-12-'+ i +'","1-3-'+ i +'","1-6-'+ i +'","1-9-'+ i +'"';
+	}*/
+	var availableDates = ["1-1-2015","1-4-2015","1-7-2015"];
+	
+	function available(date) {
+	  dmy = date.getDate() + "-" + (date.getMonth()+1) + "-" + date.getFullYear();
+	  if ($.inArray(dmy, availableDates)>=0) {
+		return [true, "","Available"];
+	  } else {
+		return [false,"","unAvailable"];
+	  }
+	}
+	
+	$('.datepickespecific').datepicker(Mtg.Config.Datepicker);
+	// Select box(Drop Down) with class name = onSelectAction post form with action set to the value in drop down
+	$('.onSelectAction').change(function(){
+        //TODO: horrible hack to add a confirmation box when adding "Løpende tiltak" to a "vaktrapport"
+        if($(this).find(':selected').attr('id') === 'mto-shown-in-vaktrap') {
+            if(!confirm('Ønsker du å vise løpende tiltak i vaktrapporten?')) {
+                return false;
+            }
+        }
+
+
+        var action = $(this).val();
+		if(action.length>0)
+		{
+			var formId = '#'+$(this).data('form');
+			$(formId).attr('action', action);
+			$(formId).submit();
+		}
+	});
+	
+	// When check box whose id = checkbox_all is checked/unchecked all check box of that form are checked/unchecked
+	$("#checkbox_all").click(function () {
+		var wrapperId = '#'+$(this).data('form');
+        if ($(wrapperId + " #checkbox_all").is(':checked')) {
+            $(wrapperId + " input[type=checkbox]").each(function () {
+                $(this).prop("checked", true);
+            });
+
+        } else {
+            $(wrapperId + " input[type=checkbox]").each(function () {
+                $(this).prop("checked", false);
+            });
+        }
+    });
+	// When check box whose id = checkbox_all1 is checked/unchecked all check box of that form are checked/unchecked
+	$("#checkbox_all1").click(function () {
+		var wrapperId = '#'+$(this).data('form');
+        if ($(wrapperId + " #checkbox_all1").is(':checked')) {
+            $(wrapperId + " input[type=checkbox]").each(function () {
+                $(this).prop("checked", true);
+            });
+
+        } else {
+            $(wrapperId + " input[type=checkbox]").each(function () {
+                $(this).prop("checked", false);
+            });
+        }
+    });
+	// When check box whose id = checkbox_all2 is checked/unchecked all check box of that form are checked/unchecked
+	$("#checkbox_all2").click(function () {
+		var wrapperId = '#'+$(this).data('form');
+        if ($(wrapperId + " #checkbox_all2").is(':checked')) {
+            $(wrapperId + " input[type=checkbox]").each(function () {
+                $(this).prop("checked", true);
+            });
+
+        } else {
+            $(wrapperId + " input[type=checkbox]").each(function () {
+                $(this).prop("checked", false);
+            });
+        }
+    });
+	// When check box whose id = checkbox_all2 is checked/unchecked all check box of that form are checked/unchecked
+	$("#checkbox_all3").click(function () {
+		var wrapperId = '#'+$(this).data('form');
+        if ($(wrapperId + " #checkbox_all3").is(':checked')) {
+            $(wrapperId + " input[type=checkbox]").each(function () {
+                $(this).prop("checked", true);
+            });
+
+        } else {
+            $(wrapperId + " input[type=checkbox]").each(function () {
+                $(this).prop("checked", false);
+            });
+        }
+    });
+});
+
+</script>
+<script type="text/javascript">
+	$(function(){
+		var base = 'body';
+		$('a[href^="#"]').each(function(){
+			var name = $(this).attr('href').substr(1);
+			var anchor = document.getElementById(name) || document.getElementsByName(name);
+			if(anchor = (anchor.item)?anchor.item(0):anchor){
+					var offset = $(base+' > .rollbar-content').height() - $(anchor).offset().top;
+					$(this).click(function(){
+							$(base).trigger('rollbar',-offset);
+					});
+			}       
+		});
+	});
+</script>
+<script src="<?php echo $this->getMediaUrl('dzscalendar.js','js');?>" type="text/javascript"></script>
+<script>
+window.arr_weekdays = ['SØNDAG', 'MANDAG', 'TIRSDAG', 'ONSDAG', 'TORSDAG', 'FREDAG', 'LØRDAG'];
+ window.arr_monthnames = [ "Januar", "Februar", "Mars", "April", "Mai", "Juni",
+ "Juli", "August", "September", "Oktober", "November", "Desember" ];
+</script>

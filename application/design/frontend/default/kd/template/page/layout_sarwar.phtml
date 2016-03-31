@@ -1,0 +1,443 @@
+<?php echo $this->doctype() ?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>M.T.G. - <?php echo $this->ModuleName; ?></title>
+  <?php echo $this->render('head.phtml')?>
+  <?php if((strtolower($this->ModuleName)=='client' && $this->ControllerName=='mapping') || (strtolower($this->ModuleName)=='vaktrapport' && $this->ControllerName=='info')):?>
+    <script type="text/javascript" src="<?php echo $this->getMediaUrl('genogram/go-debug.js','js');?>"></script>
+	<?php if(strtolower($this->ModuleName)=='client' && $this->ControllerName=='mapping'):?>
+		<script type="text/javascript" src="<?php echo $this->getMediaUrl('genogram/genogram.js','js');?>"  id="code"></script>
+	<?php else:?>
+		<script type="text/javascript" src="<?php echo $this->getMediaUrl('genogram/genogram_vaktrapport.js','js');?>"  id="code"></script>
+	<?php endif;?>
+	<link rel="stylesheet" href="<?php echo $this->getMediaUrl('genogram/genogram.css','css');?>" type="text/css"/>
+	<link href="<?php echo $this->getMediaUrl('genogram/goSamples.css','css');?>" rel="stylesheet" type="text/css"/>
+  <?php endif;?>
+</head>
+<body <?php if((strtolower($this->ModuleName)=='client' && $this->ControllerName=='mapping') || (strtolower($this->ModuleName)=='vaktrapport' && $this->ControllerName=='info')):?>onLoad="init()" <?php endif;?>>
+<?php if(strtolower($this->ModuleName)!='admin'){echo $this->render('left.phtml');}?>
+<div id="collapse" class="collapse">
+
+
+
+
+<?php if(isset($_SESSION['Acl']['userImage']) && $_SESSION['Acl']['userImage']>0)
+		{ 
+			$data = KD::getModel('client/document')->getDocument($_SESSION['Acl']['userImage']);
+			if(in_array($data['document_mimetype'],array('image/png','image/jpg','image/jpeg','image/gif')))
+			{
+				if($data['document_imagewidth']>$data['document_imageheight'])
+				{
+					$borderRadius = $data['document_imagewidth']/2;
+				}
+				else
+				{
+					$borderRadius = $data['document_imageheight']/2;
+				}
+				echo '<div class="imageAuto" style="border-radius:44px !important; width:30px !important; height:30px !important;border:0px none !important; margin-top:87px !important; margin-left-2px;"><img src= "data:'.$data['document_mimetype'].';base64,'.base64_encode($data['document_filecontent']).'" width="30 margin-top"50"  /></div>';
+			}
+			else
+			{
+			?>
+				<div class="KKI1PHWhite"></div>
+			<?php 
+			}
+		?>
+		<?php 
+		}
+		else
+		{
+		?>
+			<div class="KKI1PHWhite"></div>
+		<?php 
+		}?>
+
+
+
+</div>
+<!-- Starting CONTENT ID -->
+<div id="CONTENT">
+	<?php if(strtolower($this->ModuleName)!='admin'){echo $this->render('mainmenu.phtml');}?>
+	
+	<?php  if(strtolower($this->ModuleName)=='default'){
+				 $flag = false; 
+				 if(isset($this->message['success']) && count($this->message['success'])>0):
+					$flag = true;?>
+					<div class="homepageError"><div class="messages">
+					<?php 
+					foreach($this->message['success'] as $key=>$successMsg)
+					{?>
+					<div class="message success">
+					<?php echo $successMsg;?>
+					</div>    
+					<?php
+					}
+				endif;
+				if(isset($this->message['error']) && count($this->message['error'])>0):;
+					if(!$flag):?>
+					<div class="homepageError"><div class="messages">
+					<?php endif;
+					$flag = true;
+					foreach($this->message['error'] as $key=>$errorMsg)
+					{?>
+					<div class="message error">
+					<?php echo $errorMsg;?>
+					</div>    
+					<?php
+					}
+				endif;
+				
+				if($flag):?>
+					</div></div>
+				<?php endif;
+			echo $this->layout()->content; 
+		  }	
+		  elseif(strtolower($this->ModuleName)=='admin'){
+			echo $this->layout()->content; 
+		  }
+		  else	{?>
+		<!-- Starting CFULWRAPPER ID -->
+		<div class="CFULWRAPPER">
+			<!-- Starting CIDWRAPPER ID -->
+			<div id="CIDWRAPPER">
+				<!-- Starting CIDCENTERBG ID -->
+				<div id="CIDCENTERBG">
+					<!-- Starting PTCWRAPPER ID -->
+					<div id="PTCWRAPPER">
+						<?php
+						 $flag = false; 
+						 if(isset($this->message['success']) && count($this->message['success'])>0):
+						 	$flag = true;?>
+							<div class="messages">
+							<?php 
+							foreach($this->message['success'] as $key=>$successMsg)
+							{?>
+							<div class="message success">
+							<?php echo $successMsg;?>
+							</div>    
+							<?php
+							}
+						endif;
+						if(isset($this->message['error']) && count($this->message['error'])>0):;
+							if(!$flag):?>
+							<div class="messages">
+							<?php endif;
+							$flag = true;
+							foreach($this->message['error'] as $key=>$errorMsg)
+							{?>
+							<div class="message error">
+							<?php echo $errorMsg;?>
+							</div>    
+							<?php
+							}
+						endif;
+						
+						if($flag):?>
+							</div>
+						<?php endif;?>
+						<div id="<?php echo (isset($this->className) && $this->className!='')?$this->className:'PTCLEFT';?>">
+						<?php if(isset($this->title) && $this->title!='')
+						{
+							if($this->title=='Show_Department')
+							{
+						?>
+								<div class="vaktraporthead3">	
+									<span class="tdbgvaktraportFL">
+										 <select>
+										  <option value="" style=" font-weight:bold;"><?php echo $this->translate('Select').' '.$this->translate('Name').' '.$this->translate('Here!');?></option>
+										  <option value="">Andreas Balchen</option>
+										  <option value="">Payam Afshar</option>
+										</select> 
+									</span>
+								</div>
+						<?php
+							}
+							else
+							{
+								echo $this->title;;
+							}
+						}
+						else
+						{
+							echo $this->ModuleName;
+						}?>
+						</div>
+						<div id="PTCRIGHT"> 
+							<a class="PRINTBUTTON" id="doPrint" href="#" title="<?php echo $this->translate('Print');?>"></a>
+						</div>
+					</div><!-- Ending PTCWRAPPER ID -->
+					<div class="CLEARBBORDER"></div>
+					<!-- Starting BORDERTABS ID -->
+					<div id="BORDERTABS">				
+						<?php 
+							switch(strtolower($this->ModuleName))
+							{
+								case 'info':
+									
+									if($this->ControllerName=='index')
+									{
+										echo $this->render('tabs/tab_infoList.phtml');
+									}
+									else
+									{
+										echo $this->render('tabs/tab_info.phtml');
+									}
+									
+									break;
+								case 'vaktrapport':
+									
+									if($this->ControllerName=='index')
+									{
+										echo $this->render('tabs/tab_vaktrapportList.phtml');
+									}
+									elseif($this->ControllerName=='info')
+									{
+										echo $this->render('tabs/tab_vaktrapport.phtml');
+									}
+									else
+									{
+										echo $this->render('tabs/tab_vaktrapportReport.phtml');
+									}
+									break;
+								case 'client':
+									if($this->ControllerName=='index')
+									{
+										echo $this->render('tabs/tab_clientList.phtml');
+									}
+									else
+									{
+										echo $this->render('tabs/tab_client.phtml');
+									}
+									
+									break;
+								case 'user':
+									if($this->ControllerName=='index')
+									{
+										echo $this->render('tabs/tab_userList.phtml');
+									}
+									else
+									{
+										echo $this->render('tabs/tab_user.phtml');
+									}
+									break;
+								case 'statistic':
+									echo $this->render('tabs/tab_statistic.phtml');
+									break;
+								case 'system':
+									if($this->ControllerName=='index')
+									{
+										echo $this->render('tabs/tab_system.phtml');
+									}
+									else
+									{
+										echo $this->render('tabs/tab_systemDepartment.phtml');
+									}
+									
+									break;
+								default:
+									break;
+							}
+						?>
+						<!-- Starting Content ID -->
+						<div id="content">
+						<?php echo $this->layout()->content;?>
+						</div>
+						<!-- Ending Content ID -->
+						<div class="bot_shadow"></div>
+					</div><!-- Ending BORDERTABS ID -->
+				</div><!-- Ending CIDCENTERBG ID -->
+			</div><!-- Ending CIDWRAPPER ID -->
+    	</div><!-- Ending CFULWRAPPER ID -->
+	<?php }?>
+	<?php echo $this->render('footer.phtml');?>
+</div>
+<!-- Ending CONTENT ID -->
+<script type="text/javascript" language="javascript">
+  /**  var isDisplayingErrorMessage = false;
+$.validate({
+    form : '#registration, #userLogin, #frmNewDepartment, #frmUpdateDepartment, #frmNewClient, #frmUpdateClient, #frmNewUser, #frmUpdateUser, #frmUpdateUserExpertise, #frmUpdateUserEducation, #frmUpdateUserRelatives, #frmClientAddMaal, #frmClientAddFeaTiltak, #frmClientAddInsTiltak, #frmClientAddGovTiltak, #frmClientAddObservation, #frmNewClientVaktrapport, #frmClientEditMaal, #frmEditClientVaktrapport, #frmClientLogg, #frmClientForce, #frmClientMedicinePlan, #frmClientAddPlacement, #frmClientAddNetwork, #frmInfoAdd, #frmEditMapping, #frmSearch, #frmSystemConfig, #frmEditClientScoreCard',
+    validateOnBlur : false,
+    borderColorOnError : '#C90312',
+    addValidClassOnAll : true,
+    showHelpOnFocus : false,
+    addSuggestions : false,
+    errorMessagePosition : 'top',
+    ignore: '.ignore',
+    scrollToTopOnError : false,
+    onElementValidate : function(valid, $el, $form, errorMess) {
+        /**if(!valid) {
+            $el.addClass('validation-error');
+        }
+        console.log($el, ( valid ? 'VALID':'NOT VALID') );**
+    },
+    onError : function() {
+
+        if(!isDisplayingErrorMessage) {
+            Mtg.Dialog.display('mofo', 'Feil', 200, 200, function() {
+                isDisplayingErrorMessage = false;
+            });
+            isDisplayingErrorMessage = true;
+        }
+    }
+});**/
+</script>
+<script src="<?php echo $this->getMediaUrl('custom/loader-1.js','js');?>"></script>
+<script src="<?php echo $this->getMediaUrl('custom/loader-2.js','js');?>"></script>
+<script language="javascript" type="text/javascript">
+$(document).ready(function() {
+   if(jQuery.cookie('leftpanel-collapsed')) {
+      jQuery('body').addClass('leftpanel-collapsed');
+      jQuery('.menutoggle').addClass('menu-collapsed');
+	  jQuery('#LEFT').css("display","none");
+	  jQuery('#collapse').removeClass('collapse');
+	  jQuery('#collapse').addClass('expand');
+	  jQuery('.CFULWRAPPER').css('margin-left',"55px");
+	  jQuery('.CFULWRAPPER2').css('margin-left',"30px");
+  }   
+ else
+{
+  	  jQuery('#LEFT').css("display","block");
+          jQuery('.CFULWRAPPER').css('margin-left',"315px");
+	  jQuery('.CFULWRAPPER2').css('margin-left',"300px");
+}
+
+
+    $("#content").find("[id^='tab']").hide(); // Hide all content
+	<?php if(isset($this->defaultTab) && $this->defaultTab > 1):?>
+		<?php if(isset($this->defaultTabs) && $this->defaultTabs>0):?>
+			$("#tabs<?php echo $this->defaultTab;?> li").attr("id",""); //Reset id's
+			$("#content").find("[name^='tab<?php echo $this->defaultTabs;?>']").parent().attr("id","current<?php echo $this->defaultTab;?>");
+			$("#content #tab<?php echo $this->defaultTabs;?>").fadeIn();
+		<?php endif;?>
+		$("#content #tab<?php echo $this->defaultTab;?>").fadeIn();
+	<?php else:?>
+		$("#tab li:first").attr("id","current"); // Activate the first tab
+		$("#content #tab1").fadeIn(); // Show first tab's content
+	<?php endif;?>
+	});
+</script>
+<?php if(strtolower($this->ModuleName)!='admin') {?>
+<script language="javascript" type="text/javascript">
+!function(a){jQuery.sessionTimeout=function(b){function c(b){switch(b){case"start":e=setTimeout(function(){a("#sessionTimeout-dialog").dialog("open"),d("start")},h.warnAfter);break;case"stop":clearTimeout(e)}}function d(a){switch(a){case"start":f=setTimeout(function(){window.location=h.redirUrl},h.redirAfter-h.warnAfter);break;case"stop":clearTimeout(f)}}var e,f,g={message:"Du er i ferd med å bli automatisk logget ut.\n\nHvis du ønsker å fortsette, trykker du fortsette.",redirUrl:"<?php echo $this->getUrl('admin/index/logout');?>",logoutUrl:"<?php echo $this->getUrl('admin/index/logout');?>",warnAfter:3000000,redirAfter:6000000},h=g;b&&(h=a.extend(g,b)),a("body").append('<div title="Warning: Session timeout" id="sessionTimeout-dialog">'+h.message+"</div>"),a("#sessionTimeout-dialog").dialog({autoOpen:!1,width:400,modal:!0,closeOnEscape:!1,open:function(){a(".ui-dialog-titlebar-close").hide()}
+	,
+	buttons:{"Logg ut":function(){window.location=h.logoutUrl},"Fortsett":
+	function()
+	{a(this).dialog("close"),d("stop"),c("start");
+	
+	$.ajax({
+			url: '<?php echo $this->getUrl('admin/index/staylogin');?>',
+			type: "GET",
+			contentType:false,
+			processData: false,
+				success: function(data){
+					//data = JSON.parse(data);
+					//alert(data);
+				},
+				error:function(data)
+				{
+					//data = JSON.parse(data);
+					//alert(data);
+				},
+				complete: function(msg)
+				{
+				}
+		});
+	}}}),c("start")}}(jQuery);
+	
+	$(document).ready(function() {
+		$('#collapse').unbind().click(function(){
+			if ($('#LEFT').is(":visible"))
+			{
+				 //$('#LEFT').hide('slow','linear',function(){});
+				 $("#LEFT").animate({width:'toggle'},270);
+				 //$('.CFULWRAPPER').css('margin-left','25px');
+				 $(".CFULWRAPPER").animate({marginLeft: "-=270px"});
+				 //$('.CFULWRAPPER2').css('margin-left','0px');
+				 $('.CFULWRAPPER2').animate({marginLeft: "-=270px"});
+				 $(this).removeClass('collapse').addClass('expand');
+                                jQuery.cookie('leftpanel-collapsed',"1",{ path: '/' });
+			}
+			else
+			{
+				$("#LEFT").animate({width:'toggle'},270);
+				//$('#LEFT').show('slow','linear',function(){});
+				//$('.CFULWRAPPER').css('margin-left','325px');
+				$(".CFULWRAPPER").animate({marginLeft: "+=270px"});
+				//$('.CFULWRAPPER2').css('margin-left','285px');
+				$('.CFULWRAPPER2').animate({marginLeft: "+=270px"});
+				$(this).removeClass('expand').addClass('collapse');
+
+                                 jQuery.cookie('leftpanel-collapsed',"",{ path: '/' });
+			}
+		});
+		$.sessionTimeout({
+			// 1000 ms = 1 second
+		   // warnAfter: 300000, // 5 Minuts
+			//redirAfter: 600000 // 10 minutess
+		});
+
+		$('#doPrint').unbind().click(function()
+		{
+			// CONVERTING ALL EDITORS TO TEXT AREA STARTS
+			var editors = $("textarea.ckeditorClass");
+			if (editors.length) {
+				editors.each(function() {
+					var name = $(this).attr('data-name');
+					if(name != null && name !== undefined && name!='')
+					{
+						var editorExtra = $(this).attr('data-instance');
+						console.log(editorExtra);
+						if (editorExtra!= null && editorExtra!== undefined && editorExtra!='')
+						{
+							//console.log(CKEDITOR);
+							//$('#editorcontents_'+name).val(CKEDITOR.instances[editorExtra].getData());
+							CKEDITOR.remove(editorExtra);
+							$('#editor_'+name).html('');
+							//$('#contents_'+name).css('display','block');
+							//$(this).css('display','block');
+							$(this).attr('data-instance','');
+						}
+					}
+					else
+					{
+						return;
+					}
+				});
+			}
+			//var oldPage = document.body.innerHTML;
+			// CONVERTING ALL EDITORS TO TEXT AREA FINISHED
+			// PRINTING STARTS
+			if(jQuery('#content #mySavedModel').length > 0) {
+				jQuery('#content #mySavedModel').remove();
+				jQuery('#content #myPalette').html('<img src="'+jQuery('#content #myPalette canvas')[0].toDataURL()+'" />');
+				jQuery('#content #myDiagram').html('<img src="'+jQuery('#content #myDiagram canvas')[0].toDataURL()+'" />');
+			}
+			//alert(jQuery('#content #myPalette canvas')[0].toDataURL());
+			$("#content").printElement(
+            {	printMode:'iFrame',
+				overrideElementCSS:[
+				'<?php echo $this->getMediaUrl('stylesPrint.css','css');?>',
+				{ href:'<?php echo $this->getMediaUrl('stylesPrint.css','css');?>',media:'print'},{ href:'<?php echo $this->getMediaUrl('tcssPrint.css','css');?>',media:'print'}]
+            });
+			 //document.body.innerHTML = oldPage;
+			// PRINTING ENDS
+		});
+	});
+</script>
+<?php }?>
+<script src="<?php echo $this->getMediaUrl('custom/loader-3.js','js');?>"></script>
+<div id="loading-image" class="opacity2" style="display:none"><div class="ajax-loading-footer"></div></div>
+<div id="fullscreen"><div id="fullscreen-container" class="fullscreen-container"></div></div>
+
+<div id="dialog">
+    <div class="header"><a href="#">Lukk (X)</a></div>
+    <div class="content"></div>
+
+
+</div>
+
+<script src="<?php echo APPLICATION_URL; ?>/javascript.php?app" type="text/javascript"></script>
+
+</body>
+</html>

@@ -1,0 +1,8 @@
+<div class="tablebg">
+  <div style="display: block; padding:0 10px" id="tab1">
+	<?php $clientCollection = $this->clientCollection;echo $this->partial('index/tabs/clientActive.phtml',array('clientCollection'=>$this->clientCollection))?>
+  </div>
+  <div style="display: block; padding: 0px 10px;" id="tab2">
+	<?php $clientArchiveCollection = $this->clientArchiveCollection;echo $this->partial('index/tabs/clientArchive.phtml',array('clientArchiveCollection'=>$this->clientArchiveCollection))?>
+  </div>
+</div>

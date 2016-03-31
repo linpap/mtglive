@@ -1,0 +1,19 @@
+<div class="tablebg">
+  <div style="display: block; padding:0 10px" id="tab1">
+  
+	<?php //echo $this->partial('info/tabs/userInfo.phtml');?>
+	<?php $userCollection = $this->userCollection;echo $this->partial('info/tabs/userInfo.phtml',array('userCollection'=>$this->userCollection))?>
+  </div>
+  <div style="display: block; padding: 0px 10px;" id="tab2">
+	<?php $userCollection = $this->userCollection;echo $this->partial('info/tabs/userExpertise.phtml',array('userCollection'=>$this->userCollection));?>
+  </div>
+  <div style="display: block; padding: 0px 10px;" id="tab3">
+	<?php $userCollection = $this->userCollection;echo $this->partial('info/tabs/userEducation.phtml',array('userCollection'=>$this->userCollection));?>
+  </div>
+  <div style="display: block; padding: 0px 10px;" id="tab4">
+	<?php $userCollection = $this->userCollection;echo $this->partial('info/tabs/userRelatives.phtml',array('userCollection'=>$this->userCollection));?>
+  </div>
+  <div style="display: block; padding: 0px 10px;" id="tab5">
+	<?php $userCollection = $this->userCollection;echo $this->partial('info/tabs/userDocuments.phtml',array('userCollection'=>$this->userCollection));?>
+  </div>
+</div>

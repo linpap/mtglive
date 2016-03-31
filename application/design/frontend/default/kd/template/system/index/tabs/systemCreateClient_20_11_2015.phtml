@@ -1,0 +1,254 @@
+<div class="PSUBTCWRAPPER">
+	<div class="PSUBTCLEFT">
+    	<?php echo $this->translate('Create Client');?>
+    </div>
+</div>
+<form name="frmNewClient" id="frmNewClient" method="post" action="<?php echo $this->getUrl("system/index/index");?>">
+<div class="CLEARBBORDER"></div>
+ <div class="KKI1">
+    	<div class="KKI1PIC">
+        	<div class="KKI1PICBG">
+            	<div class="KKI1PH"></div>
+            </div>
+        </div>
+        <div class="KKI1WRAPPER">
+<?php /*?>	<div class="KKI1C">
+		<div class="KKI1C1">
+			<?php echo $this->translate('ID');?>
+		</div>
+		<span class="tdbg888p"><input type="text" name="client_code" id="dept_code" data-validation="required" value="" maxlength="32"></span>
+	</div><?php */?>
+        <div class="KKI1C">
+        	<div class="KKI1C1">
+                <?php echo $this->translate('First Name');?>
+        	</div>
+            <span class="tdbg888p"><input type="text" name="patient[patient_fname]" id="patient_fname" data-validation="required" value="" maxlength="255"></span>
+        </div>
+        <div class="KKI1C">
+        	<div class="KKI1C1">
+                <?php echo $this->translate('Middle Name');?>
+        	</div>
+            <span class="tdbg888p"><input type="text" name="patient[patient_mname]" id="patient_mname" value="" maxlength="255"></span>
+        </div>
+        <div class="KKI1C">
+        	<div class="KKI1C1">
+                <?php echo $this->translate('Last Name');?>
+        	</div>
+            <span class="tdbg888p"><input type="text" name="patient[patient_lname]" id="patient_lname" data-validation="required" value="" maxlength="255"></span>
+        </div>
+
+        <?php /*?> <div class="KKI1C">
+        	<div class="KKI1C1">
+                <?php echo $this->translate('Join').' ('.$this->translate('Date').')';?>
+        	</div>
+            <span class="tdbg888p"><input type="text" name="patient_date_of_joining" id="patient_date_of_joining" class="datepickerMinToday disabled" readonly data-validation="required" value="" maxlength="255"></span>
+        </div><?php */?>
+        <div class="KKI1C">
+        	<div class="KKI1C1">
+                <?php echo $this->translate('Department');?>
+        	</div>
+            <span class="tdbg888p">
+            <select name="patient[patient_deptID]" id="patient_deptID" class="get-ajax" data-target="patient_primary_userID" data-action="<?php echo $this->getUrl('user/index/getlist/default/'.$this->translate('Please Select').'/key/');?>" data-text="<option><?php echo $this->translate('Please Select');?></option>" data-load="<option><?php echo $this->translate('Loading');?></option>"  data-validation="required" >
+				<option value="">Velg her</option>
+				<?php foreach($this->departmentCollection as $key=>$department):?>
+				<option value="<?php echo $department['dept_id'];?>"><?php echo $department['dept_name'];?></option>
+				<?php endforeach;?>
+            </select>
+            </span>
+        </div>
+		<div class="KKI1C">
+        	<div class="KKI1C1">
+                <?php echo $this->translate('Primary User');?>
+        	</div>
+            <span class="tdbg888p">
+            <select name="patient[patient_primary_userID]" id="patient_primary_userID"  data-validation="required" >
+				<option value=""><?php echo $this->translate('Please Select');?></option>
+            </select>
+            </span>
+        </div>
+        <div class="KKI1C">
+        	<div class="KKI1C1">
+                <?php echo $this->translate('Person Nr.');?>
+        	</div>
+            <span class="tdbg888p"><input type="text" name="patient[patient_person_no]" id="patient_person_no" data-validation="required" value="" maxlength="64"></span>
+        </div>
+		<div class="KKI1C">
+        	<div class="KKI1C1">
+                <?php echo $this->translate('BIRK No.');?>
+        	</div>
+            <span class="tdbg888p"><input type="text" name="patient[patient_birk_no]" id="patient_birk_no" data-validation="required" value="" maxlength="64"></span>
+        </div>
+       <div class="KKI1C">
+        	<div class="KKI1C1">
+                <?php echo $this->translate('Phone');?>
+        	</div>
+            <span class="tdbg888p"><input type="text" name="patient[patient_phone]" id="patient_phone" value="" maxlength="255"></span>
+        </div>
+        <div class="KKI1C">
+        	<div class="KKI1C1">
+                <?php echo $this->translate('Mobile');?>
+        	</div>
+            <span class="tdbg888p"><input type="text" name="patient[patient_mobile1]" id="patient_mobile1" value="" maxlength="255"></span>
+        </div>
+        <div class="KKI1C">
+        	<div class="KKI1C1">
+                <?php echo $this->translate('Email');?>
+        	</div>
+            <span class="tdbg888p"><input type="text" name="patient[patient_email1]" id="patient_email1" value="" maxlength="255"></span>
+        </div>
+    </div>
+    </div>
+    <div class="CLEARBBORDER2"></div>
+	<div class="VVGBG VV2IN1C2">
+	<table width="100%" border="0" cellspacing="4" cellpadding="0">
+	  <tr>
+		<th width="25%" class="noborder"><?php echo $this->translate('Legal');?></th>
+		<th width="25%" class="noborder"><?php echo $this->translate('%s Date',$this->translate('In'));?></th>
+		<th width="25%" class="noborder"><?php echo $this->translate('%s Date',$this->translate('Decision'));?></th>
+		<th width="25%" class="noborder"><?php echo $this->translate('Action Plan %s',$this->translate('Dated'));?></th>
+	  </tr>
+	  <tr>
+		<td class="nonecls"><span class="tdbg"><input type="text" class="width90" name="patient[patient_legal]" id="patient_legal" value="" data-validation="required"></span></td>
+		<td class="nonecls"><span class="tdbg"><input type="text" class="datepickerImage width80 disabled floatleft" readonly name="patient[patient_date_of_joining]" id="patient_date_of_joining"  data-validation="required" value=""></span></td>
+		<td class="nonecls"><span class="tdbg"><input type="text" class="datepickerImage width80 disabled floatleft" readonly name="patient[patient_date_of_vedtak_plan]"  id="patient_date_of_vedtak_plan" data-validation="required" value=""></span></td>
+		<td class="nonecls"><span class="tdbg"><input type="text" class="datepickerImage width80 disabled floatleft" readonly name="patient[patient_date_of_tiltak_plan]"  id="patient_date_of_tiltak_plan" data-validation="required" value=""></span></td>
+	  </tr>
+	</table>
+	</div>
+	<div class="CLEARBBORDER2"></div>
+<?php $oppdragsgiver = '
+Fakturaadresse:
+Mail:
+Telefon:
+Adresse:
+Fagteam:
+Saksbehandler:
+Mail:
+Tlf:
+Adresse:
+Barneverntjeneste:
+Saksbehandler:
+Mail:
+Telefon:
+Adresse: ';?>
+    <div class="KKI2C">
+        <table width="100%" border="0" cellspacing="4" cellpadding="0">
+        <tr>
+        	<th class="noborder"><?php echo $this->translate('Contracting');?></th>
+        </tr>
+        <tr>
+        	<td class="nonecls"><span class="tdbg1c">
+                    <textarea rows="15" name="patient[patient_contracting]" id="patient_contracting" onkeyup="textAreaAdjust(this)" style="overflow:hidden;width: 99%; border: none; height:auto;"><?php echo $oppdragsgiver;?></textarea>
+            	</span>
+        	</td>
+        </tr>
+	</table>
+    </div>
+    <div class="CLEARBBORDER2"></div>
+    <div class="KKI2C">
+        <table width="100%" border="0" cellspacing="4" cellpadding="0">
+        <tr>
+        	<th class="noborder"><?php echo $this->translate('Describe');?></th>
+        </tr>
+        <tr>
+        	<td class="nonecls"><span class="tdbg1c">
+                    <textarea name="patient[patient_description]" id="patient_description" onkeyup="textAreaAdjust(this)" style="overflow:hidden;width: 99%; border: none; height:auto;"></textarea>
+            	</span>
+        	</td>
+        </tr>
+	</table>
+    </div>
+    <div class="CLEARBBORDER2"></div>
+    <div class="KKI2C">
+
+    	<table width="100%" border="0" cellspacing="4" cellpadding="0">
+        <tr>
+        	<th class="noborder"><?php echo $this->translate('Purpose of Stay');?></th>
+        </tr>
+        <tr>
+        	<td class="nonecls"><span class="tdbg1c">
+                    <textarea onkeyup="textAreaAdjust(this)" name="patient[patient_location]" id="patient_location" style="overflow:hidden;width: 100%; border: none; height:auto;"></textarea>
+            	</span>
+        	</td>
+        </tr>
+	</table>
+    </div>
+    <div class="CLEARBBORDER2"></div>
+    <div class="KKI2C">
+    	<table width="100%" border="0" cellspacing="4" cellpadding="0">
+        <tr>
+        	<th class="noborder"><?php echo $this->translate('Network');?></th>
+        </tr>
+        <tr>
+        	<td class="nonecls"><span class="tdbg1c">
+                    <textarea onkeyup="textAreaAdjust(this)" name="patient[patient_network]" id="patient_network" style="overflow:hidden;width: 100%; border: none; height:auto;"></textarea>
+            	</span>
+        	</td>
+        </tr>
+		<tr>
+        	<td class="bordernone alignleft nonecls">
+
+
+				<span class="tdbg default-border" style="width:30px !important;">
+					<input type="checkbox" name="patient[patient_network_check]" id="patient_network_check" class="css-checkbox" value="yes"/>
+					<label for="patient_network_check" class="css-label"></label>
+				</span>
+				<label for="patient_network_check" style="padding-left: 10px;line-height:30px" class="css-label">-<?php echo $this->translate('Vis i kartleggingsmal ');?></label>
+			</td>
+		</tr>
+</table>
+    </div>
+    <textarea name="patient[patient_genogram]" style="display: none;">{ "class": "go.GraphLinksModel",
+  "linkFromPortIdProperty": "fromPort",
+  "linkToPortIdProperty": "toPort",
+  "nodeDataArray": [
+{"category":"Male", "text":"Farfar", "figure":"RoundedRectangle", "fill":"#0A7BB5", "key":-1, "loc":"-844 -414.6779319702179"},
+{"category":"Male", "text":"Far", "figure":"RoundedRectangle", "fill":"#0A7BB5", "key":-3, "loc":"-758.0000000000002 -319.39999389648426"},
+{"category":"Male", "text":"Morfar", "figure":"RoundedRectangle", "fill":"#0A7BB5", "key":-5, "loc":"-439.7793807373367 -411.3999938964842"},
+{"category":"Male", "text":"Klient", "figure":"RoundedRectangle", "fill":"#0A7BB5", "key":-7, "loc":"-557.9455665161355 -132.23379520449387"},
+{"category":"Male", "text":"Bror", "figure":"RoundedRectangle", "fill":"#0A7BB5", "key":-9, "loc":"-697.0000000000001 -220.23380811768527"},
+{"category":"Male", "text":"Onkel", "figure":"RoundedRectangle", "fill":"#0A7BB5", "key":-10, "loc":"-179 -322.3999938964844"},
+{"category":"Male", "text":"onkel 2", "figure":"RoundedRectangle", "fill":"#0A7BB5", "key":-13, "loc":"139 -325.3999938964844"},
+{"category":"Male", "text":"Fetter", "figure":"RoundedRectangle", "fill":"#0A7BB5", "key":-15, "loc":"227.73467981936284 -224.50201362552843"},
+{"category":"Male", "text":"Mann", "figure":"RoundedRectangle", "fill":"#0A7BB5", "key":-19, "loc":"-1104.8646207980614 -321.8875309310708"},
+{"category":"Male", "text":"Fetter", "figure":"RoundedRectangle", "fill":"#0A7BB5", "key":-20, "loc":"-1019.9959362105606 -221.05730901254177"},
+{"category":"Male", "text":"Mann", "figure":"RoundedRectangle", "fill":"#0A7BB5", "key":-22, "loc":"-1456.2881449875445 -321.8875309310709"},
+{"category":"Female", "text":"Jente", "figure":"RoundedRectangle", "fill":"#AA34B2", "key":-2, "loc":"-670.9174887101728 -414.5631033192851"},
+{"category":"Female", "text":"Jente", "figure":"RoundedRectangle", "fill":"#AA34B2", "key":-21, "loc":"-1266.4366310700595 -322.5515620104614"},
+{"category":"Female", "text":"Kusine", "figure":"RoundedRectangle", "fill":"#AA34B2", "key":-23, "loc":"-1361.0040485263505 -225.42826840670304"},
+{"category":"Female", "text":"Tante", "figure":"RoundedRectangle", "fill":"#AA34B2", "key":-24, "loc":"-931.6168557518399 -322.55156201046134"},
+{"category":"Female", "text":"Søster", "figure":"RoundedRectangle", "fill":"#AA34B2", "key":-25, "loc":"-424.275440479576 -221.59445418550206"},
+{"category":"Female", "text":"Mormor", "figure":"RoundedRectangle", "fill":"#AA34B2", "key":-26, "loc":"-254.30967667299888 -413.2851652455514"},
+{"category":"Female", "text":"Mor", "figure":"RoundedRectangle", "fill":"#AA34B2", "key":-27, "loc":"-353.98884642422445 -326.38537623166235"},
+{"category":"Female", "text":"onkel kone", "figure":"RoundedRectangle", "fill":"#AA34B2", "key":-28, "loc":"-26.83669954840707 -322.5515620104614"},
+{"category":"Female", "text":"Kusine", "figure":"RoundedRectangle", "fill":"#AA34B2", "key":-29, "loc":"-98.40123167749198 -221.59445418550206"},
+{"category":"Female", "text":"onkel 2 kone", "figure":"RoundedRectangle", "fill":"#AA34B2", "key":-30, "loc":"316.9286422859484 -326.38537623166235"}
+ ],
+  "linkDataArray": [
+{"from":-9, "to":-7, "fromPort":"T", "toPort":"T"},
+{"from":-3, "to":-2, "fromPort":"T", "toPort":"L"},
+{"from":-2, "to":-1, "fromPort":"L", "toPort":"R", "text":"G", "figure":"Circle", "visible":true},
+{"from":-21, "to":-23, "fromPort":"L", "toPort":"T"},
+{"from":-22, "to":-21, "fromPort":"R", "toPort":"L", "text":"G", "figure":"Circle", "visible":true},
+{"from":-24, "to":-20, "fromPort":"L", "toPort":"T"},
+{"from":-19, "to":-24, "fromPort":"R", "toPort":"L", "text":"G", "figure":"Circle", "visible":true},
+{"from":-24, "to":-3, "fromPort":"T", "toPort":"T"},
+{"from":-21, "to":-3, "fromPort":"T", "toPort":"T"},
+{"from":-25, "to":-7, "fromPort":"T", "toPort":"T"},
+{"from":-27, "to":-26, "fromPort":"T", "toPort":"L"},
+{"from":-5, "to":-26, "fromPort":"R", "toPort":"L", "text":"G", "figure":"Circle", "visible":true},
+{"from":-7, "to":-27, "fromPort":"T", "toPort":"L"},
+{"from":-3, "to":-27, "fromPort":"R", "toPort":"L", "text":"G", "figure":"Circle", "visible":true},
+{"from":-10, "to":-27, "fromPort":"T", "toPort":"T"},
+{"from":-13, "to":-27, "fromPort":"T", "toPort":"T"},
+{"from":-28, "to":-29, "fromPort":"L", "toPort":"T"},
+{"from":-15, "to":-30, "fromPort":"T", "toPort":"L"},
+{"from":-13, "to":-30, "fromPort":"R", "toPort":"L", "text":"G", "figure":"Circle", "visible":true}
+ ]}</textarea>
+
+
+<?php /*?>    <div class="CANCELB"><a class="CANCELBA" href="#"><?php echo $this->translate('Cancel');?></a></div>
+	<div class="OPPRETTB"><a class="OPPRETTBA" href="#"><?php echo $this->translate('Create');?></a></div><?php */?>
+<div class="CANCELB"><a class="CANCELBA" href="#"><?php echo $this->translate('Cancel');?></a></div>
+<div class="OPPRETTB"><input type="submit" name="create_client" class="OPPRETTBA" value="<?php echo $this->translate('Create');?>"></div>
+</form>

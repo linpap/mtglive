@@ -1,0 +1,65 @@
+<?php $format=KD::getModel('core/format');?>
+<div>
+<form name="frmClientArchiveGovTiltak" id="frmClientArchiveGovTiltak" method="post" action="">
+<div class="PSUBTCWRAPPER">
+	<div class="PSUBTCLEFT">
+    	<?php echo $this->translate('Archived %s',$this->translate('Government Measure'));?>
+    </div>
+</div>
+<div class="CLEARBBORDER"></div>
+<div class="KKI2C">
+<table width="100%" border="0" cellspacing="4" cellpadding="0">
+      <tr class="CURNONPOINTER">
+        <th class="TSLRTDNUMBER">
+        <span class="tdbg2">
+        	<input type="checkbox" name="checkbox_all1" id="checkbox_all1" class="css-checkbox"  data-form="frmClientArchiveGovTiltak"/>
+            <label for="checkbox_all1" class="css-label"></label>
+        </span>
+		<input type="hidden" name="patient_id" id="patient_id" value="<?php echo $this->clientID;?>"/>
+        </th>
+		<th class="TSLRTDCENTER aligncenter" width="15%"><?php echo $this->translate('Owner');?></th>
+        <th class="TSLRTDCENTER"><?php echo $this->translate('Government Measure');?></th>
+		<th class="TSLRTDCENTER"><?php echo $this->translate('%s Date',$this->translate('From'));?></th>
+        <th class="TSLRTDCENTER"><?php echo $this->translate('%s Date',$this->translate('To'));?></th>
+      </tr>
+	<?php  if(count($this->tiltakArchiveCollection)>0):
+	$maalIdLoop = '';
+	foreach($this->tiltakArchiveCollection as $tiltak):  ?>
+	<?php $id = $tiltak['tilgov_id']; 
+	$maal_id = $tiltak['maal_id'];
+	if($maal_id!=$maalIdLoop):
+	?>
+	  <tr>
+		<td class="head-content" colspan="5"><?php echo $tiltak['maal_desc'];?></td>
+	  </tr>
+	<?php endif;?>
+	  <tr>
+		<td class="TSLRTDNUMBER bgwhite">
+			<span class="tdbg" style="width: 20px;">
+			<input type="checkbox" name="<?php echo 'checkbox_'.$id;?>" id="<?php echo 'checkbox_'.$id;?>" class="css-checkbox"/>
+			<label for="<?php echo 'checkbox_'.$id;?>" class="css-label"></label>
+			</span>
+		</td>
+		<td class="bgwhite aligncenter" width="15% !important"><span class="tdbg"><?php echo $tiltak['tilgov_owner']; ?></span></td>
+		<td><span class="tdbg"><a href="<?php echo $this->getUrl('client/info/index/id/'.$id,null,false,false);?>"><?php echo $tiltak['tilgov_desc']; ?></a></span></td>
+		<td class="bgwhite"><span class="tdbg"><?php echo $format->FormatDate($tiltak['tilgov_from_date']); ?></span></td>
+		<td class="bgwhite"><span class="tdbg"><?php echo $format->FormatDate($tiltak['tilgov_to_date']); ?></span></td>
+	  </tr>
+	<?php 
+	$maalIdLoop = $maal_id;
+	endforeach; 
+	endif;?>
+</table>
+</div>
+<div class="mtodroplist1">
+<div class="mtodroplist11">
+    <span class="KITINRDLISTWSPAN">
+    	<select name="selAction" class="onSelectAction" data-form="frmClientArchiveGovTiltak">
+        	<option value="" style=" font-weight:bold;"><?php echo $this->translate('Select %s %s',$this->translate('Type of Action'),$this->translate('Here!'));?></option>
+            <option value="<?php echo $this->getUrl('client/mto/restoregovtiltak');?>"><?php echo $this->translate('%s %s',$this->translate('Restore'),$this->translate('Government Measure'));?></option>
+        </select> 
+    </span>  	
+</div>
+</div>
+</form>
+</div>

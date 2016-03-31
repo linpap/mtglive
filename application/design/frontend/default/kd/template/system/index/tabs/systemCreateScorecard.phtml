@@ -1,0 +1,45 @@
+<div class="PSUBTCWRAPPER">
+	<div class="PSUBTCLEFT">
+    	<?php echo $this->translate('Create %s',$this->translate('Security Report'));?>
+    </div>
+</div>
+<div class="CLEARBBORDER"></div>
+<form name="frmNewClientVaktrapport" id="frmNewClientVaktrapport" method="post" action="<?php echo $this->getUrl("system/index/index");?>">
+<div class="VVGBG floatleft">
+<table width="100%" border="0" cellspacing="4" cellpadding="0">
+  <tbody>
+    <tr>
+      <th scope="col"><?php echo $this->translate('Department');?></th>
+      <th scope="col"><?php echo $this->translate('Client');?></th>
+      <th scope="col"><?php echo $this->translate('From Date');?></th>
+      <th scope="col"><?php echo $this->translate('To Date');?></th>
+    </tr>
+    <tr>
+      <td width="30%" class="nonecls">
+      	<span class="tdbg">
+			<select name="vaktrap[vaktrap_deptID]" id="vaktrap_deptID" class="get-ajax width98" data-target="vaktrap_patientID" data-action="<?php echo $this->getUrl('client/index/getlistnonvaktrap/key/');?>" data-text="<option><?php echo $this->translate('Please Select');?></option>" data-load="<option><?php echo $this->translate('Loading');?></option>"  data-validation="required"> 
+				<option value="">Velg her</option>
+				<?php foreach($this->departmentCollection as $key=>$department):?>
+				<option value="<?php echo $department['dept_id'];?>"><?php echo $department['dept_name'];?></option>
+				<?php endforeach;?>
+            </select>
+        </span>
+      </td>
+      <td width="30%" class="nonecls">
+      	<span class="tdbg">
+			<select name="vaktrap[vaktrap_patientID]" id="vaktrap_patientID" class="get-ajax width98" data-target="vaktrap_load" data-action="<?php echo $this->getUrl('vaktrapport/initial/index/key/');?>" data-text="<?php echo $this->translate('Please Choose Proper Client');?>" data-load="<div class='ajax-loading'><div>" data-validation="required" >
+				<option value=""><?php echo $this->translate('Please Select');?></option>
+            </select>
+        </span>
+      </td>
+      <td width="20%" class="nonecls"><span class="tdbg"><input type="text" name="vaktrap[vaktrap_from_date]" id="vaktrap_from_date" class="datepickerImage disabled width70" data-validation="required" data-error-message="Fra Dato er påkrevd" readonly value=""/></span></td>
+      <td width="20%" class="nonecls"><span class="tdbg"><input type="text" name="vaktrap[vaktrap_to_date]" id="vaktrap_to_date" class="datepickerImage disabled width70" data-validation="required" data-error-message="Til Dato er påkrevd" readonly value=""></span></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="CLEARBBORDER2"></div>
+<div class="" id="vaktrap_load">
+
+</div>
+</form>

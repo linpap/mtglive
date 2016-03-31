@@ -1,0 +1,98 @@
+<?php #var_dump($format); die; ?>
+<?php $format = KD::getModel('core/format');?>
+<table width="100%" border="0">
+  <tr>
+    <th width=""></th>
+    <th width="50%"><?php echo $this->translate('%s %s',$this->translate('Active'),$this->translate('Goal'));?></th>
+    <th width="10%" class="TABLEMARGINL1"><?php echo $this->translate('Completed');?></th>
+    <th width="10%" class="TABLEMARGINL"><?php echo $this->translate('Partial Complete');?></th>
+    <th width="10%" class="TABLEMARGINL"><?php echo $this->translate('Not Complete');?></th>
+    <th width="10%" class="TABLEMARGINL"><?php echo $this->translate('%s Date',$this->translate('From'));?></th>
+    <th width="10%" class="TABLEMARGINL"><?php echo $this->translate('%s Date',$this->translate('To'));?></th>
+</tr>
+
+<?php $goalIndex = 0;
+    foreach($this->goals as $goal): ?>
+    <?php
+        $goalIndex += 1;
+
+        $isActiveGoal = (isset($goal['maalplan_maal_id']) && $goal['maalplan_maal_id'] > 0);
+
+        $goalId = $isActiveGoal ? $goal['maalplan_maal_id'] : $goal['maal_id'];
+
+        $htmlArrayPrefix = $isActiveGoal ? 'maalplanmaal[' . $goalId . ']' : 'maal[' . $goalId . ']';
+
+        $htmlRadioButtonName = $htmlArrayPrefix . '[maalplan_maalResult]';
+
+        $htmlRadioButtonIdPrefix = $isActiveGoal ? 'maalplan' : 'maal';
+
+        $options = [ 2, 1, 0 ];
+
+        ?>
+
+    <tr>
+        <td class="TABLE10px"><span class="tdbg15"><?php echo $goalIndex;?></span></td>
+        <td>
+            <span class="tdbg">
+                <input type="text"
+                       name="<?php echo $htmlArrayPrefix; ?>[maalplan_maaldesc]"
+                       class="validation"
+                       readonly
+                       id="maalplan_maaldesc<?php echo $goalIndex;?>"
+                       value="<?php echo $goal['maal_desc'];?>" />
+            </span>
+        </td>
+        <?php foreach($options as $key => $option): ?>
+            <?php
+                $id = $htmlRadioButtonIdPrefix . $option . '_' . $goalId;
+                $checked = (isset($goal['maalplan_maalResult']) && $goal['maalplan_maalResult'] == $option )
+                    ?'checked="checked"'
+                    :'';
+            ?>
+            <td>
+                <span class="tdbg VVTAC">
+                    <div>
+                        <input type="radio"
+                               name="<?php echo $htmlRadioButtonName; ?>"
+                               id="<?php echo $id; ?>"
+                               value="<?php echo $option; ?>"
+                               <?php echo $checked; ?> />
+
+                        <label for="<?php echo $htmlRadioButtonName; ?>"><span></span></label>
+                    </div>
+                </span>
+            </td>
+        <?php endforeach; ?>
+
+        <td><span class="tdbg"><?php echo $format->FormatDate($goal['maal_from_date']);?></span></td>
+        <td><span class="tdbg"><?php echo $format->FormatDate($goal['maal_to_date']);?></span></td>
+    </tr>
+<?php endforeach; ?>
+
+
+    <?php /**
+<?php $maalplanCnt = 1;
+foreach($this->maalplanMaalInfo as $maalplanMaal):?>
+    <?php if(isset($maalplanMaal['maalplan_maal_id']) && $maalplanMaal['maalplan_maal_id']>0):?>
+        <tr>
+            <td class="TABLE10px"><span class="tdbg15"><?php echo $maalplanCnt;?></span></td>
+            <td><span class="tdbg"><input type="text" name="maalplanmaal[<?php echo $maalplanMaal['maalplan_maal_id'];?>][maalplan_maaldesc]" class="validation" readonly id="maalplan_maaldesc<?php echo $maalplanCnt;?>" value="<?php echo $maalplanMaal['maal_desc'];?>" /></span></td>
+            <td><span class="tdbg VVTAC"><div><input type="radio" name="maalplanmaal[<?php echo $maalplanMaal['maalplan_maal_id'];?>][maalplan_maalResult]" id="maalplan1_<?php echo $maalplanMaal['maalplan_maal_id'];?>" value="2" <?php echo (isset($maalplanMaal['maalplan_maalResult']) && $maalplanMaal['maalplan_maalResult']==2)?'checked="checked"':'';?> /><label for="maalplan1_<?php echo $maalplanMaal['maalplan_maal_id'];?>"><span></span></label></div></span></td>
+            <td><span class="tdbg VVTAC"><div><input type="radio" name="maalplanmaal[<?php echo $maalplanMaal['maalplan_maal_id'];?>][maalplan_maalResult]" id="maalplan2_<?php echo $maalplanMaal['maalplan_maal_id'];?>" value="1" <?php echo (isset($maalplanMaal['maalplan_maalResult']) && $maalplanMaal['maalplan_maalResult']==1)?'checked="checked"':'';?> /><label for="maalplan2_<?php echo $maalplanMaal['maalplan_maal_id'];?>"><span></span></label></div></span></td>
+            <td><span class="tdbg VVTAC"><div><input type="radio" name="maalplanmaal[<?php echo $maalplanMaal['maalplan_maal_id'];?>][maalplan_maalResult]" id="maalplan3_<?php echo $maalplanMaal['maalplan_maal_id'];?>" value="0" <?php echo (isset($maalplanMaal['maalplan_maalResult']) && $maalplanMaal['maalplan_maalResult']==0)?'checked="checked"':'';?> /><label for="maalplan3_<?php echo $maalplanMaal['maalplan_maal_id'];?>"><span></span></label></div></span></td>
+            <td><span class="tdbg"><?php echo $format->FormatDate($maalplanMaal['maal_from_date']);?></span></td>
+            <td><span class="tdbg"><?php echo $format->FormatDate($maalplanMaal['maal_to_date']);?></span></td>
+        </tr>
+    <?php else:?>
+        <tr>
+            <td class="TABLE10px"><span class="tdbg15"><?php echo $maalplanCnt;?></span></td>
+            <td><span class="tdbg"><input type="text" name="maal[<?php echo $maalplanMaal['maal_id'];?>][maalplan_maaldesc]" class="validation" readonly id="maalplan_maaldesc<?php echo $maalplanCnt;?>" value="<?php echo $maalplanMaal['maal_desc'];?>" /></span></td>
+            <td><span class="tdbg VVTAC"><div><input type="radio" name="maal[<?php echo $maalplanMaal['maal_id'];?>][maalplan_maalResult]" id="maal1_<?php echo $maalplanMaal['maal_id'];?>" value="2" <?php echo (isset($maalplanMaal['maalplan_maalResult']) && $maalplanMaal['maalplan_maalResult']==2)?'checked="checked"':'';?> /><label for="maal1_<?php echo $maalplanMaal['maal_id'];?>"><span></span></label></div></span></td>
+            <td><span class="tdbg VVTAC"><div><input type="radio" name="maal[<?php echo $maalplanMaal['maal_id'];?>][maalplan_maalResult]" id="maal2_<?php echo $maalplanMaal['maal_id'];?>" value="1" <?php echo (isset($maalplanMaal['maalplan_maalResult']) && $maalplanMaal['maalplan_maalResult']==1)?'checked="checked"':'';?> /><label for="maal2_<?php echo $maalplanMaal['maal_id'];?>"><span></span></label></div></span></td>
+            <td><span class="tdbg VVTAC"><div><input type="radio" name="maal[<?php echo $maalplanMaal['maal_id'];?>][maalplan_maalResult]" id="maal3_<?php echo $maalplanMaal['maal_id'];?>" value="0" <?php echo (isset($maalplanMaal['maalplan_maalResult']) && $maalplanMaal['maalplan_maalResult']==0)?'checked="checked"':'';?> /><label for="maal3_<?php echo $maalplanMaal['maal_id'];?>"><span></span></label></div></span></td>
+            <td><span class="tdbg"><?php echo $format->FormatDate($maalplanMaal['maal_from_date']);?></span></td>
+            <td><span class="tdbg"><?php echo $format->FormatDate($maalplanMaal['maal_to_date']);?></span></td>
+        </tr>
+    <?php endif; ?>
+    <?php $maalplanCnt++; endforeach;?> **/?>
+</table>

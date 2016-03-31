@@ -1,0 +1,316 @@
+<?php $format = KD::getModel('core/format');?>
+<?php $deptList = KD::getModel('department/department')->loadList();?>
+<?php $primaryUser = $this->clientInfo['patient_primary_userID'];
+$patientDept = $this->clientInfo['patient_deptID'];
+$userList = array();$userId = '';$userPhone = '';$userMobile = '';$userEmail = '';
+$userModel = KD::getModel('user/user');
+$userList = $userModel->loadUserByDept($patientDept);
+$format = KD::getModel('core/format');
+if(isset($primaryUser) && $primaryUser>0):
+	$userData = $userModel->load($primaryUser);
+	$userId = $userData['user_id'];
+	$userPhone = $userData['user_phone'];
+	$userMobile = $userData['user_mobile'];
+	$userEmail = $userData['user_email'];
+endif;
+#CODE FOR DEPT RESTRICTION
+$session = new Zend_Session_Namespace('Acl');
+#CODE FOR DEPT RESTRICTION
+?>
+<form name="frmUpdateClient" id="frmUpdateClient" method="post" action="<?php echo $this->getUrl("client/info/index");?>">
+<input type="hidden" name="patient_id" id="patient_id" value="<?php echo $this->clientInfo['patient_id'] ?>">	
+<input type="hidden" name="patient_code" id="patient_code" value="<?php echo $this->clientInfo['patient_code'] ?>" >
+<input type="hidden" name="counterStatus" id="counterStatus" value="1" />
+<input type="hidden" name="counter" id="counter" value="1" />
+
+<div class="KKI1">
+	<div class="imageframe">
+		<span id="imageUpload" style="display:inline-block">
+		<div class="KKI1PICBG" style="overflow:visible;display:inline-block">
+			<?php if(isset($this->clientInfo['patient_image']) && $this->clientInfo['patient_image']>0)
+			{ 
+				$data = KD::getModel('client/document')->getDocument($this->clientInfo['patient_image']);
+				if(in_array($data['document_mimetype'],array('image/png','image/jpg','image/jpeg','image/gif')))
+				{
+					echo '<div class="imageAuto" style="'.((isset($data['document_imagewidth']) && $data['document_imagewidth']>0)?'width:'.$data['document_imagewidth']:'').'px; '.((isset($data['document_imageheight']) && $data['document_imageheight']>0)?' height:'.$data['document_imageheight']:'').'px;"><img src= "data:'.$data['document_mimetype'].';base64,'.base64_encode($data['document_filecontent']).'" /></div>';
+				}
+				else
+				{
+				?>
+					<div class="KKI1PH"></div>
+				<?php 
+				}
+			?>
+			<?php 
+			}
+			else
+			{
+			?>
+				<div class="KKI1PH"></div>
+			<?php 
+			}?>
+		</div>
+		</span>
+		<span id="status1"  style="display:inline-block"></span>
+	</div>
+	<div class="KKI1WRAPPER">
+	
+	<div class="KKI1C">
+		<div class="KKI1C1">
+			<?php echo $this->translate('First Name');?>
+		</div>
+		<span class="tdbg888p"><input type="text" name="patient_fname" id="patient_fname" value="<?php echo $this->clientInfo['patient_fname'] ?>" data-validation="required" data-error-message="Fornavn er påkrevd" maxlength="64"></span>
+	</div>
+	<div class="KKI1C">
+		<div class="KKI1C1">
+			<?php echo $this->translate('Middle Name');?>
+		</div>
+		<span class="tdbg888p"><input type="text" name="patient_mname" id="patient_mname" value="<?php echo $this->clientInfo['patient_mname'] ?>"  maxlength="64"></span>		
+	</div>
+	<div class="KKI1C">
+		<div class="KKI1C1">
+			<?php echo $this->translate('Last Name');?>
+		</div>
+		<span class="tdbg888p"><input type="text" name="patient_lname" id="patient_lname" value="<?php echo $this->clientInfo['patient_lname'] ?>"  data-validation="required" maxlength="64"></span>		
+	</div>
+	<div class="KKI1C">
+		<div class="KKI1C1">
+			<?php echo $this->translate('Person Nr.');?>
+		</div>
+		<span class="tdbg888p"><input type="text" name="patient_person_no" id="patient_person_no" value="<?php echo $this->clientInfo['patient_person_no'] ?>"  data-validation="required" data-error-message="Personnr. er påkrevd" maxlength="64"></span>
+	</div>
+	<div class="KKI1C">
+		<div class="KKI1C1">
+			<?php echo $this->translate('BIRK Nr.');?>
+		</div>
+		<span class="tdbg888p"><input type="text" name="patient_birk_no" id="patient_birk_no" value="<?php echo $this->clientInfo['patient_birk_no'] ?>"  data-validation="required" data-error-message="Birk nr er påkrevd" maxlength="64"></span>
+	</div>
+	<div class="KKI1C">
+		<div class="KKI1C1">
+			<?php echo $this->translate('Phone');?>
+		</div>
+		<span class="tdbg888p"><input type="text" name="patient_phone" id="patient_phone" value="<?php echo $this->clientInfo['patient_phone'] ?>"  data-validation="required" data-error-message="Telefonnr er påkrevd" maxlength="64"></span>
+		
+	</div>
+	<div class="KKI1C">
+		<div class="KKI1C1">
+			<?php echo $this->translate('Mobile');?>
+		</div>
+		<span class="tdbg888p"><input type="text" name="patient_mobile1" id="patient_mobile1" value="<?php echo $this->clientInfo['patient_mobile1'] ?>" data-validation="required" data-error-message="Mobilnr er påkrevd" maxlength="64"></span>
+	</div>
+	<div class="KKI1C">
+		<div class="KKI1C1">
+			<?php echo $this->translate('Email');?>
+		</div>
+		<span class="tdbg888p">
+		<input type="text" name="patient_email1" id="patient_email1" value="<?php echo $this->clientInfo['patient_email1'] ?>" data-validation="email" maxlength="64"></span>
+	</div>
+	<?php /* #CODE FOR DEPT RESTRICTION */?>
+	<?php if(in_array($session->userRole,array('A','S','D'))):?>
+	<div class="KKI1C">
+        	<div class="KKI1C1">
+                <?php echo $this->translate('Department');?>
+        	</div>
+            <span class="tdbg888p">
+            <select name="patient_deptID" id="patient_deptID" class="get-ajax" data-target="patient_primary_userID" data-action="<?php echo $this->getUrl('user/index/getlist/default/'.$this->translate('Please Select').'/key/');?>" data-text='<option value=""><?php echo $this->translate('Please Select');?></option>' data-load='<option value=""><?php echo $this->translate('Loading');?></option>'  data-validation="required" data-error-message="Avdeling er påkrevd">
+				<option value="">Velg her</option>
+				<?php foreach($deptList as $key=>$department):?>
+				<option value="<?php echo $department['dept_id'];?>" <?php echo ($patientDept==$department['dept_id'])?'selected="selected"':'';?>><?php echo $department['dept_name'];?></option>
+				<?php endforeach;?>
+            </select> 
+            </span>
+    </div>
+	<?php else:?>
+	<div class="KKI1C">
+        	<div class="KKI1C1">
+                <?php echo $this->translate('Department');?>
+        	</div>
+            <span class="tdbg888p">
+            <select name="patient_deptID" id="patient_deptID" class="get-ajax" data-target="patient_primary_userID" data-action="<?php echo $this->getUrl('user/index/getlist/default/'.$this->translate('Please Select').'/key/');?>" data-text='<option value=""><?php echo $this->translate('Please Select');?></option>' data-load='<option value=""><?php echo $this->translate('Loading');?></option>'  data-validation="required" data-error-message="Bruker er påkrevd" >
+				<?php foreach($deptList as $key=>$department): ?>
+				
+				<?php if(in_array($department['dept_id'],$session->userDeptId)):?>
+				<option value="<?php echo $department['dept_id'];?>" <?php echo ($patientDept==$department['dept_id'])?'selected="selected"':'';?>><?php echo $department['dept_name'];?></option>
+				<?php endif;?>
+				<?php endforeach;?>
+            </select> 
+            </span>
+    </div>
+	<?php endif;?>
+	<?php /* #CODE FOR DEPT RESTRICTION */?>
+</div>
+</div>
+<div class="CLEARBBORDER2"></div>
+<div class="VVGBG VV2IN1C2">
+
+
+
+
+
+
+
+
+<table width="100%" border="0" cellspacing="4" cellpadding="0">
+  <tr>
+	<th width="25%" class="noborder"><?php echo $this->translate('Legal');?></th>
+	<th width="25%" class="noborder"><?php echo $this->translate('%s Date',$this->translate('In'));?></th>
+	<th width="25%" class="noborder"><?php echo $this->translate('%s Date',$this->translate('Decision'));?></th>
+	<th width="25%" class="noborder"><?php echo $this->translate('Action Plan %s',$this->translate('Dated'));?></th>
+  </tr>
+  <tr>
+	<td class=""><span class="tdbg width95"><input type="text" class="width90" name="patient_legal" id="patient_legal" data-validation="required" data-error-message="Lovpålegg er påkrevd" value="<?php echo $this->clientInfo['patient_legal'];?>" ></span></td>
+	<td class=""><span class="tdbg width95"><input type="text" readonly class="width80 disabled floatleft" value="<?php echo $format->FormatDate($this->clientInfo['patient_date_of_joining']);?>"></span></td>
+	<td class=""><span class="tdbg width95"><input type="text" class="datepickerImage width80 floatleft" data-validation="required" data-error-message="Dato for vedtaksplan er påkrevd" name="patient_date_of_vedtak_plan" readonly value="<?php echo $format->FormatDate($this->clientInfo['patient_date_of_vedtak_plan']);?>"></span></td>
+	<td class=""><span class="tdbg width95"><input type="text" class="datepickerImage width80 floatleft" data-validation="required" data-error-message="Dato for tiltaksplan er påkrevd" name="patient_date_of_tiltak_plan" readonly value="<?php echo $format->FormatDate($this->clientInfo['patient_date_of_tiltak_plan']);?>"></span></td>
+  </tr>
+</table>
+
+
+
+
+
+
+
+</div>
+<div class="CLEARBBORDER2"></div>
+<div class="VVGBG VV2IN1C2">
+
+
+
+
+
+
+
+<table width="100%" border="0" cellspacing="4" cellpadding="0">
+  <tr>
+	<th width="25%" class="noborder"><?php echo $this->translate('%s behandler',$this->translate('Primary'));?></th>
+	<th width="25%" class="noborder"><?php echo $this->translate('Phone');?></th>
+	<th width="25%" class="noborder"><?php echo $this->translate('Mobile');?></th>
+	<th width="25%" class="noborder"><?php echo $this->translate('Email');?></th>
+  </tr>
+   <?php $dataText = '<td width="4" class="bordernone nonecls"></td><td style="width:33%" class="nonecls"><span class="tdbg width97"><span></span></span></td><td width="4" class="bordernone nonecls"></td><td style="width:33%" class="nonecls"><span class="tdbg width97"><span></span></span></td><td width="4" class="bordernone nonecls"></td><td style="width:33%" class="nonecls"><span class="tdbg width97"><span></span></span></td>';
+  		$dataLoad = '<td width="4" class="bordernone nonecls"></td><td style="width:33%" class="nonecls"><span class="tdbg width97"><span>'.$this->translate('Loading').'</span></span></td><td width="4" class="bordernone nonecls"></td><td style="width:33%" class="nonecls"><span class="tdbg width97"><span>'.$this->translate('Loading').'</span></span></td><td width="4" class="bordernone nonecls"></td><td style="width:33%" class="nonecls"><span class="tdbg width97"><span>'.$this->translate('Loading').'</span></span></td>';?>
+  <?php /* #CODE FOR DEPT RESTRICTION */?>
+  <?php if(in_array($session->userRole,array('A','S','D','L'))):?>
+  <tr>
+	<td class=""><span class="tdbg width95"><select name="patient_primary_userID" id="patient_primary_userID" data-validation="" data-error-message="Bruker er påkrevd" class="width97 get-ajax" data-target="userInfo" data-action="<?php echo $this->getUrl('user/index/getuser/key/');?>" data-text='<?php echo $dataText;?>' data-load='<?php echo $dataLoad;?>'>
+			<option value="">Velg her</option>
+			<?php foreach($userList as $key=>$user):?>
+			<option value="<?php echo $user['user_id'];?>" <?php echo ($user['user_id']==$primaryUser)?'selected="selected"':'';?>><?php echo $format->FormatName($user['user_fname'],$user['user_mname'],$user['user_lname']);?></option>
+			<?php endforeach;?>
+		</select>
+	</span></span></td>
+	<td class=""><span class="tdbg width95"><?php echo $userPhone;?></span></td>
+	<td class=""><span class="tdbg width95"><?php echo $userMobile;?></span></td>
+	<td class=""><span class="tdbg width95"><?php echo $userEmail;?></span></td>
+  </tr>
+   <?php else:?>
+
+  <tr>
+	<td class="nonecls"><span class="tdbg width95"><select name="patient_primary_userID" id="patient_primary_userID" data-validation="required" data-error-message="Bruker er påkrevd" class="width97 get-ajax" data-target="userInfo" data-action="<?php echo $this->getUrl('user/index/getuser/key/');?>" data-text='<?php echo $dataText;?>' data-load='<?php echo $dataLoad;?>'>
+			<?php foreach($userList as $key=>$user):?>
+			<?php if($session->userID==$user['user_id']):?>
+			<option value="<?php echo $user['user_id'];?>" <?php echo ($user['user_id']==$primaryUser)?'selected="selected"':'';?>><?php echo $format->FormatName($user['user_fname'],$user['user_mname'],$user['user_lname']);?></option>
+			<?php endif;?>
+			<?php endforeach;?>
+		</select>
+	</span></span></td>
+	<td class="nonecls"><span class="tdbg width95"><?php echo $userPhone;?></span></td>
+	<td class="nonecls"><span class="tdbg width95"><?php echo $userMobile;?></span></td>
+	<td class="nonecls"><span class="tdbg width95"><?php echo $userEmail;?></span></td>
+  </tr>
+   <?php endif;?>
+  <?php /* #CODE FOR DEPT RESTRICTION */?>
+
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+<div style="margin:10px 0px;height:55px;">
+	<!--<div class="CANCELB"><input type="submit" class="OPPRETTBA" value="<?php echo $this->translate('Cancel');?>"></div>-->
+	<div class="OPPRETTB"><input type="submit" class="OPPRETTBA" value="<?php echo $this->translate('Save');?>"></div>
+</div>
+</form>
+<div class="CLEARBBORDER2" style="margin-bottom:0px;"></div>
+
+<?php echo $this->partial('info/tabs/clientAdditionalInformation.phtml',array('clientID'=>$this->clientInfo['patient_id'],'clientInfo'=>$this->clientInfo,'selected'=>$this->selected));?>
+
+
+<link rel="stylesheet" href="<?php echo $this->getMediaUrl('drag-drop.css','css');?>" title="default" />
+<script src="<?php echo $this->getMediaUrl('drag-drop.js','js');?>"></script>
+<script language="javascript" type="text/javascript">
+	$(document).ready(function()
+		{
+		var obj = $("#imageUpload");
+		obj.on('dragenter', function (e)
+		{
+			e.stopPropagation();
+			e.preventDefault();
+			$(this).css('border', '2px solid #0B85A1');
+		});
+		obj.on('dragover', function (e)
+		{
+			 e.stopPropagation();
+			 e.preventDefault();
+		});
+		obj.one('drop', function (e)
+		{
+			 
+			 $(this).css('border', '2px dotted #0B85A1');
+			 e.stopPropagation();
+			 e.preventDefault();
+			 var files = e.originalEvent.dataTransfer.files;
+			 var button_type = 'patient_image';
+			 
+			 var pasientId = $('#patient_id').val();
+			 if(pasientId<0)
+			 {
+			 	alert("System facing some problem so refresh page and wait while page fullyloaded.");
+				return false;
+			 }
+			 
+ 			 //We need to send dropped files to Server
+			if($('#counter').val()==1)
+			{
+			 	handleFileUpload('<?php echo $this->getUrl('client/info/uploadfile/id/'.$this->clientInfo['patient_id']);?>',files,obj,button_type,pasientId);
+			}
+			 $('#counter').val($('#counter').val()+1);
+		});
+		
+		$(document).on('dragenter', function (e)
+		{
+			e.stopPropagation();
+			e.preventDefault();
+		});
+		$(document).on('dragover', function (e)
+		{
+		  e.stopPropagation();
+		  e.preventDefault();
+		  obj.css('border', '2px dotted #0B85A1');
+		});
+		$(document).on('drop', function (e)
+		{
+			e.stopPropagation();
+			e.preventDefault();
+		});
+		
+	});
+</script>

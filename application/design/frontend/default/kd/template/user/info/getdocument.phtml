@@ -1,0 +1,14 @@
+<?php 
+//header('Content-type: $this->mimetype');
+//header('Content-type: application/pdf');
+//echo $this->filecontent;
+
+if(in_array($this->mimetype,array('image/png','image/jpg','image/jpeg','image/gif')))
+{
+	echo '<img src= "data:'.$this->mimetype.';base64,'.base64_encode($this->filecontent).'" />';
+}
+else
+{
+	echo $this->filecontent;
+}
+?>

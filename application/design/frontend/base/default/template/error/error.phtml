@@ -1,0 +1,22 @@
+<div id="NEWSW" class="CFULWRAPPER">
+  <h1>An error occurred From default/default error template asdfasdf</h1>
+  <h2><?php echo $this->message ?></h2>
+
+  <?php if (isset($this->exception) && APPLICATION_ENV=='development'): ?>
+  
+  <h3>Exception information:</h3>
+  <p>
+      <b>Message:</b> <?php echo $this->exception->getMessage() ?>
+  </p>
+
+  <h3>Stack trace:</h3>
+  <pre><?php echo $this->exception->getTraceAsString() ?>
+  </pre>
+
+  <h3>Request Parameters:</h3>
+  <pre><?php echo $this->escape(var_export($this->request->getParams(), true)) ?>
+  </pre>
+  <?php else:?>
+  <h3>404 - Request Page Not Found!!</h3>
+  <?php endif ?>
+</div>

@@ -1,0 +1,97 @@
+<?php $format = KD::getModel('core/format');?>
+<form name="frmClientAddDecision" id="frmClientAddDecision" method="post" action="<?php echo $this->getUrl("client/additional/addMeasurement/id/".$this->clientID);?>">
+<input type="hidden" readonly name="patient_id" id="patient_id" value="<?php echo $this->clientID;?>" />
+<input type="hidden" readonly name="document_type" id="document_type" value="measurement" />
+<input type="hidden" name="counterStatus" id="counterStatus" value="1" />
+<div>
+<span id="dragandrophandler">Dra og slipp filer her for &aring; laste det inn i programmet</span>
+<span id="status1"></span>
+<div class="CLEARBBORDER2"></div>
+</div>
+
+
+	<div class="tablebg">
+		<div style="display: block; padding:0 10px" id="tab11">
+			<table cellpadding="0" cellspacing="4" border="0" width="100%">
+			  <tr>
+			    <th width="5%"><?php echo $this->translate('Sr No');?></th>
+				<th width="55%"><?php echo $this->translate('Document');?></th>
+				<th width="15%"><?php echo $this->translate('Upload date');?></th>
+				<th width="25%"><?php echo $this->translate('Upload by');?></th>
+			  </tr>
+			<?php  $cnt = 0; foreach($this->documentMeasurement as $documentMeasurement): $cnt++;?>
+			  <tr>
+			    <td><?php echo $cnt;?></td>
+				<td><a href="<?php echo $this->getUrl('client/info/getdocument/id/'.$documentMeasurement['document_id']);?>" target="_blank"><?php echo $documentMeasurement['document_filename'];?></a></td>
+				<td><?php echo $format->FormatDate($documentMeasurement['date_of_creation']);?></td>
+				<td><?php echo KD::getModel('user/user')->getUser($documentMeasurement['created_by']);?></td>
+			  </tr>
+			<?php endforeach;?>
+			</table>
+		</div>
+		
+	</div>
+</form>
+<link rel="stylesheet" href="<?php echo $this->getMediaUrl('drag-drop.css','css');?>" title="default" />
+<script src="<?php echo $this->getMediaUrl('drag-drop.js','js');?>"></script>
+<script language="javascript" type="text/javascript">
+	$(document).ready(function()
+		{
+		var obj = $("#dragandrophandler");
+		obj.on('dragenter', function (e)
+		{
+			e.stopPropagation();
+			e.preventDefault();
+			$(this).css('border', '2px solid #0B85A1');
+		});
+		obj.on('dragover', function (e)
+		{
+			 e.stopPropagation();
+			 e.preventDefault();
+		});
+		obj.on('drop', function (e)
+		{
+		 
+			 $(this).css('border', '2px dotted #0B85A1');
+			 e.preventDefault();
+			 var files = e.originalEvent.dataTransfer.files;
+			
+			 	var button_check = $("#document_type").val();
+				if(button_check)
+				{
+					var button_type =  'measurement';
+				}
+				else
+				{
+					alert('you have not choose any category for Decisioin');
+					return false;
+				}
+			 
+			 var pasientId = $('#patient_id').val();
+			 if(pasientId<0)
+			 {
+			 	alert("System facing some problem so refresh page and wait while page fullyloaded.");
+				return false;
+			 }
+ 			 //We need to send dropped files to Server
+			 handleFileUpload('<?php echo $this->getUrl('client/additional/uploadfile/id/'.$this->clientID);?>',files,obj,button_type,pasientId);
+		});
+		
+		$(document).on('dragenter', function (e)
+		{
+			e.stopPropagation();
+			e.preventDefault();
+		});
+		$(document).on('dragover', function (e)
+		{
+		  e.stopPropagation();
+		  e.preventDefault();
+		  obj.css('border', '2px dotted #0B85A1');
+		});
+		$(document).on('drop', function (e)
+		{
+			e.stopPropagation();
+			e.preventDefault();
+		});
+		});
+	</script>

@@ -1,0 +1,91 @@
+<table cellspacing=0 cellpadding="0" border="0px" width="100%">
+  <tr>
+	<td style="padding:0px;">
+		<table cellspacing=0 cellpadding="5" border="0px" class="bordercolor" style="border-collapse:collapse; margin-left:0pt"  width="100%">
+			<tr>
+				<th style="width: 100%;" colspan="2"><h2>2.5 &sect; 18 Kontroll av beboerens post inn til institusjonen<!--&sect; 18 Inspection of the resident&#39;s entry into the institution--></h2></th>
+			</tr>
+			  <tr><td colspan="2">Hver hjemmel st&aring;r p&aring; egen siden, da det kun er den dokumentasjonen som er utfylt, som skal oversendes Fylkesmannen uten ugrunnet opphold.<!--Each authority is on their side, since only the documentation is completed, which shall be submitted to the County without undue delay.--></td></tr>
+			 
+			  <tr>
+				<td class="title1" width="60%">Redegj&oslash;r for hvilke fremgangsm&aring;ter som ble pr&oslash;vd f&oslash;r beslutning om kontroll av post , jf.&sect; 12 <!--Describe the procedures that were tried before a decision on control of mail, see &sect; 12:--></td>
+				<td align="left" width="40%" class="value1 nonecls1">
+					<span class="tdbg1"><?php echo (isset($this->forceInfo['force_txta25_method']) && $this->forceInfo['force_txta25_method']!='')?$this->forceInfo['force_txta25_method']:'';?></span>
+				</td>
+			  </tr>
+			  <tr>
+				<td class="title1">Mistanke om at forsendelsen inneholder:<!--Suspecting that the shipment contains:--></td>
+				<td class="value1"></td>
+			  </tr>
+			  <tr>
+				<td class="title1"><label for="force_chk25_drug">Rusmidler</label><!--Drugs--></td>
+				<td class="value1"><span class="nonecls1"><span class="tdbg"><input type="checkbox" id="force_chk25_drug"  readonly="readonly" disabled="disabled" class="css-checkbox" name="force2511[force_chk25_drug]" value="1"  <?php echo (isset($this->forceInfo['force_chk25_drug']) && $this->forceInfo['force_chk25_drug']=='1')?'checked="checked"':'';?>/><label for="force_chk25_drug" class="css-label"></label></span></span></td>
+			  </tr>
+			  <tr>
+				<td class="title1"><label for="force_chk25_danger">Farlige gjenstander</span><!--Dangerous objects--></td>
+				<td class="value1"><span class="nonecls1"><span class="tdbg"><input type="checkbox" id="force_chk25_danger"  readonly="readonly" disabled="disabled" class="css-checkbox" name="force2511[force_chk25_danger]" value="1"  <?php echo (isset($this->forceInfo['force_chk25_danger']) && $this->forceInfo['force_chk25_danger']=='1')?'checked="checked"':'';?>/><label for="force_chk25_danger" class="css-label"></label></span></span></td>
+			  </tr>
+			  <tr>
+				<td class="title1">Beskriv n&aelig;rmere:<!--Describe in more detail:--></td>
+				<td class="value1 nonecls1"><span class="tdbg1"><?php echo (isset($this->forceInfo['force_txta25_describe']) && $this->forceInfo['force_txta25_describe']!='')?$this->forceInfo['force_txta25_describe']:'';?></span></td>
+			  </tr>
+
+			  <tr>
+				<td class="title1" width="60%">Redegj&oslash;r for de individuelle og konkrete forholdene som gir mistanke om at forsendelsen inneholder rusmidler eller farlige gjenstander: <!--Describe the individual and specific circumstances that give suspicion that the shipment contains drugs or dangerous objects:--></td>
+				<td align="left" width="40%" class="value1 nonecls1"><span class="tdbg1"><?php echo (isset($this->forceInfo['force_txta25_suspicion']) && $this->forceInfo['force_txta25_suspicion']!='')?$this->forceInfo['force_txta25_suspicion']:'';?></span></td>
+			  </tr>
+			  <tr>
+				<td class="title1">Er avgj&oslash;relsen om &aring;pne posten p&aring;klaget, jf. &sect; 27?<!--Is the decision appealed open item, see &sect; 27?--></td>
+				<td class="value1 nonecls1">
+					<span class="tdbg1"><select class="width98 validation" name="force2511[force_sel25_decision]" id="force_sel25_decision"  onchange="changeAreaClass(this.value,'','rem','#force_sel25_county','yes');"  readonly="readonly" disabled="disabled">
+						<option value="" <?php echo (!isset($this->forceInfo['force_sel25_decision']) || $this->forceInfo['force_sel25_decision']=='')?'selected="selected"':'';?>>Velg<!--Select--></option>
+						<option value="yes" <?php echo (isset($this->forceInfo['force_sel25_decision']) && $this->forceInfo['force_sel25_decision']=='yes')?'selected="selected"':'';?>>  yes<!--Yes--></option>
+						<option value="no" <?php echo (isset($this->forceInfo['force_sel25_decision']) && $this->forceInfo['force_sel25_decision']=='no')?'selected="selected"':'';?>>  no<!--No--></option>
+					</select></span>
+				</td>
+			  </tr>
+			  <tr>
+				<td class="title1">Hvis yes; har Fylkesmannen ferdigbehandlet klagen?<!--If so; the County has completed complaint?--></td>
+				<td class="value1 nonecls1">
+					<span class="tdbg1"><select class="width98" name="force2511[force_sel25_county]" id="force_sel25_county"  readonly="readonly" disabled="disabled">
+						<option value="" <?php echo (!isset($this->forceInfo['force_sel25_county']) || $this->forceInfo['force_sel25_county']=='')?'selected="selected"':'';?>>Velg<!--Select--></option>
+						<option value="yes" <?php echo (isset($this->forceInfo['force_sel25_county']) && $this->forceInfo['force_sel25_county']=='yes')?'selected="selected"':'';?>>  yes<!--Yes--></option>
+						<option value="no" <?php echo (isset($this->forceInfo['force_sel25_county']) && $this->forceInfo['force_sel25_county']=='no')?'selected="selected"':'';?>>  no<!--No--></option>
+					</select></span>
+				</td>
+			  </tr>
+			  <tr>
+				<td class="title1">Er posten &aring;pnet?<!--If the item is opened?--><br /></td>
+				<td class="value1 nonecls1">
+					<span class="tdbg1"><select class="width98 validation" name="force2511[force_sel25_open]" id="force_sel25_open" onchange="changeAreaClass(this.value,'','rem','#force_sel25_open_who','yes');"  readonly="readonly" disabled="disabled">
+						<option value="" <?php echo (!isset($this->forceInfo['force_sel25_open']) || $this->forceInfo['force_sel25_open']=='')?'selected="selected"':'';?>>Velg<!--Select--></option>
+						<option value="yes" <?php echo (isset($this->forceInfo['force_sel25_open']) && $this->forceInfo['force_sel25_open']=='yes')?'selected="selected"':'';?>>  yes<!--Yes--></option>
+						<option value="no" <?php echo (isset($this->forceInfo['force_sel25_open']) && $this->forceInfo['force_sel25_open']=='no')?'selected="selected"':'';?>>  no<!--No--></option>
+					</select></span>
+				</td>
+			  </tr>
+			  <tr>
+				<td class="title1">Hvis yes; hvem &aring;pnet posten?<!--If so; who opened the mail?--></td>
+				<td class="value1 nonecls1">
+					<span class="tdbg1"><select class="width98"  name="force2511[force_sel25_open_who]" id="force_sel25_open_who" onchange="changeAreaClass(this.value,'','rem','#force_txt25_open_name','leader');"  readonly="readonly" disabled="disabled">
+						<option value="" <?php echo (!isset($this->forceInfo['force_sel25_open_who']) || $this->forceInfo['force_sel25_open_who']=='')?'selected="selected"':'';?>>Velg<!--Select--></option>
+						<option value="conductor" <?php echo (isset($this->forceInfo['force_sel25_open_who']) && $this->forceInfo['force_sel25_open_who']=='conductor')?'selected="selected"':'';?>>  Leder<!--Director--></option>
+						<option value="leader" <?php echo (isset($this->forceInfo['force_sel25_open_who']) && $this->forceInfo['force_sel25_open_who']=='leader')?'selected="selected"':'';?>> Fullmakt fra leder<!--Proxy Manager--></option>
+					</select></span>
+				</td>
+			  </tr>
+			  <tr>
+				<td class="title1">Hvis fullmakt fra leder:<!--If authorization from the manager:--></td>
+				<td class="value1 nonecls1"><span class="padding5">Navn:</span><!--Name--><span class="tdbg1"><?php echo (isset($this->forceInfo['force_txt25_open_name']) && $this->forceInfo['force_txt25_open_name']!='')?$this->forceInfo['force_txt25_open_name']:'';?></span></td>
+			  </tr>					
+			  <tr>
+				<td class="title1" width="60%">Posten ble &aring;pnet i n&aelig;rv&aelig;r av:<!--Post Office was opened in the presence of:--></td>
+				<td align="left" width="40%">
+					<span class="nonecls1"><span class="tdbg"><input type="checkbox" name="force2511[force_chk25_residen]" class="css-checkbox" id="force_chk25_residen" value="1" <?php echo (isset($this->forceInfo['force_chk25_residen']) && $this->forceInfo['force_chk25_residen']=='1')?'checked="checked"':'';?> readonly="readonly" disabled="disabled"/><label for="force_chk25_residen" class="css-label"></label></span></span><label for="force_chk25_residen">beboeren</label><!--resident--><br /><br />
+					<span class="nonecls1"><span class="tdbg"><input type="checkbox" name="force2511[force_chk25_sender]" class="css-checkbox" id="force_chk25_sender" value="1" <?php echo (isset($this->forceInfo['force_chk25_sender']) && $this->forceInfo['force_chk25_sender']=='1')?'checked="checked"':'';?> readonly="readonly" disabled="disabled"/><label for="force_chk25_sender" class="css-label"></label></span></span><label for="force_chk25_sender">avsender</label><!--Sender-->
+				</td>
+			  </tr>
+		</table>
+	</td>
+  </tr>
+</table>

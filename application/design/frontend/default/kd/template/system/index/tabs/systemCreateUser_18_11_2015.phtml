@@ -1,0 +1,278 @@
+<form name="frmNewUser" id="frmNewUser" method="post" action="<?php echo $this->getUrl("system/index/index");?>">
+<div class="PSUBTCWRAPPER">
+	<div class="PSUBTCLEFT width20">
+    	<?php echo $this->translate('Create User');?>
+    </div>
+     <div class="ALOBUSERT width70 userpermission">
+    	<div class="ALOBUSERT3"><?php echo $this->translate('Select User Permission Type:');?></div>
+        <?php /*?><div class="ALOBUSERT2">
+		<span class="tdbg"><div class="ALOBUSERT3"><input type="radio" id="super" name="user[user_role]" value="S" /><label for="super"><span></span></label><?php echo $this->translate('Super User');?></div></span>
+        </div><?php */?>
+        <div class="ALOBUSERT2">
+        <span class="tdbg"><div class="ALOBUSERT3"><input type="radio" id="admin" name="user[user_role]" value="A" class="check" data-validation="radio"/><label for="admin"><span></span></label><label for="admin"><?php echo $this->translate('Administrator');?></label></div></span>
+        </div>
+
+		<div class="ALOBUSERT2">
+        <span class="tdbg"><div class="ALOBUSERT3"><input type="radio" id="doctor" name="user[user_role]" value="D" class="check" data-validation="radio"/><label for="doctor"><span></span></label><label for="doctor"><?php echo $this->translate('Doctor');?></label></div></span>
+        </div>
+
+		<div class="ALOBUSERT2">
+        <span class="tdbg"><div class="ALOBUSERT3"><input type="radio" id="leader" name="user[user_role]" value="L" class="check" data-validation="radio"/><label for="leader"><span></span></label><label for="leader"><?php echo $this->translate('Department Leader');?></label></div></span>
+        </div>
+
+		<div class="ALOBUSERT2">
+        <span class="tdbg"><div class="ALOBUSERT3"><input type="radio" id="normal" name="user[user_role]" value="N" class="check" data-validation="radio"/><label for="normal"><span></span></label><label for="normal"><?php echo $this->translate('Normal User');?></label></div></span>
+        </div>
+    </div>
+</div>
+<div class="CLEARBBORDER"></div>
+ <div class="KKI1">
+    	<div class="KKI1PIC">
+        	<div class="KKI1PICBG">
+            	<div class="KKI1PH"></div>
+            </div>
+        </div>
+        <div class="KKI1WRAPPER">
+
+        <div class="KKI1C">
+        	<div class="KKI1C1">
+                <?php echo $this->translate('First Name');?>
+        	</div>
+		<span class="tdbg888p"><input type="text" name="user[user_fname]" id="user_fname"  value="" maxlength="255" class="codeGenerator1" data-validation="required" data-validation-length="max255"></span>
+        </div>
+        <div class="KKI1C">
+        	<div class="KKI1C1">
+                <?php echo $this->translate('Middle Name');?>
+        	</div>
+		<span class="tdbg888p"><input type="text" name="user[user_mname]" id="user_mname"  value="" maxlength="255" class="codeGenerator1" data-validation-length="max255"></span>
+        </div>
+        <div class="KKI1C">
+        	<div class="KKI1C1">
+                <?php echo $this->translate('Last Name');?>
+        	</div>
+		<span class="tdbg888p"><input type="text" name="user[user_lname]" id="user_lname"  value="" maxlength="255" class="codeGenerator1" data-validation="required" data-validation-length="max255"></span>
+        </div>
+        <div class="KKI1C">
+        	<div class="KKI1C1">
+                <?php echo $this->translate('Position');?>
+        	</div>
+		<span class="tdbg888p"><input type="text" name="user[user_position]" id="user_position"  value="" maxlength="255" data-validation="required" data-validation-length="max255"></span>
+        </div>
+        <div class="KKI1C">
+        	<div class="KKI1C1">
+                <?php echo $this->translate('Join').' ('.$this->translate('Date').')';?>
+        	</div>
+		<span class="tdbg888p"><input type="text" name="user[user_date_joining]" id="user_date_joining"  value="" class="datepickerImage disabled width70"  readonly maxlength="255" data-validation="required" data-validation-length="max255"></span>
+        </div>
+        <div class="KKI1C" id="DropLeader" style="display:none;">
+        	<div class="KKI1C1">
+               	<?php echo $this->translate('Department');?>
+        	</div>
+            <span class="tdbg888p"  >
+			<select name="user[user_deptidMul][]" id="user_deptidMul" class="checkvalidation codeGenerator1" multiple="multiple">
+				<?php foreach($this->departmentCollection as $key=>$department):?>
+				<option value="<?php echo $department['dept_id'];?>"><?php echo $department['dept_name'];?></option>
+				<?php endforeach;?>
+            </select>
+            </span>
+        </div>
+		<div class="KKI1C" id="DropNormal" style="display:none;">
+        	<div class="KKI1C1">
+               	<?php echo $this->translate('Department');?>
+        	</div>
+            <span class="tdbg888p"  >
+			<select name="user[user_deptid]" id="user_deptid" class="checkvalidation codeGenerator1">
+				<option value="">Velg her</option>
+				<?php foreach($this->departmentCollection as $key=>$department):?>
+				<option value="<?php echo $department['dept_id'];?>"><?php echo $department['dept_name'];?></option>
+				<?php endforeach;?>
+            </select>
+            </span>
+        </div>
+        <div class="KKI1C">
+        	<div class="KKI1C1">
+                <?php echo $this->translate('ID');?>
+        	</div>
+		<span class="tdbg888p greyBG"><input type="text" name="user[user_code]" id="user_code"  value="" readonly class="greyBG" maxlength="255" data-validation="required" data-validation-length="max255"></span>
+        </div>
+        <div class="KKI1C">
+        	<div class="KKI1C1">
+                <?php echo $this->translate('Phone');?>
+        	</div>
+		<span class="tdbg888p"><input type="text" name="user[user_phone]" id="user_phone"  value="" maxlength="255" data-validation="required" data-validation-length="max255"></span>
+        </div>
+        <div class="KKI1C">
+        	<div class="KKI1C1">
+                <?php echo $this->translate('Mobile');?>
+        	</div>
+		<span class="tdbg888p"><input type="text" name="user[user_mobile]" id="user_mobile"  value="" maxlength="255" data-validation="required" data-validation-length="max255"></span>
+        </div>
+        <div class="KKI1C">
+        	<div class="KKI1C1">
+                <?php echo $this->translate('Email');?>
+        	</div>
+		<span class="tdbg888p"><input type="text" name="user[user_email]" id="user_email"  value="" maxlength="255" data-validation="required" data-validation-length="max255"></span>
+        </div>
+    </div>
+    </div>
+
+    <div class="CLEARBBORDER2"></div>
+    <div class="KKI2C">
+        <table width="100%" border="0" cellspacing="4" cellpadding="0">
+        <tr>
+        	<th class="noborder"><?php echo $this->translate('Expertise');?> - <?php echo $this->translate('Describe');?></th>
+        </tr>
+        <tr>
+        	<td class="nonecls"><span class="tdbg1c">
+                    <textarea onkeyup="textAreaAdjust(this)" name="user[user_expertise]" id="user_expertise" style="overflow:hidden;width: 100%; border: none; height:auto;" data-validation="required"></textarea>
+            	</span>
+        	</td>
+        </tr>
+</table>
+
+
+    </div>
+    <div class="CLEARBBORDER2"></div>
+    <div class="KKI2C">
+
+    	<table width="100%" border="0" cellspacing="4" cellpadding="0">
+        <tr>
+        	<th class="noborder"><?php echo $this->translate('Education');?> - <?php echo $this->translate('Describe');?></th>
+        </tr>
+        <tr>
+        	<td class="nonecls"><span class="tdbg1c">
+                    <textarea onkeyup="textAreaAdjust(this)" name="user[user_education]" id="user_education" style="overflow:hidden;width: 100%; border: none; height:auto;" data-validation="required"></textarea>
+            	</span>
+        	</td>
+        </tr>
+</table>
+    </div>
+    <div class="CLEARBBORDER2"></div>
+    <div class="KKI2C">
+
+    	<table width="100%" border="0" cellspacing="4" cellpadding="0">
+        <tr>
+        	<th class="noborder"><?php echo $this->translate('Relatives');?> - <?php echo $this->translate('Describe');?></th>
+        </tr>
+        <tr>
+        	<td class="nonecls"><span class="tdbg1c">
+                    <textarea onkeyup="textAreaAdjust(this)" name="user[user_relatives]" id="user_relatives" style="overflow:hidden;width: 100%; border: none; height:auto;" data-validation="required"></textarea>
+            	</span>
+        	</td>
+        </tr>
+</table>
+    </div>
+
+
+    <div class="CANCELB"><a class="CANCELBA" href="#"><?php echo $this->translate('Cancel');?></a></div>
+	<?php /*?><div class="CANCELB"><input type="reset" class="CANCELBA" value="<?php echo $this->translate('Cancel');?>"></div><?php */?>
+	<div class="OPPRETTB"><input type="submit" name="create_user" id="create_user" class="OPPRETTBA" value="<?php echo $this->translate('Create');?>"></div>
+	<?php /*?><div class="OPPRETTB"><a class="OPPRETTBA" href="#"><?php echo $this->translate('Create');?></a></div><?php */?>
+</form>
+<script language="javascript" type="text/javascript">
+	$('#frmNewUser').submit(function(){
+		var radioStatus = $( "input.check:checked" ).val();
+		if($( "input.check:checked").is(':checked')){
+			if(radioStatus=='A' || radioStatus=='D')
+			{
+				$('#user_deptid').attr('data-validation','required');
+				$('#user_deptidMul').attr('data-validation','');
+			}
+			else if(radioStatus=='L')
+			{
+				$('#user_deptidMul').attr('data-validation','required');
+				$('#user_deptid').attr('data-validation','');
+			}
+			else if(radioStatus=='N')
+			{
+				$('#user_deptid').attr('data-validation','required');
+				$('#user_deptidMul').attr('data-validation','');
+			}
+		}else{
+            $('.userpermission').css('border','1px solid red');
+			return false;
+		}
+
+	});
+
+	$("#create_user").unbind().click(function(){
+//		var radioStatus = $( "input.check:checked" ).val();
+//		alert("dsdsds");
+//		if(radioStatus=='A' || radioStatus=='D')
+//		{
+//			$('#user_deptid').attr('data-validation','required');
+//			$('#user_deptidMul').attr('data-validation','');
+//		}
+//		else if(radioStatus=='L')
+//		{
+//			$('#user_deptidMul').attr('data-validation','required');
+//			$('#user_deptid').attr('data-validation','');
+//		}
+//		else if(radioStatus=='N')
+//		{
+//			$('#user_deptid').attr('data-validation','required');
+//			$('#user_deptidMul').attr('data-validation','');
+//		}
+
+	});
+
+	$(".tdbg").click(function(){
+		$('.userpermission').css('border','1px solid white');
+	});
+
+	$(".check").unbind().click(function(){
+		if($(this).attr('id')=="leader")
+		{
+			$('#DropLeader').show();
+			$('#DropNormal').hide();
+		}
+		else
+		{
+			$('#DropLeader').hide();
+			$('#DropNormal').show();
+		}
+	});
+</script>
+<script language="javascript" type="text/javascript">
+$(document).ready(function() {
+    $(".codeGenerator1").change(function(){
+		elements = $('.codeGenerator1');
+        var code = '';
+        var name = '';
+		if (elements.length) {
+				elements.each(function() {
+					if ($(this).attr('id') == 'user_deptidMul' && $('#'+$(this).attr('id')).is(':visible')) {
+						// Sett avdelingens forbokstav f�rst hvis denne er valgt
+						var hasValue = $(this).has('[selected]');
+						name ='';
+						if (hasValue) {
+							//name = $("#"+ $(this).attr('id')+ " option:selected").text();
+							var str = '';
+							$("#"+ $(this).attr('id')+ " option:selected").each(function() {
+							  str += $(this).text() + " ";
+							  name += str.substr(0,1);
+							});
+							code = name + '-' + code;
+						}
+					}
+					else if($(this).attr('id') == 'user_deptid' && $('#'+$(this).attr('id')).is(':visible'))
+					{
+						// Sett avdelingens forbokstav f�rst hvis denne er valgt
+						var hasValue = $(this).has('[selected]');
+						if (hasValue) {
+							name = $("#"+ $(this).attr('id')+ " option:selected").text();
+							code = name.substr(0,1) + '-' + code;
+						}
+					}
+					else {
+						name = $(this).val();
+						if (name) {
+							code += name.substr(0,1);
+						}
+					}
+				});
+		}
+		$("#user_code").val(code);
+	});
+});
+</script>

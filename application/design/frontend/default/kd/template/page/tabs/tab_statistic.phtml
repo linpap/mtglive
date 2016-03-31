@@ -1,0 +1,4 @@
+<ul id="tab">
+	<li class="INACTIVTAB" <?php echo ($this->defaultTab=='1')?'id="current"':'';?>><a href="<?php echo $this->getUrl('statistic/index/index');?>" name="tab1" <?php echo ($this->defaultTab!='1')?'class="clickable"':'';?>><div class="ACTIVETLZI TLZI"><?php echo $this->translate('Statistic Client');?></div></a></li>
+	<li class="INACTIVTAB" <?php echo ($this->defaultTab=='2')?'id="current"':'';?>><a href="<?php echo $this->getUrl('statistic/index/department/t/2');?>" name="tab2" <?php echo ($this->defaultTab!='2')?'class="clickable"':'';?>><div class="ACTIVETLZI TLZI"><?php echo $this->translate('Statistic Department');?></div></a></li>
+</ul>

@@ -1,0 +1,109 @@
+<?php 
+	// get Session for checking if its loged in or not
+	$ns = new Zend_Session_Namespace('Acl');
+	$loggedinsession = $ns->loggedIn;
+
+    $btnFlag=false;
+
+	if(isset($ns->userRole) && in_array($ns->userRole,array('A','S')))
+	{
+		$btnFlag=true;
+	}
+
+
+	switch($this->ModuleName)
+	{
+		case 'Info':
+			$title = 'Info';
+			break;
+		case 'Vaktrapport':
+			$title = 'Vaktrapport';
+			break;
+		case 'Client':
+			$title = 'Client';
+			break;
+		case 'User':
+			$title = 'User';
+			break;
+		case 'Department':
+			$title = 'Department';
+			break;
+		case 'Statistic':
+			$title = 'Statistic';
+			break;
+		case 'System':
+			$title = 'System';
+			break;
+		default:
+			$title = 'Hjem';
+			break;
+	}
+?>
+<div class="CFULWRAPPER"> 
+  <div id="MENUBGC">
+   	<div class="CWRAPPER" id="MAINMENU">
+        <ul class="MENU">
+            <li class="HOME">
+                <a id="HOMEICMENU" <?php echo ($title == "Hjem") ? 'class="active"' : ""; ?> title="<?php echo $this->translate('Home');?>" href="<?php echo $this->getUrl();?>"><div <?php echo ($title == "Hjem") ? "class='active'" : ""; ?> id="homeIco"></div></a>
+            </li>
+			<?php if(in_array($this->ModuleName,array('Default','Info'))):?>
+			<li class="KLIENT">
+                <a <?php echo ($title == "Info") ? "class='active'" : ""; ?> title="<?php echo $this->translate('Info');?>" href="<?php echo $this->getUrl('info');?>"><div <?php echo ($title == "Info") ? "class='active'" : ""; ?> id="KLIENTICO"><?php echo $this->translate('Info');?></div></a>
+            </li>
+			<?php endif;?>
+            <li class="VAKTRAPORT">
+					<a <?php echo ($title == "Vaktrapport") ? "class='active'" : ""; ?> title="<?php echo $this->translate('Security Report');?>" href="<?php echo $this->getUrl('vaktrapport');?>"><div <?php echo ($title == "Vaktrapport") ? "class='active'" : ""; ?> id="VRAPORTICO"><?php echo $this->translate('Security Report');?></div></a>
+            </li>
+            <li class="KLIENT">
+                <a <?php echo ($title == "Client") ? "class='active'" : ""; ?> title="<?php echo $this->translate('Clients');?>" href="<?php echo $this->getUrl('client');?>"><div <?php echo ($title == "Client") ? "class='active'" : ""; ?> id="KLIENTICO"><?php echo $this->translate('Clients');?></div></a>
+            </li>
+            <li class="BEHANDLER">
+                <a <?php echo ($title == "User") ? "class='active'" : ""; ?> title="<?php echo $this->translate('User');?>" href="<?php echo $this->getUrl('user');?>"><div <?php echo ($title == "User") ? "class='active'" : ""; ?> id="BEHANDLERICO"><?php echo $this->translate('User');?></div></a>
+            </li>
+            <li class="AVDELING">
+                <a <?php echo ($title == "Department") ? "class='active'" : ""; ?> title="<?php echo $this->translate('Department');?>" href="<?php echo $this->getUrl('department');?>"><div <?php echo ($title == "Department") ? "class='active'" : ""; ?> id="AVDELINGICO"><?php echo $this->translate('Department');?></div></a>
+            </li>
+            <li class="STATISTIKK">
+                <a <?php echo ($title == "Statistic") ? "class='active'" : ""; ?> title="<?php echo $this->translate('Statistic');?>" href="<?php echo $this->getUrl('statistic');?>"><div <?php echo ($title == "Statistic") ? "class='active'" : ""; ?> id="STATICO"><?php echo $this->translate('Statistic');?></div></a>
+            </li>
+			<?php if($btnFlag): ?>
+            <li class="ADMINLINKS">
+                <a <?php echo ($title == "System") ? "class='active'" : ""; ?> title="<?php echo $this->translate('System');?>" href="<?php echo $this->getUrl('system');?>"><div <?php echo ($title == "System") ? "class='active'" : ""; ?> id="ADMINLICO"><?php echo $this->translate('System');?></div></a>
+            </li>
+			<?php endif;?>
+        </ul>
+		<?php if($loggedinsession):?>
+        <div class="SECONDARY-MENU">
+            <?php if($title === 'Vaktrapport' && $this->ControllerName !== 'index'): ?>
+                <a class="secondary-menu-item" href="<?php echo $this->getUrl('vaktrapport');?>">Alle åpne</a>
+            <?php endif; ?>
+            
+            
+            <?php if($title === 'Client' && $this->ControllerName !== 'index'): ?>
+                <a class="secondary-menu-item" href="<?php echo $this->getUrl('client');?>">Klient liste</a>
+            <?php endif; ?>
+            
+            
+            
+             <?php if($title === 'User' && $this->ControllerName !== 'index'): ?>
+                <a class="secondary-menu-item" href="<?php echo $this->getUrl('user');?>">Behandler liste</a>
+            <?php endif; ?>
+            <?php if($title === 'Department' && $this->ControllerName !== 'index'): ?>
+                <a class="secondary-menu-item" href="<?php echo $this->getUrl('department');?>">Avdeling liste</a>
+            <?php endif; ?>
+            
+            
+            
+            
+            
+            
+            </div>
+            <div id="LOGOUTWRAPPER">
+                <div id="LOTEXTIMG"></div>
+                <a class="LOBUTON" href="<?php echo KD::getHelper('view/getUrl')->getUrl("admin/index/logout");?>" title="<?php echo $this->translate('Log Out');?>"></a>
+            </div>
+
+	    <?php endif;?>
+	</div>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+<?php if($this->isEdit=='1'):?>
+	<?php if($this->type=='M'):?>
+		<select name="observation_relationID" id="observation_relationID" class="width97" data-validation="required">
+			<option value=""><?php echo $this->translate('Select %s %s',$this->translate('Goal'),$this->translate('Here!'));?></option>
+			<?php foreach($this->collection as $data):  ?>
+			<option value="<?php echo $data['maal_id'];?>"><?php echo $data['maal_desc'];?></option>
+			<?php endforeach;?>
+		</select>
+	<?php elseif($this->type=='T'):?>	
+		<select name="observation_relationID" id="observation_relationID" class="width97" data-validation="required">
+			<option value=""><?php echo $this->translate('Select %s %s',$this->translate('Measure'),$this->translate('Here!'));?></option>
+			<?php foreach($this->collection as $data):  ?>
+			<option value="<?php echo $data['tilgov_id'];?>"><?php echo $data['tilgov_desc'];?></option>
+			<?php endforeach;?>
+		</select>	
+	<?php else:?>	
+		<input type="text" readonly="" class="disable width90" name="observation_relationID"/>
+	<?php endif;?>
+<?php else:?>
+	<?php if($this->type=='M'):?>
+		<select name="relations[]" id="relations[]" class="width97" data-validation="required">
+			<option value=""><?php echo $this->translate('Select %s %s',$this->translate('Goal'),$this->translate('Here!'));?></option>
+			<?php foreach($this->collection as $data):  ?>
+			<option value="<?php echo $data['maal_id'];?>"><?php echo $data['maal_desc'];?></option>
+			<?php endforeach;?>
+		</select>
+	<?php elseif($this->type=='T'):?>	
+		<select name="relations[]" id="relations[]" class="width97" data-validation="required">
+			<option value=""><?php echo $this->translate('Select %s %s',$this->translate('Measure'),$this->translate('Here!'));?></option>
+			<?php foreach($this->collection as $data):  ?>
+			<option value="<?php echo $data['tilgov_id'];?>"><?php echo $data['tilgov_desc'];?></option>
+			<?php endforeach;?>
+		</select>	
+	<?php else:?>	
+		<input type="text" readonly="" class="disable width90" name="relations[]"/>
+	<?php endif;?>
+<?php endif;?>

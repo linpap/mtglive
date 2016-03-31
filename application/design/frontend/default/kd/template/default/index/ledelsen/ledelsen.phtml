@@ -1,0 +1,18 @@
+<?php $format = KD::getModel('core/format');?>
+<div id="LEDELSENW" class="NWC">
+	<div class="NCENTERBG">
+    	<div class="NEWSIW">
+		<?php $data = KD::getModel('info/info')->loadList('main');?>
+			<?php if(count($data)>0):?>
+    		<h2 class="NEWSTITLE"><?php echo $data[0]['info_title'];?></h2>
+            <div class="NEWSUSER"><?php echo KD::getModel('user/user')->getUser($data[0]['created_by']);?></div>
+            <div class="NEWCALENDAR"><?php echo $format->FormatDate($data[0]['date_of_creation']);?></div>
+            <div class="HORISONTALLINEB"></div>
+            <div class="CONTENTNORMALM">
+            	<?php echo $data[0]['info_desc'];?>
+            </div>
+            <div class="NEWSREADM"><a class="NEWSREADMICON" href="<?php echo $this->getUrl('info/info/index/type/main/id/'.$data[0]['info_id']);?>"><?php echo $this->translate('Read more');?> ...</a></div>
+			<?php endif;?>
+        </div>
+    </div>
+</div>

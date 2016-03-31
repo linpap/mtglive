@@ -1,0 +1,23 @@
+<?php $pageLabel = ''; if(isset($this->page) && $this->page!=''): $pageLabel = $this->page;endif;?>
+<?php $tabs = '1'; if(isset($this->tt) && $this->tt!=''): $tabs = $this->tt;endif;?>
+<?php $url_array = array();$url_array['tt'] = $tabs;?>
+<?php if ($this->pageCount): ?>
+<select id="paginationControl" size="1">
+<?php foreach ($this->pagesInRange as $page):$url_array[$pageLabel] = $page;?>
+  <?php $selected = ($page == $this->current) ? ' selected="selected"' : ''; ?>
+  <option value="<?php
+        echo $this->url($url_array);?>"<?php echo $selected ?>>
+    <?php echo $page; ?>
+  </option>
+<?php endforeach; ?>
+</select>
+<?php endif; ?>
+
+<script type="text/javascript"
+     src="http://ajax.googleapis.com/ajax/libs/prototype/1.6.0.2/prototype.js">
+</script>
+<script type="text/javascript">
+$('paginationControl').observe('change', function() {
+    window.location = this.options[this.selectedIndex].value;
+})
+</script>

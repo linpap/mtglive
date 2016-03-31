@@ -1,0 +1,21 @@
+<?php $format = KD::getModel('core/format');
+    $crypt = KD::getModel('core/Endecrypt');
+?>
+<?php if(empty($this->events)): ?>
+    <?php echo $this->translate('No events for today'); ?>
+<?php else: ?>
+    <table class="width100 tablebg">
+        <tr>
+            <th width="20%"><span class="tdbg"><?php echo $this->translate('Time'); ?></span></th>
+            <th width="30%"><span class="tdbg"><?php echo $this->translate('Client'); ?></span></th>
+            <th width="50%"><span class="tdbg"><?php echo $this->translate('Event'); ?></span></th>
+        </tr>
+    <?php foreach($this->events as $event): ?>
+        <tr>
+            <td><?php echo $format->FormatTime($event['weekplan_date']); ?></td>
+            <td><?php echo $crypt->getDec($event['patient_fname']) . ' ' . $crypt->getDec($event['patient_lname']); ?></td>
+            <td><?php echo $event['weekplan_title']; ?></td>
+        </tr>
+    <?php endforeach; ?>
+    </table>
+<?php endif; ?>

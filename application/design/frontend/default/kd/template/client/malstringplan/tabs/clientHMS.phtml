@@ -1,0 +1,32 @@
+<div class="PSUBTCWRAPPER">
+	<div class="PSUBTCLEFTH2"><?php echo $this->translate('HMS');?></div>
+    <div class="KITITWRAPPER">
+    	
+	</div>
+	<div class="CLEARBBORDER4"></div>
+	<!-- OPPTION 1 -->  
+	<div class="KKI2C">
+
+	<div id="BORDERTABS7">
+     	<ul id="tabs7">
+        	<li class="INACTIVTAB" id="current7"><a href="#" name="tab71"><?php echo $this->translate('M.T.O');?></a></li>
+            <li class="INACTIVTAB"><a href="#" name="tab72"><?php echo $this->translate('%s List',$this->translate('Task'));?></a></li>
+            <li class="INACTIVTAB"><a href="#" name="tab73"><?php echo $this->translate('Create %s',$this->translate('Task'));?></a></li>
+		</ul>
+		<div id="content7">
+			<div class="tablebg">
+				<div style="display: block; padding:0 10px" id="tab71">
+                	<?php echo $this->partial('info/tabs/hms/clientHmsMto.phtml');?>
+                </div>
+                <div style="display: block; padding:0 10px" id="tab72">
+                	<?php echo $this->partial('info/tabs/hms/clientHmsOppgave.phtml');?>
+				</div>
+                <div style="display: block; padding:0 10px" id="tab73">
+                	<?php echo $this->partial('info/tabs/hms/clientHmsOpprett.phtml');?>
+				</div>
+			</div>
+		</div>
+		<div class="bot_shadow"><img src="<?php echo $this->getMediaUrl('timg/bot-shadow.png');?>" width="834" height="21"></div>
+	</div>    
+    </div>
+</div>

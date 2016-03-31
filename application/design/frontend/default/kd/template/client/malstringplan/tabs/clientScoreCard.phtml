@@ -1,0 +1,447 @@
+<div class="PSUBTCLEFTH2"><?php echo $this->translate('Scorecard For').' '.KD::getModel('client/client')->getClient($clientID,'name').'';?>
+
+
+
+</div>
+<div class="VVGBG">
+<table width="100%" border="0" cellspacing="4" cellpadding="0">
+  <tbody>
+    <tr>
+      <th class="noborder"><?php echo $this->translate('%s Date',$this->translate('From'));?></th>
+      <th class="noborder"><?php echo $this->translate('%s Date',$this->translate('To'));?></th>
+    </tr>
+    <tr>
+      <td><span class="tdbg1c"><input type="text"></span></td>
+      <td><span class="tdbg1c"><input type="text"></span></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="CLEARBBORDER2"></div>
+	<div class="VVGBG">
+     	<table width="100%" border="0" cellspacing="4" cellpadding="0">
+  <tbody>
+    <tr>
+      <th scope="col" width="50%"><?php echo $this->translate('Checklist');?></th>
+      <th scope="col" width="25%"><?php echo $this->translate('%s Date',$this->translate('From'));?></th>
+      <th scope="col" width="25%"><?php echo $this->translate('%s Date',$this->translate('To'));?></th>
+    </tr>
+    <tr>
+      <td class="noborder"><?php echo $this->translate('Valid %s',$this->translate('Measurement'));?></td>
+      <td><span class="tdbg45"><input type="text" value="03/07-2014"></span></td>
+      <td><span class="tdbg45"><input type="text" value="03/07-2014"></span></td>
+    </tr>
+    <tr>
+      <td class="noborder"><?php echo $this->translate('Valid %s',$this->translate('Scorecard Plan'));?></td>
+      <td><span class="tdbg45"><input type="text" value="03/07-2014"></span></td>
+      <td><span class="tdbg45"><input type="text" value="03/07-2014"></span></td>
+    </tr>
+
+    
+  </tbody>
+</table>
+<table width="100%" border="0" cellspacing="4" cellpadding="0">
+  <tbody>
+    <tr>
+      <td class="noborder">
+      	<?php echo $this->translate('Force reports');?>
+      </td>
+      <td width="50%" class="bgwhite"><span class="tdbg45"><input type="text" value="0"></span></td>
+    </tr>
+    
+  </tbody>
+</table>
+</div>
+<div class="CLEARBBORDER2"></div>
+	<div class="KKI2C">
+        <table width="100%" border="0" cellspacing="4" cellpadding="0">
+            <tr>
+                <th class="noborder">Årsak til plassering - Beskriv</th>
+            </tr>
+            <tr>
+                <td><span class="tdbg1c">
+                        <textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden;width: 100%; border: none; height:auto;"></textarea>
+                    </span>
+                </td>
+            </tr>
+		</table> 
+    </div>
+    <div class="CLEARBBORDER2"></div>
+    <div class="KKI2C">
+        <table width="100%" border="0" cellspacing="4" cellpadding="0">
+            <tr>
+                <th class="noborder">Mål fra tiltaksplan - Beskriv</th>
+            </tr>
+            <tr>
+                <td><span class="tdbg1c">
+                        <textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden;width: 100%; border: none; height:auto;"></textarea>
+                    </span>
+                </td>
+            </tr>
+		</table> 
+    </div>
+<div class="CLEARBBORDER2"></div>
+	<div class="VVGBG">
+     	<table width="100%" border="0" cellspacing="4" cellpadding="0">
+  <tbody>
+    <tr>
+      <th scope="col" width="50%"><?php echo $this->translate('%s %s',$this->translate('Fullfil'),$this->translate('Goal'));?></th>
+      <th scope="col" width="25%"><?php echo $this->translate('%s Date',$this->translate('From'));?></th>
+      <th scope="col" width="25%"><?php echo $this->translate('%s Date',$this->translate('To'));?></th>
+    </tr>
+    <tr>
+      <td class="noborder">Vedkommende beskriver gode sommeropplevelser</td>
+      <td><span class="tdbg45"><input type="text" value="03/07-2014"></span></td>
+      <td><span class="tdbg45"><input type="text" value="03/07-2014"></span></td>
+    </tr>
+    <tr>
+      <td class="noborder">Vedkommende har et dagtilbud</td>
+      <td><span class="tdbg45"><input type="text" value="03/07-2014"></span></td>
+      <td><span class="tdbg45"><input type="text" value="03/07-2014"></span></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="CLEARBBORDER2"></div>
+
+
+
+<div class="VVGBG VV2IN1C2">
+<table width="100%" border="0">
+  <tr>
+    <th width=""></th>
+    <th width="50%"><?php echo $this->translate('%s %s',$this->translate('Active'),$this->translate('Goal'));?></th>
+    <th width="10%" class="TABLEMARGINL1"><?php echo $this->translate('Completed');?></th>
+    <th width="10%" class="TABLEMARGINL"><?php echo $this->translate('Partial Complete');?></th>
+    <th width="10%" class="TABLEMARGINL"><?php echo $this->translate('Not Complete');?></th>
+    <th width="10%" class="TABLEMARGINL"><?php echo $this->translate('%s Date',$this->translate('From'));?></th>
+    <th width="10%" class="TABLEMARGINL"><?php echo $this->translate('%s Date',$this->translate('To'));?></th>
+  </tr>
+  <tr>
+    <td class="TABLE10px"><span class="tdbg15"><input type="text" value="1" class="VVTAC"></span></td>
+    <td ><span class="tdbg"><input type="text" value="Begynne på skole igjen"></span></td>
+    <td></span><span class="tdbg VVTAC">
+    <div>
+    	<input type="radio" id="tk21" name="tk" /><label for="tk21"><span></span></label>
+    </div>  
+    </span>
+    </td>
+    <td>
+    <span class="tdbg VVTAC">
+    <div>
+    	<input type="radio" id="tk19" name="tk" /><label for="tk19"><span></span></label>
+    </div>  
+    </span>
+    </td>
+    <td>
+    <span class="tdbg VVTAC">
+    <div>
+    	<input type="radio" id="tk20" name="tk" /><label for="tk20"><span></span></label>
+    </div>  
+    </span>
+    </td>
+    <td>
+    <span class="tdbg"><input type="text" value="02/09-2014">
+    </td>
+    <td>
+    <span class="tdbg"><input type="text" value="02/12-2014">
+    </td>
+  </tr>
+ <tr>
+    <td><span class="tdbg15"><input type="text" value="2" class="VVTAC"></span></td>
+    <td ><span class="tdbg"><input type="text" value="Begynne på skole igjen"></span></td>
+    <td></span><span class="tdbg VVTAC">
+    <div>
+    	<input type="radio" id="tk22" name="tk" /><label for="tk22"><span></span></label>
+    </div>  
+    </span>
+    </td>
+    <td>
+    <span class="tdbg VVTAC">
+    <div>
+    	<input type="radio" id="tk23" name="tk" /><label for="tk23"><span></span></label>
+    </div>  
+    </span>
+    </td>
+    <td>
+    <span class="tdbg VVTAC">
+    <div>
+    	<input type="radio" id="tk24" name="tk" /><label for="tk24"><span></span></label>
+    </div>  
+    </span>
+    </td>
+    <td>
+    <span class="tdbg"><input type="text" value="02/09-2014">
+    </td>
+    <td>
+    <span class="tdbg"><input type="text" value="02/12-2014">
+    </td>
+  </tr>
+  <tr>
+    <td><span class="tdbg15"><input type="text" value="3" class="VVTAC"></span></td>
+    <td ><span class="tdbg"><input type="text" value="Begynne på skole igjen"></span></td>
+    <td></span><span class="tdbg VVTAC">
+    <div>
+    	<input type="radio" id="tk25" name="tk" /><label for="tk25"><span></span></label>
+    </div>  
+    </span>
+    </td>
+    <td>
+    <span class="tdbg VVTAC">
+    <div>
+    	<input type="radio" id="tk26" name="tk" /><label for="tk26"><span></span></label>
+    </div>  
+    </span>
+    </td>
+    <td>
+    <span class="tdbg VVTAC">
+    <div>
+    	<input type="radio" id="tk27" name="tk" /><label for="tk27"><span></span></label>
+    </div>  
+    </span>
+    </td>
+    <td>
+    <span class="tdbg"><input type="text" value="02/09-2014">
+    </td>
+    <td>
+    <span class="tdbg"><input type="text" value="02/12-2014">
+    </td>
+  </tr>
+  <tr>
+    <td><span class="tdbg15"><input type="text" value="4" class="VVTAC"></span></td>
+    <td ><span class="tdbg"><input type="text" value="Begynne på skole igjen"></span></td>
+    <td></span><span class="tdbg VVTAC">
+    <div>
+    	<input type="radio" id="tk28" name="tk" /><label for="tk28"><span></span></label>
+    </div>  
+    </span>
+    </td>
+    <td>
+    <span class="tdbg VVTAC">
+    <div>
+    	<input type="radio" id="tk29" name="tk" /><label for="tk29"><span></span></label>
+    </div>  
+    </span>
+    </td>
+    <td>
+    <span class="tdbg VVTAC">
+    <div>
+    	<input type="radio" id="tk30" name="tk" /><label for="tk30"><span></span></label>
+    </div>  
+    </span>
+    </td>
+    <td>
+    <span class="tdbg"><input type="text" value="02/09-2014">
+    </td>
+    <td>
+    <span class="tdbg"><input type="text" value="02/12-2014">
+    </td>
+  </tr>
+  <tr>
+    <td><span class="tdbg15"><input type="text" value="5" class="VVTAC"></span></td>
+    <td ><span class="tdbg"><input type="text" value="Begynne på skole igjen"></span></td>
+    <td></span><span class="tdbg VVTAC">
+    <div>
+    	<input type="radio" id="tk31" name="tk" /><label for="tk31"><span></span></label>
+    </div>  
+    </span>
+    </td>
+    <td>
+    <span class="tdbg VVTAC">
+    <div>
+    	<input type="radio" id="tk32" name="tk" /><label for="tk32"><span></span></label>
+    </div>  
+    </span>
+    </td>
+    <td>
+    <span class="tdbg VVTAC">
+    <div>
+    	<input type="radio" id="tk33" name="tk" /><label for="tk33"><span></span></label>
+    </div>  
+    </span>
+    </td>
+    <td>
+    <span class="tdbg"><input type="text" value="02/09-2014">
+    </td>
+    <td>
+    <span class="tdbg"><input type="text" value="02/12-2014">
+    </td>
+  </tr>
+</table>
+</div>
+<div class="CLEARBBORDER2"></div>
+    <div class="KKI2C">
+        <table width="100%" border="0" cellspacing="4" cellpadding="0">
+            <tr>
+                <th class="noborder"><?php echo $this->translate('Resources');?> - hentes fra kartleggingsmal</th>
+            </tr>
+            <tr>
+                <td><span class="tdbg1c">
+                        <textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden;width: 100%; border: none; height:auto;"></textarea>
+                    </span>
+                </td>
+            </tr>
+		</table> 
+    </div>
+<div class="CLEARBBORDER2"></div>
+<div class="KKI2C">
+<div class="PSUBTCWRAPPER">
+	<div class="PSUBTCLEFT2">
+    <strong><?php echo $this->translate('Goal');?>: Vedkommende forberedes på annen bosituasjon utenfor istutisjon</strong>
+    </div>
+</div>
+
+<div class="KKI2C">
+        <table width="100%" border="0" cellspacing="4" cellpadding="0">
+            <tr>
+                <td class="noborder">
+                	<div class="PSUBTCWRAPPER">
+	<div class="PSUBTCLEFT2">
+    <strong>Status ved oppstart av perioden - Evaluering fra forige kvartal </strong>
+    </div>
+</div>
+                </td>
+            </tr>
+            <tr>
+                <td><span class="tdbg1c">
+                        <textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden; width: 100%; border: none; height:auto;"></textarea>
+                    </span>
+                </td>
+            </tr>
+		</table> 
+    </div>
+
+
+<div class="CLEARBBORDER2"></div>
+<div class="KKI2C">
+<div class="PSUBTCWRAPPER">
+	<div class="PSUBTCLEFT2">
+    <strong><?php echo $this->translate('Ongoing Measure');?></strong>
+    </div>
+</div>
+<div class="KKI2C">
+        <table width="100%" border="0" cellspacing="4" cellpadding="0">
+            <tr>
+                <th class="noborder">M - <?php echo $this->translate('Identify relevant practical needs relation that she lives in a separate apartment, boututstyr, furniture, etc.');?></th>
+            </tr>
+            <tr>
+                <td><span class="tdbg1c">
+                        <textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden; width: 100%; border: none; height:auto;"></textarea>
+                    </span>
+                </td>
+            </tr>
+		</table> 
+    </div>
+    <div class="KKI2C">
+        <table width="100%" border="0" cellspacing="4" cellpadding="0">
+            <tr>
+                <th class="noborder">B - <?php echo $this->translate('Identify relevant practical needs relation that she lives in a separate apartment, boututstyr, furniture, etc.');?></th>
+            </tr>
+            <tr>
+                <td><span class="tdbg1c">
+                        <textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden; width: 100%; border: none; height:auto;"></textarea>
+                    </span>
+                </td>
+            </tr>
+		</table> 
+    </div>
+    
+    
+    <div class="KKI2C">
+        <table width="100%" border="0" cellspacing="4" cellpadding="0">
+            <tr>
+                <th class="noborder">C - <?php echo $this->translate('Identify relevant practical needs relation that she lives in a separate apartment, boututstyr, furniture, etc.');?></th>
+            </tr>
+            <tr>
+                <td><span class="tdbg1c">
+                        <textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden; width: 100%; border: none; height:auto;"></textarea>
+                    </span>
+                </td>
+            </tr>
+		</table> 
+    </div>
+    <div class="KKI2C">
+        <table width="100%" border="0" cellspacing="4" cellpadding="0">
+            <tr>
+                <th class="noborder">D - <?php echo $this->translate('Identify relevant practical needs relation that she lives in a separate apartment, boututstyr, furniture, etc.');?></th>
+            </tr>
+            <tr>
+                <td><span class="tdbg1c">
+                        <textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden; width: 100%; border: none; height:auto;"></textarea>
+                    </span>
+                </td>
+            </tr>
+		</table> 
+    </div>
+    
+    
+    
+</div>
+
+<div class="CLEARBBORDER2"></div>
+<div class="KKI2C">
+        <table width="100%" border="0" cellspacing="4" cellpadding="0">
+            <tr>
+                <td class="noborder">
+                	<div class="PSUBTCWRAPPER">
+	<div class="PSUBTCLEFT2">
+    <strong><?php echo $this->translate('Overall evaluation of objectives and measures');?></strong>
+    </div>
+</div>
+                </td>
+            </tr>
+            <tr>
+                <td><span class="tdbg1c">
+                        <textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden; width: 100%; border: none; height:auto;"></textarea>
+                    </span>
+                </td>
+            </tr>
+		</table> 
+    </div>
+    </div>
+<div class="CLEARBBORDER2"></div>
+<div class="KKI2C">
+<div class="PSUBTCWRAPPER">
+	<div class="PSUBTCLEFT2">
+    <strong><?php echo $this->translate('Advances in treatment and challenges ahead');?></strong>
+    </div>
+</div>
+        <table width="100%" border="0" cellspacing="4" cellpadding="0">
+            <tr>
+                <td><span class="tdbg1c">
+                        <textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden; width: 100%; border: none; height:auto;"></textarea>
+                    </span>
+                </td>
+            </tr>
+		</table> 
+    </div>
+    
+<div class="PSUBTCLEFTH2"><?php echo $this->translate('Attachment to scorecard plan');?></div>
+
+	<div class="KKI2C">
+	<div id="BORDERTABS1">
+     	<ul id="tabs3">
+        	<li class="INACTIVTAB" id="current3"><a href="#" name="tab31"><div class="ACTIVETLZI TLZI"><?php echo $this->translate('Activities that only <br /> takes certain weekdays');?></div></a></li>
+            <li class="INACTIVTAB"><a href="#" name="tab32"><div class="ACTIVETLZI TLZI"><?php echo $this->translate('Activities that take place <br /> less than once a week');?></div></a></li>
+            <li class="INACTIVTAB"><a href="#" name="tab33"><div class="ACTIVETLZI TLZI"><?php echo $this->translate('Meetings conducted <br>in the period');?></div></a></li>
+		</ul>
+		<div id="content3">
+			<div class="tablebg">
+				<div style="display: block; padding:0 10px" id="tab31">
+                	<?php echo $this->partial('info/tabs/scorecard/clientCertainActivity.phtml');?>
+                </div>
+                <div style="display: block; padding:0 10px" id="tab32">
+                	<?php echo $this->partial('info/tabs/scorecard/clientOnceActivity.phtml');?>
+				</div>
+                <div style="display: block; padding:0 10px" id="tab33">
+                	<?php echo $this->partial('info/tabs/scorecard/clientMeeting.phtml');?>
+				</div>
+			</div>
+		</div>
+		<div class="bot_shadow"><img src="<?php echo $this->getMediaUrl('timg/bot-shadow.png');?>" width="834" height="21"></div>
+	</div>    
+    </div>
+
+
+<div class="CANCELB"><a class="OPPRETTBA" href="#"><?php echo $this->translate('Save');?></a></div>
+<div class="LAASARKIVERB"><a class="LAASARKIVERBA" href="#"><?php echo $this->translate('Lock and Archives');?></a></div>

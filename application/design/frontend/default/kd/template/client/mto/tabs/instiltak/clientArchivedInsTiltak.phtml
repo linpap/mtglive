@@ -1,0 +1,55 @@
+<?php $format=KD::getModel('core/format');?>
+<div>
+<form name="frmClientArchiveInsTiltak" id="frmClientArchiveInsTiltak" method="post" action="">
+<div class="PSUBTCWRAPPER">
+	<div class="PSUBTCLEFT">
+    	<?php echo $this->translate('Archived %s',$this->translate('Institute Measure'));?>
+    </div>
+</div>
+<div class="CLEARBBORDER"></div>
+<div class="KKI2C">
+<table width="100%" border="0" cellspacing="4" cellpadding="0">
+      <tr class="CURNONPOINTER">
+        <th class="TSLRTDNUMBER">
+        <span class="tdbg2">
+        	<input type="checkbox" name="checkbox_all1" id="checkbox_all1" class="css-checkbox"  data-form="frmClientArchiveInsTiltak"/>
+            <label for="checkbox_all1" class="css-label"></label>
+        </span>
+		<input type="hidden" name="patient_id" id="patient_id" value="<?php echo $this->clientID;?>"/>
+        </th>
+        <th class="TSLRTDCENTER"><?php echo $this->translate('Institute Measure');?></th>
+		<th class="TSLRTDCENTER"><?php echo $this->translate('%s Date',$this->translate('From'));?></th>
+        <th class="TSLRTDCENTER"><?php echo $this->translate('%s Date',$this->translate('To'));?></th>
+      </tr>
+<?php  if(count($this->maalCollection)>0):
+foreach($this->maalCollection as $maal):  ?>
+<?php $id = $maal['maal_id']; ?>
+  <tr>
+	<td class="TSLRTDNUMBER bgwhite">
+		<span class="tdbg" style="width: 20px;">
+		<input type="checkbox" name="<?php echo 'checkbox_'.$id;?>" id="<?php echo 'checkbox_'.$id;?>" class="css-checkbox"/>
+		<label for="<?php echo 'checkbox_'.$id;?>" class="css-label"></label>
+		</span>
+	</td>
+	<td><span class="tdbg"><a href="<?php echo $this->getUrl('client/info/index/id/'.$id,null,false,false);?>"><?php echo $maal['maal_desc']; ?></a></span></td>
+	<td class="bgwhite"><span class="tdbg"><?php echo $format->FormatDate($maal['from_date']); ?></span></td>
+	<td class="bgwhite"><span class="tdbg"><?php echo $format->FormatDate($maal['to_date']); ?></span></td>
+  </tr>
+
+<?php endforeach; 
+echo $this->paginationControl($this->maalCollection, 'Sliding', 'control.phtml', array('page'=>'pia','tt'=>'62','t'=>'6'));
+endif;?>
+</table>
+</div>
+<div class="mtodroplist1">
+<div class="mtodroplist11">
+    <span class="KITINRDLISTWSPAN">
+    	<select name="selAction" class="onSelectAction" data-form="frmClientArchiveInsTiltak">
+        	<option value="" style=" font-weight:bold;"><?php echo $this->translate('Select %s %s',$this->translate('Type of Action'),$this->translate('Here!'));?></option>
+            <option value="<?php echo $this->getUrl('client/mto/restoreinstiltak');?>"><?php echo $this->translate('%s %s',$this->translate('Restore'),$this->translate('Institute Measure'));?></option>
+        </select> 
+    </span>  	
+</div>
+</div>
+</form>
+</div>

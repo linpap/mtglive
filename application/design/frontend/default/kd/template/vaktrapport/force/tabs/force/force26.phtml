@@ -1,0 +1,80 @@
+<table cellspacing=0 cellpadding="0" border="0px" width="100%">
+  <tr>
+	<td style="padding:0px;">
+		<table cellspacing=0 cellpadding="5" border="0px" class="bordercolor" style="border-collapse:collapse; margin-left:0pt" width="100%">
+			<thead>
+				<tr>
+					<th style="width: 100%;" colspan="2"><h2>2.6 &sect; 19 Samtykke til &aring; avlegge urinpr&oslash;ver under oppholdet <!--&sect; 19 Consent to take urine samples during stay--></h2></th>
+				</tr>
+			</thead>
+			<tbody>
+			  <tr><td colspan="2">Hver hjemmel st&aring;r p&aring; egen siden, da det kun er den dokumentasjonen som er utfylt, som skal oversendes Fylkesmannen uten ugrunnet opphold.<!--Each authority is on their side, since only the documentation is completed, which shall be submitted to the County without undue delay.--></td></tr>
+			  <tr><td colspan="2"><u>NB! Bruk av hurtigtest ved urinpr&oslash;vetaking er ikke lov etter &sect; 19.<!--NB!Using Quick test by urine sampling is not permitted by &sect; 19.--></u></td></tr>
+			  <tr>
+				<td class="title1" width="60%">Hvilke konkrete forhold/hendelser under oppholdet foranlediget samtykke til urinpr&oslash;vetaking?<!--What specific conditions / events during your stay occasioned consent to urine collection?--></td>
+				<td width="40%" class="nonecls1 value1"><span class="tdbg1"><textarea onkeyup="textAreaAdjust(this)" style="overflow:visible;width: 100%; border: none; height:auto;" class="validation"  name="force2511[force_txta26_urine]" id="force_txta26_urine"><?php echo (isset($this->forceInfo['force_txta26_urine']) && $this->forceInfo['force_txta26_urine']!='')?$this->forceInfo['force_txta26_urine']:'';?></textarea></span></td>
+			  </tr>				  
+			  <tr>
+				<td class="title1">Urinpr&oslash;vet aking er foretatt p&aring; grunnlag av skriftlig samtykke fra:<!--Urine Sampler acceptance is made ??on the basis of written consent:--></td>
+				<td class="nonecls1 value1"><span class="tdbg1">
+				  <select class="validation width98" name="force2511[force_sel26_tobog]" id="force_sel26_tobog">
+					<option value="" <?php echo (!isset($this->forceInfo['force_sel26_tobog']) || $this->forceInfo['force_sel26_tobog']=='')?'selected="selected"':'';?>>Velg<!--Select--> </option>
+					<option value="alone" <?php echo (isset($this->forceInfo['force_sel26_tobog']) && $this->forceInfo['force_sel26_tobog']=='alone')?'selected="selected"':'';?>> Beboeren alene<!--The resident alone--> </option>
+					<option value="guardian" <?php echo (isset($this->forceInfo['force_sel26_tobog']) && $this->forceInfo['force_sel26_tobog']=='guardian')?'selected="selected"':'';?>> Beboeren (u.15 &aring;r) og foresatte<!--The resident (u.15 years) and carers--> </option>
+					<option value="barnev" <?php echo (isset($this->forceInfo['force_sel26_tobog']) && $this->forceInfo['force_sel26_tobog']=='barnev')?'selected="selected"':'';?>> Beboeren (u. 1515 &aring;r) og barneverntj. (bvl. &sect; 4-1212)<!--The resident (without 15 years) and child welfare. (Bvl. § 4-12)--> </option>
+					<option value="streg" <?php echo (isset($this->forceInfo['force_sel26_tobog']) && $this->forceInfo['force_sel26_tobog']=='streg')?'selected="selected"':'';?>> Beboeren (u.1515 &aring;r) og st.reg.bv.mynd. (bvl. &sect; 5A-1)<!--The resident (u.15 years) and st.reg.bv.mynd. (Bvl. § 5A-1)--> </option>
+				  </select></span>
+				</td>
+			  </tr>
+			  
+			  <tr>
+				<td class="title1">Har beboeren f&aring;tt kunnskap om institusjonens regler og rutiner for pr&oslash;vetaking, herunder om hvordan urinpr&oslash;ver avlegges, f&oslash;r samtykket ble gitt?<!--Has the resident received the knowledge of the institution&#39;s policies and procedures for sampling, including how urine samples taken before the consent was given?--></td>
+				<td class="nonecls1 value1"><span class="tdbg1">
+				  <select class="validation width98" name="force2511[force_sel26_policy]" id="force_sel26_policy">
+					<option value="" <?php echo (!isset($this->forceInfo['force_sel26_policy']) || $this->forceInfo['force_sel26_policy']=='')?'selected="selected"':'';?>>Velg<!--Select--></option>
+					<option value="yes" <?php echo (isset($this->forceInfo['force_sel26_policy']) && $this->forceInfo['force_sel26_policy']=='yes')?'selected="selected"':'';?>>  yes<!--Yes--></option>
+					<option value="no" <?php echo (isset($this->forceInfo['force_sel26_policy']) && $this->forceInfo['force_sel26_policy']=='no')?'selected="selected"':'';?>>  no<!--No--></option>
+				  </select></span>
+				</td>
+			  </tr>
+			  <tr>
+				<td class="title1">Er avleggelse av urinpr&oslash;ve h&aring;ndtert i samsvar gjeldende kvalitetsrutiner for rusmiddeltesting gitt av Helsedirektoratet?<!--Is the presentation of the urine sample handled in accordance the applicable quality procedures for drug testing provided by the Directorate of Health?--></td>
+				<td class="nonecls1 value1"><span class="tdbg1">
+				  <select class="validation width98" name="force2511[force_sel26_present]" id="force_sel26_present">
+					<option value="" <?php echo (!isset($this->forceInfo['force_sel26_present']) || $this->forceInfo['force_sel26_present']=='')?'selected="selected"':'';?>>Velg<!--Select--></option>
+					<option value="yes" <?php echo (isset($this->forceInfo['force_sel26_present']) && $this->forceInfo['force_sel26_present']=='yes')?'selected="selected"':'';?>>  yes<!--Yes--></option>
+					<option value="no" <?php echo (isset($this->forceInfo['force_sel26_present']) && $this->forceInfo['force_sel26_present']=='no')?'selected="selected"':'';?>>  no<!--No--></option>
+				  </select></span>
+				</td>
+			  </tr>
+			  <tr>
+				<td class="title1">Ble det gjort funn i urinpr&oslash;ven?<!--When oil was discovered in the urine sample?--></td>
+				<td class="nonecls1 value1"><span class="tdbg1">
+				  <select class="validation width98" name="force2511[force_sel26_discovery]"  id="force_sel26_discovery" onchange="changeAreaClass(this.value,'','rem','#force_txta26_discovery_res','yes');">
+					<option value="" <?php echo (!isset($this->forceInfo['force_sel26_discovery']) || $this->forceInfo['force_sel26_discovery']=='')?'selected="selected"':'';?>>Velg<!--Select--></option>
+					<option value="yes" <?php echo (isset($this->forceInfo['force_sel26_discovery']) && $this->forceInfo['force_sel26_discovery']=='yes')?'selected="selected"':'';?>>  yes<!--Yes--></option>
+					<option value="no" <?php echo (isset($this->forceInfo['force_sel26_discovery']) && $this->forceInfo['force_sel26_discovery']=='no')?'selected="selected"':'';?>>  no<!--No--></option>
+				  </select></span>
+				</td>
+			  </tr>
+			  <tr>
+				<td class="title1">Hvis yes: Hva ble det testet positivt p&aring;?Beskriv:<!--If yes: What was it tested positive for? Describe:--></td>
+				<td class="nonecls1 value1"><span class="tdbg1">
+				  <textarea onkeyup="textAreaAdjust(this)" style="overflow:visible;width: 100%; border: none; height:auto;" id="force_txta26_discovery_res"  name="force2511[force_txta26_discovery_res]"><?php echo (isset($this->forceInfo['force_txta26_discovery_res']) && $this->forceInfo['force_txta26_discovery_res']!='')?$this->forceInfo['force_txta26_discovery_res']:'';?></textarea></span>
+				</td>
+			  </tr>
+			  <tr>
+				<td class="title1">Er avgitt urinpr&oslash;ve sendt inn til laboratorium for analyse?<!--Is prepared urine sample submitted to the laboratory for analysis?--></td>
+				<td class="nonecls1 value1"><span class="tdbg1">
+				  <select class="validation width98" name="force2511[force_sel26_sample_submit]" id="force_sel26_sample_submit">
+					<option value="" <?php echo (!isset($this->forceInfo['force_sel26_sample_submit']) || $this->forceInfo['force_sel26_sample_submit']=='')?'selected="selected"':'';?>>Velg<!--Select--></option>
+					<option value="yes" <?php echo (isset($this->forceInfo['force_sel26_sample_submit']) && $this->forceInfo['force_sel26_sample_submit']=='yes')?'selected="selected"':'';?>>  yes<!--Yes--></option>
+					<option value="no" <?php echo (isset($this->forceInfo['force_sel26_sample_submit']) && $this->forceInfo['force_sel26_sample_submit']=='no')?'selected="selected"':'';?>>  no, men den vil bli sendt inn omg&aring;ende<!--No, but it will be submitted promptly--></option>
+				  </select></span>
+				</td>
+			  </tr>
+			</tbody>
+		</table>
+	</td>
+  </tr>
+</table>

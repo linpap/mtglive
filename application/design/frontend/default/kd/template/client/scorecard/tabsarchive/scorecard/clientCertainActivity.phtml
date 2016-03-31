@@ -1,0 +1,19 @@
+<?php $format = KD::getModel('core/format');?>
+<div class="VVGBG VV2IN1C2">
+<div class="printvisibeltitel">
+<div class="PSUBTCLEFTH26">Aktiviteter som bare foregår enkelte ukedager</div>
+
+</div>
+<table width="100%" border="0" id="clientCertainTbl">
+  <tr>
+    <th class="malstyringstable"><?php echo $this->translate('Weekday');?></th>
+    <th><?php echo $this->translate('Description of activities');?></th>
+  </tr>
+  <?php foreach($this->maalPlanCertain as $maalplancertain):?>
+  <tr>
+    <td class="nonecls1 width15"><span class="tdbg"><?php echo $format->FormatDate($maalplancertain['maalplan_other_certainDate']);?></span></td>
+    <td class="nonecls1"><span class="tdbg1c"><?php echo $maalplancertain['maalplan_other_certainDesc'];?></span></td>
+  </tr>
+  <?php endforeach;?>
+</table>  
+</div>

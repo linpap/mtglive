@@ -1,0 +1,59 @@
+<?php $format = KD::getModel('core/format');?>
+<div class="PSUBTCWRAPPER">
+	<div class="PSUBTCLEFT2">
+    	<?php echo $this->translate('Scratch Pad');?>
+    </div>
+    <div class="OPPRETTSUMERINGB"><a class="OPPRETTSUMERINGBA" href="<?php echo $this->getUrl('info/info/index/type/cur/id/0');?>"><?php echo $this->translate('Create %s',$this->translate('Info Management'));?></a></div>
+</div>
+<div class="CLEARBBORDER"></div>
+<div class="VVGBG VV2IN1C2 KRV">
+<form name="infoDeptList" id="infoDeptList" action="" method="post">
+<table width="100%" border="0" cellspacing="4" cellpadding="0">
+  <tr class="CURNONPOINTER">
+	<th class="TSLRTDNUMBER">
+	<span class="tdbg2">
+		<input type="checkbox" name="checkbox_all1" id="checkbox_all1" class="css-checkbox" data-form="infoDeptList" />
+		<label for="checkbox_all1" class="css-label"></label>
+	</span>
+	</th>
+	<th class="TSLRTDCENTER width80"><?php echo $this->translate('Titel');?></th>	
+	<th class="TSLRTDCENTER width20"><?php echo $this->translate('Created');?></th>	
+  </tr>
+
+<?php 
+if(count($this->infoDeptCollection)>0):
+foreach($this->infoDeptCollection as $infoDept): ?>
+<?php $id = $infoDept['info_id']; ?>
+  <tr>
+	<td class="TSLRTDNUMBER head-content">
+		<span class="tdbg" style="width: 20px;">
+		<input type="checkbox" name="<?php echo 'checkbox_'.$id;?>" id="<?php echo 'checkbox_'.$id;?>" class="css-checkbox" />
+		<label for="<?php echo 'checkbox_'.$id;?>" class="css-label"></label>
+		</span>
+	</td>
+	<td class="head-content"><?php /*?><a href="<?php echo $this->getUrl('info/info/index/type/main/id/'.$infoAll['info_id']);?>"><?php */?><span class="tdbg"><?php echo $infoDept['info_title'] ?></span><?php /*?></a><?php */?></td>
+	<td class="head-content"><span class="tdbg"><?php echo $format->FormatDate($infoDept['date_of_creation']); ?></span></td>
+  </tr>
+  <tr>
+	<td class="nonecls"></td>
+	<td><span class="tdbg"><?php echo $infoDept['info_desc'] ?></span></td>
+	<td><span class="tdbg"><?php echo KD::getModel('user/user')->getUser($infoDept['created_by']); ?></span></td>
+  </tr>
+
+<?php endforeach; 
+endif;?>
+<?php echo $this->paginationControl($this->infoDeptCollection, 'Sliding', 'control.phtml', array('page'=>'pageUA','tab'=>'tab2'));?>
+</table>
+<div class="listdroplist">
+	<?php echo $this->translate('Select').' '.$this->translate('Type of Action');?>
+	<div class="KITINRDLISTW">
+		<span class="KITINRDLISTWSPAN">
+			<select name="selAction" class="onSelectAction" data-form="infoDeptList">
+				<option ><?php echo $this->translate('Select').' '.$this->translate('Type of Action').' '.$this->translate('Here!');?></option>
+				<option value="<?php echo $this->getUrl('info/index/restore');?>"><?php echo $this->translate('Restore');?></option>
+			</select> 
+		</span>  	
+	</div>
+</div>
+</form>
+</div>

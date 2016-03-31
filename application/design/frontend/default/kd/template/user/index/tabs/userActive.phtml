@@ -1,0 +1,54 @@
+<?php $format = KD::getModel('core/format');?>
+<form name="userList" id="userList" action="" method="post">
+<table width="100%" border="0" cellspacing="4" cellpadding="0">
+  <tr class="CURNONPOINTER">
+	<th class="TSLRTDNUMBER">
+	<span class="tdbg2">
+		<input type="checkbox" name="checkbox_all" id="checkbox_all" class="css-checkbox" data-form="userList" />
+		<label for="checkbox_all" class="css-label"></label>
+	</span>
+	</th>
+	<th class="TSLRTDCENTER"><?php echo $this->translate('Name');?></th>	
+	<?php /*?><th class="TSLRTDCENTER"><?php echo $this->translate('ID');?></th><?php */?>	
+	<th class="TSLRTDCENTER"><?php echo $this->translate('Role');?></th>	
+	<th class="TSLRTDCENTER"><?php echo $this->translate('Department');?></th>
+	<th class="TSLRTDCENTER"><?php echo $this->translate('Mobile');?></th>	
+	<th class="TSLRTDCENTER"><?php echo $this->translate('Email');?></th>
+  </tr>
+<?php 
+if(count($this->userCollection)>0):
+foreach($this->userCollection as $user): ?>
+<?php $id = $user['user_id']; ?>
+  <tr>
+	<td class="TSLRTDNUMBER">
+		<span class="tdbg" style="width: 20px;">
+		<input type="checkbox" name="<?php echo 'checkbox_'.$id;?>" id="<?php echo 'checkbox_'.$id;?>" class="css-checkbox" />
+		<label for="<?php echo 'checkbox_'.$id;?>" class="css-label"></label>
+		</span>
+	</td>
+	<td><span class="tdbg"><a href="<?php echo $this->getUrl('user/info/index/id/'.$id,null,false,false);?>"><?php echo $format->FormatName($user['user_fname'],$user['user_mname'],$user['user_lname']); ?></a></span></td>	
+	<?php /*?><td><span class="tdbg"><?php echo $user['user_id'] ?></span></td><?php */?>
+	<td><span class="tdbg"><?php echo $this->translate(ucfirst($user['role_name'])); ?></span></td>
+	<td><span class="tdbg"><?php echo $user['dept_name'] ?></span></td>
+	<td><span class="tdbg"><?php echo $user['user_mobile'] ?></span></td>
+	<td><span class="tdbg"><?php echo $user['user_email'] ?></span></td>
+  </tr>
+
+<?php endforeach; 
+endif;?>
+<?php echo $this->paginationControl($this->userCollection, 'Sliding', 'control.phtml', array('page'=>'pageU')); ?>
+
+</table>
+<div class="listdroplist">
+<?php echo $this->translate('Select %s',$this->translate('Type of Action'));?>
+	<div class="KITINRDLISTW">
+		<span class="KITINRDLISTWSPAN">
+			<select name="selAction" class="onSelectAction" data-form="userList">
+				<option value=""><?php echo $this->translate('Select %s %s',$this->translate('Type of Action'),$this->translate('Here!'));?></option>
+				<option value="<?php echo $this->getUrl('user/index/archive');?>"><?php echo $this->translate('Archive');?></option>
+				<option value="<?php echo $this->getUrl('user/index/delete');?>"><?php echo $this->translate('Delete');?></option>
+			</select> 
+		</span>  	
+	</div>
+</div>
+</form>

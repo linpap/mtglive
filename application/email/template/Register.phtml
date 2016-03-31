@@ -1,0 +1,52 @@
+
+<html lang="no">
+<head>
+<title>Varsling</title>
+<style type="text/css">
+body {margin:0px auto;padding:0px;}
+.body {font-family:verdana,"Trebuchet MS";font-size:11px;background-color:#CCCCCC;color:#0077BB;}
+td{font-size:12px;}
+.body a {color:#000;}
+.body a:hover {text-decoration:none;}
+.head {padding:5px 8px 5px; margin-bottom:10px;font-size:16px;font-weight:bold;font-family:verdana,"Trebuchet MS";color:#fff;background-color:#0077BB;}
+</style>
+</head>
+<body>
+<table width="800" border="0" align="center" cellpadding="5" cellspacing="5" class="body" style="background-color:#CCCCCC;color:#0077BB;">
+  <tr>
+    <td  bgcolor="#FFFFFF">
+	  <table cellpadding="0" cellspacing="0" border="0" width="100%">
+        <tr>
+          <td class="head" style="padding:5px 8px 5px; margin-bottom:10px;font-size:16px;font-weight:bold;font-family:verdana;color:#fff;background-color:#0077BB;"> Hei <?php echo $this->data['name']; ?></td>
+        </tr>
+        <tr>
+          <td style="background:#FFFFFF;">
+		  <br><br>
+			<br>
+              Velkommen til MTG, her er dine logg inn detaljer:
+              <br>
+              <br>
+              <big style="font:16px/18px Arial, sans-serif, color: #000000;">
+                  <b>
+                      Epost: <?php echo $this->data['email']; ?>
+                  </b>
+              </big>
+
+                <br>
+					<big style="font:16px/18px Arial, sans-serif">
+						<b>
+							Passord: <?php echo $this->data['password']; ?>
+						</b>
+					</big>
+                <br>
+                <br>
+            	<strong>Vennlig hilsen,<br> MTG</strong>
+
+		  </td>
+        </tr>
+      </table>
+	</td>
+  </tr>
+</table>
+</body>
+</html>

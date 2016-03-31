@@ -1,0 +1,32 @@
+#MAINMENU #LOGOUTWRAPPER {
+	float: right;
+    margin-top: 38px;
+    position: absolute;
+    right: 44px;
+    width: 267px;
+}
+#LOTEXTIMG {
+	background-image:url(../images/timg/log_out_her_text.png);
+	background-repeat:no-repeat;
+	height:28px;
+	width:219px;
+	float:left;
+	margin-top:5px;
+	display:block;
+	z-index:98787;
+}
+a.LOBUTON {
+	background-image:url(../images/timg/log_out_butten.jpg);
+	background-repeat:no-repeat;
+	display:block;
+	height:35px;
+	width:38px;
+	float:right;
+	
+}
+a.LOBUTON:hover {
+	background-image:url(../images/timg/log_out_butten_hover.jpg);
+}
+a.LOBUTON:active {
+	background-image:url(../images/timg/log_out_butten.jpg);
+}

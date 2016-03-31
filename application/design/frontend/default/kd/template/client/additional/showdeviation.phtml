@@ -1,0 +1,52 @@
+<?php if($this->show):?>
+<?php $format = KD::getModel('core/format');?>
+
+<table width="100%" border="0">
+  <tbody>
+        <tr>
+      <th class="nonecls1"><span class="padding5h"><strong><?php echo $this->translate('Deviation Sr No');?></strong></span></th>
+      <th class="nonecls1"><span class="padding5h"><strong><?php echo $this->translate('Vaktrapport No');?></strong></span></th>
+      <th class="nonecls1"><span class="padding5h"><strong><?php echo $this->translate('Lock Date');?></strong></span></th>
+      <th class="nonecls1"><span class="padding5h"><strong><?php echo $this->translate('Create By');?></strong></span></th>
+    </tr>
+    <tr>
+      <td class="nonecls1"><span class="tdbg"><span class="padding5h"><?php echo $this->deviation['deviation_id'];?></span></span></td>
+      <td class="nonecls1"><span class="tdbg"><span class="padding5h"><?php echo $this->deviation['deviation_vaktrapID'];?></span></span></td>
+      <td class="nonecls1"><span class="tdbg"><span class="padding5h"><?php echo $format->FormatDate($this->deviation['deviation_locked_at']);?></span></span></td>
+      <td class="nonecls1"><span class="tdbg"><span class="padding5h"><?php echo KD::getModel('user/user')->getUser($this->deviation['deviation_locked_by']);?></span></span></td>
+    </tr>
+
+  </tbody>
+  </table>
+<br />
+<table width="100%" border="0">
+  <tbody>
+    <tr>
+      <th class="nonecls1"><span class="padding5h"><strong><?php echo $this->translate('Describe deviation');?></strong></span></th>
+    </tr>
+    <tr>
+      <td class="nonecls1"><span class="tdbg"  style="height:auto;"><span class="padding5h"><?php echo $this->deviation['deviation_desc'];?></span></span></td>
+    </tr>
+    <tr>
+        <th class="nonecls1"><span class="padding5h"><strong><?php echo $this->translate('What is done to correct deviation');?></strong></span></th>
+    </tr>
+    <tr>
+        <td class="nonecls1"><span class="tdbg"  style="height:auto;"><span class="padding5h"><?php echo $this->deviation['correct_deviation'];?></span></span></td>
+    </tr>
+    <tr>
+        <th class="nonecls1"><span class="padding5h"><strong><?php echo $this->translate('Proposed corrective measures');?></strong></span></th>
+    </tr>
+    <tr>
+        <td class="nonecls1"><span class="tdbg"  style="height:auto;"><span class="padding5h"><?php echo $this->deviation['deviation_proposed_measures'];?></span></span></td>
+    </tr>
+    <tr>
+        <th class="nonecls1"><span class="padding5h"><strong><?php echo $this->translate('Decided corrective measures');?></strong></span></th>
+    </tr>
+    <tr>
+        <td class="nonecls1"><span class="tdbg"  style="height:auto;"><span class="padding5h"><?php echo $this->deviation['deviation_decided_measures'];?></span></span></td>
+    </tr>
+  </tbody>
+</table>
+<?php else:?>
+<div>We have not Data for this ID</div>
+<?php endif;?>

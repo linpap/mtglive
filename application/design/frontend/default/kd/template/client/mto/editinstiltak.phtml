@@ -1,0 +1,19 @@
+<?php $format = KD::getModel('core/format');
+$tiltakId = $this->tiltakID;
+if(isset($tiltakId) && $tiltakId>0 && isset($this->tiltakCollection)):?>
+<form name="frmClientEditInsTiltak" id="frmClientEditInsTiltak" method="post" action="<?php echo $this->getUrl("client/mto/editinstiltakpost/id/".$tiltakId.'/pid/'.$this->tiltakCollection['tilins_patientID']);?>">
+<table width="100%" border="0" cellspacing="4" cellpadding="0" id="clientEditInsTiltakTbl">
+      <tr class="CURNONPOINTER">
+		<th class="TSLRTDCENTER" width="30%"><?php echo $this->translate('Owner');?></th>
+		<th class="TSLRTDCENTER" width="70%"><?php echo $this->translate('Institute Measure');?></th>
+      </tr>
+	  <tr>
+	  	<td class="nonecls"><span class="tdbg VVTAC"><div><span><?php echo $this->translate('A');?><input type="radio" id="tilins_owner1" value="A" name="tilins_owner" data-validation="radio" <?php echo ($this->tiltakCollection['tilins_owner']=='A')?'checked="checked"':'';?>/><label for="tilins_owner1"><span></span></label></span><span><?php echo $this->translate('U');?><input type="radio" data-validation="radio" value="U" id="tilins_owner2" name="tilins_owner" <?php echo ($this->tiltakCollection['tilins_owner']=='U')?'checked="checked"':'';?>/><label for="tilins_owner2"><span></span></label></span><span><?php echo $this->translate('M');?><input type="radio" data-validation="radio" value="M" id="tilins_owner3" name="tilins_owner" <?php echo ($this->tiltakCollection['tilins_owner']=='M')?'checked="checked"':'';?>/><label for="tilins_owner3"><span></span></label></span></div>
+		</span></td>
+	  	<td class="nonecls"><span class="tdbg"><input type="text" name="tilins_desc" value="<?php echo $this->tiltakCollection['tilins_desc'];?>" id="tilins_desc" data-validation="required" /></span></td>
+</table>
+<div class="mtodroplist2">
+	<div class="OPPRETTB"><input type="submit" class="OPPRETTBA" value="<?php echo $this->translate('Save');?>"/></div>
+</div>
+</form>
+<?php endif;?>

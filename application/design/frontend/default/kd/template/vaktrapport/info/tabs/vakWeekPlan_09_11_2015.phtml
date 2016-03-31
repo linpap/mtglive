@@ -1,0 +1,31 @@
+<?php $format = KD::getModel('core/format');?>
+<table width="100%" border="0" cellspacing="4" cellpadding="0" id="clientWeekplanTbl">
+  <tr class="CURNONPOINTER">
+      <th class="TSLRTDCENTER" width="5%"><?php echo $this->translate('Sr.No.');?></th>
+      <th class="TSLRTDCENTER" width="20%"><?php echo $this->translate('Date');?></th>
+      <th class="TSLRTDCENTER" width="10%"><?php echo $this->translate('Time'); ?></th>
+      <th class="TSLRTDCENTER" width="20%"><?php echo $this->translate('Title'); ?></th>
+      <th class="TSLRTDCENTER" width="40%"><?php echo $this->translate('Description');?></th>
+  </tr>
+  <?php
+	$weekplanCnt = 1;
+	foreach($this->weekplanCollection as $weekplan):
+	$date = new DateTime($weekplan['weekplan_date']);
+  ?>
+  <tr>
+      <td><span class="tdbg"><?php echo $weekplanCnt++;?></span></td>
+      <td><span class="tdbg"><?php echo $format->FormatDate($weekplan['weekplan_date']);  echo ' - '.$date->format("l");?></span></td>
+      <td><span class="tdbg"><?php echo $format->FormatTime($weekplan['weekplan_date']); ?></span></td>
+      <td><span class="tdbg"><?php echo $weekplan['weekplan_title'];?></span></td>
+      <td><span class="tdbg"><?php echo $weekplan['weekplan_desc'];?></span></td>
+<?php /**
+	<td><span class="tdbg"><?php echo $weekplanCnt++;?></span></td>
+	<td><span class="tdbg <?php echo ($date->format('Y-m-d')==date('Y-m-d'))?'greenColor':'';?>"><?php  $begin = date('Y-m-d H:i:s'); echo $diff = $date->diff($begin)->format("%a");echo  $format->FormatDate($weekplan['weekplan_date']); echo ' - '.$date->format("l");
+	
+	
+	
+	?></span></td>
+	<td><span class="tdbg"><?php echo $weekplan['weekplan_desc'];?></span></td> **/ ?>
+  </tr>
+  <?php endforeach;?>
+</table>

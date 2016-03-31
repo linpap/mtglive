@@ -1,0 +1,63 @@
+<?php $format = KD::getModel('core/format'); ?>
+
+<form name="frmClientEditMaal" id="frmClientEditMaal" method="post" action="<?php echo $this->getUrl("client/mto/create-short-term-goal/id/" . $this->clientID . '/vaktrapid/' . $this->vaktrapid); ?>">
+    <input type="hidden" name="patient_id" id="patient_id" value="<?php echo $this->clientID;?>"/>
+    <input type="hidden" name="redirectUrl" value="<?php echo $this->redirectUrl; ?>">
+    <table width="100%" border="0" cellspacing="4" cellpadding="0" id="clientGovTiltakTbl">
+        <tr class="CURNONPOINTER">
+            <th class="TSLRTDCENTER" width="20%"><?php echo $this->translate('Owner');?></th>
+            <th class="TSLRTDCENTER" width="80%"><?php echo $this->translate('Goal');?></th>
+        </tr>
+
+        <tr>
+            <td class="nonecls">
+                <span class="tdbg VVTAC">
+                    <div>
+                        <span>
+                            <?php echo $this->translate('A');?><input type="radio" id="tilgovowner-1" value="A" name="tilgovowner"/>
+                            <label for="tilgovowner-1"><span></span></label>
+                        </span>
+                        <span>
+                            <?php echo $this->translate('U');?><input type="radio" value="U" id="tilgovowner-2" name="tilgovowner" />
+                            <label for="tilgovowner-2"><span></span></label>
+                        </span>
+                        <span>
+                            <?php echo $this->translate('M');?><input type="radio" value="M" id="tilgovowner-3" name="tilgovowner" />
+                            <label for="tilgovowner-3"><span></span></label>
+                        </span>
+                    </div>
+                </span>
+            </td>
+
+            <td class="nonecls">
+                <span class="tdbg cltdbg" >
+                    <select name="goalId" class="dptxt" id="maalIds[]">
+                        <option value=""><?php echo $this->translate('Select %s %s',$this->translate('Goal'),$this->translate('Here!'));?></option>
+                        <?php foreach($this->maalCollection as $maal):?>
+                            <option  <?php if($this->maalid==$maal['maal_id']):?> selected <?php endif?> value="<?php echo $maal['maal_id'];?>"><?php echo $maal['maal_desc'];?></option>
+                        <?php endforeach;?>
+                    </select>
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <?php echo $this->translate('Korttids tiltak');?>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" class="nonecls">
+                   <span class="tdbg">
+                    <textarea type="text" name="description" id="tilgovDescs[]" class="width100" />
+                       </textarea>
+                </span>
+            </td>
+        </tr>
+    </table>
+    <div class="mtodroplist2">
+        <div class="OPPRETTB"><input type="submit" class="OPPRETTBA" value="<?php echo $this->translate('Save');?>"/></div>
+    </div>
+</form>
+
+
+

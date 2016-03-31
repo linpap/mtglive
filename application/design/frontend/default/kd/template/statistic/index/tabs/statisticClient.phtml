@@ -1,0 +1,988 @@
+<?php
+//echo "<pre>";
+//print_r($this->observationAllData);
+//die;
+$patientId = isset($this->clientInfo['patient_id']) ? $this->clientInfo['patient_id'] : 0;
+$format = KD::getModel('core/format');
+#CODE FOR DEPT RESTRICTION
+$session = new Zend_Session_Namespace('Acl');
+#CODE FOR DEPT RESTRICTION
+$AssoArray_goal = array('NOTCOMPLETE' => $this->translate('Not Complete'), 'PARTIALCOMPLETE' => $this->translate('Partial Complete'), 'COMPLETE' => $this->translate('Completed'), 'NOTEVALUATED' => $this->translate('Non Evaluated'));
+
+$AssoArray = array('NOTCOMPLETE' => $this->translate('Ikke gjennomført'), 'PARTIALCOMPLETE' => $this->translate('Delvis gjennomført'), 'COMPLETE' => $this->translate('Gjennomført'), 'NOTEVALUATED' => $this->translate('Ikke evaluert'));
+$colors = array('#f8f707', '#00b0f0', '#207413', '#4c70f5', '#e2431e', '#0000aa', '#f8f707', '#00b0f0', '#207413', '#4c70f5', '#e2431e', '#0000aa', '#f8f707', '#00b0f0', '#207413', '#4c70f5', '#e2431e', '#0000aa', '#f8f707', '#00b0f0', '#207413', '#4c70f5', '#e2431e', '#0000aa', '#f8f707', '#00b0f0', '#207413', '#4c70f5', '#e2431e', '#0000aa');
+
+?>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script>
+
+
+    // Load the Visualization API and the piechart package.
+    google.load('visualization', '1.0', {'packages':['corechart']});
+    // Set a callback to run when the Google Visualization API is loaded.
+    google.setOnLoadCallback(drawChart);
+    // Callback that creates and populates a data table,
+    // instantiates the pie chart, passes in the data and
+    // draws it.
+
+    function drawChart() {
+
+
+    var pieResultCodes = ['<?php echo $this->translate('Not Complete'); ?>', '<?php echo $this->translate('Partial Complete'); ?>', '<?php echo $this->translate('Completed'); ?>', '<?php echo $this->translate('Non Evaluated'); ?>'];
+    var pieResultCodes_custome = ['<?php echo $this->translate('Ikke gjennomført'); ?>', '<?php echo $this->translate('Delvis gjennomført'); ?>', '<?php echo $this->translate('Gjennomført'); ?>', '<?php echo $this->translate('Ikke evaluert'); ?>'];
+    // Create Pie Chart For Maal .
+    // GOAL PIE CHART STARTS
+
+<?php if (isset($this->maalCountCollection) && count($this->maalCountCollection) > 0) { ?>
+        var dataMaal = new google.visualization.DataTable();
+        dataMaal.addColumn('string', 'Resultat');
+        dataMaal.addColumn('number', 'Antall');
+        dataMaal.addRows([
+    <?php
+    $colorsOption = '[';
+    if (isset($this->maalCountCollection)) {
+
+        foreach ($this->maalCountCollection as $title => $resultArray) {
+            $count = $resultArray['count'];
+            echo "['$AssoArray_goal[$title]', $count],\n";
+            $colorsOption .= "'" . $resultArray['color'] . "',";
+        }
+    } else
+        $title = '';
+    $colorsOption .= "]";
+    ?>
+        ]);
+        // Set chart options
+        var options = {'title':'<?php echo $this->translate('Goal'); ?>',
+                'legend': 'right',
+                'width':350,
+                'height':200,
+                'pieSliceTextStyle': {color: 'black', fontName: 'Ubuntu', fontSize: 12},
+                'colors': <?php echo $colorsOption; ?>,
+                'titleTextStyle': {color: 'black', fontName: 'Ubuntu', fontSize: 16},
+                is3D: true
+        };
+        // Instantiate and draw our chart, passing in some options.
+        var chartMaal = new google.visualization.PieChart(document.getElementById('chartMaalPie_div'));
+        // Add a listener to the pie's select event - when someone clicks on a pice slice
+        // The handler is implemented below, and the dialog is Initialized at page bottom
+        google.visualization.events.addListener(chartMaal, 'select', selectHandlerMaalChart);
+        function getDistinctCount(arr) {
+        var a = [], b = [], prev;
+        arr.sort();
+        for (var i = 0; i < arr.length; i++) {
+        if (arr[i] !== prev) {
+        a.push(arr[i]);
+        b.push(1);
+        } else {
+        b[b.length - 1]++;
+        }
+        prev = arr[i];
+        }
+
+        return [a, b];
+        }
+
+        // The select handler for pie chart. Define a new one for each chart
+        function selectHandlerMaalChart() {
+        var pieChartMaalDetails = new Array(4);
+    <?php
+    if (isset($this->maalCountCollection)) {
+        foreach ($this->maalCountCollection as $title => $resultArray) {
+            $result = $resultArray['result'];
+            echo "pieChartMaalDetails[$result] = new Array(" . count($resultArray['data']) . ");";
+            $cnt = 0;
+            foreach ($resultArray['data'] as $resultDesc) {
+                echo "pieChartMaalDetails[$result][$cnt] = '" . $resultDesc['maalplan_maaldesc'] . "';";
+                $cnt++;
+            }
+        }
+    }
+    ?>
+        // The chart and data objects are globa
+        var selectedItem = chartMaal.getSelection()[0];
+        if (selectedItem) {
+        var title = dataMaal.getValue(selectedItem.row, 0);
+        var percent = dataMaal.getValue(selectedItem.row, 1);
+        var tag = $('<div></div>'); //This tag will the hold the dialog content.
+        var titleDialog = title + ' : ' + percent + ' <?php echo $this->translate('Goal'); ?>';
+        var resultCode = pieResultCodes.indexOf(title);
+        // First remove any previously added rows
+        $('.chartData').remove();
+        // Now build a list of Tiltak and add them to the dialogs table
+        var html = '<table border="0" width="100%" cellpadding="0" cellspacing="4" class="KRV">';
+        // Get the names of the Tiltak that is part of this result
+
+        // Get distinct values with count
+
+
+        var listMaal = getDistinctCount(pieChartMaalDetails[resultCode]);
+        var maal_title, maal_count;
+        for (var i = 0; i < listMaal[0].length; i++) {
+        maal_title = listMaal[0][i], maal_count = listMaal[1][i];
+        html += '<tr class="chartData"><td class="padding5">' + (i + 1) + '</td><td class="padding5">' + maal_title + (maal_count > 1 ? ' (' + maal_count + ')' : '') + '</td></tr>';
+        }
+
+        html += '</table>';
+        tag.append(html);
+        tag.dialog({modal:true, title: titleDialog, width:'500px'}).dialog('open');
+        }
+        }
+
+        // Done. Draw the Instituional Pie chart
+        chartMaal.draw(dataMaal, options);
+<?php } ?>
+    // GOAL PIE CHART ENDS
+
+
+
+    // Create Pie Chart For Government Tiltak.
+    // GOVERNMENT TILTAK PIE CHART STARTS
+<?php if (isset($this->govTiltakCountCollection) && count($this->govTiltakCountCollection) > 0) { ?>
+        // Create Pie Chart For Government Tiltak.
+        var dataGov = new google.visualization.DataTable();
+        dataGov.addColumn('string', 'Resultat');
+        dataGov.addColumn('number', 'Antall');
+        dataGov.addRows([
+    <?php
+    $colorsOption = '[';
+    if (isset($this->govTiltakCountCollection)) {
+        foreach ($this->govTiltakCountCollection as $title => $resultArray) {
+            $count = $resultArray['count'];
+            echo "['$AssoArray[$title]', $count],\n";
+            $colorsOption .= "'" . $resultArray['color'] . "',";
+        }
+    }
+    $colorsOption .= ']';
+    ?>
+        ]);
+        // Set chart options
+        var options = {//'title':'<?php echo $this->translate('Government Tiltak'); ?>',
+        'legend': 'right',
+                'width':350,
+                'height':200,
+                'pieSliceTextStyle': {color: 'black', fontName: 'Ubuntu', fontSize: 12},
+                'colors': <?php echo $colorsOption; ?>,
+                'titleTextStyle': {color: 'black', fontName: 'Ubuntu', fontSize: 16},
+                is3D: true
+        };
+        // Government and draw our chart, passing in some options.
+        var chartGov = new google.visualization.PieChart(document.getElementById('chartGovPie_div'));
+        // Add a listener to the pie's select event - when someone clicks on a pice slice
+        // The handler is implemented below, and the dialog is Initialized at page bottom
+        google.visualization.events.addListener(chartGov, 'select', selectHandlerGovChart);
+        // The select handler for pie chart. Define a new one for each chart
+        function selectHandlerGovChart() {
+        var pieChartGovDetails = new Array(4);
+    <?php
+    foreach ($this->govTiltakCountCollection as $title => $resultArray) {
+        $result = $resultArray['result'];
+        echo "pieChartGovDetails[$result] = new Array(" . count($resultArray['data']) . ");";
+        $cnt = 0;
+        foreach ($resultArray['data'] as $resultDesc) {
+            echo "pieChartGovDetails[$result][$cnt] = '" . $resultDesc['vaktrap_tilgov_desc'] . "';";
+            $cnt++;
+        }
+    }
+    ?>
+        // The chart and data objects are globa
+        var selectedItem = chartGov.getSelection()[0];
+        if (selectedItem) {
+        var title = dataGov.getValue(selectedItem.row, 0);
+        var percent = dataGov.getValue(selectedItem.row, 1);
+        var tag = $('<div></div>'); //This tag will the hold the dialog content.
+        var titleDialog = title + ' : ' + percent + ' <?php echo $this->translate('Government Tiltak'); ?>';
+        var resultCode = pieResultCodes_custome.indexOf(title);
+        // First remove any previously added rows
+        $('.chartData').remove();
+        // Now build a list of Tiltak and add them to the dialogs table
+        var html = '<table border="0" width="100%" cellpadding="0" cellspacing="4" class="KRV">';
+        // Get distinct values with count
+
+        var listGov = getDistinctCount(pieChartGovDetails[resultCode]);
+        var gov_title, gov_count;
+        for (var i = 0; i < listGov[0].length; i++) {
+        gov_title = listGov[0][i], gov_count = listGov[1][i];
+        html += '<tr class="chartData"><td class="padding5">' + (i + 1) + '</td><td class="padding5">' + gov_title + (gov_count > 1 ? ' (' + gov_count + ')' : '') + '</td></tr>';
+        }
+        html += '</table>';
+        tag.append(html);
+        tag.dialog({modal:true, title: titleDialog, width:'500px'}).dialog('open');
+        }
+        }
+
+        // Done. Draw the chart
+        chartGov.draw(dataGov, options);
+<?php } ?>
+    // GOAL PIE CHART ENDS
+
+
+    // Create Pie Chart For Institutional Tiltak.
+    // INSTITUTE TILTAK PIE CHART STARTS
+<?php if (isset($this->instTiltakCountCollection) && count($this->instTiltakCountCollection) > 0) { ?>
+        var dataInst = new google.visualization.DataTable();
+        dataInst.addColumn('string', 'Resultat');
+        dataInst.addColumn('number', 'Antall');
+        dataInst.addRows([
+    <?php
+    $colorsOption = '[';
+    foreach ($this->instTiltakCountCollection as $title => $resultArray) {
+        $count = $resultArray['count'];
+        echo "['$AssoArray[$title]', $count],\n";
+        $colorsOption .= "'" . $resultArray['color'] . "',";
+    }
+    $colorsOption .= ']';
+    ?>
+        ]);
+        // Set chart options
+        var options = {//'title':'<?php echo $this->translate('Institute Tiltak'); ?>',
+        'legend': 'right',
+                'width':350,
+                'height':200,
+                'pieSliceTextStyle': {color: 'black', fontName: 'Ubuntu', fontSize: 12},
+                'colors': <?php echo $colorsOption; ?>,
+                'titleTextStyle': {color: 'black', fontName: 'Ubuntu', fontSize: 16},
+                is3D: true
+        };
+        // Instantiate and draw our chart, passing in some options.
+        var chartInst = new google.visualization.PieChart(document.getElementById('chartInstPie_div'));
+        // Add a listener to the pie's select event - when someone clicks on a pice slice
+        // The handler is implemented below, and the dialog is Initialized at page bottom
+        google.visualization.events.addListener(chartInst, 'select', selectHandlerInstChart);
+        // The select handler for pie chart. Define a new one for each chart
+        function selectHandlerInstChart() {
+        var pieChartInstDetails = new Array(4);
+    <?php
+    if (isset($this->instTiltakCountCollection)) {
+        foreach ($this->instTiltakCountCollection as $title => $resultArray) {
+            $result = $resultArray['result'];
+            echo "pieChartInstDetails[$result] = new Array(" . count($resultArray['data']) . ");";
+            $cnt = 0;
+            foreach ($resultArray['data'] as $resultDesc) {
+                echo "pieChartInstDetails[$result][$cnt] = '" . $resultDesc['tilins_desc'] . "';";
+                $cnt++;
+            }
+        }
+    }
+    ?>
+        // The chart and data objects are globa
+        var selectedItem = chartInst.getSelection()[0];
+        if (selectedItem) {
+        var title = dataInst.getValue(selectedItem.row, 0);
+        var percent = dataInst.getValue(selectedItem.row, 1);
+        var tag = $('<div></div>'); //This tag will the hold the dialog content.
+        var titleDialog = title + ' : ' + percent + ' <?php echo $this->translate('Institute Tiltak'); ?>';
+        var resultCode = pieResultCodes_custome.indexOf(title);
+        // First remove any previously added rows
+        $('.chartData').remove();
+        // Now build a list of Tiltak and add them to the dialogs table
+        var html = '<table border="0" width="100%" cellpadding="0" cellspacing="4" class="KRV">';
+        // Get distinct values with count
+        var listInst = getDistinctCount(pieChartInstDetails[resultCode]);
+        var inst_title, inst_count;
+        for (var i = 0; i < listInst[0].length; i++) {
+        inst_title = listInst[0][i], inst_count = listInst[1][i];
+        html += '<tr class="chartData"><td class="padding5">' + (i + 1) + '</td><td class="padding5">' + inst_title + (inst_count > 1 ? ' (' + inst_count + ')' : '') + '</td></tr>';
+        }
+        html += '</table>';
+        tag.append(html);
+        tag.dialog({modal:true, title: titleDialog, width:'500px'}).dialog('open');
+        }
+        }
+
+        // Done. Draw the Instituional Pie chart
+        chartInst.draw(dataInst, options);
+<?php } ?>
+    // INSTITUTE TILTAK PIE CHART ENDS
+
+
+
+
+
+    var monthReports = new Array(13);
+<?php
+if (isset($this->monthReports)):
+    foreach ($this->monthReports as $monthReport) {
+        echo 'monthReports[' . $monthReport['vaktrap_period'] . '] = ' . $monthReport['vaktrap_id'] . ';';
+    }
+endif;
+?>
+
+    // Drow Line Chart For Observation
+<?php
+if (isset($this->observationCollection)) {
+    $obserCount = 0;
+    $showAll = false;
+    $observationAll = array();
+    foreach ($this->observationCollection as $observation) {
+        if (!empty($observation) && count($observation) > 0) {
+            $showAll = true;
+            $chartType = $observation['xTitle'];
+            ?>
+                var dataLine<?php echo $observation['id']; ?> = google.visualization.arrayToDataTable([
+                ['<?php echo $observation['xTitle']; ?>', '<?php echo $observation['yTitle']; ?>'],
+            <?php
+            $maxTick = 0;
+            //$observationAll[$observation['id']] = array();
+            foreach ($observation['linedata'] as $key => $value) {
+                $result = $value['result'];
+                $period = $value['period'];
+                if ($result > $maxTick)
+                    $maxTick = $result;
+                echo "['$period', $result],";
+                //$observationAll[$date][$observation['id']] = $result;
+            }
+            $ticks = '';
+            $maxTick++;
+            for ($i = 0; $i <= $maxTick; $i++) {
+                $ticks .= "$i,";
+            }
+            $ticks = rtrim($ticks, ',');
+            ?>
+                ]);
+                var optionsLine<?php echo $observation['id']; ?> = {
+            <?php /* ?> 'title': '<?php echo $observation['title']; ?>',<?php */ ?>
+                'width':700,
+                        'height':200,
+                        colors: ['<?php echo $colors[$obserCount]; ?>'],
+                        focusTarget: 'category',
+                        crosshair: { trigger: 'both' },
+                        tooltip: { trigger: 'selection', isHtml: true },
+                        'legend': {position: 'top', textStyle: {color: 'black', fontSize: 15}},
+                        'titleTextStyle': {color: 'black', fontName: 'Ubuntu', fontSize: 15},
+                        'vAxis': { ticks: [ <?php echo $ticks; ?>] },
+                        hAxis: { title: '<?php echo $observation['xTitle'] == 'month' ? 'mnd' : 'uke'; ?>', 'textStyle': {color: 'black', fontName: 'Ubuntu', fontSize: 12, italic: false}}
+                };
+                var chartLine<?php echo $observation['id']; ?> = new google.visualization.LineChart(document.getElementById('plot<?php echo $observation['id']; ?>'));
+            <?php
+            // Allow zooming in if the selection is not already on date level
+            if ($observation['xTitle'] != 'date') {
+                ?>
+                    chartLine<?php echo $observation['id']; ?>.setAction({
+                    id: 'zoom', // An id is mandatory for all actions.
+                            text: '<?php echo $this->translate('Zoom inn'); ?>', // The text displayed in the tooltip.
+                            action: function() {           // When clicked, the following runs.
+                            var dateType = '<?php echo $observation['xTitle']; ?>';
+                            var dateValue = dataLine<?php echo $observation['id']; ?>.getValue(chartLine<?php echo $observation['id']; ?>.getSelection()[0].row, 0);
+                            var filter = '<?php echo $observation['xTitle']; ?>';
+                            // Set a hidden filter and value and submit the form
+                            var zoomValue = document.getElementById('zoomValue');
+                            var zoomFilter = document.getElementById('zoomFilter');
+                            var form = document.getElementById('frmStatistikClient');
+                            zoomValue.value = dateValue;
+                            zoomFilter.value = filter;
+                            form.submit();
+                            }
+                    });
+                <?php
+            }
+
+            // Allow zooming in if the selection is not already on date level
+            if ($observation['xTitle'] == 'month' && $this->period == 'curyear') {
+                ?>
+                    chartLine<?php echo $observation['id']; ?>.setAction({
+                    id: 'summering<?php echo $observation['xTitle']; ?>', // An id is mandatory for all actions.
+                            text: '<?php echo $this->translate('Month Summary'); ?>', // The text displayed in the tooltip.
+                            action: function() {           // When clicked, the following runs.
+                            var dateType = '<?php echo $observation['xTitle']; ?>';
+                            var dateValue = dataLine<?php echo $observation['id']; ?>.getValue(chartLine<?php echo $observation['id']; ?>.getSelection()[0].row, 0);
+                            var vaktrapportId = monthReports[dateValue];
+                            if (vaktrapportId) {
+                            vaktrapportId;
+                            var url = '<?php echo $this->getUrl('vaktrapport/month/show/vid/'); ?>' + vaktrapportId;
+                            //alert(url);
+                            window.location = url;
+                            }
+                            else {
+                            alert('<?php echo $this->translate('There is no monthly summary for this month'); ?>');
+                            }
+                            }
+                    });
+            <?php }
+            ?>
+                chartLine<?php echo $observation['id']; ?>.draw(dataLine<?php echo $observation['id']; ?>, optionsLine<?php echo $observation['id']; ?>);
+            <?php
+            $obserCount++;
+        }
+    }
+}
+?>
+
+<?php
+
+if (isset($this->observationAllData) && $showAll) {
+    ?>
+
+        var dataLineAll = google.visualization.arrayToDataTable([
+        ['Title'
+    <?php
+    foreach ($this->observationAllData as $observationAll) {
+        //echo",'".$observationAll['desc']."'";
+        $obserCount = 0;
+        $observationAllColors = '';
+        foreach ($observationAll as $observationResult) {
+            echo ",'" . $observationResult['observation_desc'] . "'";
+            $observationAllColors .= ",'" . $colors[$obserCount] . "'";
+            $obserCount++;
+        }
+        break;
+    }
+    ?>
+        ]
+    <?php
+    $maxTick = 0;
+    //$observationAll[$observation['id']] = array();
+    foreach ($this->observationAllData as $key => $observationAll) {
+        echo ",['$key'";
+        foreach ($observationAll as $observationResult) {
+            $result = $observationResult['result'];
+            echo "," . $result;
+            if ($result > $maxTick)
+                $maxTick = $result;
+        }
+        echo "]";
+        //$observationAll[$date][$observation['id']] = $result;
+    }
+    $ticks = '';
+    $maxTick++;
+    for ($i = 0; $i <= $maxTick; $i++) {
+        $ticks .= "$i,";
+    }
+    $ticks = rtrim($ticks, ',');
+    ?>
+        ]);
+        
+        var optionsLineAll = {
+        'title': '<?php echo $chartType == 'month' ? 'mnd' : 'uke'; ?>',
+                'width':700,
+                'height':200,
+                colors: [<?php echo substr($observationAllColors, 1); ?>],
+                focusTarget: 'category',
+                crosshair: { trigger: 'both' },
+                tooltip: { trigger: 'selection', isHtml: true },
+                'legend': {position: 'top', textStyle: {color: 'black', fontSize: 15}},
+                'titleTextStyle': {color: 'black', fontName: 'Ubuntu', fontSize: 15},
+                'vAxis': { ticks: [ <?php echo $ticks; ?>] },
+                hAxis: { title: '<?php echo $chartType == 'month' ? 'mnd' : 'uke'; ?>', 'textStyle': {color: 'black', fontName: 'Ubuntu', fontSize: 12, italic: false}}
+        };
+        var chartLineAll = new google.visualization.LineChart(document.getElementById('LineChartAllObservation'));
+    <?php
+    // Allow zooming in if the selection is not already on date level
+    if ($chartType != 'date') {
+       
+        ?>
+            chartLineAll.setAction({
+            id: 'zoom', // An id is mandatory for all actions.
+                    text: '<?php echo $this->translate('Zoom inn'); ?>', // The text displayed in the tooltip.
+                    action: function() {           // When clicked, the following runs.
+                    var dateType = '<?php echo $chartType; ?>';
+                    var dateValue = dataLineAll.getValue(chartLineAll.getSelection()[0].row, 0);
+                    var filter = '<?php echo $chartType; ?>';
+                    // Set a hidden filter and value and submit the form
+                    var zoomValue = document.getElementById('zoomValue');
+                    var zoomFilter = document.getElementById('zoomFilter');
+                    var form = document.getElementById('frmStatistikClient');
+                    zoomValue.value = dateValue;
+                    zoomFilter.value = filter;
+                    form.submit();
+                    }
+            });
+        <?php
+    }
+    
+
+    // Allow zooming in if the selection is not already on date level
+    if ($observation['xTitle'] == 'month' && $this->period == 'curyear') {
+        ?>
+            chartLineAll.setAction({
+            id: 'summering<?php echo $chartType; ?>', // An id is mandatory for all actions.
+                    text: '<?php echo $this->translate('Month Summary'); ?>', // The text displayed in the tooltip.
+                    action: function() {           // When clicked, the following runs.
+                    var dateType = '<?php echo $chartType; ?>';
+                    var dateValue = dataLineAll.getValue(chartLineAll.getSelection()[0].row, 0);
+                    var vaktrapportId = monthReports[dateValue];
+                    if (vaktrapportId) {
+                    vaktrapportId;
+                    var url = '<?php echo $this->getUrl('vaktrapport/month/show/vid/'); ?>' + vaktrapportId;
+                    //alert(url);
+                    window.location = url;
+                    }
+                    else {
+                    alert('<?php echo $this->translate('There is no monthly summary for this month'); ?>');
+                    }
+                    }
+            });
+    <?php }
+    ?>
+        chartLineAll.draw(dataLineAll, optionsLineAll);
+    <?php
+}
+?>
+
+    }
+
+    $(document).ready(function(){
+//		$('#deptId').change(function(){
+//			if($(this).val()){
+//              $('#show_report').trigger('click');
+//			}
+//		});
+    $('#clientId').change(function(){
+    if ($(this).val()){
+    $('#show_report').trigger('click');
+    }
+    });
+    $('#frmStatistikClient').submit(function(){
+    var deptId = $('#deptId');
+    var clientId = $('#clientId');
+    if (deptId.val() == ""){
+    deptId.parent('.KITINRDLISTWSPAN').css('border', 'solid 1px red');
+    return false;
+    }
+    if (clientId.val() == ""){
+    clientId.parent('.KITINRDLISTWSPAN').css('border', 'solid 1px red');
+    return false;
+    }
+    });
+    $('.filterclk').click(function(){
+    $('#show_report').trigger('click');
+    });
+    });</script>
+
+<form name="frmStatistikClient" id="frmStatistikClient" method="post" action="<?php echo $this->getUrl("statistic/index/index/t/1/id/" . $patientId); ?>">
+    <?php $colors = array('#f8f707', '#00b0f0', '#207413', '#4c70f5', '#e2431e', '#0000aa', '#f8f707', '#00b0f0', '#207413', '#4c70f5', '#e2431e', '#0000aa', '#f8f707', '#00b0f0', '#207413', '#4c70f5', '#e2431e', '#0000aa', '#f8f707', '#00b0f0', '#207413', '#4c70f5', '#e2431e', '#0000aa', '#f8f707', '#00b0f0', '#207413', '#4c70f5', '#e2431e', '#0000aa');?>
+
+    <input type="hidden" id="zoomValue" name="zoomValue" value=""/>
+    <input type="hidden" id="zoomFilter" name="zoomFilter" value=""/>
+
+    <?php /* #CODE FOR DEPT RESTRICTION */ ?>
+    <?php if (in_array($session->userRole, array('A', 'S', 'D'))): ?>
+
+
+        <table width="100%" border="0">
+            <tbody>
+                <tr>
+                    <th width="50%" scope="col"><div class="PSUBTCLEFT"><?php echo $this->translate('Select') . ' ' . $this->translate('Department'); ?></div></th>
+                    <th width="50%" scope="col"><div class="PSUBTCLEFT"><?php echo $this->translate('Select') . ' ' . $this->translate('Client'); ?></div></th>
+                </tr>
+                <tr>
+                    <td><div class="KITITWRAPPER">
+
+                            <div class="KITINRDLISTW width100">
+                                <span class="KITINRDLISTWSPAN">
+                                    <select name="deptId" id="deptId" class="get-ajax" data-target="clientId" data-action="<?php echo $this->getUrl('client/index/getlist/key/'); ?>" data-text="<option><?php echo $this->translate('Please Select'); ?></option>" data-load="<option><?php echo $this->translate('Loading'); ?></option>"  data-validation="required">
+                                        <option value="">Velg avdeling her</option>
+                                        <?php foreach ($this->departmentCollection as $key => $department): ?>
+                                            <option value="<?php echo $department['dept_id']; ?>" <?php echo ($this->deptId == $department['dept_id']) ? 'selected="selected"' : '' ?>><?php echo $department['dept_name']; ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </span>
+                            </div>
+                        </div></td>
+                    <td><div class="KITITWRAPPER">
+
+                            <div class="KITINRDLISTW width100">
+                                <span class="KITINRDLISTWSPAN">
+                                    <select name="clientId" id="clientId" data-validation="required" >
+                                        <option value=""><?php echo $this->translate('Please Select'); ?></option>
+                                        <?php
+                                        if ($this->deptId > 0):
+                                            $clientArray = KD::getModel('client/client')->loadClientByDept($this->deptId);
+                                            ?>
+                                            <?php foreach ($clientArray as $client): ?>
+                                                <option value="<?php echo $client['patient_id']; ?>" <?php echo ($patientId == $client['patient_id']) ? 'selected="selected"' : '' ?>><?php echo $format->FormatName($client['patient_fname'], $client['patient_mname'], $client['patient_lname']); ?></option>
+                                            <?php endforeach; ?>
+    <?php endif; ?>
+                                    </select>
+                                </span>
+                            </div>
+                        </div></td>
+                </tr>
+            </tbody>
+        </table>
+        <br />
+
+<?php else: ?>
+        <div class="KITITWRAPPER">
+            <div class="PSUBTCLEFT"><?php echo $this->translate('Select') . ' ' . $this->translate('Client'); ?></div>
+            <div class="KITINRDLISTW width70">
+                <span class="KITINRDLISTWSPAN">
+                    <select name="clientId" id="clientId" data-validation="required" >
+                        <option value=""><?php echo $this->translate('Please Select'); ?></option>
+                        <?php
+                        if ($session->userDeptId > 0):
+                            foreach ($session->userDeptId as $deptId):
+                                $clientArray = KD::getModel('client/client')->loadClientByDept($deptId);
+                                ?>
+                                <?php foreach ($clientArray as $client): ?>
+                                    <option value="<?php echo $client['patient_id']; ?>" <?php echo ($patientId == $client['patient_id']) ? 'selected="selected"' : '' ?>><?php echo $format->FormatName($client['patient_fname'], $client['patient_mname'], $client['patient_lname']); ?></option>
+                                <?php endforeach; ?>
+                            <?php endforeach; ?>
+    <?php endif; ?>
+                    </select>
+                </span>
+            </div>
+        </div>
+    <?php endif; ?>
+        <?php /* #CODE FOR DEPT RESTRICTION */ ?>
+    <div id="vaktrap_load">
+        <?php if (isset($this->clientInfo['patient_id']) && $this->clientInfo['patient_id'] > 0): ?>
+            <?php
+            $dateJoin = new DateTime($this->clientInfo['patient_date_of_joining']);
+            $startYear = $dateJoin->format('Y');
+            $tilDate = new DateTime();
+            $endYear = $tilDate->format('Y');
+            ?>
+
+
+
+
+            <div class="PSUBTCWRAPPER">
+                <div class="VVGBG VV2IN1C2 floatleft">
+                    <div class="width15 floatleft" style="line-height: 40px;">
+                        <div class="floatleft"><?php echo $this->translate('Year'); ?></div>
+                        <span class="tdbg888p floatleft marginleft20 width60" style="margin-top:5px;">
+                            <select name="year" id="year">
+                                <?php
+                                for ($i = $startYear; $i <= $endYear; $i++) {
+                                    ?>
+                                    <option value="<?php echo $i; ?>" <?php echo (isset($this->year) && $this->year == $i) ? 'selected="selected"' : ''; ?>><?php echo $i; ?></option>
+                                <?php }
+                                ?>
+                            </select>
+                        </span>
+                    </div>
+                    <div class="width70 floatleft marginleft20" style="line-height: 40px;">
+                        <div class="floatleft"><?php echo $this->translate('Period'); ?></div>
+                        <span class="floatleft width80 marginleft20" style="">
+                            <table cellpadding="0" cellspacing="4" border="0" width="100%">
+                                <tr><td><div style="line-height:20px;"><input type="radio" class="filterclk" id="lifetime" name="period" <?php echo ($this->period == 'lifetime') ? 'checked="checked"' : ''; ?> value="lifetime"  /><label for="lifetime"><span></span></label><span><?php echo $this->translate('Lifetime'); ?></span></div></td>
+                                    <td><div style="line-height:20px;"><input type="radio" class="filterclk" id="quartal1" name="period" <?php echo ($this->period == 'quartal1') ? 'checked="checked"' : ''; ?> value="quartal1"  /><label for="quartal1"><span></span></label><span><?php echo $this->translate('Quartal 1'); ?></span></div></td>
+                                    <td><div style="line-height:20px;"><input type="radio" class="filterclk" id="quartal2" name="period" <?php echo ($this->period == 'quartal2') ? 'checked="checked"' : ''; ?> value="quartal2"  /><label for="quartal2"><span></span></label><span><?php echo $this->translate('Quartal 2'); ?></span></div></td>
+                                    <td><div style="line-height:20px;"><input type="radio" class="filterclk" id="quartal3" name="period" <?php echo ($this->period == 'quartal3') ? 'checked="checked"' : ''; ?> value="quartal3"  /><label for="quartal3"><span></span></label><span><?php echo $this->translate('Quartal 3'); ?></span></div></td>
+                                    <td><div style="line-height:20px;"><input type="radio" class="filterclk" id="quartal4" name="period" <?php echo ($this->period == 'quartal4') ? 'checked="checked"' : ''; ?> value="quartal4"  /><label for="quartal4"><span></span></label><span><?php echo $this->translate('Quartal 4'); ?></span></div></td>
+                                    <td><div style="line-height:20px;"><input type="radio" class="filterclk" id="curyear" name="period" <?php echo ($this->period == 'curyear') ? 'checked="checked"' : ''; ?> value="curyear"  /><label for="curyear"><span></span></label><span><?php echo $this->translate('Year'); ?></span></div></td></tr>
+                            </table>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+<?php endif; ?>
+
+        <div class="width100" style="margin:0px">
+            <div class="buttonwraper width100"><div class="OPPRETTB marginleft20" style="margin-top:0px"><input type="submit" name="show_report" id="show_report" class="OPPRETTBA" value="<?php echo $this->translate('Show'); ?>"></div></div>
+        </div>
+
+<?php if (isset($this->clientInfo['patient_id']) && $this->clientInfo['patient_id'] > 0): ?>
+            <div class="CLEARBBORDER2"></div>
+
+            <div class="KKI2C">
+                <div class="statistikkcon2">
+                    <div class="statistikkcon2_1">
+                        <div id="chartMaalPie_div"><?php
+                            if (!(isset($this->maalCountCollection) && count($this->maalCountCollection) > 0)) {
+                                echo 'Det finnes ingen data til å generere statistikk';
+                            }
+                            ?></div>
+                        <div class="statistikkcon2_12 floatleft">
+                            <table width="100%" border="0">
+                                <tr>
+                                    <th width="20%"><?php echo $this->translate('Goal'); ?></th>
+                                    <th width="20%"><?php echo $this->translate('Not Complete'); ?></th>
+                                    <th width="20%"><?php echo $this->translate('Partial Complete'); ?></th>
+                                    <th width="20%"><?php echo $this->translate('Completed'); ?></th>
+                                    <th width="20%"><?php echo $this->translate('Non Evaluated'); ?></th>
+                                </tr>
+                                <tr>
+                                    <td><?php echo $this->totalItems['maal']; ?></td>
+                                    <?php
+                                    if (isset($this->maalCountCollection) && count($this->maalCountCollection) > 0) {
+                                        foreach ($this->maalCountCollection as $title => $resultArray) {
+                                            echo '<td><span class="tdbg">' . $count = $resultArray['count'] . '</span></td>';
+                                        }
+                                    } else {
+                                        for ($i = 0; $i <= 3; $i++) {
+                                            echo '<td><span class=""tdbg">0</span></td>';
+                                        }
+                                    }
+                                    ?>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="statistikkcon2_2">
+                        <div id="chartGovPie_div"><?php
+                                    if (!(isset($this->govTiltakCountCollection) && count($this->govTiltakCountCollection) > 0)) {
+                                        echo 'Det finnes ingen data til å generere statistikk';
+                                    }
+                                    ?></div>
+                        <div class="statistikkcon2_12 floatleft">
+                            <table width="100%" border="0">
+                                <tr>
+                                    <th width="20%"><?php echo $this->translate('Ongoing Measure'); ?></th>
+                                    <th width="20%"><?php echo $this->translate('Ikke gjennomført'); ?></th>
+                                    <th width="20%"><?php echo $this->translate('Delvis gjennomført'); ?></th>
+                                    <th width="20%"><?php echo $this->translate('Gjennomført'); ?></th>
+                                    <th width="20%"><?php echo $this->translate('Ikke evaluert'); ?></th>
+                                </tr>
+                                <tr>
+                                    <td><?php echo $this->totalItems['gov_tiltak']; ?></td>
+                                    <?php
+                                    if (isset($this->govTiltakCountCollection) && count($this->govTiltakCountCollection) > 0) {
+                                        foreach ($this->govTiltakCountCollection as $title => $resultArray) {
+                                            echo '<td><span class="tdbg">' . $count = $resultArray['count'] . '</span></td>';
+                                        }
+                                    } else {
+                                        for ($i = 0; $i <= 3; $i++) {
+                                            echo '<td><span class=""tdbg">0</span></td>';
+                                        }
+                                    }
+                                    ?>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="statistikkcon2_3">
+                        <div id="chartInstPie_div"><?php
+                                    if (!(isset($this->instTiltakCountCollection) && count($this->instTiltakCountCollection) > 0)) {
+                                        echo 'Det finnes ingen data til å generere statistikk';
+                                    }
+                                    ?></div>
+                        <div class="statistikkcon2_12 floatleft">
+                            <table width="100%" border="0">
+                                <tr>
+                                    <th width="20%"><?php echo $this->translate('Short Measure'); ?></th>
+                                    <th width="20%"><?php echo $this->translate('Ikke gjennomført'); ?></th>
+                                    <th width="20%"><?php echo $this->translate('Delvis gjennomført'); ?></th>
+                                    <th width="20%"><?php echo $this->translate('Gjennomført'); ?></th>
+                                    <th width="20%"><?php echo $this->translate('Ikke evaluert'); ?></th>
+                                </tr>
+                                <tr>
+                                    <td><?php echo $this->totalItems['inst_tiltak']; ?></td>
+                                    <?php
+                                    if (isset($this->instTiltakCountCollection) && count($this->govTiltakCountCollection) > 0) {
+                                        foreach ($this->instTiltakCountCollection as $title => $resultArray) {
+                                            echo '<td><span class="tdbg">' . $count = $resultArray['count'] . '</span></td>';
+                                        }
+                                    } else {
+                                        for ($i = 0; $i <= 3; $i++) {
+                                            echo '<td><span class=""tdbg">0</span></td>';
+                                        }
+                                    }
+                                    ?>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="CLEARBBORDER2"></div>
+
+            <div class="break brClass"></div>
+            <div id="ObservationList">
+                <div class="KKI2C statistikkcon3">
+
+                    <div class="statistikkcon3_1" >
+                        <div class="KKI2C"><?php echo $this->translate('All observations in graph'); ?></div>
+                        <div class="statistikkcon3_12"  id="LineChartAllObservation"><?php
+                        if (!$showAll) {
+                            echo 'Data Not Exist For Generating Observation Chart';
+                        };
+                        ?></div>
+                    </div>
+
+                    <div class="statistikkcon3_2">
+                        <div class="KKI2C1"><div class="checkbox_border"><span class="tdbg" style="width: 20px;"><input type="checkbox" checked name="observation[]" class="css-checkbox" data-form="ObservationList" id="AllObservation" value="alle" /><label for="AllObservation" class="css-label"></label></span></div><?php echo $this->translate('All observations in list'); ?></div>
+
+                        <?php
+                        $i = 0;
+                        foreach ($this->observations as $observation):
+                            if ($observation['checked']) {
+                                echo '<div class="statistikkcon3_31"><div class="checkbox_border"><span class="tdbg" style="width: 20px;"><input type="checkbox" colors="' . $colors[$i] . '"  checked name="observation[]" class="observationCheck hideshow css-checkbox" id="' . $observation['observation_id'] . '" value="' . $observation['observation_id'] . '" data-index="' . ($i + 1) . '" /><label for="' . $observation['observation_id'] . '" class="css-label"></label></div><div class="statistikkcon3_41" style="background-color:' . $colors[$i] . ' !important"></div></span>' . $observation['observation_desc'] . '</div>';
+                            } else {
+                                echo '<div class="statistikkcon3_31"><div class="checkbox_border"><span class="tdbg" style="width: 20px;"><input type="checkbox" colors="' . $colors[$i] . '" name="observation[]" class="observationCheck hideshow css-checkbox" id="' . $observation['observation_id'] . '" value="' . $observation['observation_id'] . '" data-index="' . ($i + 1) . '" /><label for="' . $observation['observation_id'] . '" class="css-label"></label></div><div class="statistikkcon3_41" style="background-color:' . $colors[$i] . ' !important"></div></span>' . $observation['observation_desc'] . '</div>';
+                            }
+                            $i++;
+                        endforeach;
+                        ?>
+                    </div>
+                </div>
+
+                <div class="CLEARBBORDER2"></div>
+
+                <?php
+//	 echo "<pre>";
+//	print_r($this->observationCollection);
+//    echo "</pre>";
+//	die;
+                ?>
+
+                <?php
+                if (isset($this->observationCollection)):
+                    $obserCount = 0;
+                    foreach ($this->observationCollection as $observation):
+                        ?>
+                                <?php
+                                $countLine = 0;
+                                foreach ($observation['linedata'] as $rowLine) {
+                                    $countLine = $countLine + $rowLine['result'];
+                                }
+                                ?>
+                        <div class="KKI2C statistikkcon3" id="LineChart<?php echo $observation['id']; ?>" <?php echo $observation['checked'] ? 'style="display:block"' : 'style="display:none"'; ?>	>
+
+                            <div class="statistikkcon3_1">
+                                <div class="KKI2C"><div class="statistikkcon3_41" style="background-color:<?php echo $colors[$obserCount]; ?> !important"></div><div><?php echo $observation['title']; ?></div></div>
+            <?php echo '<div id="plot' . $observation['id'] . '" class="floatleft"></div>'; ?>
+                            </div>
+
+                            <div class="statistikkcon3_2">
+                                <div class="KKI2C1"><div class="statistikkcon3_41" style="background-color:<?php echo $colors[$obserCount]; ?> !important"></div><div><?php echo $this->translate('List Information'); ?></div></div>
+
+                                <div class="statistikkcon3_31 width80">
+                                    <div><?php echo $this->translate('Period'); ?>:<?php echo $format->FormatDate($this->startDate) . ' - ' . $format->FormatDate($this->endDate); ?></div>
+                                </div>
+
+                                <div class="statistikkcon3_32">
+                                    <div><?php echo $this->translate('Total Remarks'); ?>: <?php echo $countLine; //$observation['count'];  ?></div>
+                                </div>
+
+                            </div>
+                        </div>
+            <?php
+            $obserCount++;
+        endforeach;
+
+    endif;
+    ?>
+            </div>
+            <script language="javascript" type="text/javascript">
+               
+                $(document).ready(function(){
+
+                var stoke = $('#LineChartAllObservation').find('path');
+                var colors = [];
+                stoke.each(function(key, index){
+
+                if (key > 3){
+                colors.push($(this).attr('stroke'));
+                }
+                });
+                for (var i = 0; colors.length > i; i++){
+                //console.log(colors[i]);
+                }
+                $('.hideshow').each(function(key, index){
+                console.log(colors[key]);
+                console.log($(this).attr('colors'));
+                for (var i = 0; colors.length > i; i++){
+                if ($(this).attr('colors') == colors[i]){
+                if ($(this).not(":checked")){
+                $(this).prop('checked', true);
+                }
+                }
+                }
+                });
+                $(".observationCheck").unbind().click(function () {
+                var selectedID = $(this).attr('id');
+                var chartID = $("#LineChart" + selectedID);
+                if ($(this).is(':checked') == true) {
+                chartID.show();
+                $(this).prop("checked", true);
+                } else {
+                chartID.hide();
+                $(this).prop("checked", false);
+                }
+                });
+                $("#AllObservation").unbind().click(function () {
+                var wrapperId = '#' + $(this).data('form');
+                var stoke = $('#LineChartAllObservation').find('path');
+                if ($(this).is(':checked')) {
+                $(wrapperId + " input[type=checkbox]").each(function () {
+
+                $(this).prop("checked", true);
+                var selectedID = $(this).attr('id');
+                var chartID = $("#LineChart" + selectedID);
+                chartID.show();
+                });
+                stoke.each(function(){
+                //console.log($(this).attr('stroke'));
+                if ($(this).attr('stroke') !== "none"){
+                //$(this).css('display','block');
+                }
+                });
+                } else {
+                $(wrapperId + " input[type=checkbox]").each(function () {
+                $(this).prop("checked", false);
+                var selectedID = $(this).attr('id');
+                var chartID = $("#LineChart" + selectedID);
+                chartID.hide();
+                });
+                stoke.each(function(){
+                if ($(this).attr('stroke') !== "none"){
+                //$(this).css('display','none');
+                }
+                });
+                }
+                });
+                $('.hideshow').bind('click', function(event){
+                var colors = $(this).attr('colors');
+                var t = $(this).val();
+                //console.log(colors);
+                var i = 0;
+                var j = 0;
+                var flag = true;
+                $("[colors=" + colors + "]").each(function(){
+                i++;
+                if (t == $(this).val()){
+
+                //console.log($(this).prop("checked"));
+                if ($(this).is(":checked")){
+                flag = true;
+                } else{
+                flag = false;
+                }
+                return false;
+                }
+
+                });
+                var stoke = $('#LineChartAllObservation').find('path');
+                stoke.each(function(key, index){
+
+                if (key > 3){
+                if ($(this).attr('stroke') == colors){
+                j++;
+                if (i === j){
+                console.log(i + "-" + j);
+                if (flag){
+                $(this).css('display', 'block');
+                return false;
+                } else {
+                $(this).css('display', 'none');
+                return false;
+                }
+                }
+                }
+                }
+
+                });
+                });
+    //    $('.hideshow').bind('click',function(event){
+    //     var colors=$(this).attr('colors');
+    //     var stoke=$('#LineChartAllObservation').find('path');
+    //     stoke.each(function(){
+    //      // console.log($(this).attr('stroke'));
+    //      if($(this).attr('stroke')==colors){
+    //       if($(this).css("display") == "none"){
+    //        $(this).css('display','block');
+    //       }else{
+    //        $(this).css('display','none');
+    //       }
+    //      }
+    //     });
+    //    });
+                });
+            </script>
+<?php endif; ?>
+    </div>
+</form>

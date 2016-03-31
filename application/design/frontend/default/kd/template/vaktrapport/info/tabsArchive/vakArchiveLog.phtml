@@ -1,0 +1,35 @@
+<?php
+    $format = KD::getModel('core/format');
+    $decrypt = KD::getModel('core/Endecrypt');
+?>
+<div class="PSUBTCWRAPPER">
+	<div class="PSUBTCLEFT">
+    	<?php echo $this->translate('Log');?>
+    </div>
+</div>
+<div class="CLEARBBORDER"></div>
+
+<?php if(empty($this->logArchive)): ?>
+    <?php echo $this->translate('No Avvik items found'); ?>
+<?php else: ?>
+    <table class="width100">
+        <tr>
+            <th width="20%"><?php echo $this->translate('Date'); ?></th>
+            <th width="10%"><?php echo $this->translate('Log type');?></th>
+            <th width="40%"><?php echo $this->translate('Log'); ?></th>
+            <th width="30%"><?php echo $this->translate('Signature'); ?></th>
+        </tr>
+    <?php foreach($this->logArchive as $log): ?>
+        <tr>
+            <td><?php echo $format->formatDate($log['date_of_creation']) . ' kl: ' . $format->formatTime($log['date_of_creation']); ?></td>
+            <td><?php echo $log['logg_type']; ?></td>
+            <td><?php echo $log['logg_desc']; ?></td>
+            <td><?php echo $decrypt->getDec($log['user_fname']) . ' ' . $decrypt->getDec($log['user_lname']); ?></td>
+        </tr>
+    <?php endforeach;?>
+    </table>
+<?php endif; ?>
+
+
+
+

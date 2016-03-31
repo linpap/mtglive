@@ -1,0 +1,231 @@
+<?php $format=KD::getModel('core/format');?>
+<div>
+<form name="frmClientAddGovTiltak" id="frmClientAddGovTiltak" method="post" action="<?php echo $this->getUrl("client/mto/addgovtiltak");?>">
+<div class="PSUBTCWRAPPER">
+	<div class="PSUBTCLEFT">
+    	<?php echo $this->translate('Government Measure');?>
+    </div>
+</div>
+<div class="CLEARBBORDER"></div>
+<div class="KKI2C">
+<table width="100%" border="0" cellspacing="4" cellpadding="0" id="clientGovTiltakTbl">
+      <tr class="CURNONPOINTER">
+        <th class="TSLRTDNUMBER" width="20px !important">
+        <span class="tdbg2">
+        	<input type="checkbox" name="checkbox_all" id="checkbox_all" class="css-checkbox" data-form="frmClientAddGovTiltak"/>
+            <label for="checkbox_all" class="css-label"></label>
+        </span>
+		<input type="hidden" name="patient_id" id="patient_id" value="<?php echo $this->clientID;?>"/>
+        </th>
+		<th class="TSLRTDCENTER aligncenter" width="15%"><?php echo $this->translate('Owner');?></th>
+		<th class="TSLRTDCENTER" width="45%"><?php echo $this->translate('Government Measure');?></th>
+		<th class="TSLRTDCENTER" width="10%"><?php echo $this->translate('Shown Vaktrapport');?></th>
+		<th class="TSLRTDCENTER" width="15%"><?php echo $this->translate('From Date');?></th>
+		<th class="TSLRTDCENTER" width="15%"><?php echo $this->translate('To Date');?></th>
+      </tr>
+	  <?php  if(count($this->tiltakCollection)>0):
+	  	$maalIdLoop = '';
+		foreach($this->tiltakCollection as $tiltak):  ?>
+		<?php $id = $tiltak['tilgov_id'];
+		$maal_id = $tiltak['maal_id'];
+		if($maal_id!=$maalIdLoop):
+		?>
+		  <tr>
+			<td class="head-content" colspan="6"><?php echo $tiltak['maal_desc'];?></td>
+		  </tr>
+		<?php endif;?>
+		  <tr>
+			<td class="TSLRTDNUMBER bgwhite" width="20px !important">
+				<span class="tdbg" style="width: 20px;">
+				<input type="checkbox" name="<?php echo 'checkbox_'.$id;?>" id="<?php echo 'checkbox_'.$id;?>" class="css-checkbox"/>
+				<label for="<?php echo 'checkbox_'.$id;?>" class="css-label"></label>
+				</span>
+			</td>
+			<td class="bgwhite aligncenter" width="15% !important"><span class="tdbg"><?php echo $tiltak['tilgov_owner']; ?></span></td>
+			<td><span class="tdbg dialog-ajax1" data-url="<?php echo $this->getUrl('client/mto/editgovtiltak/id/'.$id);?>" data-title="<?php echo $tiltak['tilgov_desc']; ?>"><?php echo $tiltak['tilgov_desc']; ?></span></td>
+			<td class="bgwhite"><span class="tdbg"><?php echo (isset($tiltak['vaktrap_tilgov_status']) && $tiltak['vaktrap_tilgov_status']=='yes')?'Ja':'Nei'; ?></span></td>
+			<td class="bgwhite"><span class="tdbg"><?php echo $format->FormatDate($tiltak['tilgov_from_date']); ?></span></td>
+			<td class="bgwhite"><span class="tdbg"  style=" <?php echo $format->getColorStyle($tiltak['tilgov_to_date']);?>"><?php echo $format->FormatDate($tiltak['tilgov_to_date']); ?></span></td>
+		  </tr>
+
+		<?php
+		$maalIdLoop = $maal_id;
+		endforeach;
+	  endif;?>
+</table>
+</div>
+
+<div class="mtodroplist1">
+<div class="mtodroplist11">
+    <span class="KITINRDLISTWSPAN">
+    	<select name="selAction" class="onSelectAction client-gov-measures" data-form="frmClientAddGovTiltak">
+        	<option value="" style=" font-weight:bold;"><?php echo $this->translate('Select %s %s',$this->translate('Type of Action'),$this->translate('Here!'));?></option>
+            <option value="<?php echo $this->getUrl('client/mto/archivegovtiltak');?>"><?php echo $this->translate('%s %s',$this->translate('Archive'),$this->translate('Government Measure'));?></option>
+			<option id="mto-shown-in-vaktrap" value="<?php echo $this->getUrl('client/mto/showninvaktrap');?>"><?php echo $this->translate('%s %s',$this->translate('Shown in'),$this->translate('Vaktrapport Report'));?></option>
+			<option value="<?php echo $this->getUrl('client/mto/removefromvaktrap');?>"><?php echo $this->translate('%s %s',$this->translate('Remove From'),$this->translate('Vaktrapport Report'));?></option>
+        </select>
+    </span>
+</div>
+</div>
+<div class="mtodroplist2">
+	<div class="CANCELB"><a class="leggtilrada" id="clientAddGovTiltak" data-val="0"><?php echo $this->translate('Add %s(s)',$this->translate('Row'));?></a></div>
+	<div class="OPPRETTB"><input type="submit" id="btnSubmit" class="OPPRETTBA" value="<?php echo $this->translate('Create');?>"/></div>
+</div>
+
+<script language="javascript" type="text/javascript">
+
+// Code For adding New Raw to For add new element
+$("#clientAddGovTiltak").unbind("click").click(function () {
+
+	var id = $(this).data('val');
+    $("#clientGovTiltakTbl").each(function () {
+
+		var tds = "";
+		var j = 1;
+		tds += '<tr class="newEle"><td colspan="2" class="nonecls" width="15% !important"><span class="tdbg VVTAC"><div><span><?php echo $this->translate('A');?><input type="radio" data-validation="required" data-error-message="Eier er påkrevd" id="tilgovowner'+id+j+'" value="A" name="tilgovowner['+id+']"/><label for="tilgovowner'+id+j+'"><span></span></label></span><span><?php echo $this->translate('U');?><input type="radio"  data-validation="required" data-error-message="Eier er påkrevd" value="U" id="tilgovowner'+id+(j+1)+'" name="tilgovowner['+id+']" /><label for="tilgovowner'+id+(j+1)+'"><span></span></label></span><span><?php echo $this->translate('M');?><input type="radio" data-validation="required" data-error-message="Eier er påkrevd" value="M" id="tilgovowner'+id+(j+2)+'" name="tilgovowner['+id+']" /><label for="tilgovowner'+id+(j+2)+'"><span></span></label></span></div></span></td><td class="nonecls" colspan="2" width="55% !impotant"><span class="tdbg" style="width: 40% !important;"><select data-validation="required" data-error-message="Løpende Tiltak er påkrevd" name="maalIds['+id+']" id="maalIds[]" class="dpdn" style="width: 99% !important;">';
+		tds += '<option value=""><?php echo $this->translate('Select %s %s',$this->translate('Goal'),$this->translate('Here!'));?></option>';
+		<?php foreach($this->maalCollection as $maal):?>
+		tds += '<option value="<?php echo $maal['maal_id'];?>"><?php echo $maal['maal_desc'];?></option>';
+		<?php endforeach;?>
+		tds += '</select></span><span class="tdbg" style="width: 59% !important;float:right"><input type="text" data-validation="required" data-error-message="Vises i vaktrapport er påkrevd" class="dptxt" name="tilgovDescs['+id+']" id="tilgovDescs[]"  class="width96" /></span></td><td class="nonecls" width="15% !important"><span class="tdbg"><input type="text" data-validation="required" data-error-message="Fra Dato er påkrevd" name="fromDates['+id+']"   id="fromDates'+id+'" class="DyndatepickerImage width60"/></span></td><td class="nonecls" width="15% !important"><span class="tdbg"><input type="text" data-validation="required" data-error-message="	Til Dato er påkrevd" name="toDates['+id+']"  id="toDates'+id+'" class="DyndatepickerImage width60"/></span></td></tr>';
+
+        if ($('tbody', this).length > 0) {
+            $('tbody', this).append(tds);
+        } else {
+            $(this).append(tds);
+        }
+
+		$(".DyndatepickerImage").datepicker(Mtg.Config.Datepicker);
+
+
+	});
+	$(this).data('val',id+1);
+
+});
+// Code For Validation of form
+//$.validate({
+//	form : '#frmClientAddGovTiltak',
+//	validateOnBlur : false,
+//	borderColorOnError : '#C90312',
+//	addValidClassOnAll : true,
+//	showHelpOnFocus : false,
+//	addSuggestions : false,
+//	errorMessagePosition : 'top',
+//	scrollToTopOnError : true
+//});
+// Code For Get Dialog on click of class dialog-ajax
+$(document).ready(function(){
+$('#clientAddGovTiltak').click(function (){
+    $( "#frmClientAddGovTiltak" ).submit(function( event ) {
+        var i=0;
+		var len=$('.newEle').length;
+		var k=0;
+	        var flg=true;
+		$('.newEle').each(function(){
+			var date_fst=$(this).find('#fromDates'+i).val();
+			var date_scd=$(this).find('#toDates'+i).val();
+			if(date_fst!=="" && date_scd!==""){
+				if($(this).find(':radio:checked').is(':checked')) {
+				$(this).find('.tdbg').eq(0).css('border','1px solid white');
+			    }else{
+				$(this).find('.tdbg').eq(0).css('border','1px solid red');
+					flg=false;
+					return flg;
+			    }
+				if($(this).find('.dpdn').val()!=""){
+					$(this).find('.tdbg').eq(1).css('border','1px solid white');
+				}else{
+					$(this).find('.tdbg').eq(1).css('border','1px solid red');
+					flg=false;
+					return flg;
+				}
+				if($(this).find('.dptxt').val()!=""){
+					$(this).find('.tdbg').eq(2).css('border','1px solid white');
+					flg=true;
+				}else{
+					$(this).find('.tdbg').eq(2).css('border','1px solid red');
+					flg=false;
+				}
+
+
+			}
+			i++;
+
+		});
+
+		if(!flg){
+			return false;
+		}
+
+//		var len=$('.newEle').length;
+//		var i=0;
+//		$('.newEle').each(function(){
+//			if($(this).find(':radio:checked').is(':checked')) {
+//				i++;
+//				$(this).find('.tdbg ').css('border','1px solid white');
+//			}else{
+//				$(this).find('.tdbg ').css('border','1px solid red');
+//			}
+//		});
+
+	});
+});
+	
+
+
+
+//	$('#btnSubmit').click(function(){
+//		$( "#frmClientAddGovTiltak" ).submit();
+//	});
+
+	$('.dialog-ajax1').unbind("click").click(function(){
+		var tag = $("<div></div>"); //This tag will the hold the dialog content.
+		var url = $(this).data('url');
+		var title = $(this).data('title');
+		$.ajax({
+		  url: $(this).data('url'),
+		  type: 'GET',
+		  beforeSend: function() {$("#loading-image").show();},
+		  error: function() { alert('Could not load form') },
+		  success: function(data, textStatus, jqXHR) {
+			if(typeof data == "object" && data.html) { //response is assumed to be JSON
+			  tag.html(data.html).dialog({modal:true, title: title}).dialog('open');
+			} else { //response is assumed to be HTML
+			  tag.html(data).dialog({modal: true, title: title, height: 200, width:800, hide: "scale", show : "scale",
+					open: function (event, ui) {
+						var startDate = $(".DyndatepickerImage1");
+						startDate.unbind();
+						startDate.datepicker(Mtg.Config.Datepicker);
+//						$.validate({
+//							form : '#frmClientEditgovTiltak',
+//							validateOnBlur : false,
+//							borderColorOnError : '#C90312',
+//							addValidClassOnAll : true,
+//							showHelpOnFocus : false,
+//							addSuggestions : false,
+//							errorMessagePosition : 'top',
+//							scrollToTopOnError : true
+//						});
+						$("#loading-image").hide();
+					},
+					close: function (event, ui) {
+						$('input.DyndatepickerImage1').datepicker("destroy");
+						$(this).dialog("destroy");
+						$(this).remove();
+					}
+				}).dialog('open');
+
+			}
+		  }
+		});
+	  });
+
+
+
+});
+</script>
+<?php if($this->isAjax):?>
+<script src="<?php echo $this->getMediaUrl('ajax-load-custom.js','js');?>" language="javascript" type="text/javascript"></script>
+<?php endif;?>
+</form>
+</div>

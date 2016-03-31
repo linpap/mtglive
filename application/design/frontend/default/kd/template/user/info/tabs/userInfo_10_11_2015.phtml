@@ -1,0 +1,272 @@
+<?php 	$userCollection = $this->userCollection; 
+		$formatModel = KD::getModel('core/format');
+		$deptList = KD::getModel('department/department')->loadList();?>
+<?php //print_r($userCollection); ?>
+<div class="KKI1">
+	<div class="imageframe">
+		<span id="imageUpload" style="display:inline-block">
+		<div class="KKI1PICBG" style="overflow:visible;display:inline-block">
+			<?php if(isset($this->userCollection['user_image']) && $this->userCollection['user_image']>0)
+			{ 
+				$data = KD::getModel('client/document')->getDocument($this->userCollection['user_image']);
+				if(in_array($data['document_mimetype'],array('image/png','image/jpg','image/jpeg','image/gif')))
+				{
+					echo '<div class="imageAuto" style="'.((isset($data['document_imagewidth']) && $data['document_imagewidth']>0)?'width:'.$data['document_imagewidth']:'').'px; '.((isset($data['document_imageheight']) && $data['document_imageheight']>0)?' height:'.$data['document_imageheight']:'').'px;"><img src= "data:'.$data['document_mimetype'].';base64,'.base64_encode($data['document_filecontent']).'" /></div>';
+				}
+				else
+				{
+				?>
+					<div class="KKI1PH"></div>
+				<?php 
+				}
+			?>
+			<?php 
+			}
+			else
+			{
+			?>
+				<div class="KKI1PH"></div>
+			<?php 
+			}?>
+		</div>
+		</span>
+		<span id="status1"  style="display:inline-block"></span>
+	</div>
+	
+	<div class="KKI1WRAPPER">
+<form name="frmUpdateUser" id="frmUpdateUser" method="post" action="<?php echo $this->getUrl("user/info/index");?>">	
+<input type="hidden" name="user_id" id="user_id" value="<?php echo $this->userCollection['user_id'] ?>">	
+<input type="hidden" name="counterStatus" id="counterStatus" value="1" />
+<input type="hidden" name="counter" id="counter" value="1" />	
+<?php 
+		
+#CODE FOR DEPT RESTRICTION
+$session = new Zend_Session_Namespace('Acl'); 
+if(isset($session->userRole) && in_array($session->userRole,array('A','S','D','L'))): $departmet = '';if($session->userRole=='L'){ $departmet = 'disabled';}?>
+	<div class="KKI1C">
+		<div class="">
+			<div class="ALOBUSERT3"><?php echo $this->translate('Select User Permission Type:');?></div>
+			<?php /*?><div class="ALOBUSERT2">
+			<span class="tdbg"><div class="ALOBUSERT3"><input type="radio" id="super" name="user[user_role]" value="S" /><label for="super"><span></span></label><?php echo $this->translate('Super User');?></div></span>
+			</div><?php */?>
+			<div class="ALOBUSERT2">
+			<span class="tdbg"><div class="ALOBUSERT3"><input type="radio" id="admin" name="user_role" value="A" <?php echo $departmet;?> class="check" <?php echo ($this->userCollection['user_role']=='A')?'checked="checked"':''; ?> data-validation="radio"/><label for="admin"><span></span></label><label for="admin"><?php echo $this->translate('Administrator');?></label></div></span>
+			</div>
+			
+			<div class="ALOBUSERT2">
+			<span class="tdbg"><div class="ALOBUSERT3"><input type="radio" id="doctor" name="user_role" value="D" <?php echo $departmet;?> class="check" <?php echo ($this->userCollection['user_role']=='D')?'checked="checked"':''; ?> data-validation="radio"/><label for="doctor"><span></span></label><label for="doctor"><?php echo $this->translate('Doctor');?></label></div></span>
+			</div>
+			
+			<div class="ALOBUSERT2">
+			<span class="tdbg"><div class="ALOBUSERT3"><input type="radio" id="leader" name="user_role" value="L" class="check" <?php echo ($this->userCollection['user_role']=='L')?'checked="checked"':''; ?> data-validation="radio"/><label for="leader"><span></span></label><label for="leader"><?php echo $this->translate('Department Leader');?></label></div></span>
+			</div>
+			
+			<div class="ALOBUSERT2">
+			<span class="tdbg"><div class="ALOBUSERT3"><input type="radio" id="normal" name="user_role" value="N" class="check" <?php echo ($this->userCollection['user_role']=='N')?'checked="checked"':''; ?> data-validation="radio"/><label for="normal"><span></span></label><label for="normal"><?php echo $this->translate('Normal User');?></label></div></span>
+			</div>
+		</div>
+	</div>
+<?php endif;?>	
+	<div class="KKI1C">
+		<div class="KKI1C1">
+			<?php echo $this->translate('First Name');?>
+		</div>
+		<span class="tdbg888p"><input type="text" name="user_fname" id="user_fname"  value="<?php echo $this->userCollection['user_fname'] ?>" maxlength="255" data-validation="required" data-validation-length="max255"></span>
+
+	</div>
+	<div class="KKI1C">
+		<div class="KKI1C1">
+			<?php echo $this->translate('Middle Name');?>
+		</div>
+		<span class="tdbg888p"><input type="text" name="user_mname" id="user_mname"  value="<?php echo $this->userCollection['user_mname'] ?>" maxlength="255" data-validation-length="max255"></span>
+	</div>
+	<div class="KKI1C">
+		<div class="KKI1C1">
+			<?php echo $this->translate('Last Name');?>
+		</div>
+		<span class="tdbg888p"><input type="text" name="user_lname" id="user_lname"  value="<?php echo $this->userCollection['user_lname'] ?>" maxlength="255" data-validation="required" data-validation-length="max255"></span>
+    </div>
+	<div class="KKI1C">
+		<div class="KKI1C1">
+			<?php echo $this->translate('Position');?>
+		</div>
+		<span class="tdbg888p"><input type="text" name="user_position" id="user_position"  value="<?php echo $this->userCollection['user_position'] ?>" maxlength="255" data-validation="required" data-validation-length="max255"></span>
+	</div>
+	<div class="KKI1C">
+		<div class="KKI1C1">
+			<?php echo $this->translate('Join').' ('.$this->translate('Date').')';?>
+		</div>
+		<?php 
+		
+		#CODE FOR DEPT RESTRICTION
+		$session = new Zend_Session_Namespace('Acl'); 
+		if(isset($session->userRole) && in_array($session->userRole,array('A','S','D','L'))):?>
+			<span class="tdbg888p"><input type="text" name="user_date_joining" id="user_date_joining" class="datepickerImage" readonly value="<?php echo $formatModel->FormatDate($this->userCollection['user_date_joining']);?>" maxlength="255" data-validation="required" data-validation-length="max255"></span>
+		<?php else:?>
+			<span class="tdbg888p"><input type="text" name="user_date_joining" id="user_date_joining" class="datepickerMinToday disabled" readonly value="<?php echo $formatModel->FormatDate($this->userCollection['user_date_joining']);?>" maxlength="255" data-validation="required" data-validation-length="max255"></span>
+		<?php 
+		endif;
+		#CODE FOR DEPT RESTRICTION
+		?>
+		
+	</div>
+	<?php $deptArray = explode(',',$this->userCollection['user_deptid']);?>
+	<div class="KKI1C" id="DropLeader" <?php echo ($this->userCollection['user_role']=='L')?'style="display:block;"':'style="display:none;"';?>>
+		<div class="KKI1C1">
+			<?php echo $this->translate('Department');?>
+		</div>
+		<span class="tdbg888p"  >
+		<select name="user_deptidMul[]" id="user_deptidMul" data-validation="required" multiple="multiple">
+				<?php foreach($deptList as $key=>$department):?>
+				<option value="<?php echo $department['dept_id'];?>" <?php echo (in_array($department['dept_id'],$deptArray))?'selected="selected"':'';?>><?php echo $department['dept_name'];?></option>
+				<?php endforeach;?>
+            </select> 
+		</span>
+		
+	</div>
+	<div class="KKI1C" id="DropNormal" <?php echo ($this->userCollection['user_role']!='L')?'style="display:block;"':'style="display:none;"';?>>
+		<div class="KKI1C1">
+			<?php echo $this->translate('Department');?>
+		</div>
+		<span class="tdbg888p"  >
+		<select name="user_deptid" id="user_deptid" data-validation="required">
+				<option value="">Kontoret</option>
+				<?php foreach($deptList as $key=>$department):?>
+				<option value="<?php echo $department['dept_id'];?>" <?php echo ($this->userCollection['user_deptid']==$department['dept_id'])?'selected="selected"':'';?>><?php echo $department['dept_name'];?></option>
+				<?php endforeach;?>
+            </select> 
+		</span>
+	</div>
+<?php /*?>	<div class="KKI1C">
+		<div class="KKI1C1">
+			<?php echo $this->translate('Department');?>
+		</div>
+		<span class="tdbg888p">
+			<select name="user_deptid" id="user_deptid" data-validation="required">
+				<option value="">Kontoret</option>
+				<?php foreach($deptList as $key=>$department):?>
+				<option value="<?php echo $department['dept_id'];?>" <?php echo ($this->userCollection['user_deptid']==$department['dept_id'])?'selected="selected"':'';?>><?php echo $department['dept_name'];?></option>
+				<?php endforeach;?>
+            </select> 
+        </span>
+	</div><?php */?>
+	<div class="KKI1C">
+		<div class="KKI1C1">
+			<?php echo $this->translate('ID');?>
+		</div>
+		<span class="tdbg888p greyBG"><input type="text" name="user_code" id="user_code" disabled="disabled" readonly class="greyBG" value="<?php echo $this->userCollection['user_code'] ?>" maxlength="255" data-validation="required" data-validation-length="max255"></span>
+	</div>	
+	<div class="KKI1C">
+		<div class="KKI1C1">
+			<?php echo $this->translate('Phone');?>
+		</div>
+		<span class="tdbg888p"><input type="text" name="user_phone" id="user_phone"  value="<?php echo $this->userCollection['user_phone'] ?>" maxlength="255" data-validation="required" data-validation-length="max255"></span>
+	</div>
+	<div class="KKI1C">
+		<div class="KKI1C1">
+			<?php echo $this->translate('Mobile');?>
+		</div>
+		<span class="tdbg888p"><input type="text" name="user_mobile" id="user_mobile"  value="<?php echo $this->userCollection['user_mobile'] ?>" maxlength="255" data-validation="required" data-validation-length="max255"></span>
+	</div>
+	<div class="KKI1C">
+		<div class="KKI1C1">
+			<?php echo $this->translate('Email');?>
+		</div>
+		<span class="tdbg888p"><input type="text" name="user_email" id="user_email"  value="<?php echo $this->userCollection['user_email'] ?>" maxlength="255"  data-validation="email" data-validation-length="max255"></span>
+	</div>
+	<div class="OPPRETTB"><input type="submit" class="OPPRETTBA" name="frmUpdateUserSubmit" id="frmUpdateUserSubmit" value="<?php echo $this->translate('Save');?>"></div>
+</form>	
+</div>
+</div>
+<link rel="stylesheet" href="<?php echo $this->getMediaUrl('drag-drop.css','css');?>" title="default" />
+<script src="<?php echo $this->getMediaUrl('drag-drop.js','js');?>"></script>
+<script language="javascript" type="text/javascript">
+	$(document).ready(function()
+		{
+		var obj = $("#imageUpload");
+		obj.on('dragenter', function (e)
+		{
+			e.stopPropagation();
+			e.preventDefault();
+			$(this).css('border', '2px solid #0B85A1');
+		});
+		obj.on('dragover', function (e)
+		{
+			 e.stopPropagation();
+			 e.preventDefault();
+		});
+		obj.one('drop', function (e)
+		{
+			 //if ( e.type!="dragstop" ) return; 
+			 $(this).css('border', '2px dotted #0B85A1');
+			 e.stopPropagation();
+			 e.preventDefault();
+			 var files = e.originalEvent.dataTransfer.files;
+			 var button_type = 'user_image';
+			 
+			 var pasientId = $('#user_id').val();
+			 if(pasientId<0)
+			 {
+			 	alert("System facing some problem so refresh page and wait while page fullyloaded.");
+				return false;
+			 }
+ 			 //We need to send dropped files to Server
+			 if($('#counter').val()==1)
+			 {
+			 	 handleFileUpload('<?php echo $this->getUrl('user/info/uploadfile/id/'.$this->userCollection['user_id']);?>',files,obj,button_type,pasientId);
+			 }
+			 $('#counter').val($('#counter').val()+1);
+		});
+		
+		$(document).on('dragenter', function (e)
+		{
+			e.stopPropagation();
+			e.preventDefault();
+		});
+		$(document).on('dragover', function (e)
+		{
+		  e.stopPropagation();
+		  e.preventDefault();
+		  obj.css('border', '2px dotted #0B85A1');
+		});
+		$(document).on('drop', function (e)
+		{
+			e.stopPropagation();
+			e.preventDefault();
+		});
+		
+		$(".check").unbind().click(function(){
+			if($(this).attr('id')=="leader")
+			{
+				$('#DropLeader').show();
+				$('#DropNormal').hide();
+			}
+			else
+			{
+				$('#DropLeader').hide();
+				$('#DropNormal').show();
+			}
+		});
+		$("#frmUpdateUserSubmit").unbind().click(function(){
+			var radioStatus = $( "input.check:checked" ).val();
+			if(radioStatus=='A' || radioStatus=='D')
+			{
+				$('#user_deptid').attr('data-validation','');
+				$('#user_deptidMul').attr('data-validation','');
+			}
+			else if(radioStatus=='L')
+			{
+				$('#user_deptidMul').attr('data-validation','required');
+				$('#user_deptid').attr('data-validation','');
+			}
+			else if(radioStatus=='N')
+			{
+				$('#user_deptid').attr('data-validation','required');
+				$('#user_deptidMul').attr('data-validation','');
+			}
+		});
+		
+	});
+</script>
+<?php /*?><div class="LAGREB2"><a class="LAGREBA2" href="#"><?php echo $this->translate('Save');?></a></div><?php */?>
+
